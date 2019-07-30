@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="nodeInfoCell" selectionStyle="default" indentationWidth="10" rowHeight="118" id="KGk-i7-Jjw" customClass="NodeInfoCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="118"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="117.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RBp-ML-9T6">
+                        <rect key="frame" x="15" y="10" width="345" height="97.5"/>
+                        <string key="text">klnlknsaldfknasndfdsalkngvjlnsadcvnwklanfloanwedsnvlzxnv.你发的那个绿看上了大V你看撒放了那个拉可适当那旮旯的房价可能够啦电脑是否看见那双大V那是处女绿卡的烦恼GV卡拉少女安山东龙女郎扩散到V领那都是绿能alsnvlansln'</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="RBp-ML-9T6" secondAttribute="bottom" constant="10" id="3n1-CV-Ihk"/>
+                    <constraint firstAttribute="trailing" secondItem="RBp-ML-9T6" secondAttribute="trailing" constant="15" id="MRS-In-reu"/>
+                    <constraint firstItem="RBp-ML-9T6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="jMB-EL-gMU"/>
+                    <constraint firstItem="RBp-ML-9T6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="lWe-AC-v06"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="infoLable" destination="RBp-ML-9T6" id="yOT-Iq-lE8"/>
+            </connections>
+            <point key="canvasLocation" x="131.15942028985509" y="131.25"/>
+        </tableViewCell>
+    </objects>
+</document>

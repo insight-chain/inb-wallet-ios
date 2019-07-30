@@ -1,0 +1,2284 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC5DD2865770DB080B131ED3 /* Pods_inb_wallet_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFA2CE734299E1C35667DA2 /* Pods_inb_wallet_ios.framework */; };
+		FE3FC2A322AE7B6C00A41205 /* NSDate+DateString.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2A222AE7B6C00A41205 /* NSDate+DateString.m */; };
+		FE3FC2A622AF5AC000A41205 /* NetworkUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2A522AF5AC000A41205 /* NetworkUtil.m */; };
+		FE3FC2A922AFB38B00A41205 /* CommonTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2A822AFB38B00A41205 /* CommonTransaction.m */; };
+		FE3FC2C822B0E7B300A41205 /* TransferListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2C722B0E7B300A41205 /* TransferListVC.m */; };
+		FE3FC2CC22B0E84500A41205 /* TransferListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2CA22B0E84500A41205 /* TransferListCell.m */; };
+		FE3FC2CD22B0E84500A41205 /* TransferListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE3FC2CB22B0E84500A41205 /* TransferListCell.xib */; };
+		FE3FC2D822B77F6D00A41205 /* PasswordInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2D722B77F6D00A41205 /* PasswordInputView.m */; };
+		FE3FC2DC22B8B7F700A41205 /* MBProgressHUD+LZ.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2DB22B8B7F700A41205 /* MBProgressHUD+LZ.m */; };
+		FE3FC2FC22B8D44700A41205 /* TZImageCropManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2E122B8D44700A41205 /* TZImageCropManager.m */; };
+		FE3FC2FD22B8D44700A41205 /* TZAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2E322B8D44700A41205 /* TZAssetCell.m */; };
+		FE3FC2FE22B8D44700A41205 /* TZVideoPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2E422B8D44700A41205 /* TZVideoPlayerController.m */; };
+		FE3FC2FF22B8D44700A41205 /* TZAssetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2E522B8D44700A41205 /* TZAssetModel.m */; };
+		FE3FC30022B8D44700A41205 /* NSBundle+TZImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2E622B8D44700A41205 /* NSBundle+TZImagePicker.m */; };
+		FE3FC30122B8D44700A41205 /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2E922B8D44700A41205 /* UIView+Layout.m */; };
+		FE3FC30222B8D44700A41205 /* TZPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2EA22B8D44700A41205 /* TZPhotoPreviewController.m */; };
+		FE3FC30322B8D44700A41205 /* TZImagePickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FE3FC2EB22B8D44700A41205 /* TZImagePickerController.bundle */; };
+		FE3FC30422B8D44700A41205 /* TZProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2EC22B8D44700A41205 /* TZProgressView.m */; };
+		FE3FC30522B8D44700A41205 /* TZImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2EF22B8D44700A41205 /* TZImageManager.m */; };
+		FE3FC30622B8D44700A41205 /* TZPhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2F122B8D44700A41205 /* TZPhotoPickerController.m */; };
+		FE3FC30722B8D44700A41205 /* TZPhotoPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2F222B8D44700A41205 /* TZPhotoPreviewCell.m */; };
+		FE3FC30822B8D44700A41205 /* TZImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2F822B8D44700A41205 /* TZImagePickerController.m */; };
+		FE3FC30922B8D44700A41205 /* TZLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2F922B8D44700A41205 /* TZLocationManager.m */; };
+		FE3FC30A22B8D44700A41205 /* TZGifPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2FA22B8D44700A41205 /* TZGifPhotoPreviewController.m */; };
+		FE3FC30E22B90B3200A41205 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC30D22B90B3200A41205 /* Node.m */; };
+		FE3FC31522BB279000A41205 /* FAGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC31422BB278F00A41205 /* FAGlobal.m */; };
+		FE4FFF3D22C5F1340024CB4D /* BTCKey+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = FE4FFF3C22C5F1340024CB4D /* BTCKey+Category.m */; };
+		FE4FFF4622C61B1A0024CB4D /* BIP44.m in Sources */ = {isa = PBXBuildFile; fileRef = FE4FFF4522C61B1A0024CB4D /* BIP44.m */; };
+		FE4FFF4922C6FEA90024CB4D /* BTCTransactionSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = FE4FFF4822C6FEA90024CB4D /* BTCTransactionSigner.m */; };
+		FE92C41C22A78ED40043DA9D /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE92C41B22A78ED40043DA9D /* test.swift */; };
+		FE92C49622A792580043DA9D /* libscrypt.podspec in Resources */ = {isa = PBXBuildFile; fileRef = FE92C41E22A792580043DA9D /* libscrypt.podspec */; };
+		FE92C49722A792580043DA9D /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42222A792580043DA9D /* BTCBlock.m */; };
+		FE92C49822A792580043DA9D /* BTCBlockHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42322A792580043DA9D /* BTCBlockHeader.m */; };
+		FE92C49922A792580043DA9D /* BTCEncryptedBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42622A792580043DA9D /* BTCEncryptedBackup.m */; };
+		FE92C49A22A792580043DA9D /* BTCKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42722A792580043DA9D /* BTCKeychain.m */; };
+		FE92C49B22A792580043DA9D /* BTCTransactionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42822A792580043DA9D /* BTCTransactionBuilder.m */; };
+		FE92C49C22A792580043DA9D /* BTCAssetType.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42922A792580043DA9D /* BTCAssetType.m */; };
+		FE92C49D22A792580043DA9D /* BTCAssetID.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42B22A792580043DA9D /* BTCAssetID.m */; };
+		FE92C49E22A792580043DA9D /* BTCBlindSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42D22A792580043DA9D /* BTCBlindSignature.m */; };
+		FE92C49F22A792580043DA9D /* BTCQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42F22A792580043DA9D /* BTCQRCode.m */; };
+		FE92C4A022A792580043DA9D /* NSData+BTCData.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C43122A792580043DA9D /* NSData+BTCData.m */; };
+		FE92C4A122A792580043DA9D /* BTCTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C43622A792580043DA9D /* BTCTransaction.m */; };
+		FE92C4A222A792580043DA9D /* BTCBigNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C43922A792580043DA9D /* BTCBigNumber.m */; };
+		FE92C4A322A792580043DA9D /* BTCBlockchainInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C43A22A792580043DA9D /* BTCBlockchainInfo.m */; };
+		FE92C4A422A792580043DA9D /* BTCNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C43D22A792580043DA9D /* BTCNumberFormatter.m */; };
+		FE92C4A522A792580043DA9D /* BTCScriptMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C43E22A792580043DA9D /* BTCScriptMachine.m */; };
+		FE92C4A622A792580043DA9D /* BTCMnemonic.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C43F22A792580043DA9D /* BTCMnemonic.m */; };
+		FE92C4A722A792580043DA9D /* BTCProtocolSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C44022A792580043DA9D /* BTCProtocolSerialization.m */; };
+		FE92C4A822A792580043DA9D /* BTCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C44122A792580043DA9D /* BTCNetwork.m */; };
+		FE92C4A922A792580043DA9D /* BTCPriceSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C44422A792580043DA9D /* BTCPriceSource.m */; };
+		FE92C4AA22A792580043DA9D /* BTCSecretSharing.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C44622A792580043DA9D /* BTCSecretSharing.m */; };
+		FE92C4AB22A792580043DA9D /* BTCOpcode.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C44722A792580043DA9D /* BTCOpcode.m */; };
+		FE92C4AC22A792580043DA9D /* BTCFancyEncryptedMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C44822A792580043DA9D /* BTCFancyEncryptedMessage.m */; };
+		FE92C4AD22A792580043DA9D /* BTCChainCom.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C44C22A792580043DA9D /* BTCChainCom.m */; };
+		FE92C4AE22A792580043DA9D /* BTCAssetAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C44D22A792580043DA9D /* BTCAssetAddress.m */; };
+		FE92C4AF22A792580043DA9D /* BTCBitcoinURL.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C44F22A792580043DA9D /* BTCBitcoinURL.m */; };
+		FE92C4B022A792580043DA9D /* NS+BTCBase58.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C45022A792580043DA9D /* NS+BTCBase58.m */; };
+		FE92C4B122A792580043DA9D /* BTCTransactionInput.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C45122A792580043DA9D /* BTCTransactionInput.m */; };
+		FE92C4B222A792580043DA9D /* BTC256.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C45322A792580043DA9D /* BTC256.m */; };
+		FE92C4B322A792580043DA9D /* BTCAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C45422A792580043DA9D /* BTCAddress.m */; };
+		FE92C4B422A792580043DA9D /* BTCProtocolBuffers.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C45622A792580043DA9D /* BTCProtocolBuffers.m */; };
+		FE92C4B522A792580043DA9D /* BTCOutpoint.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C45822A792580043DA9D /* BTCOutpoint.m */; };
+		FE92C4B622A792580043DA9D /* BTCMerkleTree.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C45A22A792580043DA9D /* BTCMerkleTree.m */; };
+		FE92C4B722A792580043DA9D /* BTCData.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C45F22A792580043DA9D /* BTCData.m */; };
+		FE92C4B822A792580043DA9D /* BTCProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C46222A792580043DA9D /* BTCProcessor.m */; };
+		FE92C4B922A792580043DA9D /* BTCCurvePoint.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C46322A792580043DA9D /* BTCCurvePoint.m */; };
+		FE92C4BA22A792580043DA9D /* BTCPaymentMethodDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C46422A792580043DA9D /* BTCPaymentMethodDetails.m */; };
+		FE92C4BB22A792580043DA9D /* BTCTransactionOutput.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C46622A792580043DA9D /* BTCTransactionOutput.m */; };
+		FE92C4BC22A792580043DA9D /* BTCPaymentRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C46922A792580043DA9D /* BTCPaymentRequest.m */; };
+		FE92C4BD22A792580043DA9D /* BTCScript.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C46B22A792580043DA9D /* BTCScript.m */; };
+		FE92C4BE22A792580043DA9D /* BTCHashID.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C46C22A792580043DA9D /* BTCHashID.m */; };
+		FE92C4BF22A792580043DA9D /* BTCCurrencyConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C46D22A792580043DA9D /* BTCCurrencyConverter.m */; };
+		FE92C4C022A792580043DA9D /* BTCPaymentMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C46E22A792580043DA9D /* BTCPaymentMethod.m */; };
+		FE92C4C122A792580043DA9D /* BTCPaymentProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C46F22A792580043DA9D /* BTCPaymentProtocol.m */; };
+		FE92C4C222A792580043DA9D /* BTCBase58.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C47122A792580043DA9D /* BTCBase58.m */; };
+		FE92C4C322A792580043DA9D /* BTCPaymentMethodRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C47222A792580043DA9D /* BTCPaymentMethodRequest.m */; };
+		FE92C4C422A792580043DA9D /* BTCEncryptedMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C47622A792580043DA9D /* BTCEncryptedMessage.m */; };
+		FE92C4C522A792580043DA9D /* BTCKey.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C47822A792580043DA9D /* BTCKey.m */; };
+		FE92C4C622A792580043DA9D /* BTCErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C48222A792580043DA9D /* BTCErrors.m */; };
+		FE92C4C722A792580043DA9D /* crypto_scrypt-hash.c in Sources */ = {isa = PBXBuildFile; fileRef = FE92C48622A792580043DA9D /* crypto_scrypt-hash.c */; };
+		FE92C4C822A792580043DA9D /* slowequals.c in Sources */ = {isa = PBXBuildFile; fileRef = FE92C48722A792580043DA9D /* slowequals.c */; };
+		FE92C4C922A792580043DA9D /* crypto-scrypt-saltgen.c in Sources */ = {isa = PBXBuildFile; fileRef = FE92C48A22A792580043DA9D /* crypto-scrypt-saltgen.c */; };
+		FE92C4CA22A792580043DA9D /* crypto_scrypt-hexconvert.c in Sources */ = {isa = PBXBuildFile; fileRef = FE92C48B22A792580043DA9D /* crypto_scrypt-hexconvert.c */; };
+		FE92C4CB22A792580043DA9D /* crypto-mcf.c in Sources */ = {isa = PBXBuildFile; fileRef = FE92C48C22A792580043DA9D /* crypto-mcf.c */; };
+		FE92C4CC22A792580043DA9D /* crypto_scrypt-check.c in Sources */ = {isa = PBXBuildFile; fileRef = FE92C48F22A792580043DA9D /* crypto_scrypt-check.c */; };
+		FE92C4CD22A792580043DA9D /* b64.c in Sources */ = {isa = PBXBuildFile; fileRef = FE92C49122A792580043DA9D /* b64.c */; };
+		FE92C4CE22A792580043DA9D /* sha256.c in Sources */ = {isa = PBXBuildFile; fileRef = FE92C49222A792580043DA9D /* sha256.c */; };
+		FE92C4CF22A792580043DA9D /* crypto_scrypt-nosse.c in Sources */ = {isa = PBXBuildFile; fileRef = FE92C49322A792580043DA9D /* crypto_scrypt-nosse.c */; };
+		FE92C4D022A792580043DA9D /* CoreBitcoin.podspec in Resources */ = {isa = PBXBuildFile; fileRef = FE92C49522A792580043DA9D /* CoreBitcoin.podspec */; };
+		FE92C5EC22A792F40043DA9D /* UIImage+QRImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4D222A792F30043DA9D /* UIImage+QRImage.m */; };
+		FE92C5ED22A792F40043DA9D /* PaddingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4D422A792F30043DA9D /* PaddingLabel.m */; };
+		FE92C5EE22A792F40043DA9D /* UIButton+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4D522A792F30043DA9D /* UIButton+Layout.m */; };
+		FE92C5EF22A792F40043DA9D /* NSData+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4D622A792F30043DA9D /* NSData+HexString.m */; };
+		FE92C5F022A792F40043DA9D /* NSData+Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4D922A792F30043DA9D /* NSData+Crypto.m */; };
+		FE92C5F122A792F40043DA9D /* BasicWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4DF22A792F30043DA9D /* BasicWebViewController.m */; };
+		FE92C5F322A792F40043DA9D /* VoteListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4E522A792F30043DA9D /* VoteListCell.m */; };
+		FE92C5F422A792F40043DA9D /* VoteDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4E822A792F30043DA9D /* VoteDetailHeaderView.m */; };
+		FE92C5F522A792F40043DA9D /* NodeInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4E922A792F30043DA9D /* NodeInfoCell.m */; };
+		FE92C5F622A792F40043DA9D /* VoteListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C4EA22A792F30043DA9D /* VoteListCell.xib */; };
+		FE92C5F722A792F40043DA9D /* NodeHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C4EB22A792F30043DA9D /* NodeHeaderTableViewCell.xib */; };
+		FE92C5F822A792F40043DA9D /* VoteDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C4EE22A792F30043DA9D /* VoteDetailCell.xib */; };
+		FE92C5F922A792F40043DA9D /* NodeHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4F022A792F30043DA9D /* NodeHeaderTableViewCell.m */; };
+		FE92C5FA22A792F40043DA9D /* VoteDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4F122A792F30043DA9D /* VoteDetailCell.m */; };
+		FE92C5FB22A792F40043DA9D /* NodeInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C4F222A792F30043DA9D /* NodeInfoCell.xib */; };
+		FE92C5FC22A792F50043DA9D /* VoteListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4F422A792F30043DA9D /* VoteListVC.m */; };
+		FE92C5FD22A792F50043DA9D /* NodeInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4F522A792F30043DA9D /* NodeInfoVC.m */; };
+		FE92C5FE22A792F50043DA9D /* VoteDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4F822A792F30043DA9D /* VoteDetailVC.m */; };
+		FE92C5FF22A792F50043DA9D /* VoteBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C4FB22A792F30043DA9D /* VoteBarView.xib */; };
+		FE92C60022A792F50043DA9D /* VoteBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C4FC22A792F30043DA9D /* VoteBarView.m */; };
+		FE92C60122A792F50043DA9D /* WalletInfoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C50222A792F40043DA9D /* WalletInfoViewModel.m */; };
+		FE92C60222A792F50043DA9D /* WalletCreatedViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C50322A792F40043DA9D /* WalletCreatedViewModel.m */; };
+		FE92C60322A792F50043DA9D /* WalletAccountsListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C50622A792F40043DA9D /* WalletAccountsListCell.xib */; };
+		FE92C60422A792F50043DA9D /* WalletAccountsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C50722A792F40043DA9D /* WalletAccountsListCell.m */; };
+		FE92C60522A792F50043DA9D /* WalletDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C50B22A792F40043DA9D /* WalletDetailVC.m */; };
+		FE92C60622A792F50043DA9D /* WalletInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C50D22A792F40043DA9D /* WalletInfoVC.m */; };
+		FE92C60722A792F50043DA9D /* WalletsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C50F22A792F40043DA9D /* WalletsVC.m */; };
+		FE92C60822A792F50043DA9D /* WalletCreatedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C51122A792F40043DA9D /* WalletCreatedVC.m */; };
+		FE92C60922A792F50043DA9D /* WalletBackupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C51322A792F40043DA9D /* WalletBackupVC.m */; };
+		FE92C60A22A792F50043DA9D /* WalletImportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C51622A792F40043DA9D /* WalletImportVC.m */; };
+		FE92C60B22A792F50043DA9D /* WalletInfoFunctionView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C51922A792F40043DA9D /* WalletInfoFunctionView.m */; };
+		FE92C60C22A792F50043DA9D /* SliderBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C51C22A792F40043DA9D /* SliderBar.m */; };
+		FE92C60D22A792F50043DA9D /* SavePrivatekeyWaringView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C51E22A792F40043DA9D /* SavePrivatekeyWaringView.m */; };
+		FE92C60E22A792F50043DA9D /* WalletAccountsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C51F22A792F40043DA9D /* WalletAccountsListView.m */; };
+		FE92C60F22A792F50043DA9D /* WalletInfoCPUView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C52122A792F40043DA9D /* WalletInfoCPUView.m */; };
+		FE92C61022A792F50043DA9D /* FindVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C52522A792F40043DA9D /* FindVC.m */; };
+		FE92C61122A792F50043DA9D /* TransferMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C52822A792F40043DA9D /* TransferMessageCell.xib */; };
+		FE92C61222A792F50043DA9D /* TransferMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C52922A792F40043DA9D /* TransferMessageCell.m */; };
+		FE92C61322A792F50043DA9D /* TransferFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C52C22A792F40043DA9D /* TransferFooterView.m */; };
+		FE92C61422A792F50043DA9D /* TransferMessage_2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C52D22A792F40043DA9D /* TransferMessage_2Cell.xib */; };
+		FE92C61522A792F50043DA9D /* TransferMessage_2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C52F22A792F40043DA9D /* TransferMessage_2Cell.m */; };
+		FE92C61622A792F50043DA9D /* TransferHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C53022A792F40043DA9D /* TransferHeaderView.m */; };
+		FE92C61722A792F50043DA9D /* TransferHeaderView_vote.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C53322A792F40043DA9D /* TransferHeaderView_vote.m */; };
+		FE92C61822A792F50043DA9D /* TransferVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C53722A792F40043DA9D /* TransferVC.m */; };
+		FE92C61922A792F50043DA9D /* RequestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C53822A792F40043DA9D /* RequestVC.m */; };
+		FE92C61A22A792F50043DA9D /* TransactionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C53922A792F40043DA9D /* TransactionDetailVC.m */; };
+		FE92C61B22A792F50043DA9D /* LZCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C53F22A792F40043DA9D /* LZCollectionViewFlowLayout.m */; };
+		FE92C61C22A792F50043DA9D /* LZCollectionViewLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C54222A792F40043DA9D /* LZCollectionViewLayoutAttributes.m */; };
+		FE92C61D22A792F50043DA9D /* LZCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C54322A792F40043DA9D /* LZCollectionReusableView.m */; };
+		FE92C61E22A792F50043DA9D /* WelcomBackupTipVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C54522A792F40043DA9D /* WelcomBackupTipVC.xib */; };
+		FE92C61F22A792F50043DA9D /* WelcomBackupTipVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C54822A792F40043DA9D /* WelcomBackupTipVC.m */; };
+		FE92C62022A792F50043DA9D /* WelcomConfirmMnemonicVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C54B22A792F40043DA9D /* WelcomConfirmMnemonicVC.m */; };
+		FE92C62122A792F50043DA9D /* WelcomBackupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C54C22A792F40043DA9D /* WelcomBackupVC.m */; };
+		FE92C62222A792F50043DA9D /* WelcomVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C54D22A792F40043DA9D /* WelcomVC.m */; };
+		FE92C62322A792F50043DA9D /* PassphraseView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C54F22A792F40043DA9D /* PassphraseView.m */; };
+		FE92C62422A792F50043DA9D /* MnemonicWordCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C55422A792F40043DA9D /* MnemonicWordCell2.m */; };
+		FE92C62522A792F50043DA9D /* MnemonicWordCell2.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C55522A792F40043DA9D /* MnemonicWordCell2.xib */; };
+		FE92C62622A792F50043DA9D /* MnemonicWordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C55722A792F40043DA9D /* MnemonicWordCell.m */; };
+		FE92C62722A792F50043DA9D /* MnemonicWordHeaderView2.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C55822A792F40043DA9D /* MnemonicWordHeaderView2.m */; };
+		FE92C62822A792F50043DA9D /* MnemonicWordHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C55922A792F40043DA9D /* MnemonicWordHeaderView.xib */; };
+		FE92C62922A792F50043DA9D /* MnemonicWordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C55B22A792F40043DA9D /* MnemonicWordCell.xib */; };
+		FE92C62A22A792F50043DA9D /* MnemonicWordHeaderView2.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C55C22A792F40043DA9D /* MnemonicWordHeaderView2.xib */; };
+		FE92C62B22A792F50043DA9D /* MnemonicWordHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C55D22A792F40043DA9D /* MnemonicWordHeaderView.m */; };
+		FE92C62C22A792F50043DA9D /* SWQRCodeConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C56122A792F40043DA9D /* SWQRCodeConfig.m */; };
+		FE92C62D22A792F50043DA9D /* SWQRCodeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C56222A792F40043DA9D /* SWQRCodeManager.m */; };
+		FE92C62E22A792F50043DA9D /* SWQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C56622A792F40043DA9D /* SWQRCodeViewController.m */; };
+		FE92C62F22A792F50043DA9D /* SWQRCode.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FE92C56722A792F40043DA9D /* SWQRCode.bundle */; };
+		FE92C63022A792F50043DA9D /* SWScannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C56922A792F40043DA9D /* SWScannerView.m */; };
+		FE92C63122A792F50043DA9D /* CCSlideAnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C56E22A792F40043DA9D /* CCSlideAnimatedTransitioning.m */; };
+		FE92C63222A792F50043DA9D /* CCNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C57022A792F40043DA9D /* CCNavigationController.m */; };
+		FE92C63322A792F50043DA9D /* UIView+CCAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C57422A792F40043DA9D /* UIView+CCAddition.m */; };
+		FE92C63422A792F50043DA9D /* NSObject+CCAssociative.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C57522A792F40043DA9D /* NSObject+CCAssociative.m */; };
+		FE92C63522A792F50043DA9D /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C57922A792F40043DA9D /* Base64.m */; };
+		FE92C63622A792F50043DA9D /* CocoaSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C57C22A792F40043DA9D /* CocoaSecurity.m */; };
+		FE92C63722A792F50043DA9D /* ResourceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C58022A792F40043DA9D /* ResourceVC.m */; };
+		FE92C63822A792F50043DA9D /* ResourceCPUView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C58322A792F40043DA9D /* ResourceCPUView.m */; };
+		FE92C63922A792F50043DA9D /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C58722A792F40043DA9D /* Config.m */; };
+		FE92C63A22A792F50043DA9D /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C58922A792F40043DA9D /* SettingCell.xib */; };
+		FE92C63B22A792F50043DA9D /* SettingCell_2.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C58B22A792F40043DA9D /* SettingCell_2.m */; };
+		FE92C63C22A792F50043DA9D /* SettingCell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C58C22A792F40043DA9D /* SettingCell_2.xib */; };
+		FE92C63D22A792F50043DA9D /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C58F22A792F40043DA9D /* SettingCell.m */; };
+		FE92C63E22A792F50043DA9D /* SettingAboutUsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C59022A792F40043DA9D /* SettingAboutUsHeaderView.m */; };
+		FE92C63F22A792F50043DA9D /* SettingAboutUsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C59622A792F40043DA9D /* SettingAboutUsVC.m */; };
+		FE92C64022A792F50043DA9D /* SettingSystemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C59722A792F40043DA9D /* SettingSystemVC.m */; };
+		FE92C64122A792F50043DA9D /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C59822A792F40043DA9D /* SettingVC.m */; };
+		FE92C64222A792F50043DA9D /* PasswordChangeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C59922A792F40043DA9D /* PasswordChangeVC.m */; };
+		FE92C64522A792F50043DA9D /* SigUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5A122A792F40043DA9D /* SigUtil.m */; };
+		FE92C64622A792F50043DA9D /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5A422A792F40043DA9D /* NSString+Extension.m */; };
+		FE92C64822A792F50043DA9D /* V3KeystoreValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5A922A792F40043DA9D /* V3KeystoreValidator.m */; };
+		FE92C64922A792F50043DA9D /* IdentityValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5AB22A792F40043DA9D /* IdentityValidator.m */; };
+		FE92C64A22A792F50043DA9D /* PrivateKeyValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5AD22A792F40043DA9D /* PrivateKeyValidator.m */; };
+		FE92C64B22A792F50043DA9D /* WalletIDValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5AF22A792F40043DA9D /* WalletIDValidator.m */; };
+		FE92C64C22A792F50043DA9D /* Keystore.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5B122A792F40043DA9D /* Keystore.m */; };
+		FE92C64D22A792F50043DA9D /* EncryptedMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5B222A792F40043DA9D /* EncryptedMessage.m */; };
+		FE92C64E22A792F50043DA9D /* IdentityKeystore.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5B422A792F40043DA9D /* IdentityKeystore.m */; };
+		FE92C64F22A792F50043DA9D /* BTCMnemonicKeystore.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5BA22A792F40043DA9D /* BTCMnemonicKeystore.m */; };
+		FE92C65022A792F50043DA9D /* WalletMeta.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5BD22A792F40043DA9D /* WalletMeta.m */; };
+		FE92C65122A792F50043DA9D /* Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5BE22A792F40043DA9D /* Crypto.m */; };
+		FE92C65222A792F50043DA9D /* ETHKeystore.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5C122A792F40043DA9D /* ETHKeystore.m */; };
+		FE92C65322A792F50043DA9D /* ETHMnemonicKeystore.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5C322A792F40043DA9D /* ETHMnemonicKeystore.m */; };
+		FE92C65A22A792F50043DA9D /* MnemonicDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5D522A792F40043DA9D /* MnemonicDictionary.m */; };
+		FE92C65B22A792F50043DA9D /* Mnemonic.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5D622A792F40043DA9D /* Mnemonic.m */; };
+		FE92C65C22A792F50043DA9D /* TransactionSignedResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5D722A792F40043DA9D /* TransactionSignedResult.m */; };
+		FE92C65D22A792F50043DA9D /* MnemonicUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5D822A792F40043DA9D /* MnemonicUtil.m */; };
+		FE92C65E22A792F50043DA9D /* ETHKey.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5DA22A792F40043DA9D /* ETHKey.m */; };
+		FE92C65F22A792F50043DA9D /* ETHTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5DB22A792F40043DA9D /* ETHTransaction.m */; };
+		FE92C66022A792F50043DA9D /* StorageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5E322A792F40043DA9D /* StorageManager.m */; };
+		FE92C66122A792F50043DA9D /* LocalFileStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5E422A792F40043DA9D /* LocalFileStorage.m */; };
+		FE92C66222A792F50043DA9D /* Identity.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5E622A792F40043DA9D /* Identity.m */; };
+		FE92C66322A792F50043DA9D /* WalletManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5E722A792F40043DA9D /* WalletManager.m */; };
+		FE92C66422A792F50043DA9D /* BasicWallet.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C5E822A792F40043DA9D /* BasicWallet.m */; };
+		FE92C66722A798530043DA9D /* BigNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE92C66622A798530043DA9D /* BigNumber.swift */; };
+		FE92C66C22A79BB20043DA9D /* Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE92C66822A79BB20043DA9D /* Hex.swift */; };
+		FE92C66D22A79BB20043DA9D /* RLP.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE92C66922A79BB20043DA9D /* RLP.swift */; };
+		FE92C66E22A79BB20043DA9D /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE92C66A22A79BB20043DA9D /* String+Extension.swift */; };
+		FE92C66F22A79BB20043DA9D /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE92C66B22A79BB20043DA9D /* Data+Extension.swift */; };
+		FE92C68B22A7AA4A0043DA9D /* Keccak256.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C68122A7AA4A0043DA9D /* Keccak256.m */; };
+		FE92C68C22A7AA4A0043DA9D /* Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C68322A7AA4A0043DA9D /* Hash.m */; };
+		FE92C68D22A7AA4A0043DA9D /* Secp256k1_Insight.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C68422A7AA4A0043DA9D /* Secp256k1_Insight.m */; };
+		FE92C68E22A7AA4A0043DA9D /* Scrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C68522A7AA4A0043DA9D /* Scrypt.m */; };
+		FE92C69022A7AA4A0043DA9D /* AES128.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C68722A7AA4A0043DA9D /* AES128.m */; };
+		FE92C69622A7BE940043DA9D /* TabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C69422A7BE940043DA9D /* TabBarVC.m */; };
+		FE92C69B22A7C1660043DA9D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE92C69D22A7C1660043DA9D /* Localizable.strings */; };
+		FECC977922D31B4B007BE8F5 /* TransferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC977822D31B4B007BE8F5 /* TransferModel.m */; };
+		FECC978422D46FCF007BE8F5 /* AppVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC978322D46FCF007BE8F5 /* AppVersion.m */; };
+		FECC978822DEFB78007BE8F5 /* NodeRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC978722DEFB78007BE8F5 /* NodeRegisterVC.m */; };
+		FED3FF8C22BCB1FF005918B3 /* Keccak256_bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED3FF8B22BCB1FF005918B3 /* Keccak256_bridge.swift */; };
+		FED3FF8E22BCC6E5005918B3 /* Secp256k1_bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FED3FF8D22BCC6E5005918B3 /* Secp256k1_bridge.swift */; };
+		FED3FFB622C0B8FA005918B3 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FED3FFB522C0B8FA005918B3 /* MobileCoreServices.framework */; };
+		FED3FFBE22C2090D005918B3 /* UpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = FED3FFBD22C2090D005918B3 /* UpdateView.m */; };
+		FED3FFC522C35EC3005918B3 /* NSString+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = FED3FFC422C35EC3005918B3 /* NSString+Category.m */; };
+		FEDD8EF322C5E2B700BBC74B /* BTCKeystore.m in Sources */ = {isa = PBXBuildFile; fileRef = FEDD8EF222C5E2B700BBC74B /* BTCKeystore.m */; };
+		FEE0F65322C737FF00CFBAEA /* BTCTransaction+Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE0F65222C737FF00CFBAEA /* BTCTransaction+Transaction.m */; };
+		FEE3B27B22A641D2003B5244 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE3B27A22A641D2003B5244 /* AppDelegate.m */; };
+		FEE3B27E22A641D2003B5244 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE3B27D22A641D2003B5244 /* ViewController.m */; };
+		FEE3B28122A641D2003B5244 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE3B27F22A641D2003B5244 /* Main.storyboard */; };
+		FEE3B28322A641D3003B5244 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FEE3B28222A641D3003B5244 /* Assets.xcassets */; };
+		FEE3B28622A641D3003B5244 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FEE3B28422A641D3003B5244 /* LaunchScreen.storyboard */; };
+		FEE3B28922A641D3003B5244 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FEE3B28822A641D3003B5244 /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		02CA8EF2941D8951E8EC84A7 /* Pods-insightWallet_ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-insightWallet_ios.debug.xcconfig"; path = "Target Support Files/Pods-insightWallet_ios/Pods-insightWallet_ios.debug.xcconfig"; sourceTree = "<group>"; };
+		0F8751618F1964E1DA2DA63E /* Pods-insightWallet_ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-insightWallet_ios.release.xcconfig"; path = "Target Support Files/Pods-insightWallet_ios/Pods-insightWallet_ios.release.xcconfig"; sourceTree = "<group>"; };
+		1CD94D012D893B0C3ED64D82 /* Pods-inb-wallet-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inb-wallet-ios.release.xcconfig"; path = "Target Support Files/Pods-inb-wallet-ios/Pods-inb-wallet-ios.release.xcconfig"; sourceTree = "<group>"; };
+		285E3ED8C9787F7210221EE6 /* Pods-test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test.release.xcconfig"; path = "Target Support Files/Pods-test/Pods-test.release.xcconfig"; sourceTree = "<group>"; };
+		3CE0FC7322E22DC26AE92F8E /* Pods-test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-test.debug.xcconfig"; path = "Target Support Files/Pods-test/Pods-test.debug.xcconfig"; sourceTree = "<group>"; };
+		3EC89D4EEC29CB938A006A9D /* Pods_insightWallet_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_insightWallet_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F3A6CB6E0335195F75C4B93 /* Pods_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		838E3AABC8B99CAE7E3B598F /* Pods-inb-wallet-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inb-wallet-ios.debug.xcconfig"; path = "Target Support Files/Pods-inb-wallet-ios/Pods-inb-wallet-ios.debug.xcconfig"; sourceTree = "<group>"; };
+		EAFA2CE734299E1C35667DA2 /* Pods_inb_wallet_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_inb_wallet_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE3FC2A122AE7B6C00A41205 /* NSDate+DateString.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateString.h"; sourceTree = "<group>"; };
+		FE3FC2A222AE7B6C00A41205 /* NSDate+DateString.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateString.m"; sourceTree = "<group>"; };
+		FE3FC2A422AF5AC000A41205 /* NetworkUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkUtil.h; sourceTree = "<group>"; };
+		FE3FC2A522AF5AC000A41205 /* NetworkUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkUtil.m; sourceTree = "<group>"; };
+		FE3FC2A722AFB38B00A41205 /* CommonTransaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonTransaction.h; sourceTree = "<group>"; };
+		FE3FC2A822AFB38B00A41205 /* CommonTransaction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommonTransaction.m; sourceTree = "<group>"; };
+		FE3FC2C622B0E7B300A41205 /* TransferListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferListVC.h; sourceTree = "<group>"; };
+		FE3FC2C722B0E7B300A41205 /* TransferListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransferListVC.m; sourceTree = "<group>"; };
+		FE3FC2C922B0E84500A41205 /* TransferListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferListCell.h; sourceTree = "<group>"; };
+		FE3FC2CA22B0E84500A41205 /* TransferListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransferListCell.m; sourceTree = "<group>"; };
+		FE3FC2CB22B0E84500A41205 /* TransferListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferListCell.xib; sourceTree = "<group>"; };
+		FE3FC2D622B77F6D00A41205 /* PasswordInputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PasswordInputView.h; sourceTree = "<group>"; };
+		FE3FC2D722B77F6D00A41205 /* PasswordInputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PasswordInputView.m; sourceTree = "<group>"; };
+		FE3FC2DA22B8B7F700A41205 /* MBProgressHUD+LZ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+LZ.h"; sourceTree = "<group>"; };
+		FE3FC2DB22B8B7F700A41205 /* MBProgressHUD+LZ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+LZ.m"; sourceTree = "<group>"; };
+		FE3FC2DF22B8D44700A41205 /* TZPhotoPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPreviewCell.h; sourceTree = "<group>"; };
+		FE3FC2E022B8D44700A41205 /* TZPhotoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPickerController.h; sourceTree = "<group>"; };
+		FE3FC2E122B8D44700A41205 /* TZImageCropManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZImageCropManager.m; sourceTree = "<group>"; };
+		FE3FC2E222B8D44700A41205 /* TZImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZImageManager.h; sourceTree = "<group>"; };
+		FE3FC2E322B8D44700A41205 /* TZAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZAssetCell.m; sourceTree = "<group>"; };
+		FE3FC2E422B8D44700A41205 /* TZVideoPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZVideoPlayerController.m; sourceTree = "<group>"; };
+		FE3FC2E522B8D44700A41205 /* TZAssetModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZAssetModel.m; sourceTree = "<group>"; };
+		FE3FC2E622B8D44700A41205 /* NSBundle+TZImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+TZImagePicker.m"; sourceTree = "<group>"; };
+		FE3FC2E722B8D44700A41205 /* TZLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZLocationManager.h; sourceTree = "<group>"; };
+		FE3FC2E822B8D44700A41205 /* TZImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZImagePickerController.h; sourceTree = "<group>"; };
+		FE3FC2E922B8D44700A41205 /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
+		FE3FC2EA22B8D44700A41205 /* TZPhotoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZPhotoPreviewController.m; sourceTree = "<group>"; };
+		FE3FC2EB22B8D44700A41205 /* TZImagePickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TZImagePickerController.bundle; sourceTree = "<group>"; };
+		FE3FC2EC22B8D44700A41205 /* TZProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZProgressView.m; sourceTree = "<group>"; };
+		FE3FC2ED22B8D44700A41205 /* TZGifPhotoPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZGifPhotoPreviewController.h; sourceTree = "<group>"; };
+		FE3FC2EE22B8D44700A41205 /* TZAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAssetCell.h; sourceTree = "<group>"; };
+		FE3FC2EF22B8D44700A41205 /* TZImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZImageManager.m; sourceTree = "<group>"; };
+		FE3FC2F022B8D44700A41205 /* TZImageCropManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZImageCropManager.h; sourceTree = "<group>"; };
+		FE3FC2F122B8D44700A41205 /* TZPhotoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZPhotoPickerController.m; sourceTree = "<group>"; };
+		FE3FC2F222B8D44700A41205 /* TZPhotoPreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZPhotoPreviewCell.m; sourceTree = "<group>"; };
+		FE3FC2F322B8D44700A41205 /* NSBundle+TZImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+TZImagePicker.h"; sourceTree = "<group>"; };
+		FE3FC2F422B8D44700A41205 /* TZAssetModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZAssetModel.h; sourceTree = "<group>"; };
+		FE3FC2F522B8D44700A41205 /* TZVideoPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZVideoPlayerController.h; sourceTree = "<group>"; };
+		FE3FC2F622B8D44700A41205 /* TZPhotoPreviewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZPhotoPreviewController.h; sourceTree = "<group>"; };
+		FE3FC2F722B8D44700A41205 /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
+		FE3FC2F822B8D44700A41205 /* TZImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZImagePickerController.m; sourceTree = "<group>"; };
+		FE3FC2F922B8D44700A41205 /* TZLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZLocationManager.m; sourceTree = "<group>"; };
+		FE3FC2FA22B8D44700A41205 /* TZGifPhotoPreviewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZGifPhotoPreviewController.m; sourceTree = "<group>"; };
+		FE3FC2FB22B8D44700A41205 /* TZProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZProgressView.h; sourceTree = "<group>"; };
+		FE3FC30C22B90B3200A41205 /* Node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		FE3FC30D22B90B3200A41205 /* Node.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
+		FE3FC31322BB278F00A41205 /* FAGlobal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FAGlobal.h; sourceTree = "<group>"; };
+		FE3FC31422BB278F00A41205 /* FAGlobal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FAGlobal.m; sourceTree = "<group>"; };
+		FE4FFF3B22C5F1340024CB4D /* BTCKey+Category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTCKey+Category.h"; sourceTree = "<group>"; };
+		FE4FFF3C22C5F1340024CB4D /* BTCKey+Category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTCKey+Category.m"; sourceTree = "<group>"; };
+		FE4FFF4422C61B1A0024CB4D /* BIP44.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BIP44.h; sourceTree = "<group>"; };
+		FE4FFF4522C61B1A0024CB4D /* BIP44.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BIP44.m; sourceTree = "<group>"; };
+		FE4FFF4722C6FEA90024CB4D /* BTCTransactionSigner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTCTransactionSigner.h; sourceTree = "<group>"; };
+		FE4FFF4822C6FEA90024CB4D /* BTCTransactionSigner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTCTransactionSigner.m; sourceTree = "<group>"; };
+		FE92C41A22A78ED40043DA9D /* inb-wallet-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inb-wallet-ios-Bridging-Header.h"; sourceTree = "<group>"; };
+		FE92C41B22A78ED40043DA9D /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		FE92C41E22A792580043DA9D /* libscrypt.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libscrypt.podspec; sourceTree = "<group>"; };
+		FE92C42022A792580043DA9D /* BTCPaymentMethodDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCPaymentMethodDetails.h; sourceTree = "<group>"; };
+		FE92C42122A792580043DA9D /* BTCProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCProcessor.h; sourceTree = "<group>"; };
+		FE92C42222A792580043DA9D /* BTCBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCBlock.m; sourceTree = "<group>"; };
+		FE92C42322A792580043DA9D /* BTCBlockHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCBlockHeader.m; sourceTree = "<group>"; };
+		FE92C42422A792580043DA9D /* BTCCurvePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCCurvePoint.h; sourceTree = "<group>"; };
+		FE92C42522A792580043DA9D /* BTCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCData.h; sourceTree = "<group>"; };
+		FE92C42622A792580043DA9D /* BTCEncryptedBackup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCEncryptedBackup.m; sourceTree = "<group>"; };
+		FE92C42722A792580043DA9D /* BTCKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCKeychain.m; sourceTree = "<group>"; };
+		FE92C42822A792580043DA9D /* BTCTransactionBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCTransactionBuilder.m; sourceTree = "<group>"; };
+		FE92C42922A792580043DA9D /* BTCAssetType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCAssetType.m; sourceTree = "<group>"; };
+		FE92C42A22A792580043DA9D /* BTCMerkleTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCMerkleTree.h; sourceTree = "<group>"; };
+		FE92C42B22A792580043DA9D /* BTCAssetID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCAssetID.m; sourceTree = "<group>"; };
+		FE92C42C22A792580043DA9D /* BTCOutpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCOutpoint.h; sourceTree = "<group>"; };
+		FE92C42D22A792580043DA9D /* BTCBlindSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCBlindSignature.m; sourceTree = "<group>"; };
+		FE92C42E22A792580043DA9D /* BTCProtocolBuffers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCProtocolBuffers.h; sourceTree = "<group>"; };
+		FE92C42F22A792580043DA9D /* BTCQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCQRCode.m; sourceTree = "<group>"; };
+		FE92C43022A792580043DA9D /* BTC256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTC256.h; sourceTree = "<group>"; };
+		FE92C43122A792580043DA9D /* NSData+BTCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+BTCData.m"; sourceTree = "<group>"; };
+		FE92C43222A792580043DA9D /* BTCAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCAddress.h; sourceTree = "<group>"; };
+		FE92C43322A792580043DA9D /* BTCPaymentMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCPaymentMethod.h; sourceTree = "<group>"; };
+		FE92C43422A792580043DA9D /* BTCHashID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCHashID.h; sourceTree = "<group>"; };
+		FE92C43522A792580043DA9D /* BTCCurrencyConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCCurrencyConverter.h; sourceTree = "<group>"; };
+		FE92C43622A792580043DA9D /* BTCTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCTransaction.m; sourceTree = "<group>"; };
+		FE92C43722A792580043DA9D /* BTCScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCScript.h; sourceTree = "<group>"; };
+		FE92C43822A792580043DA9D /* BTCPaymentRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCPaymentRequest.h; sourceTree = "<group>"; };
+		FE92C43922A792580043DA9D /* BTCBigNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCBigNumber.m; sourceTree = "<group>"; };
+		FE92C43A22A792580043DA9D /* BTCBlockchainInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCBlockchainInfo.m; sourceTree = "<group>"; };
+		FE92C43B22A792580043DA9D /* BTCScriptTestData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCScriptTestData.h; sourceTree = "<group>"; };
+		FE92C43C22A792580043DA9D /* BTCTransactionOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCTransactionOutput.h; sourceTree = "<group>"; };
+		FE92C43D22A792580043DA9D /* BTCNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCNumberFormatter.m; sourceTree = "<group>"; };
+		FE92C43E22A792580043DA9D /* BTCScriptMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCScriptMachine.m; sourceTree = "<group>"; };
+		FE92C43F22A792580043DA9D /* BTCMnemonic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCMnemonic.m; sourceTree = "<group>"; };
+		FE92C44022A792580043DA9D /* BTCProtocolSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCProtocolSerialization.m; sourceTree = "<group>"; };
+		FE92C44122A792580043DA9D /* BTCNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCNetwork.m; sourceTree = "<group>"; };
+		FE92C44222A792580043DA9D /* BTCAddressSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCAddressSubclass.h; sourceTree = "<group>"; };
+		FE92C44322A792580043DA9D /* BTCKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCKey.h; sourceTree = "<group>"; };
+		FE92C44422A792580043DA9D /* BTCPriceSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCPriceSource.m; sourceTree = "<group>"; };
+		FE92C44522A792580043DA9D /* BTCEncryptedMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCEncryptedMessage.h; sourceTree = "<group>"; };
+		FE92C44622A792580043DA9D /* BTCSecretSharing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCSecretSharing.m; sourceTree = "<group>"; };
+		FE92C44722A792580043DA9D /* BTCOpcode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCOpcode.m; sourceTree = "<group>"; };
+		FE92C44822A792580043DA9D /* BTCFancyEncryptedMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCFancyEncryptedMessage.m; sourceTree = "<group>"; };
+		FE92C44922A792580043DA9D /* BTCBase58.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCBase58.h; sourceTree = "<group>"; };
+		FE92C44A22A792580043DA9D /* BTCPaymentMethodRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCPaymentMethodRequest.h; sourceTree = "<group>"; };
+		FE92C44B22A792580043DA9D /* BTCPaymentProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCPaymentProtocol.h; sourceTree = "<group>"; };
+		FE92C44C22A792580043DA9D /* BTCChainCom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCChainCom.m; sourceTree = "<group>"; };
+		FE92C44D22A792580043DA9D /* BTCAssetAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCAssetAddress.m; sourceTree = "<group>"; };
+		FE92C44E22A792580043DA9D /* BTCErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCErrors.h; sourceTree = "<group>"; };
+		FE92C44F22A792580043DA9D /* BTCBitcoinURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCBitcoinURL.m; sourceTree = "<group>"; };
+		FE92C45022A792580043DA9D /* NS+BTCBase58.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NS+BTCBase58.m"; sourceTree = "<group>"; };
+		FE92C45122A792580043DA9D /* BTCTransactionInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCTransactionInput.m; sourceTree = "<group>"; };
+		FE92C45222A792580043DA9D /* NSData+BTCData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+BTCData.h"; sourceTree = "<group>"; };
+		FE92C45322A792580043DA9D /* BTC256.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTC256.m; sourceTree = "<group>"; };
+		FE92C45422A792580043DA9D /* BTCAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCAddress.m; sourceTree = "<group>"; };
+		FE92C45522A792580043DA9D /* BTCBlindSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCBlindSignature.h; sourceTree = "<group>"; };
+		FE92C45622A792580043DA9D /* BTCProtocolBuffers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCProtocolBuffers.m; sourceTree = "<group>"; };
+		FE92C45722A792580043DA9D /* BTCQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCQRCode.h; sourceTree = "<group>"; };
+		FE92C45822A792580043DA9D /* BTCOutpoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCOutpoint.m; sourceTree = "<group>"; };
+		FE92C45922A792580043DA9D /* BTCAssetID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCAssetID.h; sourceTree = "<group>"; };
+		FE92C45A22A792580043DA9D /* BTCMerkleTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCMerkleTree.m; sourceTree = "<group>"; };
+		FE92C45B22A792580043DA9D /* BTCTransactionBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCTransactionBuilder.h; sourceTree = "<group>"; };
+		FE92C45C22A792580043DA9D /* BTCAssetType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCAssetType.h; sourceTree = "<group>"; };
+		FE92C45D22A792580043DA9D /* BTCKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCKeychain.h; sourceTree = "<group>"; };
+		FE92C45E22A792580043DA9D /* BTCEncryptedBackup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCEncryptedBackup.h; sourceTree = "<group>"; };
+		FE92C45F22A792580043DA9D /* BTCData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCData.m; sourceTree = "<group>"; };
+		FE92C46022A792580043DA9D /* BTCBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCBlock.h; sourceTree = "<group>"; };
+		FE92C46122A792580043DA9D /* BTCBlockHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCBlockHeader.h; sourceTree = "<group>"; };
+		FE92C46222A792580043DA9D /* BTCProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCProcessor.m; sourceTree = "<group>"; };
+		FE92C46322A792580043DA9D /* BTCCurvePoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCCurvePoint.m; sourceTree = "<group>"; };
+		FE92C46422A792580043DA9D /* BTCPaymentMethodDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCPaymentMethodDetails.m; sourceTree = "<group>"; };
+		FE92C46522A792580043DA9D /* BTCNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCNumberFormatter.h; sourceTree = "<group>"; };
+		FE92C46622A792580043DA9D /* BTCTransactionOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCTransactionOutput.m; sourceTree = "<group>"; };
+		FE92C46722A792580043DA9D /* BTCBlockchainInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCBlockchainInfo.h; sourceTree = "<group>"; };
+		FE92C46822A792580043DA9D /* BTCBigNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCBigNumber.h; sourceTree = "<group>"; };
+		FE92C46922A792580043DA9D /* BTCPaymentRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCPaymentRequest.m; sourceTree = "<group>"; };
+		FE92C46A22A792580043DA9D /* BTCTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCTransaction.h; sourceTree = "<group>"; };
+		FE92C46B22A792580043DA9D /* BTCScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCScript.m; sourceTree = "<group>"; };
+		FE92C46C22A792580043DA9D /* BTCHashID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCHashID.m; sourceTree = "<group>"; };
+		FE92C46D22A792580043DA9D /* BTCCurrencyConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCCurrencyConverter.m; sourceTree = "<group>"; };
+		FE92C46E22A792580043DA9D /* BTCPaymentMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCPaymentMethod.m; sourceTree = "<group>"; };
+		FE92C46F22A792580043DA9D /* BTCPaymentProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCPaymentProtocol.m; sourceTree = "<group>"; };
+		FE92C47022A792580043DA9D /* BTCUnitsAndLimits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCUnitsAndLimits.h; sourceTree = "<group>"; };
+		FE92C47122A792580043DA9D /* BTCBase58.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCBase58.m; sourceTree = "<group>"; };
+		FE92C47222A792580043DA9D /* BTCPaymentMethodRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCPaymentMethodRequest.m; sourceTree = "<group>"; };
+		FE92C47322A792580043DA9D /* BTCFancyEncryptedMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCFancyEncryptedMessage.h; sourceTree = "<group>"; };
+		FE92C47422A792580043DA9D /* BTCOpcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCOpcode.h; sourceTree = "<group>"; };
+		FE92C47522A792580043DA9D /* BTCPriceSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCPriceSource.h; sourceTree = "<group>"; };
+		FE92C47622A792580043DA9D /* BTCEncryptedMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCEncryptedMessage.m; sourceTree = "<group>"; };
+		FE92C47722A792580043DA9D /* BTCSecretSharing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCSecretSharing.h; sourceTree = "<group>"; };
+		FE92C47822A792580043DA9D /* BTCKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCKey.m; sourceTree = "<group>"; };
+		FE92C47922A792580043DA9D /* BTCSignatureHashType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCSignatureHashType.h; sourceTree = "<group>"; };
+		FE92C47A22A792580043DA9D /* BTCMnemonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCMnemonic.h; sourceTree = "<group>"; };
+		FE92C47B22A792580043DA9D /* BTCProtocolSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCProtocolSerialization.h; sourceTree = "<group>"; };
+		FE92C47C22A792580043DA9D /* BTCNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCNetwork.h; sourceTree = "<group>"; };
+		FE92C47D22A792580043DA9D /* BTCScriptMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCScriptMachine.h; sourceTree = "<group>"; };
+		FE92C47E22A792580043DA9D /* BTCTransactionInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCTransactionInput.h; sourceTree = "<group>"; };
+		FE92C47F22A792580043DA9D /* CoreBitcoin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreBitcoin.h; sourceTree = "<group>"; };
+		FE92C48022A792580043DA9D /* BTCAssetAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCAssetAddress.h; sourceTree = "<group>"; };
+		FE92C48122A792580043DA9D /* BTCBitcoinURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCBitcoinURL.h; sourceTree = "<group>"; };
+		FE92C48222A792580043DA9D /* BTCErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCErrors.m; sourceTree = "<group>"; };
+		FE92C48322A792580043DA9D /* NS+BTCBase58.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NS+BTCBase58.h"; sourceTree = "<group>"; };
+		FE92C48422A792580043DA9D /* BTCChainCom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCChainCom.h; sourceTree = "<group>"; };
+		FE92C48622A792580043DA9D /* crypto_scrypt-hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "crypto_scrypt-hash.c"; sourceTree = "<group>"; };
+		FE92C48722A792580043DA9D /* slowequals.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = slowequals.c; sourceTree = "<group>"; };
+		FE92C48822A792580043DA9D /* b64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b64.h; sourceTree = "<group>"; };
+		FE92C48922A792580043DA9D /* sha256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha256.h; sourceTree = "<group>"; };
+		FE92C48A22A792580043DA9D /* crypto-scrypt-saltgen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "crypto-scrypt-saltgen.c"; sourceTree = "<group>"; };
+		FE92C48B22A792580043DA9D /* crypto_scrypt-hexconvert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "crypto_scrypt-hexconvert.c"; sourceTree = "<group>"; };
+		FE92C48C22A792580043DA9D /* crypto-mcf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "crypto-mcf.c"; sourceTree = "<group>"; };
+		FE92C48D22A792580043DA9D /* sysendian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sysendian.h; sourceTree = "<group>"; };
+		FE92C48E22A792580043DA9D /* libscrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libscrypt.h; sourceTree = "<group>"; };
+		FE92C48F22A792580043DA9D /* crypto_scrypt-check.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "crypto_scrypt-check.c"; sourceTree = "<group>"; };
+		FE92C49022A792580043DA9D /* slowequals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slowequals.h; sourceTree = "<group>"; };
+		FE92C49122A792580043DA9D /* b64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = b64.c; sourceTree = "<group>"; };
+		FE92C49222A792580043DA9D /* sha256.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha256.c; sourceTree = "<group>"; };
+		FE92C49322A792580043DA9D /* crypto_scrypt-nosse.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "crypto_scrypt-nosse.c"; sourceTree = "<group>"; };
+		FE92C49422A792580043DA9D /* crypto_scrypt-hexconvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "crypto_scrypt-hexconvert.h"; sourceTree = "<group>"; };
+		FE92C49522A792580043DA9D /* CoreBitcoin.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CoreBitcoin.podspec; sourceTree = "<group>"; };
+		FE92C4D222A792F30043DA9D /* UIImage+QRImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+QRImage.m"; sourceTree = "<group>"; };
+		FE92C4D322A792F30043DA9D /* NSData+Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Crypto.h"; sourceTree = "<group>"; };
+		FE92C4D422A792F30043DA9D /* PaddingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaddingLabel.m; sourceTree = "<group>"; };
+		FE92C4D522A792F30043DA9D /* UIButton+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Layout.m"; sourceTree = "<group>"; };
+		FE92C4D622A792F30043DA9D /* NSData+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HexString.m"; sourceTree = "<group>"; };
+		FE92C4D722A792F30043DA9D /* UIImage+QRImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+QRImage.h"; sourceTree = "<group>"; };
+		FE92C4D822A792F30043DA9D /* PaddingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaddingLabel.h; sourceTree = "<group>"; };
+		FE92C4D922A792F30043DA9D /* NSData+Crypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Crypto.m"; sourceTree = "<group>"; };
+		FE92C4DA22A792F30043DA9D /* UIButton+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Layout.h"; sourceTree = "<group>"; };
+		FE92C4DB22A792F30043DA9D /* NSData+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HexString.h"; sourceTree = "<group>"; };
+		FE92C4DE22A792F30043DA9D /* BasicWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicWebViewController.h; sourceTree = "<group>"; };
+		FE92C4DF22A792F30043DA9D /* BasicWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicWebViewController.m; sourceTree = "<group>"; };
+		FE92C4E522A792F30043DA9D /* VoteListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteListCell.m; sourceTree = "<group>"; };
+		FE92C4E622A792F30043DA9D /* VoteDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteDetailCell.h; sourceTree = "<group>"; };
+		FE92C4E722A792F30043DA9D /* NodeHeaderTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeHeaderTableViewCell.h; sourceTree = "<group>"; };
+		FE92C4E822A792F30043DA9D /* VoteDetailHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteDetailHeaderView.m; sourceTree = "<group>"; };
+		FE92C4E922A792F30043DA9D /* NodeInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeInfoCell.m; sourceTree = "<group>"; };
+		FE92C4EA22A792F30043DA9D /* VoteListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoteListCell.xib; sourceTree = "<group>"; };
+		FE92C4EB22A792F30043DA9D /* NodeHeaderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NodeHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		FE92C4EC22A792F30043DA9D /* VoteListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteListCell.h; sourceTree = "<group>"; };
+		FE92C4ED22A792F30043DA9D /* VoteDetailHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteDetailHeaderView.h; sourceTree = "<group>"; };
+		FE92C4EE22A792F30043DA9D /* VoteDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoteDetailCell.xib; sourceTree = "<group>"; };
+		FE92C4EF22A792F30043DA9D /* NodeInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeInfoCell.h; sourceTree = "<group>"; };
+		FE92C4F022A792F30043DA9D /* NodeHeaderTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeHeaderTableViewCell.m; sourceTree = "<group>"; };
+		FE92C4F122A792F30043DA9D /* VoteDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteDetailCell.m; sourceTree = "<group>"; };
+		FE92C4F222A792F30043DA9D /* NodeInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NodeInfoCell.xib; sourceTree = "<group>"; };
+		FE92C4F422A792F30043DA9D /* VoteListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteListVC.m; sourceTree = "<group>"; };
+		FE92C4F522A792F30043DA9D /* NodeInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NodeInfoVC.m; sourceTree = "<group>"; };
+		FE92C4F622A792F30043DA9D /* VoteDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteDetailVC.h; sourceTree = "<group>"; };
+		FE92C4F722A792F30043DA9D /* VoteListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteListVC.h; sourceTree = "<group>"; };
+		FE92C4F822A792F30043DA9D /* VoteDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteDetailVC.m; sourceTree = "<group>"; };
+		FE92C4F922A792F30043DA9D /* NodeInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeInfoVC.h; sourceTree = "<group>"; };
+		FE92C4FB22A792F30043DA9D /* VoteBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoteBarView.xib; sourceTree = "<group>"; };
+		FE92C4FC22A792F30043DA9D /* VoteBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoteBarView.m; sourceTree = "<group>"; };
+		FE92C4FD22A792F30043DA9D /* VoteBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoteBarView.h; sourceTree = "<group>"; };
+		FE92C50022A792F40043DA9D /* WalletInfoViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletInfoViewModel.h; sourceTree = "<group>"; };
+		FE92C50122A792F40043DA9D /* WalletCreatedViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletCreatedViewModel.h; sourceTree = "<group>"; };
+		FE92C50222A792F40043DA9D /* WalletInfoViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletInfoViewModel.m; sourceTree = "<group>"; };
+		FE92C50322A792F40043DA9D /* WalletCreatedViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletCreatedViewModel.m; sourceTree = "<group>"; };
+		FE92C50522A792F40043DA9D /* WalletAccountsListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAccountsListCell.h; sourceTree = "<group>"; };
+		FE92C50622A792F40043DA9D /* WalletAccountsListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WalletAccountsListCell.xib; sourceTree = "<group>"; };
+		FE92C50722A792F40043DA9D /* WalletAccountsListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAccountsListCell.m; sourceTree = "<group>"; };
+		FE92C50B22A792F40043DA9D /* WalletDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletDetailVC.m; sourceTree = "<group>"; };
+		FE92C50C22A792F40043DA9D /* WalletCreatedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletCreatedVC.h; sourceTree = "<group>"; };
+		FE92C50D22A792F40043DA9D /* WalletInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletInfoVC.m; sourceTree = "<group>"; };
+		FE92C50E22A792F40043DA9D /* WalletBackupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletBackupVC.h; sourceTree = "<group>"; };
+		FE92C50F22A792F40043DA9D /* WalletsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletsVC.m; sourceTree = "<group>"; };
+		FE92C51022A792F40043DA9D /* WalletImportVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletImportVC.h; sourceTree = "<group>"; };
+		FE92C51122A792F40043DA9D /* WalletCreatedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletCreatedVC.m; sourceTree = "<group>"; };
+		FE92C51222A792F40043DA9D /* WalletDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletDetailVC.h; sourceTree = "<group>"; };
+		FE92C51322A792F40043DA9D /* WalletBackupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletBackupVC.m; sourceTree = "<group>"; };
+		FE92C51422A792F40043DA9D /* WalletInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletInfoVC.h; sourceTree = "<group>"; };
+		FE92C51522A792F40043DA9D /* WalletsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletsVC.h; sourceTree = "<group>"; };
+		FE92C51622A792F40043DA9D /* WalletImportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletImportVC.m; sourceTree = "<group>"; };
+		FE92C51822A792F40043DA9D /* SavePrivatekeyWaringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavePrivatekeyWaringView.h; sourceTree = "<group>"; };
+		FE92C51922A792F40043DA9D /* WalletInfoFunctionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletInfoFunctionView.m; sourceTree = "<group>"; };
+		FE92C51A22A792F40043DA9D /* WalletAccountsListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletAccountsListView.h; sourceTree = "<group>"; };
+		FE92C51B22A792F40043DA9D /* WalletInfoCPUView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletInfoCPUView.h; sourceTree = "<group>"; };
+		FE92C51C22A792F40043DA9D /* SliderBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SliderBar.m; sourceTree = "<group>"; };
+		FE92C51D22A792F40043DA9D /* WalletInfoFunctionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletInfoFunctionView.h; sourceTree = "<group>"; };
+		FE92C51E22A792F40043DA9D /* SavePrivatekeyWaringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SavePrivatekeyWaringView.m; sourceTree = "<group>"; };
+		FE92C51F22A792F40043DA9D /* WalletAccountsListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletAccountsListView.m; sourceTree = "<group>"; };
+		FE92C52022A792F40043DA9D /* SliderBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SliderBar.h; sourceTree = "<group>"; };
+		FE92C52122A792F40043DA9D /* WalletInfoCPUView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletInfoCPUView.m; sourceTree = "<group>"; };
+		FE92C52422A792F40043DA9D /* FindVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindVC.h; sourceTree = "<group>"; };
+		FE92C52522A792F40043DA9D /* FindVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindVC.m; sourceTree = "<group>"; };
+		FE92C52822A792F40043DA9D /* TransferMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransferMessageCell.xib; sourceTree = "<group>"; };
+		FE92C52922A792F40043DA9D /* TransferMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferMessageCell.m; sourceTree = "<group>"; };
+		FE92C52A22A792F40043DA9D /* TransferHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferHeaderView.h; sourceTree = "<group>"; };
+		FE92C52B22A792F40043DA9D /* TransferMessage_2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferMessage_2Cell.h; sourceTree = "<group>"; };
+		FE92C52C22A792F40043DA9D /* TransferFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferFooterView.m; sourceTree = "<group>"; };
+		FE92C52D22A792F40043DA9D /* TransferMessage_2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransferMessage_2Cell.xib; sourceTree = "<group>"; };
+		FE92C52E22A792F40043DA9D /* TransferHeaderView_vote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferHeaderView_vote.h; sourceTree = "<group>"; };
+		FE92C52F22A792F40043DA9D /* TransferMessage_2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferMessage_2Cell.m; sourceTree = "<group>"; };
+		FE92C53022A792F40043DA9D /* TransferHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferHeaderView.m; sourceTree = "<group>"; };
+		FE92C53122A792F40043DA9D /* TransferMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferMessageCell.h; sourceTree = "<group>"; };
+		FE92C53222A792F40043DA9D /* TransferFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferFooterView.h; sourceTree = "<group>"; };
+		FE92C53322A792F40043DA9D /* TransferHeaderView_vote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferHeaderView_vote.m; sourceTree = "<group>"; };
+		FE92C53522A792F40043DA9D /* RequestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestVC.h; sourceTree = "<group>"; };
+		FE92C53622A792F40043DA9D /* TransactionDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionDetailVC.h; sourceTree = "<group>"; };
+		FE92C53722A792F40043DA9D /* TransferVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferVC.m; sourceTree = "<group>"; };
+		FE92C53822A792F40043DA9D /* RequestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestVC.m; sourceTree = "<group>"; };
+		FE92C53922A792F40043DA9D /* TransactionDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionDetailVC.m; sourceTree = "<group>"; };
+		FE92C53A22A792F40043DA9D /* TransferVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferVC.h; sourceTree = "<group>"; };
+		FE92C53E22A792F40043DA9D /* LZCollectionViewLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZCollectionViewLayoutAttributes.h; sourceTree = "<group>"; };
+		FE92C53F22A792F40043DA9D /* LZCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		FE92C54022A792F40043DA9D /* LZCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZCollectionReusableView.h; sourceTree = "<group>"; };
+		FE92C54122A792F40043DA9D /* LZCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		FE92C54222A792F40043DA9D /* LZCollectionViewLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZCollectionViewLayoutAttributes.m; sourceTree = "<group>"; };
+		FE92C54322A792F40043DA9D /* LZCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZCollectionReusableView.m; sourceTree = "<group>"; };
+		FE92C54522A792F40043DA9D /* WelcomBackupTipVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WelcomBackupTipVC.xib; sourceTree = "<group>"; };
+		FE92C54622A792F40043DA9D /* WelcomVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomVC.h; sourceTree = "<group>"; };
+		FE92C54722A792F40043DA9D /* WelcomBackupVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomBackupVC.h; sourceTree = "<group>"; };
+		FE92C54822A792F40043DA9D /* WelcomBackupTipVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomBackupTipVC.m; sourceTree = "<group>"; };
+		FE92C54922A792F40043DA9D /* WelcomConfirmMnemonicVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomConfirmMnemonicVC.h; sourceTree = "<group>"; };
+		FE92C54A22A792F40043DA9D /* WelcomBackupTipVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomBackupTipVC.h; sourceTree = "<group>"; };
+		FE92C54B22A792F40043DA9D /* WelcomConfirmMnemonicVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomConfirmMnemonicVC.m; sourceTree = "<group>"; };
+		FE92C54C22A792F40043DA9D /* WelcomBackupVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomBackupVC.m; sourceTree = "<group>"; };
+		FE92C54D22A792F40043DA9D /* WelcomVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomVC.m; sourceTree = "<group>"; };
+		FE92C54F22A792F40043DA9D /* PassphraseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassphraseView.m; sourceTree = "<group>"; };
+		FE92C55022A792F40043DA9D /* PassphraseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassphraseView.h; sourceTree = "<group>"; };
+		FE92C55222A792F40043DA9D /* MnemonicWordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MnemonicWordCell.h; sourceTree = "<group>"; };
+		FE92C55322A792F40043DA9D /* MnemonicWordHeaderView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MnemonicWordHeaderView2.h; sourceTree = "<group>"; };
+		FE92C55422A792F40043DA9D /* MnemonicWordCell2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MnemonicWordCell2.m; sourceTree = "<group>"; };
+		FE92C55522A792F40043DA9D /* MnemonicWordCell2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MnemonicWordCell2.xib; sourceTree = "<group>"; };
+		FE92C55622A792F40043DA9D /* MnemonicWordHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MnemonicWordHeaderView.h; sourceTree = "<group>"; };
+		FE92C55722A792F40043DA9D /* MnemonicWordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MnemonicWordCell.m; sourceTree = "<group>"; };
+		FE92C55822A792F40043DA9D /* MnemonicWordHeaderView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MnemonicWordHeaderView2.m; sourceTree = "<group>"; };
+		FE92C55922A792F40043DA9D /* MnemonicWordHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MnemonicWordHeaderView.xib; sourceTree = "<group>"; };
+		FE92C55A22A792F40043DA9D /* MnemonicWordCell2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MnemonicWordCell2.h; sourceTree = "<group>"; };
+		FE92C55B22A792F40043DA9D /* MnemonicWordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MnemonicWordCell.xib; sourceTree = "<group>"; };
+		FE92C55C22A792F40043DA9D /* MnemonicWordHeaderView2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MnemonicWordHeaderView2.xib; sourceTree = "<group>"; };
+		FE92C55D22A792F40043DA9D /* MnemonicWordHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MnemonicWordHeaderView.m; sourceTree = "<group>"; };
+		FE92C56122A792F40043DA9D /* SWQRCodeConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWQRCodeConfig.m; sourceTree = "<group>"; };
+		FE92C56222A792F40043DA9D /* SWQRCodeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWQRCodeManager.m; sourceTree = "<group>"; };
+		FE92C56322A792F40043DA9D /* SWQRCodeConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCodeConfig.h; sourceTree = "<group>"; };
+		FE92C56422A792F40043DA9D /* SWQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCode.h; sourceTree = "<group>"; };
+		FE92C56522A792F40043DA9D /* SWQRCodeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCodeManager.h; sourceTree = "<group>"; };
+		FE92C56622A792F40043DA9D /* SWQRCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWQRCodeViewController.m; sourceTree = "<group>"; };
+		FE92C56722A792F40043DA9D /* SWQRCode.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SWQRCode.bundle; sourceTree = "<group>"; };
+		FE92C56922A792F40043DA9D /* SWScannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWScannerView.m; sourceTree = "<group>"; };
+		FE92C56A22A792F40043DA9D /* SWScannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWScannerView.h; sourceTree = "<group>"; };
+		FE92C56B22A792F40043DA9D /* SWQRCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWQRCodeViewController.h; sourceTree = "<group>"; };
+		FE92C56E22A792F40043DA9D /* CCSlideAnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCSlideAnimatedTransitioning.m; sourceTree = "<group>"; };
+		FE92C56F22A792F40043DA9D /* CCNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCNavigationController.h; sourceTree = "<group>"; };
+		FE92C57022A792F40043DA9D /* CCNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCNavigationController.m; sourceTree = "<group>"; };
+		FE92C57122A792F40043DA9D /* CCSlideAnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSlideAnimatedTransitioning.h; sourceTree = "<group>"; };
+		FE92C57322A792F40043DA9D /* NSObject+CCAssociative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CCAssociative.h"; sourceTree = "<group>"; };
+		FE92C57422A792F40043DA9D /* UIView+CCAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CCAddition.m"; sourceTree = "<group>"; };
+		FE92C57522A792F40043DA9D /* NSObject+CCAssociative.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CCAssociative.m"; sourceTree = "<group>"; };
+		FE92C57622A792F40043DA9D /* UIView+CCAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CCAddition.h"; sourceTree = "<group>"; };
+		FE92C57822A792F40043DA9D /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		FE92C57922A792F40043DA9D /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		FE92C57B22A792F40043DA9D /* CocoaSecurity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaSecurity.h; sourceTree = "<group>"; };
+		FE92C57C22A792F40043DA9D /* CocoaSecurity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocoaSecurity.m; sourceTree = "<group>"; };
+		FE92C57F22A792F40043DA9D /* ResourceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceVC.h; sourceTree = "<group>"; };
+		FE92C58022A792F40043DA9D /* ResourceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceVC.m; sourceTree = "<group>"; };
+		FE92C58222A792F40043DA9D /* ResourceCPUView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceCPUView.h; sourceTree = "<group>"; };
+		FE92C58322A792F40043DA9D /* ResourceCPUView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceCPUView.m; sourceTree = "<group>"; };
+		FE92C58622A792F40043DA9D /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		FE92C58722A792F40043DA9D /* Config.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Config.m; sourceTree = "<group>"; };
+		FE92C58922A792F40043DA9D /* SettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
+		FE92C58A22A792F40043DA9D /* SettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
+		FE92C58B22A792F40043DA9D /* SettingCell_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell_2.m; sourceTree = "<group>"; };
+		FE92C58C22A792F40043DA9D /* SettingCell_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingCell_2.xib; sourceTree = "<group>"; };
+		FE92C58D22A792F40043DA9D /* SettingAboutUsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingAboutUsHeaderView.h; sourceTree = "<group>"; };
+		FE92C58E22A792F40043DA9D /* SettingCell_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCell_2.h; sourceTree = "<group>"; };
+		FE92C58F22A792F40043DA9D /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
+		FE92C59022A792F40043DA9D /* SettingAboutUsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingAboutUsHeaderView.m; sourceTree = "<group>"; };
+		FE92C59222A792F40043DA9D /* SettingSystemVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingSystemVC.h; sourceTree = "<group>"; };
+		FE92C59322A792F40043DA9D /* SettingAboutUsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingAboutUsVC.h; sourceTree = "<group>"; };
+		FE92C59422A792F40043DA9D /* PasswordChangeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordChangeVC.h; sourceTree = "<group>"; };
+		FE92C59522A792F40043DA9D /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
+		FE92C59622A792F40043DA9D /* SettingAboutUsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingAboutUsVC.m; sourceTree = "<group>"; };
+		FE92C59722A792F40043DA9D /* SettingSystemVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingSystemVC.m; sourceTree = "<group>"; };
+		FE92C59822A792F40043DA9D /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
+		FE92C59922A792F40043DA9D /* PasswordChangeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordChangeVC.m; sourceTree = "<group>"; };
+		FE92C59F22A792F40043DA9D /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		FE92C5A122A792F40043DA9D /* SigUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SigUtil.m; sourceTree = "<group>"; };
+		FE92C5A422A792F40043DA9D /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
+		FE92C5A622A792F40043DA9D /* SigUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SigUtil.h; sourceTree = "<group>"; };
+		FE92C5A822A792F40043DA9D /* PrivateKeyValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivateKeyValidator.h; sourceTree = "<group>"; };
+		FE92C5A922A792F40043DA9D /* V3KeystoreValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = V3KeystoreValidator.m; sourceTree = "<group>"; };
+		FE92C5AA22A792F40043DA9D /* WalletIDValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletIDValidator.h; sourceTree = "<group>"; };
+		FE92C5AB22A792F40043DA9D /* IdentityValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityValidator.m; sourceTree = "<group>"; };
+		FE92C5AC22A792F40043DA9D /* V3KeystoreValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = V3KeystoreValidator.h; sourceTree = "<group>"; };
+		FE92C5AD22A792F40043DA9D /* PrivateKeyValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateKeyValidator.m; sourceTree = "<group>"; };
+		FE92C5AE22A792F40043DA9D /* IdentityValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityValidator.h; sourceTree = "<group>"; };
+		FE92C5AF22A792F40043DA9D /* WalletIDValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletIDValidator.m; sourceTree = "<group>"; };
+		FE92C5B122A792F40043DA9D /* Keystore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keystore.m; sourceTree = "<group>"; };
+		FE92C5B222A792F40043DA9D /* EncryptedMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedMessage.m; sourceTree = "<group>"; };
+		FE92C5B422A792F40043DA9D /* IdentityKeystore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityKeystore.m; sourceTree = "<group>"; };
+		FE92C5B522A792F40043DA9D /* IdentityKeystore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityKeystore.h; sourceTree = "<group>"; };
+		FE92C5B622A792F40043DA9D /* WalletMeta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletMeta.h; sourceTree = "<group>"; };
+		FE92C5B722A792F40043DA9D /* Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crypto.h; sourceTree = "<group>"; };
+		FE92C5B822A792F40043DA9D /* Keystore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keystore.h; sourceTree = "<group>"; };
+		FE92C5BA22A792F40043DA9D /* BTCMnemonicKeystore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTCMnemonicKeystore.m; sourceTree = "<group>"; };
+		FE92C5BB22A792F40043DA9D /* BTCMnemonicKeystore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTCMnemonicKeystore.h; sourceTree = "<group>"; };
+		FE92C5BC22A792F40043DA9D /* EncryptedMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedMessage.h; sourceTree = "<group>"; };
+		FE92C5BD22A792F40043DA9D /* WalletMeta.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletMeta.m; sourceTree = "<group>"; };
+		FE92C5BE22A792F40043DA9D /* Crypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crypto.m; sourceTree = "<group>"; };
+		FE92C5C022A792F40043DA9D /* ETHMnemonicKeystore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETHMnemonicKeystore.h; sourceTree = "<group>"; };
+		FE92C5C122A792F40043DA9D /* ETHKeystore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETHKeystore.m; sourceTree = "<group>"; };
+		FE92C5C222A792F40043DA9D /* ETHKeystore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETHKeystore.h; sourceTree = "<group>"; };
+		FE92C5C322A792F40043DA9D /* ETHMnemonicKeystore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETHMnemonicKeystore.m; sourceTree = "<group>"; };
+		FE92C5D122A792F40043DA9D /* MnemonicDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MnemonicDictionary.h; sourceTree = "<group>"; };
+		FE92C5D222A792F40043DA9D /* TransactionSignedResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionSignedResult.h; sourceTree = "<group>"; };
+		FE92C5D322A792F40043DA9D /* Mnemonic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mnemonic.h; sourceTree = "<group>"; };
+		FE92C5D422A792F40043DA9D /* MnemonicUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MnemonicUtil.h; sourceTree = "<group>"; };
+		FE92C5D522A792F40043DA9D /* MnemonicDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MnemonicDictionary.m; sourceTree = "<group>"; };
+		FE92C5D622A792F40043DA9D /* Mnemonic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mnemonic.m; sourceTree = "<group>"; };
+		FE92C5D722A792F40043DA9D /* TransactionSignedResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionSignedResult.m; sourceTree = "<group>"; };
+		FE92C5D822A792F40043DA9D /* MnemonicUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MnemonicUtil.m; sourceTree = "<group>"; };
+		FE92C5DA22A792F40043DA9D /* ETHKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETHKey.m; sourceTree = "<group>"; };
+		FE92C5DB22A792F40043DA9D /* ETHTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETHTransaction.m; sourceTree = "<group>"; };
+		FE92C5DC22A792F40043DA9D /* ETHTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETHTransaction.h; sourceTree = "<group>"; };
+		FE92C5DD22A792F40043DA9D /* ETHKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETHKey.h; sourceTree = "<group>"; };
+		FE92C5E022A792F40043DA9D /* StorageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorageManager.h; sourceTree = "<group>"; };
+		FE92C5E122A792F40043DA9D /* LocalFileStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalFileStorage.h; sourceTree = "<group>"; };
+		FE92C5E222A792F40043DA9D /* Storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Storage.h; sourceTree = "<group>"; };
+		FE92C5E322A792F40043DA9D /* StorageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorageManager.m; sourceTree = "<group>"; };
+		FE92C5E422A792F40043DA9D /* LocalFileStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalFileStorage.m; sourceTree = "<group>"; };
+		FE92C5E622A792F40043DA9D /* Identity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Identity.m; sourceTree = "<group>"; };
+		FE92C5E722A792F40043DA9D /* WalletManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WalletManager.m; sourceTree = "<group>"; };
+		FE92C5E822A792F40043DA9D /* BasicWallet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicWallet.m; sourceTree = "<group>"; };
+		FE92C5E922A792F40043DA9D /* Identity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Identity.h; sourceTree = "<group>"; };
+		FE92C5EA22A792F40043DA9D /* WalletManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletManager.h; sourceTree = "<group>"; };
+		FE92C5EB22A792F40043DA9D /* BasicWallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicWallet.h; sourceTree = "<group>"; };
+		FE92C66522A793700043DA9D /* Enum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enum.h; sourceTree = "<group>"; };
+		FE92C66622A798530043DA9D /* BigNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigNumber.swift; sourceTree = "<group>"; };
+		FE92C66822A79BB20043DA9D /* Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hex.swift; sourceTree = "<group>"; };
+		FE92C66922A79BB20043DA9D /* RLP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RLP.swift; sourceTree = "<group>"; };
+		FE92C66A22A79BB20043DA9D /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		FE92C66B22A79BB20043DA9D /* Data+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
+		FE92C68022A7AA4A0043DA9D /* Scrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scrypt.h; sourceTree = "<group>"; };
+		FE92C68122A7AA4A0043DA9D /* Keccak256.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Keccak256.m; sourceTree = "<group>"; };
+		FE92C68222A7AA4A0043DA9D /* AES128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AES128.h; sourceTree = "<group>"; };
+		FE92C68322A7AA4A0043DA9D /* Hash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Hash.m; sourceTree = "<group>"; };
+		FE92C68422A7AA4A0043DA9D /* Secp256k1_Insight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Secp256k1_Insight.m; sourceTree = "<group>"; };
+		FE92C68522A7AA4A0043DA9D /* Scrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scrypt.m; sourceTree = "<group>"; };
+		FE92C68722A7AA4A0043DA9D /* AES128.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AES128.m; sourceTree = "<group>"; };
+		FE92C68822A7AA4A0043DA9D /* Keccak256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Keccak256.h; sourceTree = "<group>"; };
+		FE92C68922A7AA4A0043DA9D /* Secp256k1_Insight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Secp256k1_Insight.h; sourceTree = "<group>"; };
+		FE92C68A22A7AA4A0043DA9D /* Hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hash.h; sourceTree = "<group>"; };
+		FE92C69422A7BE940043DA9D /* TabBarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarVC.m; sourceTree = "<group>"; };
+		FE92C69522A7BE940043DA9D /* TabBarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarVC.h; sourceTree = "<group>"; };
+		FE92C69722A7C0DA0043DA9D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		FE92C69822A7C0DA0043DA9D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		FE92C69C22A7C1660043DA9D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		FE92C69E22A7C16D0043DA9D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FECC977722D31B4B007BE8F5 /* TransferModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferModel.h; sourceTree = "<group>"; };
+		FECC977822D31B4B007BE8F5 /* TransferModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransferModel.m; sourceTree = "<group>"; };
+		FECC978222D46FCF007BE8F5 /* AppVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppVersion.h; sourceTree = "<group>"; };
+		FECC978322D46FCF007BE8F5 /* AppVersion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppVersion.m; sourceTree = "<group>"; };
+		FECC978622DEFB78007BE8F5 /* NodeRegisterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeRegisterVC.h; sourceTree = "<group>"; };
+		FECC978722DEFB78007BE8F5 /* NodeRegisterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeRegisterVC.m; sourceTree = "<group>"; };
+		FED3FF8B22BCB1FF005918B3 /* Keccak256_bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keccak256_bridge.swift; sourceTree = "<group>"; };
+		FED3FF8D22BCC6E5005918B3 /* Secp256k1_bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secp256k1_bridge.swift; sourceTree = "<group>"; };
+		FED3FFB522C0B8FA005918B3 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		FED3FFBC22C2090D005918B3 /* UpdateView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateView.h; sourceTree = "<group>"; };
+		FED3FFBD22C2090D005918B3 /* UpdateView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UpdateView.m; sourceTree = "<group>"; };
+		FED3FFC322C35EC3005918B3 /* NSString+Category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Category.h"; sourceTree = "<group>"; };
+		FED3FFC422C35EC3005918B3 /* NSString+Category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Category.m"; sourceTree = "<group>"; };
+		FEDD8EF122C5E2B700BBC74B /* BTCKeystore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTCKeystore.h; sourceTree = "<group>"; };
+		FEDD8EF222C5E2B700BBC74B /* BTCKeystore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTCKeystore.m; sourceTree = "<group>"; };
+		FEE0F65122C737FF00CFBAEA /* BTCTransaction+Transaction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTCTransaction+Transaction.h"; sourceTree = "<group>"; };
+		FEE0F65222C737FF00CFBAEA /* BTCTransaction+Transaction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTCTransaction+Transaction.m"; sourceTree = "<group>"; };
+		FEE3B27622A641D2003B5244 /* inb-wallet-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "inb-wallet-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FEE3B27922A641D2003B5244 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FEE3B27A22A641D2003B5244 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FEE3B27C22A641D2003B5244 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FEE3B27D22A641D2003B5244 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FEE3B28022A641D2003B5244 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FEE3B28222A641D3003B5244 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FEE3B28522A641D3003B5244 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FEE3B28722A641D3003B5244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FEE3B28822A641D3003B5244 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FEE3B29222A6433B003B5244 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FEE3B27322A641D2003B5244 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FED3FFB622C0B8FA005918B3 /* MobileCoreServices.framework in Frameworks */,
+				FC5DD2865770DB080B131ED3 /* Pods_inb_wallet_ios.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5A3C2DC28A80BE3F6D0B6A0B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3CE0FC7322E22DC26AE92F8E /* Pods-test.debug.xcconfig */,
+				285E3ED8C9787F7210221EE6 /* Pods-test.release.xcconfig */,
+				02CA8EF2941D8951E8EC84A7 /* Pods-insightWallet_ios.debug.xcconfig */,
+				0F8751618F1964E1DA2DA63E /* Pods-insightWallet_ios.release.xcconfig */,
+				838E3AABC8B99CAE7E3B598F /* Pods-inb-wallet-ios.debug.xcconfig */,
+				1CD94D012D893B0C3ED64D82 /* Pods-inb-wallet-ios.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		CBDCFE9083F606B647DF7D48 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FED3FFB522C0B8FA005918B3 /* MobileCoreServices.framework */,
+				6F3A6CB6E0335195F75C4B93 /* Pods_test.framework */,
+				3EC89D4EEC29CB938A006A9D /* Pods_insightWallet_ios.framework */,
+				EAFA2CE734299E1C35667DA2 /* Pods_inb_wallet_ios.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FE3FC2DE22B8D44700A41205 /* TZImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				FE3FC2DF22B8D44700A41205 /* TZPhotoPreviewCell.h */,
+				FE3FC2E022B8D44700A41205 /* TZPhotoPickerController.h */,
+				FE3FC2E122B8D44700A41205 /* TZImageCropManager.m */,
+				FE3FC2E222B8D44700A41205 /* TZImageManager.h */,
+				FE3FC2E322B8D44700A41205 /* TZAssetCell.m */,
+				FE3FC2E422B8D44700A41205 /* TZVideoPlayerController.m */,
+				FE3FC2E522B8D44700A41205 /* TZAssetModel.m */,
+				FE3FC2E622B8D44700A41205 /* NSBundle+TZImagePicker.m */,
+				FE3FC2E722B8D44700A41205 /* TZLocationManager.h */,
+				FE3FC2E822B8D44700A41205 /* TZImagePickerController.h */,
+				FE3FC2E922B8D44700A41205 /* UIView+Layout.m */,
+				FE3FC2EA22B8D44700A41205 /* TZPhotoPreviewController.m */,
+				FE3FC2EB22B8D44700A41205 /* TZImagePickerController.bundle */,
+				FE3FC2EC22B8D44700A41205 /* TZProgressView.m */,
+				FE3FC2ED22B8D44700A41205 /* TZGifPhotoPreviewController.h */,
+				FE3FC2EE22B8D44700A41205 /* TZAssetCell.h */,
+				FE3FC2EF22B8D44700A41205 /* TZImageManager.m */,
+				FE3FC2F022B8D44700A41205 /* TZImageCropManager.h */,
+				FE3FC2F122B8D44700A41205 /* TZPhotoPickerController.m */,
+				FE3FC2F222B8D44700A41205 /* TZPhotoPreviewCell.m */,
+				FE3FC2F322B8D44700A41205 /* NSBundle+TZImagePicker.h */,
+				FE3FC2F422B8D44700A41205 /* TZAssetModel.h */,
+				FE3FC2F522B8D44700A41205 /* TZVideoPlayerController.h */,
+				FE3FC2F622B8D44700A41205 /* TZPhotoPreviewController.h */,
+				FE3FC2F722B8D44700A41205 /* UIView+Layout.h */,
+				FE3FC2F822B8D44700A41205 /* TZImagePickerController.m */,
+				FE3FC2F922B8D44700A41205 /* TZLocationManager.m */,
+				FE3FC2FA22B8D44700A41205 /* TZGifPhotoPreviewController.m */,
+				FE3FC2FB22B8D44700A41205 /* TZProgressView.h */,
+			);
+			path = TZImagePickerController;
+			sourceTree = "<group>";
+		};
+		FE3FC30B22B90B1200A41205 /* Mode */ = {
+			isa = PBXGroup;
+			children = (
+				FE3FC30C22B90B3200A41205 /* Node.h */,
+				FE3FC30D22B90B3200A41205 /* Node.m */,
+			);
+			path = Mode;
+			sourceTree = "<group>";
+		};
+		FE3FC31222BB275600A41205 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				FE3FC31322BB278F00A41205 /* FAGlobal.h */,
+				FE3FC31422BB278F00A41205 /* FAGlobal.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		FE4FFF3A22C5F0CF0024CB4D /* Bitcoin */ = {
+			isa = PBXGroup;
+			children = (
+				FE4FFF3B22C5F1340024CB4D /* BTCKey+Category.h */,
+				FE4FFF3C22C5F1340024CB4D /* BTCKey+Category.m */,
+				FE4FFF4722C6FEA90024CB4D /* BTCTransactionSigner.h */,
+				FE4FFF4822C6FEA90024CB4D /* BTCTransactionSigner.m */,
+				FEE0F65122C737FF00CFBAEA /* BTCTransaction+Transaction.h */,
+				FEE0F65222C737FF00CFBAEA /* BTCTransaction+Transaction.m */,
+			);
+			path = Bitcoin;
+			sourceTree = "<group>";
+		};
+		FE92C41D22A792580043DA9D /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C41E22A792580043DA9D /* libscrypt.podspec */,
+				FE92C41F22A792580043DA9D /* CoreBitcoin */,
+				FE92C48522A792580043DA9D /* libscrypt */,
+				FE92C49522A792580043DA9D /* CoreBitcoin.podspec */,
+			);
+			path = Vendor;
+			sourceTree = SOURCE_ROOT;
+		};
+		FE92C41F22A792580043DA9D /* CoreBitcoin */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C42022A792580043DA9D /* BTCPaymentMethodDetails.h */,
+				FE92C42122A792580043DA9D /* BTCProcessor.h */,
+				FE92C42222A792580043DA9D /* BTCBlock.m */,
+				FE92C42322A792580043DA9D /* BTCBlockHeader.m */,
+				FE92C42422A792580043DA9D /* BTCCurvePoint.h */,
+				FE92C42522A792580043DA9D /* BTCData.h */,
+				FE92C42622A792580043DA9D /* BTCEncryptedBackup.m */,
+				FE92C42722A792580043DA9D /* BTCKeychain.m */,
+				FE92C42822A792580043DA9D /* BTCTransactionBuilder.m */,
+				FE92C42922A792580043DA9D /* BTCAssetType.m */,
+				FE92C42A22A792580043DA9D /* BTCMerkleTree.h */,
+				FE92C42B22A792580043DA9D /* BTCAssetID.m */,
+				FE92C42C22A792580043DA9D /* BTCOutpoint.h */,
+				FE92C42D22A792580043DA9D /* BTCBlindSignature.m */,
+				FE92C42E22A792580043DA9D /* BTCProtocolBuffers.h */,
+				FE92C42F22A792580043DA9D /* BTCQRCode.m */,
+				FE92C43022A792580043DA9D /* BTC256.h */,
+				FE92C43122A792580043DA9D /* NSData+BTCData.m */,
+				FE92C43222A792580043DA9D /* BTCAddress.h */,
+				FE92C43322A792580043DA9D /* BTCPaymentMethod.h */,
+				FE92C43422A792580043DA9D /* BTCHashID.h */,
+				FE92C43522A792580043DA9D /* BTCCurrencyConverter.h */,
+				FE92C43622A792580043DA9D /* BTCTransaction.m */,
+				FE92C43722A792580043DA9D /* BTCScript.h */,
+				FE92C43822A792580043DA9D /* BTCPaymentRequest.h */,
+				FE92C43922A792580043DA9D /* BTCBigNumber.m */,
+				FE92C43A22A792580043DA9D /* BTCBlockchainInfo.m */,
+				FE92C43B22A792580043DA9D /* BTCScriptTestData.h */,
+				FE92C43C22A792580043DA9D /* BTCTransactionOutput.h */,
+				FE92C43D22A792580043DA9D /* BTCNumberFormatter.m */,
+				FE92C43E22A792580043DA9D /* BTCScriptMachine.m */,
+				FE92C43F22A792580043DA9D /* BTCMnemonic.m */,
+				FE92C44022A792580043DA9D /* BTCProtocolSerialization.m */,
+				FE92C44122A792580043DA9D /* BTCNetwork.m */,
+				FE92C44222A792580043DA9D /* BTCAddressSubclass.h */,
+				FE92C44322A792580043DA9D /* BTCKey.h */,
+				FE92C44422A792580043DA9D /* BTCPriceSource.m */,
+				FE92C44522A792580043DA9D /* BTCEncryptedMessage.h */,
+				FE92C44622A792580043DA9D /* BTCSecretSharing.m */,
+				FE92C44722A792580043DA9D /* BTCOpcode.m */,
+				FE92C44822A792580043DA9D /* BTCFancyEncryptedMessage.m */,
+				FE92C44922A792580043DA9D /* BTCBase58.h */,
+				FE92C44A22A792580043DA9D /* BTCPaymentMethodRequest.h */,
+				FE92C44B22A792580043DA9D /* BTCPaymentProtocol.h */,
+				FE92C44C22A792580043DA9D /* BTCChainCom.m */,
+				FE92C44D22A792580043DA9D /* BTCAssetAddress.m */,
+				FE92C44E22A792580043DA9D /* BTCErrors.h */,
+				FE92C44F22A792580043DA9D /* BTCBitcoinURL.m */,
+				FE92C45022A792580043DA9D /* NS+BTCBase58.m */,
+				FE92C45122A792580043DA9D /* BTCTransactionInput.m */,
+				FE92C45222A792580043DA9D /* NSData+BTCData.h */,
+				FE92C45322A792580043DA9D /* BTC256.m */,
+				FE92C45422A792580043DA9D /* BTCAddress.m */,
+				FE92C45522A792580043DA9D /* BTCBlindSignature.h */,
+				FE92C45622A792580043DA9D /* BTCProtocolBuffers.m */,
+				FE92C45722A792580043DA9D /* BTCQRCode.h */,
+				FE92C45822A792580043DA9D /* BTCOutpoint.m */,
+				FE92C45922A792580043DA9D /* BTCAssetID.h */,
+				FE92C45A22A792580043DA9D /* BTCMerkleTree.m */,
+				FE92C45B22A792580043DA9D /* BTCTransactionBuilder.h */,
+				FE92C45C22A792580043DA9D /* BTCAssetType.h */,
+				FE92C45D22A792580043DA9D /* BTCKeychain.h */,
+				FE92C45E22A792580043DA9D /* BTCEncryptedBackup.h */,
+				FE92C45F22A792580043DA9D /* BTCData.m */,
+				FE92C46022A792580043DA9D /* BTCBlock.h */,
+				FE92C46122A792580043DA9D /* BTCBlockHeader.h */,
+				FE92C46222A792580043DA9D /* BTCProcessor.m */,
+				FE92C46322A792580043DA9D /* BTCCurvePoint.m */,
+				FE92C46422A792580043DA9D /* BTCPaymentMethodDetails.m */,
+				FE92C46522A792580043DA9D /* BTCNumberFormatter.h */,
+				FE92C46622A792580043DA9D /* BTCTransactionOutput.m */,
+				FE92C46722A792580043DA9D /* BTCBlockchainInfo.h */,
+				FE92C46822A792580043DA9D /* BTCBigNumber.h */,
+				FE92C46922A792580043DA9D /* BTCPaymentRequest.m */,
+				FE92C46A22A792580043DA9D /* BTCTransaction.h */,
+				FE92C46B22A792580043DA9D /* BTCScript.m */,
+				FE92C46C22A792580043DA9D /* BTCHashID.m */,
+				FE92C46D22A792580043DA9D /* BTCCurrencyConverter.m */,
+				FE92C46E22A792580043DA9D /* BTCPaymentMethod.m */,
+				FE92C46F22A792580043DA9D /* BTCPaymentProtocol.m */,
+				FE92C47022A792580043DA9D /* BTCUnitsAndLimits.h */,
+				FE92C47122A792580043DA9D /* BTCBase58.m */,
+				FE92C47222A792580043DA9D /* BTCPaymentMethodRequest.m */,
+				FE92C47322A792580043DA9D /* BTCFancyEncryptedMessage.h */,
+				FE92C47422A792580043DA9D /* BTCOpcode.h */,
+				FE92C47522A792580043DA9D /* BTCPriceSource.h */,
+				FE92C47622A792580043DA9D /* BTCEncryptedMessage.m */,
+				FE92C47722A792580043DA9D /* BTCSecretSharing.h */,
+				FE92C47822A792580043DA9D /* BTCKey.m */,
+				FE92C47922A792580043DA9D /* BTCSignatureHashType.h */,
+				FE92C47A22A792580043DA9D /* BTCMnemonic.h */,
+				FE92C47B22A792580043DA9D /* BTCProtocolSerialization.h */,
+				FE92C47C22A792580043DA9D /* BTCNetwork.h */,
+				FE92C47D22A792580043DA9D /* BTCScriptMachine.h */,
+				FE92C47E22A792580043DA9D /* BTCTransactionInput.h */,
+				FE92C47F22A792580043DA9D /* CoreBitcoin.h */,
+				FE92C48022A792580043DA9D /* BTCAssetAddress.h */,
+				FE92C48122A792580043DA9D /* BTCBitcoinURL.h */,
+				FE92C48222A792580043DA9D /* BTCErrors.m */,
+				FE92C48322A792580043DA9D /* NS+BTCBase58.h */,
+				FE92C48422A792580043DA9D /* BTCChainCom.h */,
+			);
+			path = CoreBitcoin;
+			sourceTree = "<group>";
+		};
+		FE92C48522A792580043DA9D /* libscrypt */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C48622A792580043DA9D /* crypto_scrypt-hash.c */,
+				FE92C48722A792580043DA9D /* slowequals.c */,
+				FE92C48822A792580043DA9D /* b64.h */,
+				FE92C48922A792580043DA9D /* sha256.h */,
+				FE92C48A22A792580043DA9D /* crypto-scrypt-saltgen.c */,
+				FE92C48B22A792580043DA9D /* crypto_scrypt-hexconvert.c */,
+				FE92C48C22A792580043DA9D /* crypto-mcf.c */,
+				FE92C48D22A792580043DA9D /* sysendian.h */,
+				FE92C48E22A792580043DA9D /* libscrypt.h */,
+				FE92C48F22A792580043DA9D /* crypto_scrypt-check.c */,
+				FE92C49022A792580043DA9D /* slowequals.h */,
+				FE92C49122A792580043DA9D /* b64.c */,
+				FE92C49222A792580043DA9D /* sha256.c */,
+				FE92C49322A792580043DA9D /* crypto_scrypt-nosse.c */,
+				FE92C49422A792580043DA9D /* crypto_scrypt-hexconvert.h */,
+			);
+			path = libscrypt;
+			sourceTree = "<group>";
+		};
+		FE92C4D122A792F30043DA9D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C4D322A792F30043DA9D /* NSData+Crypto.h */,
+				FE92C4D922A792F30043DA9D /* NSData+Crypto.m */,
+				FE92C4DB22A792F30043DA9D /* NSData+HexString.h */,
+				FE92C4D622A792F30043DA9D /* NSData+HexString.m */,
+				FE92C4D722A792F30043DA9D /* UIImage+QRImage.h */,
+				FE92C4D222A792F30043DA9D /* UIImage+QRImage.m */,
+				FE92C4D822A792F30043DA9D /* PaddingLabel.h */,
+				FE92C4D422A792F30043DA9D /* PaddingLabel.m */,
+				FE92C4DA22A792F30043DA9D /* UIButton+Layout.h */,
+				FE92C4D522A792F30043DA9D /* UIButton+Layout.m */,
+				FE3FC2A122AE7B6C00A41205 /* NSDate+DateString.h */,
+				FE3FC2A222AE7B6C00A41205 /* NSDate+DateString.m */,
+				FE3FC2DA22B8B7F700A41205 /* MBProgressHUD+LZ.h */,
+				FE3FC2DB22B8B7F700A41205 /* MBProgressHUD+LZ.m */,
+				FED3FFC322C35EC3005918B3 /* NSString+Category.h */,
+				FED3FFC422C35EC3005918B3 /* NSString+Category.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FE92C4DC22A792F30043DA9D /* Browser */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C4DD22A792F30043DA9D /* ViewControllers */,
+			);
+			path = Browser;
+			sourceTree = "<group>";
+		};
+		FE92C4DD22A792F30043DA9D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C4DE22A792F30043DA9D /* BasicWebViewController.h */,
+				FE92C4DF22A792F30043DA9D /* BasicWebViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FE92C4E022A792F30043DA9D /* Vote */ = {
+			isa = PBXGroup;
+			children = (
+				FE3FC30B22B90B1200A41205 /* Mode */,
+				FE92C4E122A792F30043DA9D /* Types */,
+				FE92C4E422A792F30043DA9D /* cellsAndHeaderOrFooter */,
+				FE92C4F322A792F30043DA9D /* ViewControllers */,
+				FE92C4FA22A792F30043DA9D /* Views */,
+			);
+			path = Vote;
+			sourceTree = "<group>";
+		};
+		FE92C4E122A792F30043DA9D /* Types */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
+		FE92C4E422A792F30043DA9D /* cellsAndHeaderOrFooter */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C4EC22A792F30043DA9D /* VoteListCell.h */,
+				FE92C4E522A792F30043DA9D /* VoteListCell.m */,
+				FE92C4EA22A792F30043DA9D /* VoteListCell.xib */,
+				FE92C4E622A792F30043DA9D /* VoteDetailCell.h */,
+				FE92C4F122A792F30043DA9D /* VoteDetailCell.m */,
+				FE92C4EE22A792F30043DA9D /* VoteDetailCell.xib */,
+				FE92C4E722A792F30043DA9D /* NodeHeaderTableViewCell.h */,
+				FE92C4F022A792F30043DA9D /* NodeHeaderTableViewCell.m */,
+				FE92C4EB22A792F30043DA9D /* NodeHeaderTableViewCell.xib */,
+				FE92C4ED22A792F30043DA9D /* VoteDetailHeaderView.h */,
+				FE92C4E822A792F30043DA9D /* VoteDetailHeaderView.m */,
+				FE92C4EF22A792F30043DA9D /* NodeInfoCell.h */,
+				FE92C4E922A792F30043DA9D /* NodeInfoCell.m */,
+				FE92C4F222A792F30043DA9D /* NodeInfoCell.xib */,
+			);
+			path = cellsAndHeaderOrFooter;
+			sourceTree = "<group>";
+		};
+		FE92C4F322A792F30043DA9D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C4F722A792F30043DA9D /* VoteListVC.h */,
+				FE92C4F422A792F30043DA9D /* VoteListVC.m */,
+				FE92C4F922A792F30043DA9D /* NodeInfoVC.h */,
+				FE92C4F522A792F30043DA9D /* NodeInfoVC.m */,
+				FE92C4F622A792F30043DA9D /* VoteDetailVC.h */,
+				FE92C4F822A792F30043DA9D /* VoteDetailVC.m */,
+				FECC978622DEFB78007BE8F5 /* NodeRegisterVC.h */,
+				FECC978722DEFB78007BE8F5 /* NodeRegisterVC.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FE92C4FA22A792F30043DA9D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C4FD22A792F30043DA9D /* VoteBarView.h */,
+				FE92C4FC22A792F30043DA9D /* VoteBarView.m */,
+				FE92C4FB22A792F30043DA9D /* VoteBarView.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FE92C4FE22A792F40043DA9D /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C4FF22A792F40043DA9D /* ViewModels */,
+				FE92C50422A792F40043DA9D /* Cells */,
+				FE92C50822A792F40043DA9D /* Types */,
+				FE92C50922A792F40043DA9D /* Storage */,
+				FE92C50A22A792F40043DA9D /* ViewControllers */,
+				FE92C51722A792F40043DA9D /* Views */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		FE92C4FF22A792F40043DA9D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C50022A792F40043DA9D /* WalletInfoViewModel.h */,
+				FE92C50222A792F40043DA9D /* WalletInfoViewModel.m */,
+				FE92C50122A792F40043DA9D /* WalletCreatedViewModel.h */,
+				FE92C50322A792F40043DA9D /* WalletCreatedViewModel.m */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		FE92C50422A792F40043DA9D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C50522A792F40043DA9D /* WalletAccountsListCell.h */,
+				FE92C50622A792F40043DA9D /* WalletAccountsListCell.xib */,
+				FE92C50722A792F40043DA9D /* WalletAccountsListCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		FE92C50822A792F40043DA9D /* Types */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
+		FE92C50922A792F40043DA9D /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		FE92C50A22A792F40043DA9D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C50E22A792F40043DA9D /* WalletBackupVC.h */,
+				FE92C51322A792F40043DA9D /* WalletBackupVC.m */,
+				FE92C51522A792F40043DA9D /* WalletsVC.h */,
+				FE92C50F22A792F40043DA9D /* WalletsVC.m */,
+				FE92C51022A792F40043DA9D /* WalletImportVC.h */,
+				FE92C51622A792F40043DA9D /* WalletImportVC.m */,
+				FE92C50C22A792F40043DA9D /* WalletCreatedVC.h */,
+				FE92C51122A792F40043DA9D /* WalletCreatedVC.m */,
+				FE92C51222A792F40043DA9D /* WalletDetailVC.h */,
+				FE92C50B22A792F40043DA9D /* WalletDetailVC.m */,
+				FE92C51422A792F40043DA9D /* WalletInfoVC.h */,
+				FE92C50D22A792F40043DA9D /* WalletInfoVC.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FE92C51722A792F40043DA9D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C51822A792F40043DA9D /* SavePrivatekeyWaringView.h */,
+				FE92C51E22A792F40043DA9D /* SavePrivatekeyWaringView.m */,
+				FE92C51D22A792F40043DA9D /* WalletInfoFunctionView.h */,
+				FE92C51922A792F40043DA9D /* WalletInfoFunctionView.m */,
+				FE92C51A22A792F40043DA9D /* WalletAccountsListView.h */,
+				FE92C51F22A792F40043DA9D /* WalletAccountsListView.m */,
+				FE92C51B22A792F40043DA9D /* WalletInfoCPUView.h */,
+				FE92C52122A792F40043DA9D /* WalletInfoCPUView.m */,
+				FE92C52022A792F40043DA9D /* SliderBar.h */,
+				FE92C51C22A792F40043DA9D /* SliderBar.m */,
+				FE3FC2D622B77F6D00A41205 /* PasswordInputView.h */,
+				FE3FC2D722B77F6D00A41205 /* PasswordInputView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FE92C52222A792F40043DA9D /* Find */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C52322A792F40043DA9D /* ViewControllers */,
+			);
+			path = Find;
+			sourceTree = "<group>";
+		};
+		FE92C52322A792F40043DA9D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C52422A792F40043DA9D /* FindVC.h */,
+				FE92C52522A792F40043DA9D /* FindVC.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FE92C52622A792F40043DA9D /* Transfer */ = {
+			isa = PBXGroup;
+			children = (
+				FECC977622D31B30007BE8F5 /* models */,
+				FE92C52722A792F40043DA9D /* TableViewCellsAndHeaderFooters */,
+				FE92C53422A792F40043DA9D /* ViewControllers */,
+				FE92C53B22A792F40043DA9D /* Views */,
+			);
+			path = Transfer;
+			sourceTree = "<group>";
+		};
+		FE92C52722A792F40043DA9D /* TableViewCellsAndHeaderFooters */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C53122A792F40043DA9D /* TransferMessageCell.h */,
+				FE92C52922A792F40043DA9D /* TransferMessageCell.m */,
+				FE92C52822A792F40043DA9D /* TransferMessageCell.xib */,
+				FE92C52A22A792F40043DA9D /* TransferHeaderView.h */,
+				FE92C53022A792F40043DA9D /* TransferHeaderView.m */,
+				FE92C52B22A792F40043DA9D /* TransferMessage_2Cell.h */,
+				FE92C52F22A792F40043DA9D /* TransferMessage_2Cell.m */,
+				FE92C52D22A792F40043DA9D /* TransferMessage_2Cell.xib */,
+				FE92C53222A792F40043DA9D /* TransferFooterView.h */,
+				FE92C52C22A792F40043DA9D /* TransferFooterView.m */,
+				FE92C52E22A792F40043DA9D /* TransferHeaderView_vote.h */,
+				FE92C53322A792F40043DA9D /* TransferHeaderView_vote.m */,
+				FE3FC2C922B0E84500A41205 /* TransferListCell.h */,
+				FE3FC2CA22B0E84500A41205 /* TransferListCell.m */,
+				FE3FC2CB22B0E84500A41205 /* TransferListCell.xib */,
+			);
+			path = TableViewCellsAndHeaderFooters;
+			sourceTree = "<group>";
+		};
+		FE92C53422A792F40043DA9D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C53522A792F40043DA9D /* RequestVC.h */,
+				FE92C53822A792F40043DA9D /* RequestVC.m */,
+				FE92C53622A792F40043DA9D /* TransactionDetailVC.h */,
+				FE92C53922A792F40043DA9D /* TransactionDetailVC.m */,
+				FE92C53A22A792F40043DA9D /* TransferVC.h */,
+				FE92C53722A792F40043DA9D /* TransferVC.m */,
+				FE3FC2C622B0E7B300A41205 /* TransferListVC.h */,
+				FE3FC2C722B0E7B300A41205 /* TransferListVC.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FE92C53B22A792F40043DA9D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FE92C53C22A792F40043DA9D /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C53D22A792F40043DA9D /* Layout */,
+				FE92C54422A792F40043DA9D /* ViewControllers */,
+				FE92C54E22A792F40043DA9D /* Views */,
+				FE92C55122A792F40043DA9D /* CellsAndHeaderViewAndFooterView */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		FE92C53D22A792F40043DA9D /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C53E22A792F40043DA9D /* LZCollectionViewLayoutAttributes.h */,
+				FE92C53F22A792F40043DA9D /* LZCollectionViewFlowLayout.m */,
+				FE92C54022A792F40043DA9D /* LZCollectionReusableView.h */,
+				FE92C54122A792F40043DA9D /* LZCollectionViewFlowLayout.h */,
+				FE92C54222A792F40043DA9D /* LZCollectionViewLayoutAttributes.m */,
+				FE92C54322A792F40043DA9D /* LZCollectionReusableView.m */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		FE92C54422A792F40043DA9D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C54A22A792F40043DA9D /* WelcomBackupTipVC.h */,
+				FE92C54822A792F40043DA9D /* WelcomBackupTipVC.m */,
+				FE92C54522A792F40043DA9D /* WelcomBackupTipVC.xib */,
+				FE92C54622A792F40043DA9D /* WelcomVC.h */,
+				FE92C54D22A792F40043DA9D /* WelcomVC.m */,
+				FE92C54722A792F40043DA9D /* WelcomBackupVC.h */,
+				FE92C54C22A792F40043DA9D /* WelcomBackupVC.m */,
+				FE92C54922A792F40043DA9D /* WelcomConfirmMnemonicVC.h */,
+				FE92C54B22A792F40043DA9D /* WelcomConfirmMnemonicVC.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FE92C54E22A792F40043DA9D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C54F22A792F40043DA9D /* PassphraseView.m */,
+				FE92C55022A792F40043DA9D /* PassphraseView.h */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FE92C55122A792F40043DA9D /* CellsAndHeaderViewAndFooterView */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C55222A792F40043DA9D /* MnemonicWordCell.h */,
+				FE92C55322A792F40043DA9D /* MnemonicWordHeaderView2.h */,
+				FE92C55422A792F40043DA9D /* MnemonicWordCell2.m */,
+				FE92C55522A792F40043DA9D /* MnemonicWordCell2.xib */,
+				FE92C55622A792F40043DA9D /* MnemonicWordHeaderView.h */,
+				FE92C55722A792F40043DA9D /* MnemonicWordCell.m */,
+				FE92C55822A792F40043DA9D /* MnemonicWordHeaderView2.m */,
+				FE92C55922A792F40043DA9D /* MnemonicWordHeaderView.xib */,
+				FE92C55A22A792F40043DA9D /* MnemonicWordCell2.h */,
+				FE92C55B22A792F40043DA9D /* MnemonicWordCell.xib */,
+				FE92C55C22A792F40043DA9D /* MnemonicWordHeaderView2.xib */,
+				FE92C55D22A792F40043DA9D /* MnemonicWordHeaderView.m */,
+			);
+			path = CellsAndHeaderViewAndFooterView;
+			sourceTree = "<group>";
+		};
+		FE92C55E22A792F40043DA9D /* Refer */ = {
+			isa = PBXGroup;
+			children = (
+				FE3FC2DE22B8D44700A41205 /* TZImagePickerController */,
+				FE92C55F22A792F40043DA9D /* SWQRCode */,
+				FE92C56C22A792F40043DA9D /* CCSlideNavigationTransition */,
+				FE92C57722A792F40043DA9D /* Base64 */,
+				FE92C57A22A792F40043DA9D /* CocoaSecurity */,
+			);
+			path = Refer;
+			sourceTree = "<group>";
+		};
+		FE92C55F22A792F40043DA9D /* SWQRCode */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C56022A792F40043DA9D /* Config */,
+				FE92C56622A792F40043DA9D /* SWQRCodeViewController.m */,
+				FE92C56722A792F40043DA9D /* SWQRCode.bundle */,
+				FE92C56822A792F40043DA9D /* View */,
+				FE92C56B22A792F40043DA9D /* SWQRCodeViewController.h */,
+			);
+			path = SWQRCode;
+			sourceTree = "<group>";
+		};
+		FE92C56022A792F40043DA9D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C56122A792F40043DA9D /* SWQRCodeConfig.m */,
+				FE92C56222A792F40043DA9D /* SWQRCodeManager.m */,
+				FE92C56322A792F40043DA9D /* SWQRCodeConfig.h */,
+				FE92C56422A792F40043DA9D /* SWQRCode.h */,
+				FE92C56522A792F40043DA9D /* SWQRCodeManager.h */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		FE92C56822A792F40043DA9D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C56922A792F40043DA9D /* SWScannerView.m */,
+				FE92C56A22A792F40043DA9D /* SWScannerView.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FE92C56C22A792F40043DA9D /* CCSlideNavigationTransition */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C56D22A792F40043DA9D /* Classes */,
+				FE92C57222A792F40043DA9D /* Categories */,
+			);
+			path = CCSlideNavigationTransition;
+			sourceTree = "<group>";
+		};
+		FE92C56D22A792F40043DA9D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C56E22A792F40043DA9D /* CCSlideAnimatedTransitioning.m */,
+				FE92C56F22A792F40043DA9D /* CCNavigationController.h */,
+				FE92C57022A792F40043DA9D /* CCNavigationController.m */,
+				FE92C57122A792F40043DA9D /* CCSlideAnimatedTransitioning.h */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		FE92C57222A792F40043DA9D /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C57322A792F40043DA9D /* NSObject+CCAssociative.h */,
+				FE92C57422A792F40043DA9D /* UIView+CCAddition.m */,
+				FE92C57522A792F40043DA9D /* NSObject+CCAssociative.m */,
+				FE92C57622A792F40043DA9D /* UIView+CCAddition.h */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		FE92C57722A792F40043DA9D /* Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C57822A792F40043DA9D /* Base64.h */,
+				FE92C57922A792F40043DA9D /* Base64.m */,
+			);
+			path = Base64;
+			sourceTree = "<group>";
+		};
+		FE92C57A22A792F40043DA9D /* CocoaSecurity */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C57B22A792F40043DA9D /* CocoaSecurity.h */,
+				FE92C57C22A792F40043DA9D /* CocoaSecurity.m */,
+			);
+			path = CocoaSecurity;
+			sourceTree = "<group>";
+		};
+		FE92C57D22A792F40043DA9D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C57E22A792F40043DA9D /* ViewControllers */,
+				FE92C58122A792F40043DA9D /* Views */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		FE92C57E22A792F40043DA9D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C57F22A792F40043DA9D /* ResourceVC.h */,
+				FE92C58022A792F40043DA9D /* ResourceVC.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FE92C58122A792F40043DA9D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C58222A792F40043DA9D /* ResourceCPUView.h */,
+				FE92C58322A792F40043DA9D /* ResourceCPUView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FE92C58422A792F40043DA9D /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				FED3FFBB22C208E6005918B3 /* Views */,
+				FE92C58522A792F40043DA9D /* Types */,
+				FE92C58822A792F40043DA9D /* CellsAndHeaderAndFooterView */,
+				FE92C59122A792F40043DA9D /* ViewControllers */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		FE92C58522A792F40043DA9D /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C58622A792F40043DA9D /* Config.h */,
+				FE92C58722A792F40043DA9D /* Config.m */,
+				FECC978222D46FCF007BE8F5 /* AppVersion.h */,
+				FECC978322D46FCF007BE8F5 /* AppVersion.m */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
+		FE92C58822A792F40043DA9D /* CellsAndHeaderAndFooterView */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C58922A792F40043DA9D /* SettingCell.xib */,
+				FE92C58A22A792F40043DA9D /* SettingCell.h */,
+				FE92C58B22A792F40043DA9D /* SettingCell_2.m */,
+				FE92C58C22A792F40043DA9D /* SettingCell_2.xib */,
+				FE92C58D22A792F40043DA9D /* SettingAboutUsHeaderView.h */,
+				FE92C58E22A792F40043DA9D /* SettingCell_2.h */,
+				FE92C58F22A792F40043DA9D /* SettingCell.m */,
+				FE92C59022A792F40043DA9D /* SettingAboutUsHeaderView.m */,
+			);
+			path = CellsAndHeaderAndFooterView;
+			sourceTree = "<group>";
+		};
+		FE92C59122A792F40043DA9D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C59222A792F40043DA9D /* SettingSystemVC.h */,
+				FE92C59722A792F40043DA9D /* SettingSystemVC.m */,
+				FE92C59322A792F40043DA9D /* SettingAboutUsVC.h */,
+				FE92C59622A792F40043DA9D /* SettingAboutUsVC.m */,
+				FE92C59422A792F40043DA9D /* PasswordChangeVC.h */,
+				FE92C59922A792F40043DA9D /* PasswordChangeVC.m */,
+				FE92C59522A792F40043DA9D /* SettingVC.h */,
+				FE92C59822A792F40043DA9D /* SettingVC.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FE92C59A22A792F40043DA9D /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C59B22A792F40043DA9D /* Sources */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		FE92C59B22A792F40043DA9D /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C67F22A7AA4A0043DA9D /* Encryptor */,
+				FE92C59C22A792F40043DA9D /* CoreUtils */,
+				FE92C5A722A792F40043DA9D /* Validator */,
+				FE92C5B022A792F40043DA9D /* Keystore */,
+				FE92C5D022A792F40043DA9D /* Foundation */,
+				FE92C5DE22A792F40043DA9D /* Utils */,
+				FE92C5DF22A792F40043DA9D /* Storage */,
+				FE92C5E522A792F40043DA9D /* Wallet */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		FE92C59C22A792F40043DA9D /* CoreUtils */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C5A622A792F40043DA9D /* SigUtil.h */,
+				FE92C5A122A792F40043DA9D /* SigUtil.m */,
+				FE92C5A422A792F40043DA9D /* NSString+Extension.m */,
+				FE92C59F22A792F40043DA9D /* NSString+Extension.h */,
+				FE92C66622A798530043DA9D /* BigNumber.swift */,
+				FE92C66B22A79BB20043DA9D /* Data+Extension.swift */,
+				FE92C66822A79BB20043DA9D /* Hex.swift */,
+				FE92C66922A79BB20043DA9D /* RLP.swift */,
+				FE92C66A22A79BB20043DA9D /* String+Extension.swift */,
+			);
+			path = CoreUtils;
+			sourceTree = "<group>";
+		};
+		FE92C5A722A792F40043DA9D /* Validator */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C5A822A792F40043DA9D /* PrivateKeyValidator.h */,
+				FE92C5A922A792F40043DA9D /* V3KeystoreValidator.m */,
+				FE92C5AA22A792F40043DA9D /* WalletIDValidator.h */,
+				FE92C5AB22A792F40043DA9D /* IdentityValidator.m */,
+				FE92C5AC22A792F40043DA9D /* V3KeystoreValidator.h */,
+				FE92C5AD22A792F40043DA9D /* PrivateKeyValidator.m */,
+				FE92C5AE22A792F40043DA9D /* IdentityValidator.h */,
+				FE92C5AF22A792F40043DA9D /* WalletIDValidator.m */,
+			);
+			path = Validator;
+			sourceTree = "<group>";
+		};
+		FE92C5B022A792F40043DA9D /* Keystore */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C5B922A792F40043DA9D /* Bitcoin */,
+				FE92C5B322A792F40043DA9D /* Identity */,
+				FE92C5B822A792F40043DA9D /* Keystore.h */,
+				FE92C5B122A792F40043DA9D /* Keystore.m */,
+				FE92C5B722A792F40043DA9D /* Crypto.h */,
+				FE92C5BE22A792F40043DA9D /* Crypto.m */,
+				FE92C5BC22A792F40043DA9D /* EncryptedMessage.h */,
+				FE92C5B222A792F40043DA9D /* EncryptedMessage.m */,
+				FE92C5B622A792F40043DA9D /* WalletMeta.h */,
+				FE92C5BD22A792F40043DA9D /* WalletMeta.m */,
+				FE92C5BF22A792F40043DA9D /* Ethereum */,
+			);
+			path = Keystore;
+			sourceTree = "<group>";
+		};
+		FE92C5B322A792F40043DA9D /* Identity */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C5B422A792F40043DA9D /* IdentityKeystore.m */,
+				FE92C5B522A792F40043DA9D /* IdentityKeystore.h */,
+			);
+			path = Identity;
+			sourceTree = "<group>";
+		};
+		FE92C5B922A792F40043DA9D /* Bitcoin */ = {
+			isa = PBXGroup;
+			children = (
+				FEDD8EF122C5E2B700BBC74B /* BTCKeystore.h */,
+				FEDD8EF222C5E2B700BBC74B /* BTCKeystore.m */,
+				FE92C5BB22A792F40043DA9D /* BTCMnemonicKeystore.h */,
+				FE92C5BA22A792F40043DA9D /* BTCMnemonicKeystore.m */,
+			);
+			path = Bitcoin;
+			sourceTree = "<group>";
+		};
+		FE92C5BF22A792F40043DA9D /* Ethereum */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C5C022A792F40043DA9D /* ETHMnemonicKeystore.h */,
+				FE92C5C322A792F40043DA9D /* ETHMnemonicKeystore.m */,
+				FE92C5C222A792F40043DA9D /* ETHKeystore.h */,
+				FE92C5C122A792F40043DA9D /* ETHKeystore.m */,
+			);
+			path = Ethereum;
+			sourceTree = "<group>";
+		};
+		FE92C5D022A792F40043DA9D /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				FE4FFF3A22C5F0CF0024CB4D /* Bitcoin */,
+				FE92C5D122A792F40043DA9D /* MnemonicDictionary.h */,
+				FE92C5D522A792F40043DA9D /* MnemonicDictionary.m */,
+				FE92C5D222A792F40043DA9D /* TransactionSignedResult.h */,
+				FE92C5D722A792F40043DA9D /* TransactionSignedResult.m */,
+				FE92C5D322A792F40043DA9D /* Mnemonic.h */,
+				FE92C5D622A792F40043DA9D /* Mnemonic.m */,
+				FE92C5D422A792F40043DA9D /* MnemonicUtil.h */,
+				FE92C5D822A792F40043DA9D /* MnemonicUtil.m */,
+				FE92C5D922A792F40043DA9D /* Ethereum */,
+				FE3FC2A722AFB38B00A41205 /* CommonTransaction.h */,
+				FE3FC2A822AFB38B00A41205 /* CommonTransaction.m */,
+				FE4FFF4422C61B1A0024CB4D /* BIP44.h */,
+				FE4FFF4522C61B1A0024CB4D /* BIP44.m */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		FE92C5D922A792F40043DA9D /* Ethereum */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C5DD22A792F40043DA9D /* ETHKey.h */,
+				FE92C5DA22A792F40043DA9D /* ETHKey.m */,
+				FE92C5DC22A792F40043DA9D /* ETHTransaction.h */,
+				FE92C5DB22A792F40043DA9D /* ETHTransaction.m */,
+			);
+			path = Ethereum;
+			sourceTree = "<group>";
+		};
+		FE92C5DE22A792F40043DA9D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		FE92C5DF22A792F40043DA9D /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C5E022A792F40043DA9D /* StorageManager.h */,
+				FE92C5E322A792F40043DA9D /* StorageManager.m */,
+				FE92C5E122A792F40043DA9D /* LocalFileStorage.h */,
+				FE92C5E422A792F40043DA9D /* LocalFileStorage.m */,
+				FE92C5E222A792F40043DA9D /* Storage.h */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		FE92C5E522A792F40043DA9D /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C5E922A792F40043DA9D /* Identity.h */,
+				FE92C5E622A792F40043DA9D /* Identity.m */,
+				FE92C5EA22A792F40043DA9D /* WalletManager.h */,
+				FE92C5E722A792F40043DA9D /* WalletManager.m */,
+				FE92C5EB22A792F40043DA9D /* BasicWallet.h */,
+				FE92C5E822A792F40043DA9D /* BasicWallet.m */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		FE92C67F22A7AA4A0043DA9D /* Encryptor */ = {
+			isa = PBXGroup;
+			children = (
+				FE92C68022A7AA4A0043DA9D /* Scrypt.h */,
+				FE92C68522A7AA4A0043DA9D /* Scrypt.m */,
+				FE92C68222A7AA4A0043DA9D /* AES128.h */,
+				FE92C68722A7AA4A0043DA9D /* AES128.m */,
+				FE92C68A22A7AA4A0043DA9D /* Hash.h */,
+				FE92C68322A7AA4A0043DA9D /* Hash.m */,
+				FE92C68922A7AA4A0043DA9D /* Secp256k1_Insight.h */,
+				FE92C68422A7AA4A0043DA9D /* Secp256k1_Insight.m */,
+				FED3FF8D22BCC6E5005918B3 /* Secp256k1_bridge.swift */,
+				FE92C68822A7AA4A0043DA9D /* Keccak256.h */,
+				FE92C68122A7AA4A0043DA9D /* Keccak256.m */,
+				FED3FF8B22BCB1FF005918B3 /* Keccak256_bridge.swift */,
+			);
+			path = Encryptor;
+			sourceTree = "<group>";
+		};
+		FECC977622D31B30007BE8F5 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				FECC977722D31B4B007BE8F5 /* TransferModel.h */,
+				FECC977822D31B4B007BE8F5 /* TransferModel.m */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		FED3FFBB22C208E6005918B3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FED3FFBC22C2090D005918B3 /* UpdateView.h */,
+				FED3FFBD22C2090D005918B3 /* UpdateView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FEE3B26D22A641D2003B5244 = {
+			isa = PBXGroup;
+			children = (
+				FEE3B27822A641D2003B5244 /* inb-wallet-ios */,
+				FEE3B27722A641D2003B5244 /* Products */,
+				5A3C2DC28A80BE3F6D0B6A0B /* Pods */,
+				CBDCFE9083F606B647DF7D48 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FEE3B27722A641D2003B5244 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FEE3B27622A641D2003B5244 /* inb-wallet-ios.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FEE3B27822A641D2003B5244 /* inb-wallet-ios */ = {
+			isa = PBXGroup;
+			children = (
+				FE3FC31222BB275600A41205 /* Common */,
+				FE92C41D22A792580043DA9D /* Vendor */,
+				FE92C4DC22A792F30043DA9D /* Browser */,
+				FE92C59A22A792F40043DA9D /* Core */,
+				FE92C4D122A792F30043DA9D /* Extensions */,
+				FE92C52222A792F40043DA9D /* Find */,
+				FE92C55E22A792F40043DA9D /* Refer */,
+				FE92C57D22A792F40043DA9D /* Resources */,
+				FE92C58422A792F40043DA9D /* Setting */,
+				FE92C52622A792F40043DA9D /* Transfer */,
+				FE92C4E022A792F30043DA9D /* Vote */,
+				FE92C4FE22A792F40043DA9D /* Wallet */,
+				FE92C53C22A792F40043DA9D /* Welcome */,
+				FEE3B27922A641D2003B5244 /* AppDelegate.h */,
+				FEE3B27A22A641D2003B5244 /* AppDelegate.m */,
+				FE92C69522A7BE940043DA9D /* TabBarVC.h */,
+				FE92C69422A7BE940043DA9D /* TabBarVC.m */,
+				FE3FC2A422AF5AC000A41205 /* NetworkUtil.h */,
+				FE3FC2A522AF5AC000A41205 /* NetworkUtil.m */,
+				FEE3B27C22A641D2003B5244 /* ViewController.h */,
+				FEE3B27D22A641D2003B5244 /* ViewController.m */,
+				FEE3B27F22A641D2003B5244 /* Main.storyboard */,
+				FEE3B28222A641D3003B5244 /* Assets.xcassets */,
+				FEE3B28422A641D3003B5244 /* LaunchScreen.storyboard */,
+				FEE3B28722A641D3003B5244 /* Info.plist */,
+				FEE3B28822A641D3003B5244 /* main.m */,
+				FE92C66522A793700043DA9D /* Enum.h */,
+				FEE3B29222A6433B003B5244 /* PrefixHeader.pch */,
+				FE92C41B22A78ED40043DA9D /* test.swift */,
+				FE92C41A22A78ED40043DA9D /* inb-wallet-ios-Bridging-Header.h */,
+				FE92C69D22A7C1660043DA9D /* Localizable.strings */,
+			);
+			path = "inb-wallet-ios";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FEE3B27522A641D2003B5244 /* inb-wallet-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FEE3B28C22A641D3003B5244 /* Build configuration list for PBXNativeTarget "inb-wallet-ios" */;
+			buildPhases = (
+				93FC42CCD427B437B0E4D4F6 /* [CP] Check Pods Manifest.lock */,
+				FEE3B27222A641D2003B5244 /* Sources */,
+				FEE3B27322A641D2003B5244 /* Frameworks */,
+				FEE3B27422A641D2003B5244 /* Resources */,
+				EDCC4E0389561289B790757B /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "inb-wallet-ios";
+			productName = test;
+			productReference = FEE3B27622A641D2003B5244 /* inb-wallet-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FEE3B26E22A641D2003B5244 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "insightChain_iOS开发";
+				TargetAttributes = {
+					FEE3B27522A641D2003B5244 = {
+						CreatedOnToolsVersion = 10.2;
+						LastSwiftMigration = 1020;
+					};
+				};
+			};
+			buildConfigurationList = FEE3B27122A641D2003B5244 /* Build configuration list for PBXProject "inb-wallet-ios" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = FEE3B26D22A641D2003B5244;
+			productRefGroup = FEE3B27722A641D2003B5244 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FEE3B27522A641D2003B5244 /* inb-wallet-ios */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FEE3B27422A641D2003B5244 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE92C5FF22A792F50043DA9D /* VoteBarView.xib in Resources */,
+				FE92C62822A792F50043DA9D /* MnemonicWordHeaderView.xib in Resources */,
+				FE92C62922A792F50043DA9D /* MnemonicWordCell.xib in Resources */,
+				FEE3B28622A641D3003B5244 /* LaunchScreen.storyboard in Resources */,
+				FE92C62522A792F50043DA9D /* MnemonicWordCell2.xib in Resources */,
+				FE3FC2CD22B0E84500A41205 /* TransferListCell.xib in Resources */,
+				FE92C61122A792F50043DA9D /* TransferMessageCell.xib in Resources */,
+				FE92C63A22A792F50043DA9D /* SettingCell.xib in Resources */,
+				FE92C61E22A792F50043DA9D /* WelcomBackupTipVC.xib in Resources */,
+				FE3FC30322B8D44700A41205 /* TZImagePickerController.bundle in Resources */,
+				FE92C60322A792F50043DA9D /* WalletAccountsListCell.xib in Resources */,
+				FE92C5F722A792F40043DA9D /* NodeHeaderTableViewCell.xib in Resources */,
+				FE92C61422A792F50043DA9D /* TransferMessage_2Cell.xib in Resources */,
+				FE92C63C22A792F50043DA9D /* SettingCell_2.xib in Resources */,
+				FE92C62A22A792F50043DA9D /* MnemonicWordHeaderView2.xib in Resources */,
+				FE92C69B22A7C1660043DA9D /* Localizable.strings in Resources */,
+				FE92C49622A792580043DA9D /* libscrypt.podspec in Resources */,
+				FEE3B28322A641D3003B5244 /* Assets.xcassets in Resources */,
+				FE92C5F822A792F40043DA9D /* VoteDetailCell.xib in Resources */,
+				FEE3B28122A641D2003B5244 /* Main.storyboard in Resources */,
+				FE92C5FB22A792F40043DA9D /* NodeInfoCell.xib in Resources */,
+				FE92C4D022A792580043DA9D /* CoreBitcoin.podspec in Resources */,
+				FE92C62F22A792F50043DA9D /* SWQRCode.bundle in Resources */,
+				FE92C5F622A792F40043DA9D /* VoteListCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		93FC42CCD427B437B0E4D4F6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-inb-wallet-ios-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EDCC4E0389561289B790757B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-inb-wallet-ios/Pods-inb-wallet-ios-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${PODS_ROOT}/GRKOpenSSLFramework/OpenSSL-iOS/bin/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/RLP-ObjC/RLP_ObjC.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
+				"${BUILT_PRODUCTS_DIR}/secp256k1.swift/secp256k1.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RLP_ObjC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-inb-wallet-ios/Pods-inb-wallet-ios-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FEE3B27222A641D2003B5244 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE92C64922A792F50043DA9D /* IdentityValidator.m in Sources */,
+				FE3FC2DC22B8B7F700A41205 /* MBProgressHUD+LZ.m in Sources */,
+				FE92C62322A792F50043DA9D /* PassphraseView.m in Sources */,
+				FE92C68D22A7AA4A0043DA9D /* Secp256k1_Insight.m in Sources */,
+				FE92C61922A792F50043DA9D /* RequestVC.m in Sources */,
+				FE92C49B22A792580043DA9D /* BTCTransactionBuilder.m in Sources */,
+				FE92C4A922A792580043DA9D /* BTCPriceSource.m in Sources */,
+				FE92C5EC22A792F40043DA9D /* UIImage+QRImage.m in Sources */,
+				FECC977922D31B4B007BE8F5 /* TransferModel.m in Sources */,
+				FE3FC2FD22B8D44700A41205 /* TZAssetCell.m in Sources */,
+				FE92C4CC22A792580043DA9D /* crypto_scrypt-check.c in Sources */,
+				FE92C68E22A7AA4A0043DA9D /* Scrypt.m in Sources */,
+				FE92C4BD22A792580043DA9D /* BTCScript.m in Sources */,
+				FE92C64222A792F50043DA9D /* PasswordChangeVC.m in Sources */,
+				FE92C4CA22A792580043DA9D /* crypto_scrypt-hexconvert.c in Sources */,
+				FE92C62422A792F50043DA9D /* MnemonicWordCell2.m in Sources */,
+				FEE3B27E22A641D2003B5244 /* ViewController.m in Sources */,
+				FE92C65F22A792F50043DA9D /* ETHTransaction.m in Sources */,
+				FE92C4B622A792580043DA9D /* BTCMerkleTree.m in Sources */,
+				FE92C66022A792F50043DA9D /* StorageManager.m in Sources */,
+				FE92C61D22A792F50043DA9D /* LZCollectionReusableView.m in Sources */,
+				FE92C65A22A792F50043DA9D /* MnemonicDictionary.m in Sources */,
+				FE92C60422A792F50043DA9D /* WalletAccountsListCell.m in Sources */,
+				FE92C60222A792F50043DA9D /* WalletCreatedViewModel.m in Sources */,
+				FE92C5EF22A792F40043DA9D /* NSData+HexString.m in Sources */,
+				FE92C63422A792F50043DA9D /* NSObject+CCAssociative.m in Sources */,
+				FE3FC2A322AE7B6C00A41205 /* NSDate+DateString.m in Sources */,
+				FE3FC30A22B8D44700A41205 /* TZGifPhotoPreviewController.m in Sources */,
+				FE92C41C22A78ED40043DA9D /* test.swift in Sources */,
+				FE92C4A122A792580043DA9D /* BTCTransaction.m in Sources */,
+				FE92C5FD22A792F50043DA9D /* NodeInfoVC.m in Sources */,
+				FE92C4A722A792580043DA9D /* BTCProtocolSerialization.m in Sources */,
+				FE92C60722A792F50043DA9D /* WalletsVC.m in Sources */,
+				FE3FC2D822B77F6D00A41205 /* PasswordInputView.m in Sources */,
+				FE3FC30722B8D44700A41205 /* TZPhotoPreviewCell.m in Sources */,
+				FE92C4CE22A792580043DA9D /* sha256.c in Sources */,
+				FE92C4BE22A792580043DA9D /* BTCHashID.m in Sources */,
+				FE92C64022A792F50043DA9D /* SettingSystemVC.m in Sources */,
+				FE3FC2FE22B8D44700A41205 /* TZVideoPlayerController.m in Sources */,
+				FE92C49822A792580043DA9D /* BTCBlockHeader.m in Sources */,
+				FEE3B28922A641D3003B5244 /* main.m in Sources */,
+				FE92C62122A792F50043DA9D /* WelcomBackupVC.m in Sources */,
+				FE92C4B322A792580043DA9D /* BTCAddress.m in Sources */,
+				FE92C4BC22A792580043DA9D /* BTCPaymentRequest.m in Sources */,
+				FE92C4BA22A792580043DA9D /* BTCPaymentMethodDetails.m in Sources */,
+				FE92C63022A792F50043DA9D /* SWScannerView.m in Sources */,
+				FE92C63122A792F50043DA9D /* CCSlideAnimatedTransitioning.m in Sources */,
+				FE92C5F022A792F40043DA9D /* NSData+Crypto.m in Sources */,
+				FE92C61022A792F50043DA9D /* FindVC.m in Sources */,
+				FE92C65222A792F50043DA9D /* ETHKeystore.m in Sources */,
+				FE3FC30822B8D44700A41205 /* TZImagePickerController.m in Sources */,
+				FE92C4B722A792580043DA9D /* BTCData.m in Sources */,
+				FE92C4C522A792580043DA9D /* BTCKey.m in Sources */,
+				FEDD8EF322C5E2B700BBC74B /* BTCKeystore.m in Sources */,
+				FE3FC2A622AF5AC000A41205 /* NetworkUtil.m in Sources */,
+				FE92C65E22A792F50043DA9D /* ETHKey.m in Sources */,
+				FE3FC2FF22B8D44700A41205 /* TZAssetModel.m in Sources */,
+				FE92C4AA22A792580043DA9D /* BTCSecretSharing.m in Sources */,
+				FE92C69022A7AA4A0043DA9D /* AES128.m in Sources */,
+				FE3FC30522B8D44700A41205 /* TZImageManager.m in Sources */,
+				FE92C5F122A792F40043DA9D /* BasicWebViewController.m in Sources */,
+				FE92C62D22A792F50043DA9D /* SWQRCodeManager.m in Sources */,
+				FE92C4C422A792580043DA9D /* BTCEncryptedMessage.m in Sources */,
+				FE92C63F22A792F50043DA9D /* SettingAboutUsVC.m in Sources */,
+				FE3FC30622B8D44700A41205 /* TZPhotoPickerController.m in Sources */,
+				FE92C49922A792580043DA9D /* BTCEncryptedBackup.m in Sources */,
+				FE3FC30E22B90B3200A41205 /* Node.m in Sources */,
+				FED3FF8E22BCC6E5005918B3 /* Secp256k1_bridge.swift in Sources */,
+				FE92C4CF22A792580043DA9D /* crypto_scrypt-nosse.c in Sources */,
+				FE92C5FC22A792F50043DA9D /* VoteListVC.m in Sources */,
+				FE4FFF4622C61B1A0024CB4D /* BIP44.m in Sources */,
+				FE92C4AC22A792580043DA9D /* BTCFancyEncryptedMessage.m in Sources */,
+				FE92C61222A792F50043DA9D /* TransferMessageCell.m in Sources */,
+				FE92C4C122A792580043DA9D /* BTCPaymentProtocol.m in Sources */,
+				FE92C66C22A79BB20043DA9D /* Hex.swift in Sources */,
+				FE3FC2FC22B8D44700A41205 /* TZImageCropManager.m in Sources */,
+				FE92C4A622A792580043DA9D /* BTCMnemonic.m in Sources */,
+				FE92C60122A792F50043DA9D /* WalletInfoViewModel.m in Sources */,
+				FED3FF8C22BCB1FF005918B3 /* Keccak256_bridge.swift in Sources */,
+				FE92C5F322A792F40043DA9D /* VoteListCell.m in Sources */,
+				FED3FFC522C35EC3005918B3 /* NSString+Category.m in Sources */,
+				FE92C5F422A792F40043DA9D /* VoteDetailHeaderView.m in Sources */,
+				FE92C64C22A792F50043DA9D /* Keystore.m in Sources */,
+				FE92C63222A792F50043DA9D /* CCNavigationController.m in Sources */,
+				FE92C64A22A792F50043DA9D /* PrivateKeyValidator.m in Sources */,
+				FE92C63822A792F50043DA9D /* ResourceCPUView.m in Sources */,
+				FED3FFBE22C2090D005918B3 /* UpdateView.m in Sources */,
+				FE92C63622A792F50043DA9D /* CocoaSecurity.m in Sources */,
+				FE3FC30922B8D44700A41205 /* TZLocationManager.m in Sources */,
+				FE4FFF4922C6FEA90024CB4D /* BTCTransactionSigner.m in Sources */,
+				FE92C60922A792F50043DA9D /* WalletBackupVC.m in Sources */,
+				FE92C4BB22A792580043DA9D /* BTCTransactionOutput.m in Sources */,
+				FE92C4A522A792580043DA9D /* BTCScriptMachine.m in Sources */,
+				FE92C4A822A792580043DA9D /* BTCNetwork.m in Sources */,
+				FE92C62C22A792F50043DA9D /* SWQRCodeConfig.m in Sources */,
+				FE92C64622A792F50043DA9D /* NSString+Extension.m in Sources */,
+				FE92C63E22A792F50043DA9D /* SettingAboutUsHeaderView.m in Sources */,
+				FE92C61822A792F50043DA9D /* TransferVC.m in Sources */,
+				FE92C66322A792F50043DA9D /* WalletManager.m in Sources */,
+				FE92C66722A798530043DA9D /* BigNumber.swift in Sources */,
+				FE92C4C222A792580043DA9D /* BTCBase58.m in Sources */,
+				FE92C65D22A792F50043DA9D /* MnemonicUtil.m in Sources */,
+				FE4FFF3D22C5F1340024CB4D /* BTCKey+Category.m in Sources */,
+				FE92C66F22A79BB20043DA9D /* Data+Extension.swift in Sources */,
+				FE92C63722A792F50043DA9D /* ResourceVC.m in Sources */,
+				FE92C69622A7BE940043DA9D /* TabBarVC.m in Sources */,
+				FE92C61F22A792F50043DA9D /* WelcomBackupTipVC.m in Sources */,
+				FE92C64F22A792F50043DA9D /* BTCMnemonicKeystore.m in Sources */,
+				FE92C62622A792F50043DA9D /* MnemonicWordCell.m in Sources */,
+				FE92C4AD22A792580043DA9D /* BTCChainCom.m in Sources */,
+				FE92C65B22A792F50043DA9D /* Mnemonic.m in Sources */,
+				FEE0F65322C737FF00CFBAEA /* BTCTransaction+Transaction.m in Sources */,
+				FE92C4B122A792580043DA9D /* BTCTransactionInput.m in Sources */,
+				FE92C4B522A792580043DA9D /* BTCOutpoint.m in Sources */,
+				FE92C64E22A792F50043DA9D /* IdentityKeystore.m in Sources */,
+				FE92C62B22A792F50043DA9D /* MnemonicWordHeaderView.m in Sources */,
+				FE92C4AB22A792580043DA9D /* BTCOpcode.m in Sources */,
+				FE92C63522A792F50043DA9D /* Base64.m in Sources */,
+				FE92C4A022A792580043DA9D /* NSData+BTCData.m in Sources */,
+				FE92C66222A792F50043DA9D /* Identity.m in Sources */,
+				FE92C65022A792F50043DA9D /* WalletMeta.m in Sources */,
+				FE92C60622A792F50043DA9D /* WalletInfoVC.m in Sources */,
+				FE3FC2CC22B0E84500A41205 /* TransferListCell.m in Sources */,
+				FE92C4CB22A792580043DA9D /* crypto-mcf.c in Sources */,
+				FE92C4B922A792580043DA9D /* BTCCurvePoint.m in Sources */,
+				FE92C49A22A792580043DA9D /* BTCKeychain.m in Sources */,
+				FE92C5FE22A792F50043DA9D /* VoteDetailVC.m in Sources */,
+				FE92C4A422A792580043DA9D /* BTCNumberFormatter.m in Sources */,
+				FE92C60F22A792F50043DA9D /* WalletInfoCPUView.m in Sources */,
+				FE92C61522A792F50043DA9D /* TransferMessage_2Cell.m in Sources */,
+				FE92C4AE22A792580043DA9D /* BTCAssetAddress.m in Sources */,
+				FE92C5F522A792F40043DA9D /* NodeInfoCell.m in Sources */,
+				FE92C49D22A792580043DA9D /* BTCAssetID.m in Sources */,
+				FE92C66122A792F50043DA9D /* LocalFileStorage.m in Sources */,
+				FE92C63322A792F50043DA9D /* UIView+CCAddition.m in Sources */,
+				FE92C49722A792580043DA9D /* BTCBlock.m in Sources */,
+				FE92C63D22A792F50043DA9D /* SettingCell.m in Sources */,
+				FE92C60822A792F50043DA9D /* WalletCreatedVC.m in Sources */,
+				FE92C61A22A792F50043DA9D /* TransactionDetailVC.m in Sources */,
+				FE92C63B22A792F50043DA9D /* SettingCell_2.m in Sources */,
+				FE92C49F22A792580043DA9D /* BTCQRCode.m in Sources */,
+				FE92C4CD22A792580043DA9D /* b64.c in Sources */,
+				FE92C64B22A792F50043DA9D /* WalletIDValidator.m in Sources */,
+				FE92C49C22A792580043DA9D /* BTCAssetType.m in Sources */,
+				FE92C65322A792F50043DA9D /* ETHMnemonicKeystore.m in Sources */,
+				FE92C4B222A792580043DA9D /* BTC256.m in Sources */,
+				FE92C60A22A792F50043DA9D /* WalletImportVC.m in Sources */,
+				FE92C5EE22A792F40043DA9D /* UIButton+Layout.m in Sources */,
+				FE92C64822A792F50043DA9D /* V3KeystoreValidator.m in Sources */,
+				FE92C62722A792F50043DA9D /* MnemonicWordHeaderView2.m in Sources */,
+				FE92C4BF22A792580043DA9D /* BTCCurrencyConverter.m in Sources */,
+				FE92C60B22A792F50043DA9D /* WalletInfoFunctionView.m in Sources */,
+				FE3FC2C822B0E7B300A41205 /* TransferListVC.m in Sources */,
+				FECC978822DEFB78007BE8F5 /* NodeRegisterVC.m in Sources */,
+				FE92C4B022A792580043DA9D /* NS+BTCBase58.m in Sources */,
+				FE92C60E22A792F50043DA9D /* WalletAccountsListView.m in Sources */,
+				FE92C4A222A792580043DA9D /* BTCBigNumber.m in Sources */,
+				FE92C64122A792F50043DA9D /* SettingVC.m in Sources */,
+				FE3FC30222B8D44700A41205 /* TZPhotoPreviewController.m in Sources */,
+				FE92C61B22A792F50043DA9D /* LZCollectionViewFlowLayout.m in Sources */,
+				FE92C60C22A792F50043DA9D /* SliderBar.m in Sources */,
+				FE92C49E22A792580043DA9D /* BTCBlindSignature.m in Sources */,
+				FE3FC30022B8D44700A41205 /* NSBundle+TZImagePicker.m in Sources */,
+				FE3FC30422B8D44700A41205 /* TZProgressView.m in Sources */,
+				FE92C66422A792F50043DA9D /* BasicWallet.m in Sources */,
+				FE92C4C322A792580043DA9D /* BTCPaymentMethodRequest.m in Sources */,
+				FE92C60022A792F50043DA9D /* VoteBarView.m in Sources */,
+				FE92C5ED22A792F40043DA9D /* PaddingLabel.m in Sources */,
+				FE92C4C822A792580043DA9D /* slowequals.c in Sources */,
+				FE92C5F922A792F40043DA9D /* NodeHeaderTableViewCell.m in Sources */,
+				FE92C66E22A79BB20043DA9D /* String+Extension.swift in Sources */,
+				FE92C63922A792F50043DA9D /* Config.m in Sources */,
+				FE92C4C922A792580043DA9D /* crypto-scrypt-saltgen.c in Sources */,
+				FE92C64522A792F50043DA9D /* SigUtil.m in Sources */,
+				FE92C4AF22A792580043DA9D /* BTCBitcoinURL.m in Sources */,
+				FE92C4A322A792580043DA9D /* BTCBlockchainInfo.m in Sources */,
+				FE92C65C22A792F50043DA9D /* TransactionSignedResult.m in Sources */,
+				FE92C60522A792F50043DA9D /* WalletDetailVC.m in Sources */,
+				FECC978422D46FCF007BE8F5 /* AppVersion.m in Sources */,
+				FE3FC31522BB279000A41205 /* FAGlobal.m in Sources */,
+				FE92C5FA22A792F40043DA9D /* VoteDetailCell.m in Sources */,
+				FE92C4C722A792580043DA9D /* crypto_scrypt-hash.c in Sources */,
+				FE92C68B22A7AA4A0043DA9D /* Keccak256.m in Sources */,
+				FE92C66D22A79BB20043DA9D /* RLP.swift in Sources */,
+				FE92C61622A792F50043DA9D /* TransferHeaderView.m in Sources */,
+				FE92C68C22A7AA4A0043DA9D /* Hash.m in Sources */,
+				FE92C65122A792F50043DA9D /* Crypto.m in Sources */,
+				FEE3B27B22A641D2003B5244 /* AppDelegate.m in Sources */,
+				FE92C62E22A792F50043DA9D /* SWQRCodeViewController.m in Sources */,
+				FE92C4C622A792580043DA9D /* BTCErrors.m in Sources */,
+				FE92C61C22A792F50043DA9D /* LZCollectionViewLayoutAttributes.m in Sources */,
+				FE92C61722A792F50043DA9D /* TransferHeaderView_vote.m in Sources */,
+				FE92C4B822A792580043DA9D /* BTCProcessor.m in Sources */,
+				FE92C61322A792F50043DA9D /* TransferFooterView.m in Sources */,
+				FE3FC2A922AFB38B00A41205 /* CommonTransaction.m in Sources */,
+				FE92C64D22A792F50043DA9D /* EncryptedMessage.m in Sources */,
+				FE92C4B422A792580043DA9D /* BTCProtocolBuffers.m in Sources */,
+				FE92C60D22A792F50043DA9D /* SavePrivatekeyWaringView.m in Sources */,
+				FE92C62222A792F50043DA9D /* WelcomVC.m in Sources */,
+				FE3FC30122B8D44700A41205 /* UIView+Layout.m in Sources */,
+				FE92C62022A792F50043DA9D /* WelcomConfirmMnemonicVC.m in Sources */,
+				FE92C4C022A792580043DA9D /* BTCPaymentMethod.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FE92C69D22A7C1660043DA9D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE92C69C22A7C1660043DA9D /* zh-Hans */,
+				FE92C69E22A7C16D0043DA9D /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		FEE3B27F22A641D2003B5244 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FEE3B28022A641D2003B5244 /* Base */,
+				FE92C69722A7C0DA0043DA9D /* zh-Hans */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FEE3B28422A641D3003B5244 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FEE3B28522A641D3003B5244 /* Base */,
+				FE92C69822A7C0DA0043DA9D /* zh-Hans */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FEE3B28A22A641D3003B5244 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FEE3B28B22A641D3003B5244 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FEE3B28D22A641D3003B5244 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 838E3AABC8B99CAE7E3B598F /* Pods-inb-wallet-ios.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = UED4YTW463;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/inb-wallet-ios/PrefixHeader.pch";
+				INFOPLIST_FILE = "inb-wallet-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.insightchain.inbwallet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "inb-wallet-ios/inb-wallet-ios-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FEE3B28E22A641D3003B5244 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CD94D012D893B0C3ED64D82 /* Pods-inb-wallet-ios.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = UED4YTW463;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/inb-wallet-ios/PrefixHeader.pch";
+				INFOPLIST_FILE = "inb-wallet-ios/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.insightchain.inbwallet;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "inb-wallet-ios/inb-wallet-ios-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FEE3B27122A641D2003B5244 /* Build configuration list for PBXProject "inb-wallet-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEE3B28A22A641D3003B5244 /* Debug */,
+				FEE3B28B22A641D3003B5244 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FEE3B28C22A641D3003B5244 /* Build configuration list for PBXNativeTarget "inb-wallet-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FEE3B28D22A641D3003B5244 /* Debug */,
+				FEE3B28E22A641D3003B5244 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FEE3B26E22A641D2003B5244 /* Project object */;
+}

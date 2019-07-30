@@ -1,0 +1,148 @@
+//
+//  PrefixHeader.pch
+//  test
+//
+//  Created by insightChain_iOS开发 on 2019/6/4.
+//  Copyright © 2019 insightChain_iOS开发. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+typedef enum{
+    InsightChain_privateKeySize = 32,
+    InsightChain_addressSize = 20,
+}InsightChain;
+
+typedef enum{
+    network_main = 0,
+    network_test = 1,
+}Network;
+
+#ifdef __OBJC__
+
+    #import "Enum.h"
+
+    /********************************************************************** */
+    #ifdef DEBUG
+
+    #define NSLog( s, ... ) NSLog( @"< %@:(%d) > %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+
+    #define Exception(name, reson) [NSException exceptionWithName:name reason:reson userInfo:nil]
+
+    #else
+
+    #define NSLog( s, ... )
+
+    #endif
+
+    //字符串是否为空
+    #define IsStrEmpty(_ref)(( [(_ref) isKindOfClass:[NSNull class]]||(_ref) == nil) || ([(_ref) isEqual:[NSNull null]]) ||([(_ref)isEqualToString:@""]) || ([(_ref) isEqualToString:@""]) )
+
+    /***********************************************************************/
+    // 判断是否为iPhone X
+    #define iPhoneX [[UIScreen mainScreen] bounds].size.width == 375.0f && [[UIScreen mainScreen] bounds].size.height == 812.0f
+
+    #define KWIDTH   [UIScreen mainScreen].bounds.size.width
+    #define KHEIGHT  [UIScreen mainScreen].bounds.size.height
+
+    //不同屏幕尺寸字体适配
+    #define kScreenWidthRatio  (UIScreen.mainScreen.bounds.size.width / 375.0)
+    #define kScreenHeightRatio (UIScreen.mainScreen.bounds.size.height / 667.0)
+    #define AdaptedWidth(x)  ceilf((x) * kScreenWidthRatio)
+    #define AdaptedHeight(x) ceilf((x) * kScreenHeightRatio)
+    #define AdaptedFontSize(R)     [UIFont systemFontOfSize:AdaptedWidth(R)]
+    #define AdaptedBoldFontSize(R) [UIFont boldSystemFontOfSize:AdaptedWidth(R)]
+    #define AdaptedScale(x) ceilf((x) * [UIScreen mainScreen].scale)
+
+
+    // iPhone X  (安全区域 734 = 812 - kStatusBarHeight - KIndicatorHeight)
+    // 状态栏高度
+    #define kStatusBarHeight        [[UIApplication sharedApplication] statusBarFrame].size.height
+    // tabBar高度
+    #define kBottomBarHeight        (iPhoneX ? 83.f : 49.f)
+    // 导航栏高度
+    #define kNavigationBarHeight    (iPhoneX ? 88.f : 64.f)
+    // home indicator
+    #define KIndicatorHeight        (iPhoneX ? 34.f : 0.f)
+
+    /***********************************************************************/
+
+    /**
+     * View 圆角和加边框
+     */
+    #define KViewBorderRadius(View, Radius, Width, Color)\
+    \
+    [View.layer setCornerRadius:(Radius)];\
+    [View.layer setMasksToBounds:YES];\
+    [View.layer setBorderWidth:(Width)];\
+    [View.layer setBorderColor:[Color CGColor]]
+
+    /**
+     * View 圆角
+     */
+    #define KViewRadius(View, Radius)\
+    \
+    [View.layer setCornerRadius:(Radius)];\
+    [View.layer setMasksToBounds:YES]
+
+    /**
+     * Color颜色
+     */
+    #define kColorWithRGBA(r,g,b,a) [UIColor colorWithRed:r green:g blue:b alpha:a]
+    #define kColorWithRGB(r,g,b) kColorWithRGBA(r,g,b,1)
+    #define kColorWithHexValueA(hexValue, a) kColorWithRGBA(((float)((hexValue & 0xFF0000) >> 16))/255.0, ((float)((hexValue & 0xFF00) >> 8))/255.0,((float)(hexValue & 0xFF))/255.0,a)
+    #define kColorWithHexValue(hexValue) kColorWithHexValueA(hexValue,1)
+
+    #define kColorBlue      kColorWithHexValue(0x3574fa) //主视觉配色、强化，用于特别突出的文字、按钮、icon
+    #define kColorLightBlue kColorWithHexValue(0xa5c3f9)  //辅助视觉配色，用于辅助色、菜单栏icon辅助色
+    #define kColorTitle      kColorWithHexValue(0x303030) //主要文字颜色， 用于文章标题，正文
+    #define kColorAuxiliary  kColorWithHexValue(0x666666) //辅助性文字颜色,用于菜单栏文字颜色
+    #define kColorAuxiliary2 kColorWithHexValue(0x999999) //辅助性文字、失效按钮颜色，用于文字颜色的节奏变化
+    #define kColorSeparate   kColorWithHexValue(0xeeeeee) //分割线颜色，用于分割线
+    #define kColorBackground kColorWithHexValue(0xf6f7f9) //背景色，重分割
+    #define kColorTitleDark  kColorWithHexValue(0xffffff) //暗色及图片背景下的文字颜色，用于导航栏等
+    /* ********************************************************************* */
+
+    /** 获取APP名称 */
+    #define APP_NAME ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"])
+    /** 程序版本号 */
+    #define APP_VERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
+    /** 获取APP build版本 */
+    #define APP_BUILD ([[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"])
+    /** User-Agent **/
+    #define APP_USER_AGENT [NSString stringWithFormat:@"%@/%@ (%@; iOS %@; Scale/%0.2f)", [[NSBundle mainBundle] infoDictionary][(__bridge NSString *)kCFBundleExecutableKey] ?: [[NSBundle mainBundle] infoDictionary][(__bridge NSString *)kCFBundleIdentifierKey], [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"] ?: [[NSBundle mainBundle] infoDictionary][(__bridge NSString *)kCFBundleVersionKey], [[UIDevice currentDevice] model], [[UIDevice currentDevice] systemVersion], [[UIScreen mainScreen] scale]];
+
+    #define NOTI_ADD_WALLET @"NOTI_ADD_WALLET" //添加钱包通知
+    #define NOTI_DELETE_WALLET @"NOTI_DELETE_WALLET" //删除钱包通知
+    #define NOTI_MORTGAGE_CHANGE @"NOTI_MORTGAGE_CHANGE" //抵押值改变
+    #define NOTI_BALANCE_CHANGE @"NOTI_BALANCE_CHANGE"  //余额需要更新通知
+    /**  **/
+    #define Network_Main @"MAINNET"
+    #define Network_Test @"TESTNET"
+
+    #define NotificationCenter [NSNotificationCenter defaultCenter]
+
+    #define unitINB [NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]
+
+    static NSInteger kMaxSeleceNodesNumber = 30;
+
+    /* ********************** */
+    #import "AppDelegate.h"
+    #import "Masonry.h"
+    #import "CoreBitcoin.h"
+    #import "MBProgressHUD.h"
+    #import "MBProgressHUD+LZ.h"
+    #import "MJExtension.h"
+
+    #import "CCNavigationController.h"
+    #import "TabBarVC.h"
+
+    #import "NSDate+DateString.h"
+    #import "NSString+Category.h"
+
+    #import "inb_wallet_ios-Swift.h"
+    #endif /* PrefixHeader_pch */
+#endif

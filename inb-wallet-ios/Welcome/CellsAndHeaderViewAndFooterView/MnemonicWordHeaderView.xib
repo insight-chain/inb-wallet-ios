@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="mnemonocWordHeaderView" id="U6b-Vx-4bR">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccL-LU-1qw">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="horn" translatesAutoresizingMaskIntoConstraints="NO" id="0Il-E5-D4v">
+                            <rect key="frame" x="15" y="12.5" width="15" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="15" id="Pdx-DJ-K6b"/>
+                                <constraint firstAttribute="height" constant="15" id="sPa-0N-Fom"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请仔细抄写下方助记词，我们将在下一步进行验证" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oh3-xN-CUj">
+                            <rect key="frame" x="35" y="11.5" width="314.5" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.20784313725490194" green="0.45490196078431372" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.96470588235294119" green="0.96862745098039216" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="0Il-E5-D4v" firstAttribute="leading" secondItem="ccL-LU-1qw" secondAttribute="leading" constant="15" id="9Oj-Uk-yUg"/>
+                        <constraint firstItem="Oh3-xN-CUj" firstAttribute="leading" secondItem="0Il-E5-D4v" secondAttribute="trailing" constant="5" id="LjK-7w-Qo7"/>
+                        <constraint firstAttribute="height" constant="40" id="Yq1-bH-fOi"/>
+                        <constraint firstItem="Oh3-xN-CUj" firstAttribute="centerY" secondItem="ccL-LU-1qw" secondAttribute="centerY" id="dvP-AV-p7i"/>
+                        <constraint firstItem="0Il-E5-D4v" firstAttribute="centerY" secondItem="ccL-LU-1qw" secondAttribute="centerY" id="pBD-FO-Tc2"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钱包助记词" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3X-7T-eCM">
+                    <rect key="frame" x="20" y="60" width="77" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="T3X-7T-eCM" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" constant="20" id="BKG-kH-YI0"/>
+                <constraint firstAttribute="bottom" secondItem="T3X-7T-eCM" secondAttribute="bottom" constant="15" id="OSH-Qd-0mY"/>
+                <constraint firstItem="ccL-LU-1qw" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="Pf9-oC-GaG"/>
+                <constraint firstItem="T3X-7T-eCM" firstAttribute="top" secondItem="ccL-LU-1qw" secondAttribute="bottom" constant="20" id="Z3G-HE-tLH"/>
+                <constraint firstAttribute="trailing" secondItem="ccL-LU-1qw" secondAttribute="trailing" id="abe-bU-a0b"/>
+                <constraint firstItem="ccL-LU-1qw" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="hKQ-Mp-kV6"/>
+            </constraints>
+            <point key="canvasLocation" x="131.15942028985509" y="133.25892857142856"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="horn" width="15" height="15"/>
+    </resources>
+</document>

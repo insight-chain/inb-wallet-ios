@@ -1,0 +1,6 @@
+framework module RLP_ObjC {
+  umbrella header "RLP-ObjC-umbrella.h"
+
+  export *
+  module * { export * }
+}

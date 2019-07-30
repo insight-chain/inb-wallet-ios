@@ -1,0 +1,151 @@
+/* 
+  Localizable.strings
+  test
+
+  Created by insightChain_iOS开发 on 2019/6/5.
+  Copyright © 2019 insightChain_iOS开发. All rights reserved.
+*/
+"version.current" = "当前版本";
+"version.update" = "更新版本";
+"version.update.immediately" = "立即更新";
+
+"nextStep" = "下一步";
+"full" = "全部";
+"resource" = "资源";
+"determine" = "确定";
+"wallet" = "钱包";
+
+"welcom" = "你好，\n欢迎来到Insight Chain";
+"welcom.hasINBWallet" = "我有INB公链钱包";
+"welcom.noINBWallet" = "没有INB公链钱包";
+"welcom.importTip" = "通过私钥、助记词导入钱包";
+"welcom.createTip" = "创建一个INB钱包";
+
+"myAssets" = "我的资产";
+"cpuResources" = "CPU资源";
+"netResources" = "NET资源";
+"remaining"    = "剩余";
+"total"        = "总量";
+"mortgage"     = "抵押";
+"redemption"   = "赎回";
+
+"confirm" = "确认";
+
+"walletDetail" = "钱包详情";
+
+"accountName"  = "账号名";
+"walletAddress"= "钱包地址";
+"createdTime"  = "创建时间";
+
+"wallet.create.confrimMnemonicTip" = "按照顺序点击助记词，确认您的身份";
+
+"changePassword_wallet" = "修改钱包密码";
+"exportPrivateKey"      = "导出当前私钥";
+
+"transfer" = "转账";
+"transfer.success" = "转账成功";
+"transfer.fail" = "转账失败";
+"collection" = "收款";
+"scanCode" = "扫码";
+"vote" = "投票";
+"transactionRecords" = "交易记录";
+"backup" = "备份";
+
+"scan" = "扫一扫";
+
+"wallet.node" = "节点";
+
+"copyAddress" = "复制地址";
+"saveQRCode" = "保存二维码";
+
+"privateKey" = "私钥";
+"mnemonicWord"= "助记词";
+"walletPassword" = "钱包密码";
+"passwordTipMessage" = "密码提示信息";
+"importWallet" = "导入钱包";
+"createWallet" = "创建钱包";
+"backupWallet" = "备份钱包";
+
+"addAccount" = "添加账户";
+
+"importWallet.privatekey.placeholder" = "请输入私钥";
+"importWallet.mnemonic.placeholder" = "请输入助记词";
+"walletPassword.placeholder" = "设置一个密码保护钱包";
+"passwordTipMessage.placeholder" = "可不填";
+"backup.tip_1" = "建议抄写或打印私钥后放置在安全地点保存";
+"backup.tip_2" = "请勿通过网络工具传输私钥，一旦被黑客获取将造成不可挽回的损失";
+
+"transfer.sendMoney" = "发款方";
+"transfer.collectionMoney" = "收款方";
+"transfer.resource" = "资源消耗";
+"transfer.blockNo." = "区块号";
+"transfer.tradeTime"= "交易时间";
+"transfer.tradeNo." = "交易号";
+"transfer.vote" = "节点投票";
+"transfer.vote.success" = "投票成功";
+"transfer.vote.failed" = "投票失败";
+"transfer.account.receive" = "收款账号";
+"transfer.number" = "数量";
+"transfer.note" = "备注信息";
+"transfer.send" = "发送";
+"transfer.result.success" = "转账成功";
+"transfer.result.failed" = "转账失败";
+
+"pledgedResources" = "已抵押资源";
+"addMortgageResources" = "新增抵押资源";
+"voteTotal" = "投票总数";
+"submitVote" = "提交投票";
+"accountBalance" = "账户余额";
+
+"selectedNodes" = "已选节点";
+"saveWaringTip" = "如果有人获取到您的私钥将直接获取您的财产！请抄写下私钥并存放在安全的地方。";
+"I_know" = "我知道了";
+
+"password.change" = "修改密码";
+"password.original" = "原密码";
+"password.new" = "新密码";
+"password.replay" = "确认新密码";
+
+"placeholder.originPassword" = "请输入当前密码";
+"placeholder.newPassword" = "请输入新密码";
+"placeholder.rePassword" = "再次输入新密码";
+"placeholder.accountName"= "设置一个身份名称";
+"placeholder.transfer.account.receive" = "请输入收款账号";
+"placeholder.transfer.number" = "请输入转账金额";
+"placeholder.transfer.note" = "请输入备注信息";
+"placeholder.inbNumber.input" = "请输入INB数量";
+
+"wallet.accountName" = "身份名称";
+
+"done"  = "完成";
+"clear" = "清空";
+
+"node.server" = "服务器";
+"node.team" = "团队介绍";
+"node.contact" = "联系方式";
+
+"backup.tip_1" = "妥善备份钱包才能保障您的资产安全。卸载程序或删除钱包后，您需要备份文件来恢复钱包";
+"backup.tip_2" = "请在四周无人、确保没有摄像头的安全环境下进行备份";
+"backup.password.inputTip" = "请输入密码";
+
+"setting.system"      = "系统设置";
+"setting.invite"      = "邀请好友";
+"setting.checkUpdate" = "检查更新";
+"setting.help"        = "帮助中心";
+"setting.aboutUs"     = "关于我们";
+
+"setting.system.language" = "语言选择";
+"setting.system.push" = "推送设置";
+"setting.system.lockOfApp" = "应用锁";
+"seeting.system.TouchID" = "Touch ID";
+
+"setting.aboutUs.protocal" = "使用协议与隐私条款";
+"setting.aboutUs.website" = "官方网站";
+"setting.aboutUs.weChat" = "微信公众号";
+
+"tip.resource.mortgage_1" = "1. 注意在INB网络上面的任何交易都会占用NET资源。";
+"tip.resource.mortgage_2" = "2. 所占用的资源在一定时间后悔返还。";
+"tip.resource.mortgage_3" = "3. 您可以在任何时候赎回资源，但是会有3天的等待期。";
+"tip.resource.redemption_1" = "1. 仅能赎回自己抵押的资源。";
+"tip.resource.redemption_2" = "2. 如果您当前已经消耗了一部分资源，则无法赎回全部的资源，请尝试减少赎回的数量。";
+"tip.resource.redemption_3" = "3. 所有赎回中的INB资源将在最后一次赎回操作的3天后退回。";

@@ -1,0 +1,6 @@
+framework module Pods_inb_wallet_ios {
+  umbrella header "Pods-inb-wallet-ios-umbrella.h"
+
+  export *
+  module * { export * }
+}
