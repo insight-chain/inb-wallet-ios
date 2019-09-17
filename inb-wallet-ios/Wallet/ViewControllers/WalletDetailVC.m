@@ -26,6 +26,7 @@
 @property(nonatomic, strong) UILabel *addressStr; //“钱包地址”
 @property(nonatomic, strong) UILabel *address;
 @property(nonatomic, strong) UIImageView *addressBg;
+@property(nonatomic, strong) UIButton *addressCopyBtn;
 
 @property(nonatomic, strong) UILabel *createTimeStr; //“创建时间”
 @property(nonatomic, strong) UILabel *createTime;
@@ -125,10 +126,11 @@
     [self.view addSubview:self.addressStr];
     [self.view addSubview:self.addressBg];
     [self.view addSubview:self.address];
+    [self.view addSubview:self.addressCopyBtn];
     
-    [self.view addSubview:self.createTimeStr];
-    [self.view addSubview:self.createTimeBg];
-    [self.view addSubview:self.createTime];
+//    [self.view addSubview:self.createTimeStr];
+//    [self.view addSubview:self.createTimeBg];
+//    [self.view addSubview:self.createTime];
     
     
     UIView *sepView = [[UIView alloc] init];
@@ -166,23 +168,28 @@
         make.left.right.mas_equalTo(self.accountName);
         make.top.mas_equalTo(self.addressBg.mas_top).mas_offset(AdaptedHeight(15));
     }];
-    [self.createTimeStr mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.addressBg.mas_bottom).mas_offset(AdaptedHeight(topMargin));
-        make.left.mas_equalTo(self.accountStr);
+    [self.addressCopyBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.addressBg.mas_bottom).mas_offset(AdaptedHeight(-15));
+        make.right.mas_equalTo(self.addressBg.mas_right).mas_offset(AdaptedWidth(-10));
+        make.width.height.mas_equalTo(AdaptedWidth(20));
     }];
-    [self.createTimeBg mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.createTimeStr.mas_bottom).mas_offset(AdaptedWidth(midMargin));
-        make.left.right.mas_equalTo(self.accountBg);
-        make.height.mas_equalTo(self.accountBg);
-    }];
-    [self.createTime mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.createTimeBg.mas_centerY);
-        make.left.mas_equalTo(self.createTimeBg.mas_left).mas_offset(AdaptedWidth(midMargin));
-    }];
+//    [self.createTimeStr mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.addressBg.mas_bottom).mas_offset(AdaptedHeight(topMargin));
+//        make.left.mas_equalTo(self.accountStr);
+//    }];
+//    [self.createTimeBg mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.createTimeStr.mas_bottom).mas_offset(AdaptedWidth(midMargin));
+//        make.left.right.mas_equalTo(self.accountBg);
+//        make.height.mas_equalTo(self.accountBg);
+//    }];
+//    [self.createTime mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.mas_equalTo(self.createTimeBg.mas_centerY);
+//        make.left.mas_equalTo(self.createTimeBg.mas_left).mas_offset(AdaptedWidth(midMargin));
+//    }];
     
     [sepView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.createTimeBg.mas_bottom).mas_offset(AdaptedHeight(topMargin));
+        make.top.mas_equalTo(self.addressBg.mas_bottom).mas_offset(AdaptedHeight(topMargin));
         make.height.mas_equalTo(AdaptedHeight(8));
     }];
     
@@ -203,7 +210,15 @@
     [self.navigationController popViewControllerAnimated:YES];
     [NotificationCenter postNotificationName:NOTI_DELETE_WALLET object:self.wallet];
 }
-
+-(void)addressCopy:(UIButton *)sender{
+    UIPasteboard *board = [UIPasteboard generalPasteboard];
+    board.string = self.address.text;
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.label.text = @"私钥已复制到剪贴板";
+    [hud setRemoveFromSuperViewOnHide:YES];
+    [hud hideAnimated:YES afterDelay:2];
+}
 #pragma mark ---- getter
 -(UILabel *)accountStr{
     if (_accountStr == nil) {
@@ -257,6 +272,14 @@
         _address.textColor = kColorAuxiliary2;
     }
     return _address;
+}
+-(UIButton *)addressCopyBtn{
+    if (_addressCopyBtn == nil) {
+        _addressCopyBtn = [[UIButton alloc] init];
+        [_addressCopyBtn setImage:[UIImage imageNamed:@"copy"] forState:UIControlStateNormal];
+        [_addressCopyBtn addTarget:self action:@selector(addressCopy:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _addressCopyBtn;
 }
 -(UILabel *)createTimeStr{
     if (_createTimeStr == nil) {

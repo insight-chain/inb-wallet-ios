@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, readonly) NSString *to;
 @property(nonatomic, strong, readonly) NSString *value;
 @property(nonatomic, strong, readonly) NSString *data;
+@property(nonatomic, strong, readonly) NSString *txType;
 
 @property(nonatomic, strong, readonly) NSString *from; //抵押专用
 @property(nonatomic, strong) NSString *signedMortgageTx;

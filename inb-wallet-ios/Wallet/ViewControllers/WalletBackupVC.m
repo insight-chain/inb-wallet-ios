@@ -24,6 +24,10 @@
 @property(nonatomic, strong) UILabel *address;
 @property(nonatomic, strong) UIImageView *addressBg;
 
+@property(nonatomic, strong) UILabel *privateLabel; //"私钥地址"
+@property(nonatomic, strong) UILabel *private;
+@property(nonatomic, strong) UIImageView *privateBg;
+
 @property(nonatomic, strong) UILabel *menmonryLabel; //助记词
 @property(nonatomic, strong) UILabel *menmonry;
 @property(nonatomic, strong) UIImageView *menmonryBg;
@@ -300,6 +304,7 @@
         _tipLabel_1.font = AdaptedFontSize(14);
         _tipLabel_1.textColor = kColorBlue;
         _tipLabel_1.text = NSLocalizedString(@"backup.tip_1", @"建议抄写或打印私钥后放置在安全地点保存");
+        _tipLabel_1.numberOfLines = 0;
     }
     return _tipLabel_1;
 }

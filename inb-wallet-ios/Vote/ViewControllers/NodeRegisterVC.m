@@ -212,7 +212,7 @@
                                 NSDictionary *dic = (NSDictionary *)responseObject;
                                 NSDecimalNumber *nonce = [dic[@"result"] decimalNumberFromHexString];
                                 @try{
-                                    TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:self.wallet.walletID nonce:[nonce stringValue] gasPrice:@"200000" gasLimit:@"21000" to:[self.wallet.address add0xIfNeeded] value:@"0" data:[dataStr hexString] password:password chainID:kChainID];
+                                    TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:self.wallet.walletID nonce:[nonce stringValue] txType:TxType_nodeRegister gasPrice:@"200000" gasLimit:@"21000" to:[self.wallet.address add0xIfNeeded] value:@"0" data:[dataStr hexString] password:password chainID:kChainID];
                                     [NetworkUtil rpc_requetWithURL:delegate.rpcHost
                                                             params:@{@"jsonrpc":@"2.0",
                                                                      @"method":@"eth_sendRawTransaction",

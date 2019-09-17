@@ -43,7 +43,7 @@ typedef enum{
 
     /***********************************************************************/
     // 判断是否为iPhone X
-    #define iPhoneX [[UIScreen mainScreen] bounds].size.width == 375.0f && [[UIScreen mainScreen] bounds].size.height == 812.0f
+    #define iPhoneX (([[UIScreen mainScreen] bounds].size.width == 375.0f && [[UIScreen mainScreen] bounds].size.height == 812.0f) || ([[UIScreen mainScreen] bounds].size.width == 414.f && [[UIScreen mainScreen] bounds].size.height == 896.f))
 
     #define KWIDTH   [UIScreen mainScreen].bounds.size.width
     #define KHEIGHT  [UIScreen mainScreen].bounds.size.height
@@ -57,6 +57,7 @@ typedef enum{
     #define AdaptedBoldFontSize(R) [UIFont boldSystemFontOfSize:AdaptedWidth(R)]
     #define AdaptedScale(x) ceilf((x) * [UIScreen mainScreen].scale)
 
+    #define App_Delegate ((AppDelegate *)[UIApplication sharedApplication].delegate)
 
     // iPhone X  (安全区域 734 = 812 - kStatusBarHeight - KIndicatorHeight)
     // 状态栏高度
@@ -129,6 +130,12 @@ typedef enum{
 
     static NSInteger kMaxSeleceNodesNumber = 30;
 
+    /** 七日年化收益率 **/
+    static double kRateReturn7_30  = 1; //30天的七日年化
+    static double kRateReturn7_90  = 3; //90天的七日年化
+    static double kRateReturn7_180 = 5; //180天的七日年化
+    static double kRateReturn7_360 = 9; //360天的七日年化
+static double kRateVote = 9; //抵押投票奖励年化
     /* ********************** */
     #import "AppDelegate.h"
     #import "Masonry.h"

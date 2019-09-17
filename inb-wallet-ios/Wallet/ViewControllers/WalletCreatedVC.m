@@ -206,6 +206,14 @@
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
     
+    if(self.password.text.length < 6){
+        [MBProgressHUD showMessage:NSLocalizedString(@"password.setting.error.tooshort", @"设置密码长度小于5") toView:self.view afterDelay:2 animted:YES];
+        return;
+    }else if(self.password.text.length > 16){
+        [MBProgressHUD showMessage:NSLocalizedString(@"password.setting.error.toolong", @"设置密码长度大于16") toView:self.view afterDelay:2 animted:YES];
+        return;
+    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak __block typeof(self) tmpSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -237,6 +245,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             //回到主线程
             [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [MBProgressHUD showMessage:NSLocalizedString(@"", @"钱包创建成功") toView:tmpSelf.view afterDelay:2 animted:YES];
+            
             WelcomBackupTipVC *welcomTipVC = [[WelcomBackupTipVC alloc] initWithNibName:NSStringFromClass([WelcomBackupTipVC class]) bundle:nil];
             welcomTipVC.wallet = wallet;
             welcomTipVC.password = self.password.text;
@@ -301,7 +311,7 @@
         _password = [[UITextField alloc] init];
         _password.font = AdaptedFontSize(15);
         _password.textColor = kColorTitle;
-        _password.placeholder = NSLocalizedString(@"walletPassword.placeholder", @"设置一个密码保护钱包");
+        _password.placeholder = NSLocalizedString(@"walletPassword.placeholder", @"6-15位由大小字母、数字或符号组成");
     }
     return _password;
 }

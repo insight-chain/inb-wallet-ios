@@ -61,6 +61,22 @@ typedef NS_ENUM(NSInteger, TradingType){ //1、转账 2、抵押 3、解抵押 4
     tradingType_unMortgage = 3,
     tradingType_vote = 4,
 };
+/****/
+typedef NS_ENUM(NSInteger, TxType) {
+    TxType_transfer  = 1, //普通交易
+    TxType_moetgage, //抵押
+    TxType_lock, //lock锁仓
+    TxType_unMortgage, //赎回
+    TxType_vote, //投票
+    TxType_reResource, //资源重置
+    TxType_receive, //领取赎回
+    TxType_rewardLock, //锁仓奖励
+    TxType_rewardVote, //投票奖励
+    TxType_payment, //代付
+    TxType_nodeRegister,  //注册节点
+};
+
+
 /** 服务器类型 **/
 typedef NS_ENUM(NSInteger, RootNetType) {
     rootNet_production, //正式

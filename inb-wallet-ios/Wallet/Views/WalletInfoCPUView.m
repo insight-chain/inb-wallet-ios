@@ -42,9 +42,9 @@
         [self addSubview:self.moreBtn];
         [self makeConstraints];
         
-        self.remainingValue.text = @"122Kb";// viewModel.cpu_remaining;
-        self.totalValue.text = @"320kb"; //viewModel.cpu_total;
-        self.mortgageValue.text = @"99.99INB"; //viewModel.mortgage;
+        self.remainingValue.text = @"0Kb";// viewModel.cpu_remaining;
+        self.totalValue.text = @"0kb"; //viewModel.cpu_total;
+        self.mortgageValue.text = @"0 INB"; //viewModel.mortgage;
     }
     return self;
 }

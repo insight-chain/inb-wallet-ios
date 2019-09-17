@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
  * chainID: Chain ID, 1 by default after [EIP 155](https://github.com/ethereum/EIPs/issues/155) fork.
  * returns signed data
  */
-+(TransactionSignedResult *)ethSignTransactionWithWalletID:(NSString *)walletID nonce:(NSString *)nonce gasPrice:(NSString *)gasPrice gasLimit:(NSString *)gasLimit to:(NSString *)to value:(NSString *)value data:(NSString *)data password:(NSString *)password chainID:(int)chainID;
++(TransactionSignedResult *)ethSignTransactionWithWalletID:(NSString *)walletID nonce:(NSString *)nonce txType:(TxType)txType gasPrice:(NSString *)gasPrice gasLimit:(NSString *)gasLimit to:(NSString *)to value:(NSString *)value data:(NSString *)data password:(NSString *)password chainID:(int)chainID;
 /** 抵押交易 **/
 +(TransactionSignedResult *)inbMortgageWithWalletID:(NSString *)walletID value:(NSString *)value password:(NSString *)password chainID:(int)chainID;
 

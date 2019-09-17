@@ -46,7 +46,7 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="correct" translatesAutoresizingMaskIntoConstraints="NO" id="mSn-7G-RwR">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vote_support" translatesAutoresizingMaskIntoConstraints="NO" id="mSn-7G-RwR">
                         <rect key="frame" x="15" y="132.5" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="mSn-7G-RwR" secondAttribute="height" multiplier="1:1" id="3Pd-jk-iOZ"/>
@@ -54,23 +54,20 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.00%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nk5-o0-OCh">
-                        <rect key="frame" x="35" y="132" width="60" height="16.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="60" id="lhY-rY-IFd"/>
-                        </constraints>
+                        <rect key="frame" x="35" y="132" width="57" height="16.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="position" translatesAutoresizingMaskIntoConstraints="NO" id="qQX-O2-H17">
-                        <rect key="frame" x="110" y="132.5" width="15" height="15"/>
+                        <rect key="frame" x="107" y="132.5" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="15" id="Ag3-Es-Ru8"/>
                             <constraint firstAttribute="width" secondItem="qQX-O2-H17" secondAttribute="height" multiplier="1:1" id="kIS-dW-JGd"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYb-2R-O8L">
-                        <rect key="frame" x="130" y="131.5" width="36" height="17"/>
+                        <rect key="frame" x="127" y="131.5" width="36" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.18823529411764706" green="0.18823529411764706" blue="0.18823529411764706" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -152,9 +149,9 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="correct" width="15" height="15"/>
         <image name="headerImgDefault" width="35" height="35"/>
         <image name="position" width="15" height="15"/>
         <image name="selectBox_no" width="18" height="18"/>
+        <image name="vote_support" width="15" height="15"/>
     </resources>
 </document>

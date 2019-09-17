@@ -26,7 +26,7 @@
         NSLog(@"mmmm...:%@", mne);
         [self.crypto clearDerivedKey];
         self.mnemonicPath = path;
-        self.address = ethKey.address;
+        self.address = [NSString stringWithFormat:@"95%@",ethKey.address];
     }
     return self;
 }
@@ -41,7 +41,7 @@
             @throw Exception(@"KeystoreError", @"invalid");
         }
         self.ID = json[@"id"] ? json[@"id"] : [ETHMnemonicKeystore generateKeystoreId];
-        self.address = json[@"address"] ? json[@"address"] : @"";
+        self.address = [NSString stringWithFormat:@"95%@",json[@"address"] ? json[@"address"] : @""];
         self.crypto = [[Crypto alloc] initWithJSON:cryptoJson];
         
         self.encMnemonic = [[EncryptedMessage alloc] initWithJSON:encMnemonicNode];
@@ -67,7 +67,7 @@
 }
 -(NSDictionary *)serializeToMap{
     return @{@"id": self.ID,
-             @"address": self.address,
+             @"address": [self.address hasPrefix:@"95"]?[self.address substringFromIndex:2]:self.address,
              @"createdAt": @(self.meta.timestamp),
              @"source": self.meta.source,
              @"chainType": self.meta.chain

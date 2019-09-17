@@ -116,7 +116,7 @@
  * Sign transaction with given parameters
  * returns signed data
  */
-+(TransactionSignedResult *)ethSignTransactionWithWalletID:(NSString *)walletID nonce:(NSString *)nonce gasPrice:(NSString *)gasPrice gasLimit:(NSString *)gasLimit to:(NSString *)to value:(NSString *)value data:(NSString *)data password:(NSString *)password chainID:(int)chainID{
++(TransactionSignedResult *)ethSignTransactionWithWalletID:(NSString *)walletID nonce:(NSString *)nonce txType:(TxType)txType gasPrice:(NSString *)gasPrice gasLimit:(NSString *)gasLimit to:(NSString *)to value:(NSString *)value data:(NSString *)data password:(NSString *)password chainID:(int)chainID{
     
     BasicWallet *wallet = [[Identity currentIdentity] findWalletByWalletID:walletID];
     if (!wallet) {
@@ -126,11 +126,12 @@
         NSString *privatedKey = [wallet privateKey:password];
         NSLog(@"地址。。%@", wallet.address);
         NSDictionary *raw = @{@"nonce":nonce,
-                              @"gasPrice":gasPrice,
-                              @"gasLimit":gasLimit,
+//                              @"gasPrice":gasPrice,
+//                              @"gasLimit":gasLimit,
                               @"to":to,
                               @"value": value, //@"0x9184e23",
                               @"data":data,
+                              @"txType":[NSString stringWithFormat:@"%d",txType],
                               }; /*@"resourcePayer":@"0xaa18a055AB2017a0Cd3fB7D70f269C9B80092206",
                                   @"vp":@"",
                                   @"rp":@"",

@@ -16,6 +16,9 @@
 
 #import "MJRefresh.h"
 
+#import "FMListPlaceholder.h"
+#import "UITableView+FMListPlaceholder.h"
+
 #define cellId @"transferListCell"
 
 @interface TransferListVC ()<UITableViewDelegate, UITableViewDataSource>
@@ -28,45 +31,58 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView = [[UITableView alloc] init];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-
-        NSString *url = [NSString stringWithFormat:@"http://192.168.1.191:8383/v1/account/search/transfers?address=%@&page=1&limit=200", self.address];
-//        NSString *url = [NSString stringWithFormat:@"%@account/search/transfers?address=%@&page=1&limit=200", appDelegate.explorerHost, self.address];
-        [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
-            
-            NSDictionary *res = (NSDictionary *)resonseObject;
-            
-            NSInteger totalCount = res[@"totalCount"];
-            NSInteger totalPages = res[@"totalPages"];
-            NSArray *items = res[@"items"];
-            
-            NSMutableArray *tradingArr = [TransferModel mj_objectArrayWithKeyValuesArray:items];
-            
-            [self.recordArr removeAllObjects];
-            
-            [self.recordArr addObjectsFromArray:tradingArr];
-            
-            [self.tableView.mj_header endRefreshing];
-            [self.tableView.mj_footer endRefreshingWithNoMoreData]; //没有更多数据
-            [self.tableView reloadData];
-            return;
-            
-        } failed:^(NSError * _Nonnull error) {
-            [self.tableView.mj_header endRefreshing];
-        }];
-    }];
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     [self.view addSubview:self.tableView];
     
-    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.mas_equalTo(0);
-    }];
-    
     [self.tableView.mj_header beginRefreshing];
+    
+    __weak __typeof(self)weakSelf = self;
+    self.tableView.reloadBlock = ^(UIScrollView *listView) {
+        [listView.mj_header beginRefreshing];
+    };
+    /// 使用场景 3
+    // 自定义某个 列表的 占位图 文字 等等属性。根据需求自行调用相应接口。不想覆盖全局默认属性的参数传nil
+    [self.tableView fm_emptyCoverName:@"record_trading_empty" emptyTips:NSLocalizedString(@"record.trading.empty", @"暂无交易历史")]; // emptyTips如果传 nil 则会显示全局默认文字。不要 emptyTips 传 空白字符 即可
+    [self.tableView fm_backgroundColor:[UIColor whiteColor] tipsTextColor:kColorAuxiliary2 tipsFont:[UIFont systemFontOfSize:15]];
+    [self.tableView fm_coverCenterYOffset:-80 coverSize:CGSizeMake(190, 150) coverSpaceToTips:20];
+}
+
+-(void)headerRefresh{
+    [self performSelector:@selector(reloadTable) withObject:nil afterDelay:1];
+}
+-(void)reloadTable{
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSString *url = [NSString stringWithFormat:@"%@account/search/transfers?address=%@&page=1&limit=200", appDelegate.explorerHost,self.address];
+    __weak __block typeof(self) tmpSelf = self;
+    [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
+        
+        NSDictionary *res = (NSDictionary *)resonseObject;
+        
+        NSInteger totalCount = res[@"totalCount"];
+        NSInteger totalPages = res[@"totalPages"];
+        NSArray *items = res[@"items"];
+        
+        NSMutableArray *tradingArr = [TransferModel mj_objectArrayWithKeyValuesArray:items];
+        
+        [tmpSelf.recordArr removeAllObjects];
+        
+        [tmpSelf.recordArr addObjectsFromArray:tradingArr];
+        
+        [tmpSelf.tableView.mj_header endRefreshing];
+        [tmpSelf.tableView.mj_footer endRefreshingWithNoMoreData]; //没有更多数据
+        [tmpSelf.tableView reloadData];
+        return;
+        
+    } failed:^(NSError * _Nonnull error) {
+        [self.recordArr removeAllObjects];
+        [tmpSelf.tableView reloadData];
+        [tmpSelf.tableView.mj_header endRefreshing];
+    }];
 }
 
 #pragma mark ---- UITableViewDatasource & Delegate

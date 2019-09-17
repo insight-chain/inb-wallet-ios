@@ -32,7 +32,7 @@
 
 -(NSDictionary *)getStardandJSON{
     return @{@"id": self.ID,
-             @"address": self.address,
+             @"address": [self.address hasPrefix:@"95"]?[self.address substringFromIndex:2]:self.address,
              @"version": @(self.version),
              @"crypto": [self.crypto toJSON],
              };

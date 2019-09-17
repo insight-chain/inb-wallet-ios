@@ -17,7 +17,10 @@
 
 #import "VoteBarView.h"
 
+#import "FMListPlaceholder.h"
+#import "UITableView+FMListPlaceholder.h"
 
+#import "MJRefresh.h"
 
 @interface VoteListVC ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
@@ -30,6 +33,8 @@
 
 #define cellId @"voteListCell"
 
+#define voteBarViewHeight (iPhoneX ? AdaptedWidth(50)+20 : AdaptedWidth(50))
+
 @implementation VoteListVC
 
 - (void)viewDidLoad {
@@ -40,20 +45,16 @@
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.voteBarView];
     
-    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(self.voteBarView.mas_top);
-    }];
-    [self.voteBarView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.tableView.mas_bottom);
-        if(iPhoneX){
-            make.height.mas_equalTo(AdaptedWidth(50)+20);
-        }else{
-            make.height.mas_equalTo(AdaptedWidth(50));
-        }
-        make.bottom.mas_equalTo(self.view);
-    }];
+//    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.left.right.mas_equalTo(0);
+//        make.bottom.mas_equalTo(self.voteBarView.mas_top);
+//    }];
+//    [self.voteBarView mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.mas_equalTo(0);
+////        make.top.mas_equalTo(self.tableView.mas_bottom);
+//        make.height.mas_equalTo(voteBarViewHeight);
+//        make.bottom.mas_equalTo(self.view);
+//    }];
     
     __block __weak typeof(self) tmpSelf = self;
     
@@ -82,7 +83,20 @@
 //    [self.nodesList addObjectsFromArray:[self nodesTest]];
     self.voteBarView.totalNodes = kMaxSeleceNodesNumber; //最大选则节点数
     
-    [self requestNodes];
+
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestNodes)];
+    [self.tableView.mj_header beginRefreshing];
+    
+    __weak __typeof(self)weakSelf = self;
+    _tableView.reloadBlock = ^(UIScrollView *listView) {
+        [listView.mj_header beginRefreshing];
+    };
+    
+    /// 使用场景 3
+    // 自定义某个 列表的 占位图 文字 等等属性。根据需求自行调用相应接口。不想覆盖全局默认属性的参数传nil
+    [self.tableView fm_emptyCoverName:@"vote_node_empty" emptyTips:NSLocalizedString(@"vote.node.empty", @"暂无投票节点")]; // emptyTips如果传 nil 则会显示全局默认文字。不要 emptyTips 传 空白字符 即可
+    [self.tableView fm_backgroundColor:[UIColor whiteColor] tipsTextColor:kColorAuxiliary2 tipsFont:[UIFont systemFontOfSize:15]];
+    [self.tableView fm_coverCenterYOffset:-80 coverSize:CGSizeMake(190, 150) coverSpaceToTips:20];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -105,8 +119,8 @@
 
 -(void)requestNodes{
     __block __weak typeof(self) tmpSelf = self;
-    
-    NSString *url = [NSString stringWithFormat:@"http://192.168.1.191:8383/v1/node/info?page=1&limit=200"];
+    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    NSString *url = [NSString stringWithFormat:@"%@node/info?page=1&limit=200", delegate.explorerHost];
     [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
         NSLog(@"%@", resonseObject);
         NSDictionary *result = (NSDictionary *)resonseObject;
@@ -116,9 +130,16 @@
         NSArray *nodesArr = [Node mj_objectArrayWithKeyValuesArray:items];
         [tmpSelf.nodesList removeAllObjects];
         [tmpSelf.nodesList addObjectsFromArray:nodesArr];
+        [tmpSelf.tableView.mj_header endRefreshing];
+        [tmpSelf.tableView.mj_footer endRefreshing];
         [tmpSelf.tableView reloadData];
     } failed:^(NSError * _Nonnull error) {
+        [tmpSelf.nodesList removeAllObjects];
+        [tmpSelf.tableView reloadData];
         NSLog(@"%@", error);
+        
+        [tmpSelf.tableView.mj_header endRefreshing];
+        [tmpSelf.tableView.mj_footer endRefreshing];
     }];
 //    __block __weak typeof(self) tmpSelf = self;
 //    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -242,16 +263,17 @@
 #pragma mark ---- setter && getter
 -(UITableView *)tableView{
     if (_tableView == nil ) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT - voteBarViewHeight) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.bounces = NO;
+        _tableView.backgroundColor = [UIColor whiteColor];
     }
     return _tableView;
 }
 -(VoteBarView *)voteBarView{
     if (_voteBarView == nil) {
-        _voteBarView = [[VoteBarView alloc] init];
+        _voteBarView = [[VoteBarView alloc] initWithFrame:CGRectMake(0, (KHEIGHT-voteBarViewHeight), KWIDTH, voteBarViewHeight)];
         
     }
     return _voteBarView;

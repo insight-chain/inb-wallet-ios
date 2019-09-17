@@ -140,7 +140,7 @@
                                        
                                         NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f", inbNumber]];
                                         NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]];
-                                        TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] gasPrice:@"200000" gasLimit:@"21000" to:@"0xaa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[@"mortgageNet" hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                        TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_moetgage gasPrice:@"200000" gasLimit:@"21000" to:@"0xaa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[@"mortgageNet" hexString] add0xIfNeeded] password:password chainID:kChainID];
                                         
                                         [NetworkUtil rpc_requetWithURL:delegate.rpcHost
                                                                 params:@{@"jsonrpc":@"2.0",
@@ -215,7 +215,7 @@
                                          NSString *nodeStr = [nodeArr componentsJoinedByString:@","];
                                          NSString *nodeDataStr = [NSString stringWithFormat:@"candidates:%@",nodeStr];
                                     
-                                         TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] gasPrice:@"200000" gasLimit:@"21000" to:[tmpSelf.wallet.address add0xIfNeeded] value:[value stringValue] data:[nodeDataStr hexString] password:password chainID:kChainID]; //41，3
+                                         TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_vote gasPrice:@"200000" gasLimit:@"21000" to:[tmpSelf.wallet.address add0xIfNeeded] value:[value stringValue] data:[nodeDataStr hexString] password:password chainID:kChainID]; //41，3
                                          [NetworkUtil rpc_requetWithURL:delegate.rpcHost
                                                                  params:@{@"jsonrpc":@"2.0",
                                                                           @"method":@"eth_sendRawTransaction",

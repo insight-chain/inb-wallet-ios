@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 /** 指定格式的时间字符串转成时间戳 **/
 +(double)timeSwitchTimestamp:(NSString *)timestamp formatter:(NSString *)formatter;
 +(NSDate *)dateSwitchTimeStamp:(NSString *)timestamp formatter:(NSString *)formatter;
+
+/** 某日期和当前日志相隔多少天 **/
++(NSInteger)getDifferenceByDate:(NSTimeInterval)date;
 @end
 
 NS_ASSUME_NONNULL_END

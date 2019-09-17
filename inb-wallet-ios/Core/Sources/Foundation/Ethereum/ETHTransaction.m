@@ -31,11 +31,12 @@
         
         //Make sure every property at least has empty string value
         _nonce = [ETHTransaction parseData:raw key:@"nonce"];
-        _gasPrice = [ETHTransaction parseData:raw key:@"gasPrice"];
-        _gasLimit = [ETHTransaction parseData:raw key:@"gasLimit"];
+//        _gasPrice = [ETHTransaction parseData:raw key:@"gasPrice"];
+//        _gasLimit = [ETHTransaction parseData:raw key:@"gasLimit"];
         _to = [ETHTransaction parseData:raw key:@"to"];
         _value = [ETHTransaction parseData:raw key:@"value"];
         _data = [ETHTransaction parseData:raw key:@"data"];
+        _txType = [ETHTransaction parseData:raw key:@"txType"];
         _v = [ETHTransaction parseData:raw key:@"v"];
         _r = [ETHTransaction parseData:raw key:@"r"];
         _s = [ETHTransaction parseData:raw key:@"s"];
@@ -103,17 +104,19 @@
 -(NSArray *)serialize{
     //TODO....
     NSMutableArray *base = [NSMutableArray arrayWithArray:@[[BigNumberTest parse:self.nonce padding:NO paddingLen:-1],
-                      [BigNumberTest parse:self.gasPrice padding:NO paddingLen:-1],
-                      [BigNumberTest parse:self.gasLimit padding:NO paddingLen:-1],
+//                      [BigNumberTest parse:self.gasPrice padding:NO paddingLen:-1],
+//                      [BigNumberTest parse:self.gasLimit padding:NO paddingLen:-1],
                       [BigNumberTest parse:self.to padding:YES paddingLen:-1],
                       [BigNumberTest parse:self.value padding:NO paddingLen:-1],
-                      [BigNumberTest parse:self.data padding:YES paddingLen:-1]]];
+                      [BigNumberTest parse:self.data padding:YES paddingLen:-1],]];
     if (self.isSigned) {
         [base addObject:[BigNumberTest parse:self.v padding:NO paddingLen:-1]];
         [base addObject:[BigNumberTest parse:self.r padding:NO paddingLen:-1]];
         [base addObject:[BigNumberTest parse:self.s padding:NO paddingLen:-1]];
+        [base addObject:[BigNumberTest parse:self.txType padding:NO paddingLen:-1]];
         return base;
     }else{
+        [base addObject:[BigNumberTest parse:self.txType padding:NO paddingLen:-1]];
         return base;
     }
 }
@@ -129,6 +132,7 @@
         _to = [ETHTransaction parseData:raw key:@"to"];
         _value = [ETHTransaction parseData:raw key:@"value"];
         _data = [ETHTransaction parseData:raw key:@"data"];
+        _txType = [ETHTransaction parseData:raw key:@"txType"];
         _v = [ETHTransaction parseData:raw key:@"v"];
         _r = [ETHTransaction parseData:raw key:@"r"];
         _s = [ETHTransaction parseData:raw key:@"s"];
@@ -182,6 +186,7 @@
         [base addObject:[BigNumberTest parse:self.v padding:NO paddingLen:-1]];
         [base addObject:[BigNumberTest parse:self.r padding:NO paddingLen:-1]];
         [base addObject:[BigNumberTest parse:self.s padding:NO paddingLen:-1]];
+        [base addObject:[BigNumberTest parse:self.txType padding:NO paddingLen:-1]];
         return base;
     }else{
         return base;

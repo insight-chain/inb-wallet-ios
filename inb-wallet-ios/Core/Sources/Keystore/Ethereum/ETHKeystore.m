@@ -13,7 +13,7 @@
 @implementation ETHKeystore
 -(instancetype)initWith:(NSString *)password privatedKey:(NSString *)privatedKey metadata:(WalletMeta *)metadata ID:(NSString *)ID{
     if (self = [super init]) {
-        self.address = [[ETHKey alloc] initWithPrivateKey:privatedKey].address;
+        self.address = [NSString stringWithFormat:@"95%@",[[ETHKey alloc] initWithPrivateKey:privatedKey].address];
         self.crypto = [[Crypto alloc] initWith:password privateKey:privatedKey cacheDerivedKey:NO];
         if (!ID || [ID isEqualToString:@""]) {
             ID = [ETHKeystore generateKeystoreId];
@@ -33,7 +33,7 @@
         }
         NSString *ID = json[@"id"];
         self.ID = ID ? ID : [ETHKeystore generateKeystoreId];
-        self.address = json[@"address"] ? json[@"address"] :@"";
+        self.address = [NSString stringWithFormat:@"95%@",json[@"address"] ? json[@"address"] :@""];
         self.crypto = [[Crypto alloc] initWithJSON:cryptoJson];
         
         NSDictionary *metaJSON = json[WalletMeta.getKey];
@@ -49,7 +49,7 @@
 
 -(NSDictionary *)serializeToMap{
     return @{@"id":self.ID,
-             @"address":self.address,
+             @"address":[self.address hasPrefix:@"95"]?[self.address substringFromIndex:2]:self.address,
              @"createdAt":@(self.meta.timestamp),
              @"source":self.meta.source,
              @"chainType":self.meta.chain

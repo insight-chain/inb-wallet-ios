@@ -16,8 +16,8 @@
 "wallet" = "钱包";
 
 "welcom" = "你好，\n欢迎来到Insight Chain";
-"welcom.hasINBWallet" = "我有INB公链钱包";
-"welcom.noINBWallet" = "没有INB公链钱包";
+"welcom.hasINBWallet" = "我有INB钱包";
+"welcom.noINBWallet" = "没有INB钱包";
 "welcom.importTip" = "通过私钥、助记词导入钱包";
 "welcom.createTip" = "创建一个INB钱包";
 
@@ -70,10 +70,12 @@
 
 "importWallet.privatekey.placeholder" = "请输入私钥";
 "importWallet.mnemonic.placeholder" = "请输入助记词";
-"walletPassword.placeholder" = "设置一个密码保护钱包";
+"walletPassword.placeholder" = "6-15位由大小字母、数字或符号组成";
 "passwordTipMessage.placeholder" = "可不填";
 "backup.tip_1" = "建议抄写或打印私钥后放置在安全地点保存";
 "backup.tip_2" = "请勿通过网络工具传输私钥，一旦被黑客获取将造成不可挽回的损失";
+
+"record.trading.empty" = "暂无交易历史";
 
 "transfer.sendMoney" = "发款方";
 "transfer.collectionMoney" = "收款方";
@@ -91,6 +93,9 @@
 "transfer.result.success" = "转账成功";
 "transfer.result.failed" = "转账失败";
 
+"vote.support" = "支持率";
+"vote.node.empty" = "暂无投票节点";
+
 "pledgedResources" = "已抵押资源";
 "addMortgageResources" = "新增抵押资源";
 "voteTotal" = "投票总数";
@@ -105,6 +110,8 @@
 "password.original" = "原密码";
 "password.new" = "新密码";
 "password.replay" = "确认新密码";
+"password.setting.error.toolong" = "密码长度大于16";
+"password.setting.error.tooshort" = "密码长度小于5";
 
 "placeholder.originPassword" = "请输入当前密码";
 "placeholder.newPassword" = "请输入新密码";
@@ -149,3 +156,5 @@
 "tip.resource.redemption_1" = "1. 仅能赎回自己抵押的资源。";
 "tip.resource.redemption_2" = "2. 如果您当前已经消耗了一部分资源，则无法赎回全部的资源，请尝试减少赎回的数量。";
 "tip.resource.redemption_3" = "3. 所有赎回中的INB资源将在最后一次赎回操作的3天后退回。";
+
+"reward.receive" = "领取奖励";

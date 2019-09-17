@@ -13,12 +13,15 @@
 #import "WalletBackupVC.h"
 #import "TransactionDetailVC.h"
 #import "VoteListVC.h"
+#import "RewardVC.h"
 
 #import "TransferVC.h"
 #import "ResourceVC.h"
 #import "TransferListVC.h"
 #import "NodeRegisterVC.h"
 #import "WelcomVC.h"
+
+#import "ResourcePageViewController.h"
 
 #import "WalletInfoViewModel.h"
 
@@ -207,36 +210,42 @@
             case FunctionType_backup:{
 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
-                        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
-                        hud.bezelView.color = [UIColor blackColor];
-                        hud.bezelView.alpha = 0.5;
-                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                                            @try {
-                                                NSString *private = [tmpSelf.selectedWallet privateKey:password];
-                                                NSString *menmonry = [tmpSelf.selectedWallet exportMnemonic:password];
-                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                                    WalletBackupVC *backupVC = [[WalletBackupVC alloc] init];
-                                                    backupVC.privateKey = private;
-                                                    backupVC.menmonryKey = menmonry;
-                                                    backupVC.name = tmpSelf.selectedWallet.name;
-                                                    backupVC.hidesBottomBarWhenPushed = YES;
-                                                    [tmpSelf.navigationController pushViewController:backupVC animated:YES];
-                                                });
-                                            } @catch (NSException *exception) {
-                                                if([exception.name isEqualToString:@"PasswordError"]){
-                                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                                        [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                                        [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
-                                                    });
-                                                }
-                                            } @finally {
-                                               
-                                            }
-                                            
-                                        });
-                    }];
+                    
+                    RewardVC *rewardVC = [[RewardVC alloc] init];
+                    rewardVC.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:rewardVC animated:YES];
+                    
+//                    [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+//                        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
+//                        hud.bezelView.color = [UIColor blackColor];
+//                        hud.bezelView.alpha = 0.5;
+//                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                                            @try {
+//                                                NSString *private = [tmpSelf.selectedWallet privateKey:password];
+//                                                NSString *menmonry = [tmpSelf.selectedWallet exportMnemonic:password];
+//                                                dispatch_async(dispatch_get_main_queue(), ^{
+//                                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+//                                                    WalletBackupVC *backupVC = [[WalletBackupVC alloc] init];
+//                                                    backupVC.title = NSLocalizedString(@"backup", @"备份");
+//                                                    backupVC.privateKey = private;
+//                                                    backupVC.menmonryKey = menmonry;
+//                                                    backupVC.name = tmpSelf.selectedWallet.name;
+//                                                    backupVC.hidesBottomBarWhenPushed = YES;
+//                                                    [tmpSelf.navigationController pushViewController:backupVC animated:YES];
+//                                                });
+//                                            } @catch (NSException *exception) {
+//                                                if([exception.name isEqualToString:@"PasswordError"]){
+//                                                    dispatch_async(dispatch_get_main_queue(), ^{
+//                                                        [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+//                                                        [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+//                                                    });
+//                                                }
+//                                            } @finally {
+//
+//                                            }
+//
+//                                        });
+//                    }];
                 });
                 break;
                 
@@ -290,7 +299,7 @@
 }
 
 -(void)updatePrice{
-    [self showBalance:self.eyeBtn.hidden];
+    [self showBalance:self.eyeBtn.selected];
 }
 
 ///////
@@ -446,9 +455,10 @@
 /** 查询用户信息 **/
 -(void)queryAccountInfo{
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    NSLog(@"地址：%@", self.selectedWallet.address);
     [NetworkUtil rpc_requetWithURL:delegate.rpcHost
                             params:@{@"jsonrpc":@"2.0",
-                                     @"method":@"eth_getAccountInfo",
+                                     @"method":getAccountInfo_MethodName,
                                      @"params":@[[self.selectedWallet.address add0xIfNeeded]],
                                      @"id":@(67),
                                      } completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
@@ -457,7 +467,11 @@
                                          if (error) {
                                              return ;
                                          }
+                                         
                                          NSDictionary *result = responseObject[@"result"];
+                                         if(result == nil || !result || [result isKindOfClass:[NSNull class]]){
+                                             return;
+                                         }
                                          NSDecimalNumber *balanceBit = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",result[@"Balance"]]];
                                          if(!balanceBit || [balanceBit isEqualToNumber:NSDecimalNumber.notANumber]){
                                              balanceBit = [NSDecimalNumber decimalNumberWithString:@"0"];
@@ -544,7 +558,15 @@
 #pragma mark ----
 //点击资源信息
 -(void)cpuResource:(UIGestureRecognizer *)gesture{
-    ResourceVC *resourceVC = [[ResourceVC alloc] init];
+//    ResourceVC *resourceVC = [[ResourceVC alloc] init];
+//    resourceVC.address = self.selectedWallet.address;
+//    resourceVC.canUseNet  = self.canUseNet;
+//    resourceVC.totalNet = self.totalNet;
+//    resourceVC.mortgageINB = self.mortgageINB;
+//    resourceVC.navigationItem.title = NSLocalizedString(@"resource", @"资源");
+//    resourceVC.hidesBottomBarWhenPushed = YES;
+    
+    ResourcePageViewController *resourceVC = [ResourcePageViewController suspendTopPausePageVC];
     resourceVC.address = self.selectedWallet.address;
     resourceVC.canUseNet  = self.canUseNet;
     resourceVC.totalNet = self.totalNet;
@@ -686,6 +708,10 @@
 
 -(void)setSelectedWallet:(BasicWallet *)selectedWallet{
     _selectedWallet = selectedWallet;
+    
+    App_Delegate.selectAddr     = _selectedWallet.address;
+    App_Delegate.selectWalletID = _selectedWallet.walletID;
+    
     [self.accountNameBtn setTitle:selectedWallet.imTokenMeta.name forState:UIControlStateNormal];
     [self.accountNameBtn rightImgleftTitle:5];
     

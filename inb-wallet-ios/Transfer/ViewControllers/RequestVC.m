@@ -36,11 +36,13 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-   
-    UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
-    [window addSubview:self.maskView];
+    [super viewWillAppear:animated];
     
-    self.maskView.frame = CGRectMake(0, window.frame.size.height, window.frame.size.width, 0);
+    UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
+//    [window addSubview:self.maskView];
+    [self.view addSubview:self.maskView];
+    
+    self.maskView.frame = CGRectMake(0, 0, window.frame.size.width, window.frame.size.height);
     [self.maskView addSubview:self.bgView];
     
     [self.maskView addSubview:self.QRImg];
@@ -78,9 +80,16 @@
         make.height.mas_equalTo(AdaptedWidth(40));
     }];
     
-    [UIView animateWithDuration:0.5 animations:^{
-       self.maskView.frame = CGRectMake(0, 0, window.frame.size.width, window.frame.size.height);
-    }];
+//    self.maskView.hidden = YES;
+        [UIView animateWithDuration:0.5 animations:^{
+//           self.maskView.frame = CGRectMake(0, 0, window.frame.size.width, window.frame.size.height);
+//            self.maskView.hidden = NO;
+        }];
+    
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+   
 }
 
 #pragma mark ---- Action

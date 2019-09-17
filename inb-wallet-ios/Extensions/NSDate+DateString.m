@@ -31,4 +31,45 @@
     NSDate* date = [format dateFromString:timestamp];//------------将字符串按formatter转成nsdate
     return date;
 }
+
+/** 某日期和当前日志相隔多少天 **/
++(NSInteger)getDifferenceByDate:(NSTimeInterval)date{
+    //获得当前时间
+    
+    //    NSDate *now = [NSDate date];
+    //    //实例化一个NSDateFormatter对象
+    //    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //    //设定时间格式
+    //    [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+    //    NSDate *oldDate = [dateFormatter dateFromString:date];
+    //    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    //    unsigned int unitFlags = NSDayCalendarUnit;
+    //    NSDateComponents *comps = [gregorian components:unitFlags fromDate:oldDate  toDate:now  options:0];
+    //    return [comps day];
+    //
+    
+    //下面这种方法从00:00:00开始计算
+    
+#pragma clang diagnostic push
+    
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    [gregorian setFirstWeekday:2];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"YYYY-MM-dd"];
+    
+    NSDate *fromDate;
+    NSDate *toDate;
+    NSCalendarUnit unit = NSCalendarUnitDay|NSCalendarUnitHour;
+    
+    [gregorian rangeOfUnit:unit startDate:&fromDate interval:NULL forDate:[NSDate dateWithTimeIntervalSince1970:date]]; //[dateFormatter dateFromString:date]
+    [gregorian rangeOfUnit:unit startDate:&toDate interval:NULL forDate:[NSDate date]];
+    
+    NSDateComponents *dayComponents = [gregorian components:unit fromDate:fromDate toDate:toDate options:0];
+    
+#pragma clang diagnostic pop
+    return [dayComponents day];
+}
+
 @end

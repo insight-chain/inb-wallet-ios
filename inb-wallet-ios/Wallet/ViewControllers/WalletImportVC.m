@@ -272,6 +272,13 @@
 //导入钱包
 -(void)importAction:(UIButton *)sender{
     
+    if(self.password.text.length < 6){
+        [MBProgressHUD showMessage:NSLocalizedString(@"password.setting.error.tooshort", @"设置密码长度小于5") toView:self.view afterDelay:2 animted:YES];
+        return;
+    }else if(self.password.text.length > 16){
+        [MBProgressHUD showMessage:NSLocalizedString(@"password.setting.error.toolong", @"设置密码长度大于16") toView:self.view afterDelay:2 animted:YES];
+        return;
+    }
     
     BasicWallet *wallet;
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -394,7 +401,7 @@
         _password = [[UITextField alloc] init];
         _password.font = AdaptedFontSize(15);
         _password.textColor = kColorTitle;
-        _password.placeholder = NSLocalizedString(@"walletPassword.placeholder", @"设置一个密码保护钱包");
+        _password.placeholder = NSLocalizedString(@"walletPassword.placeholder", @"6-15位由大小字母、数字或符号组成");
     }
     return _password;
 }

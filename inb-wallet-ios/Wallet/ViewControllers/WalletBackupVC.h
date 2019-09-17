@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WalletBackupVC : UIViewController
 @property(nonatomic, strong) NSString *name;
 @property(nonatomic, strong) NSString *privateKey; //私钥
-@property(nonatomic, strong) NSString *menmonryKey; //助记词
+@property(nonatomic, strong) NSString *menmonryKey; //助记词Key
+@property(nonatomic, strong) NSString *addressKey; //地址
 @end
 
 NS_ASSUME_NONNULL_END

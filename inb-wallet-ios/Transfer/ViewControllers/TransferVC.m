@@ -160,7 +160,7 @@
                                     @try {
                                         NSDecimalNumber *value = [NSDecimalNumber decimalNumberWithString:tmpSelf.numberTF.text];
                                         NSDecimalNumber *bitValue = [value decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]];
-                                        TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] gasPrice:@"200000" gasLimit:@"21000" to:tmpSelf.accountTF.text value:[bitValue stringValue] data:tmpSelf.noteTF.text password:password chainID:kChainID]; //41，3
+                                        TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_transfer gasPrice:@"200000" gasLimit:@"21000" to:tmpSelf.accountTF.text value:[bitValue stringValue] data:tmpSelf.noteTF.text password:password chainID:kChainID]; //41，3
                                         NSString *requestUrl = [NSString stringWithFormat:@"https://api-ropsten.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex=%@",signResult.signedTx]; //&apikey=SJMGV3C6S3CSUQQXC7CTQ72UCM966KD2XZ
                                         //https://api-kovan.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex=%@
                                         
