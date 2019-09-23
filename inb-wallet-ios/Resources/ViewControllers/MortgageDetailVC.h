@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LockModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MortgageDetailVC : UIViewController
+
+@property (nonatomic, strong) LockModel *lockModel;
 
 @end
 

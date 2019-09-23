@@ -6,12 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "wallet_node@2x.png",
+      "filename" : "rewardDetail_header_bg@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "wallet_node@3x.png",
+      "filename" : "rewardDetail_header_bg@3x.png",
       "scale" : "3x"
     }
   ],

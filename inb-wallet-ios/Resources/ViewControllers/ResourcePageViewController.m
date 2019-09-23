@@ -17,6 +17,8 @@
 
 @interface ResourcePageViewController ()<PageViewControllerDataSource, PageViewControllerDelegate, YNPageViewControllerDelegate, YNPageViewControllerDataSource>
 
+@property (nonatomic, strong) ResourceCPUView *cpuView;
+
 @end
 
 @implementation ResourcePageViewController
@@ -24,6 +26,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    self.cpuView.balanceValue.text = [NSString stringWithFormat:@"%.5fkb",self.canUseNet];
+    self.cpuView.totalValue.text = [NSString stringWithFormat:@"%.fkb", self.totalNet];
+    self.cpuView.mortgageValue.text = [NSString stringWithFormat:@"%.2f INB", self.mortgageINB];
+    [self.cpuView updataProgress]; //更新进度条图片
 }
 
 //+(instancetype)reourcePageVC{
@@ -88,7 +99,8 @@
     vc.dataSource = vc;
     vc.delegate = vc;
     
-    ResourceCPUView *cpuView = [[ResourceCPUView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 250)];;
+    ResourceCPUView *cpuView = [[ResourceCPUView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 250)];
+    vc.cpuView = cpuView;
     vc.headerView = cpuView;
     
     vc.pageIndex = 1;

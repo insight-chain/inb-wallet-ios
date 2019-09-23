@@ -8,6 +8,8 @@
 
 #import "TransactionDetailVC.h"
 
+#import "BasicWebViewController.h"
+
 #import "TransferHeaderView.h"
 #import "TransferFooterView.h"
 
@@ -178,6 +180,16 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if(indexPath.row == 5){
+        BasicWebViewController *webView = [[BasicWebViewController alloc] init];
+        webView.urlStr = [NSString stringWithFormat:@"%@TransactionHash?transactionHash=%@",App_Delegate.webHost, [self.tranferModel.tradingHash add0xIfNeeded]];
+        webView.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webView animated:YES];
+    }
+    
+    
+    
 }
 #pragma mark ----
 -(UITableView *)tableView{

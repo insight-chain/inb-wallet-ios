@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, FunctionType){
     FunctionType_vote, //投票
     FunctionType_record, //交易记录
     FunctionType_backup, //备份
+    FunctionType_reward, //收益奖励
 };
 /**
  * 导入钱包类型

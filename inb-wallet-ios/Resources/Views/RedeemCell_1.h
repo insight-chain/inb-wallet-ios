@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) ReceiveBlock receiveBlock;
 
+-(void)makeCurreentBlockNumber:(NSInteger)currentNumber startNumber:(NSInteger)startNumber;
+
 @end
 
 NS_ASSUME_NONNULL_END

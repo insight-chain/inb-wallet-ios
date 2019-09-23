@@ -112,7 +112,7 @@
 //备份
 -(void)backupAction:(UIButton *)sender{
     if (self.click) {
-        self.click(FunctionType_backup);
+        self.click(FunctionType_reward);
     }
 }
 
@@ -175,8 +175,8 @@
 -(UIButton *)backupBtn{
     if (_backupBtn == nil) {
         _backupBtn = [[UIButton alloc] init];
-        [_backupBtn setTitle:NSLocalizedString(@"backup", @"备份") forState:UIControlStateNormal];
-        [_backupBtn setImage:[UIImage imageNamed:@"wallet_backup"] forState:UIControlStateNormal];
+        [_backupBtn setTitle:NSLocalizedString(@"wallet.reward", @"收益奖励") forState:UIControlStateNormal];
+        [_backupBtn setImage:[UIImage imageNamed:@"wallet_reward"] forState:UIControlStateNormal];
         [_backupBtn setTitleColor:kColorTitle forState:UIControlStateNormal];
         _backupBtn.titleLabel.font = AdaptedFontSize(14);
         [_backupBtn addTarget:self action:@selector(backupAction:) forControlEvents:UIControlEventTouchUpInside];

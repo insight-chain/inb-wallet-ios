@@ -75,7 +75,7 @@
                                 _nonce = [dic[@"result"] decimalNumberFromHexString];
                                 
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:inbNumber];
-                                NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]];
+                                NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                                 _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_unMortgage gasPrice:@"200000" gasLimit:@"21000" to:@"0x95aa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[@"unmortgageNet" hexString] add0xIfNeeded] password:password chainID:kChainID];
                                 
                                 //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
@@ -87,7 +87,7 @@
         //发送第二个请求
         [NetworkUtil rpc_requetWithURL:rpcHost
                                 params:@{@"jsonrpc":@"2.0",
-                                         @"method":unMortgage_MethodName,
+                                         @"method":sendTran_MethodName,
                                          @"params":@[[_signResult.signedTx add0xIfNeeded]],
                                          @"id":@(67),
                                          }

@@ -10,6 +10,8 @@
  */
 #import <UIKit/UIKit.h>
 
+#import "LockModel.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^RewardBlock)(void);
@@ -25,6 +27,10 @@ typedef void(^RewardBlock)(void);
 @property (weak, nonatomic) IBOutlet UIButton *stateBtn; //状态
 
 @property (nonatomic, copy) RewardBlock rewardBlock; //领取/赎回奖励
+
+@property (nonatomic, strong) LockModel *model;
+@property (nonatomic, assign) NSInteger currentBlockNumber;
+
 
 @end
 

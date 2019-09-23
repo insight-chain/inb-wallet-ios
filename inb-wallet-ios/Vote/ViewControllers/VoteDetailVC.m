@@ -139,7 +139,7 @@
                                         NSDecimalNumber *nonce = [dic[@"result"] decimalNumberFromHexString];
                                        
                                         NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f", inbNumber]];
-                                        NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]];
+                                        NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                                         TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_moetgage gasPrice:@"200000" gasLimit:@"21000" to:@"0xaa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[@"mortgageNet" hexString] add0xIfNeeded] password:password chainID:kChainID];
                                         
                                         [NetworkUtil rpc_requetWithURL:delegate.rpcHost
@@ -194,7 +194,7 @@
          [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
          
          [NetworkUtil rpc_requetWithURL:delegate.rpcHost params:@{@"jsonrpc":@"2.0",
-                                                                  @"method":@"eth_getTransactionCount",
+                                                                  @"method":nonce_MethodName,
                                                                   @"params":@[[self.wallet.address add0xIfNeeded],@"latest"],@"id":@(1)}
                              completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                  if (error) {
@@ -210,15 +210,15 @@
                                          NSDecimalNumber *value = [NSDecimalNumber decimalNumberWithString:@"0"];
                                          NSMutableArray *nodeArr = [NSMutableArray array];
                                          for(Node *node in tmpSelf.selectedNode){
-                                             [nodeArr addObject:[node.address add0xIfNeeded]];
+                                             [nodeArr addObject:[node.address remove0x]];
                                          }
                                          NSString *nodeStr = [nodeArr componentsJoinedByString:@","];
-                                         NSString *nodeDataStr = [NSString stringWithFormat:@"candidates:%@",nodeStr];
+                                         NSString *nodeDataStr = [NSString stringWithFormat:@"%@",nodeStr];
                                     
-                                         TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_vote gasPrice:@"200000" gasLimit:@"21000" to:[tmpSelf.wallet.address add0xIfNeeded] value:[value stringValue] data:[nodeDataStr hexString] password:password chainID:kChainID]; //41，3
+                                         TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_vote gasPrice:@"200000" gasLimit:@"21000" to:[tmpSelf.wallet.address add0xIfNeeded] value:[value stringValue] data:[[nodeDataStr hexString] add0xIfNeeded] password:password chainID:kChainID]; //41，3
                                          [NetworkUtil rpc_requetWithURL:delegate.rpcHost
                                                                  params:@{@"jsonrpc":@"2.0",
-                                                                          @"method":@"eth_sendRawTransaction",
+                                                                          @"method":sendTran_MethodName,
                                                                           @"params":@[[signResult.signedTx add0xIfNeeded]],
                                                                           @"id":@(1)}
                                                              completion:^(id  _Nullable responseObject, NSError * _Nullable error) {

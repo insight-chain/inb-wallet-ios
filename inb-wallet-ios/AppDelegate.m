@@ -147,7 +147,8 @@
             break;
         }
         case rootNet_:{
-            self.apiHost =  hostUrl_211;
+            self.apiHost = @"http://apia61.insightchain.io/";// hostUrl_211;
+            self.webHost = @"http://explorer.insightchain.io/#/";
             self.explorerHost = @"http://192.168.1.181:8383/v1/";//@"http://explorerapi.insightchain.io/v1/";
             self.rpcHost = @"http://192.168.1.184:6001";//rpcHost;
             return;

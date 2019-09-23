@@ -47,13 +47,13 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mortgageDetail_header1" translatesAutoresizingMaskIntoConstraints="NO" id="i2Z-C8-27h">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mortgageDetail_header1" translatesAutoresizingMaskIntoConstraints="NO" id="i2Z-C8-27h">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="95" id="bGl-8C-zL0"/>
                     </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mortgageDetail_header2" translatesAutoresizingMaskIntoConstraints="NO" id="VO7-g5-ACP">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mortgageDetail_header2" translatesAutoresizingMaskIntoConstraints="NO" id="VO7-g5-ACP">
                     <rect key="frame" x="0.0" y="95" width="375" height="70"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="t3b-XN-umb"/>
@@ -118,12 +118,12 @@
                 <constraint firstItem="YiF-vK-aoh" firstAttribute="leading" secondItem="Vn6-zW-1uI" secondAttribute="leading" id="ygl-wh-eoa"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="825" y="-36"/>
+            <point key="canvasLocation" x="924" y="-37"/>
         </view>
     </objects>
     <resources>
         <image name="btn_bg_white" width="10.5" height="30"/>
-        <image name="mortgageDetail_header1" width="375" height="95"/>
-        <image name="mortgageDetail_header2" width="375" height="70"/>
+        <image name="mortgageDetail_header1" width="110" height="95"/>
+        <image name="mortgageDetail_header2" width="332.5" height="70"/>
     </resources>
 </document>

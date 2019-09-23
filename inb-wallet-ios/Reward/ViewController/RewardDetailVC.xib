@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RewardDetailVC">
+            <connections>
+                <outlet property="headerTitleLabel" destination="Mja-70-nIm" id="D7t-8I-4LM"/>
+                <outlet property="headerValueLabel" destination="IRj-ZA-LkR" id="oTv-Mb-i3H"/>
+                <outlet property="headerView" destination="fzs-ZA-dce" id="6kf-RU-gBe"/>
+                <outlet property="tableView" destination="2cf-tp-K9D" id="Sk4-qn-kKr"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2cf-tp-K9D">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Sem-Vw-qtP"/>
+                        <outlet property="delegate" destination="-1" id="X5i-zw-Tkl"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="2cf-tp-K9D" secondAttribute="bottom" id="HsY-Wn-ptW"/>
+                <constraint firstAttribute="trailing" secondItem="2cf-tp-K9D" secondAttribute="trailing" id="Ms2-TT-6pu"/>
+                <constraint firstItem="2cf-tp-K9D" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YDV-se-b8g"/>
+                <constraint firstItem="2cf-tp-K9D" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rGx-VU-qWv"/>
+            </constraints>
+        </view>
+        <view contentMode="scaleToFill" id="fzs-ZA-dce">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rewardDetail_header_bg" translatesAutoresizingMaskIntoConstraints="NO" id="p73-OD-3Kx">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="抵押收益" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mja-70-nIm">
+                    <rect key="frame" x="160.5" y="25" width="54" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999.25 INB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRj-ZA-LkR">
+                    <rect key="frame" x="107" y="66" width="161" height="36"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="p73-OD-3Kx" firstAttribute="top" secondItem="fzs-ZA-dce" secondAttribute="top" id="KmY-R4-w5G"/>
+                <constraint firstItem="IRj-ZA-LkR" firstAttribute="top" secondItem="Mja-70-nIm" secondAttribute="bottom" constant="25" id="PYW-sJ-l9a"/>
+                <constraint firstAttribute="bottom" secondItem="p73-OD-3Kx" secondAttribute="bottom" id="Rpl-4u-8F0"/>
+                <constraint firstItem="IRj-ZA-LkR" firstAttribute="centerX" secondItem="Mja-70-nIm" secondAttribute="centerX" id="iu8-p9-nkP"/>
+                <constraint firstItem="Mja-70-nIm" firstAttribute="centerX" secondItem="fzs-ZA-dce" secondAttribute="centerX" id="jvV-Nb-lUz"/>
+                <constraint firstItem="p73-OD-3Kx" firstAttribute="leading" secondItem="fzs-ZA-dce" secondAttribute="leading" id="lw8-vw-80L"/>
+                <constraint firstAttribute="trailing" secondItem="p73-OD-3Kx" secondAttribute="trailing" id="rta-uj-Q7P"/>
+                <constraint firstItem="Mja-70-nIm" firstAttribute="top" secondItem="fzs-ZA-dce" secondAttribute="top" constant="25" id="xdE-6s-GCG"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="948" y="-166.41679160419793"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="rewardDetail_header_bg" width="375" height="110"/>
+    </resources>
+</document>

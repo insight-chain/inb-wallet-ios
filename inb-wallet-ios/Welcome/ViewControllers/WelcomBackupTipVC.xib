@@ -57,7 +57,10 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uv5-gR-U2B">
-                    <rect key="frame" x="109.5" y="406" width="195" height="40"/>
+                    <rect key="frame" x="147" y="406" width="120" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="yeN-2D-Hua"/>
+                    </constraints>
                     <state key="normal" title="备份钱包" backgroundImage="btn_bg_blue">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -89,7 +92,7 @@
     </objects>
     <resources>
         <image name="backupTip" width="190" height="150"/>
-        <image name="btn_bg_blue" width="195" height="40"/>
+        <image name="btn_bg_blue" width="30.5" height="40"/>
         <image name="horn" width="15" height="15"/>
     </resources>
 </document>

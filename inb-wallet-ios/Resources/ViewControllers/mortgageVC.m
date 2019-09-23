@@ -45,13 +45,21 @@
                 if(type == 0){ //普通抵押
                     [tmpSelf mortgageAddr:tmpSelf.address walletID:tmpSelf.walletID inbNumber:netValue password:password];
                 }else if(type == 30){ //锁仓30天
-                    [tmpSelf lockAddr:tmpSelf.address days:@"30" walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                    NSInteger block = 30*(24*60*60) / 2;
+                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
+                    [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
                 }else if (type == 90){
-                    [tmpSelf lockAddr:tmpSelf.address days:@"90" walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                    NSInteger block = 90*(24*60*60) / 2;
+                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
+                    [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
                 }else if (type == 180){
-                    [tmpSelf lockAddr:tmpSelf.address days:@"180" walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                    NSInteger block = 180*(24*60*60) / 2;
+                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
+                    [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
                 }else if (type == 360){
-                    [tmpSelf lockAddr:tmpSelf.address days:@"360" walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                    NSInteger block = 360*(24*60*60) / 2;
+                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
+                    [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
                 }
                 
                 
@@ -103,7 +111,7 @@
                                 _nonce = [dic[@"result"] decimalNumberFromHexString];
                                 
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:inbNumber];
-                                NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]];
+                                NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                                 _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_moetgage gasPrice:@"200000" gasLimit:@"21000" to:@"0x95aa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[@"mortgageNet" hexString] add0xIfNeeded] password:password chainID:kChainID];
                                 
                                 //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
@@ -115,7 +123,7 @@
         //发送第二个请求
         [NetworkUtil rpc_requetWithURL:rpcHost
                                 params:@{@"jsonrpc":@"2.0",
-                                         @"method":mortgage_MethodName,
+                                         @"method":sendTran_MethodName,
                                          @"params":@[[_signResult.signedTx add0xIfNeeded]],
                                          @"id":@(67),
                                          }
@@ -170,7 +178,7 @@
                                 _nonce = [dic[@"result"] decimalNumberFromHexString];
                                 
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:inbNumber];
-                                NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]];
+                                NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                                 _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_lock gasPrice:@"200000" gasLimit:@"21000" to:@"0x95aa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"days:%@",days] hexString] add0xIfNeeded] password:password chainID:kChainID];
                                 
                                 //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
@@ -180,7 +188,7 @@
         dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
         
         //发送第二个请求
-        [NetworkUtil rpc_requetWithURL:App_Delegate.rpcHost
+        [NetworkUtil rpc_requetWithURL:rpcHost
                                 params:@{@"jsonrpc":@"2.0",
                                          @"method":sendTran_MethodName,
                                          @"params":@[[_signResult.signedTx add0xIfNeeded]],

@@ -69,7 +69,13 @@
     NSDateComponents *dayComponents = [gregorian components:unit fromDate:fromDate toDate:toDate options:0];
     
 #pragma clang diagnostic pop
-    return [dayComponents day];
+    if ([dayComponents day] != 0) {
+        return [dayComponents day];
+    }else if ([dayComponents hour] != 0 || [dayComponents minute] != 0 || [dayComponents second] != 0){
+        return 1;
+    }else{
+        return 0;
+    }
 }
 
 @end

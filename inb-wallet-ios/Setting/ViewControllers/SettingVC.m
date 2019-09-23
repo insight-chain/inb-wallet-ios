@@ -79,7 +79,7 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (0 == section) {
-        return 1;
+        return 0;//1;
     }else if (1 == section){
         return 2;
     }else if(2 == section){

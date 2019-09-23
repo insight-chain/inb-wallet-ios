@@ -126,7 +126,7 @@ typedef enum{
 
     #define NotificationCenter [NSNotificationCenter defaultCenter]
 
-    #define unitINB [NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]
+    #define unitINB [NSDecimalNumber decimalNumberWithString:@"100000"]
 
     static NSInteger kMaxSeleceNodesNumber = 30;
 
@@ -135,7 +135,10 @@ typedef enum{
     static double kRateReturn7_90  = 3; //90天的七日年化
     static double kRateReturn7_180 = 5; //180天的七日年化
     static double kRateReturn7_360 = 9; //360天的七日年化
-static double kRateVote = 9; //抵押投票奖励年化
+    static double kRateVote = 9; //抵押投票奖励年化
+
+    static NSString *kWei = @"100000";//位
+
     /* ********************** */
     #import "AppDelegate.h"
     #import "Masonry.h"

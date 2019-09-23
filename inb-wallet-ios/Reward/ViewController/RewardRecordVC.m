@@ -10,12 +10,16 @@
 
 #import "RewardRecordCell.h"
 
+#import "RewardDetailVC.h"
+
 #import "NetworkUtil.h"
 
 static NSString *kCellId = @"rewardRecordCell";
 
 @interface RewardRecordVC ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (nonatomic, strong) NSMutableArray *recordsData;
 
 @end
 
@@ -39,7 +43,7 @@ static NSString *kCellId = @"rewardRecordCell";
 
 #pragma mark ---- UITableViewDelegate && Datasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0;
+    return 5; //self.recordsData.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -52,5 +56,10 @@ static NSString *kCellId = @"rewardRecordCell";
     
     return cell;
 }
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    RewardDetailVC *rewardVC = [[RewardDetailVC alloc] init];
+    rewardVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:rewardVC animated:YES];
+}
+#pragma mark ---- 
 @end

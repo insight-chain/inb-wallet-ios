@@ -104,7 +104,8 @@
     }
     self.scrollView.delegate = self;
     self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self queryAccountInfo];
+//        [self queryAccountInfo];
+        [self request];
     }];
     self.scrollContentView = [[UIView alloc] init];
     
@@ -164,7 +165,7 @@
                     }else{
                         [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
                         
-                        NSString *url = [NSString stringWithFormat:@"http://192.168.1.191:8383/v1/account/node/info?address=%@", [tmpSelf.selectedWallet.address add0xIfNeeded]];
+                        NSString *url = [NSString stringWithFormat:@"%@node/info?address=%@", App_Delegate.explorerHost,[tmpSelf.selectedWallet.address add0xIfNeeded]];
                         [NetworkUtil getRequest:url
                                          params:@{}
                                         success:^(id  _Nonnull resonseObject) {
@@ -210,11 +211,6 @@
             case FunctionType_backup:{
 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    RewardVC *rewardVC = [[RewardVC alloc] init];
-                    rewardVC.hidesBottomBarWhenPushed = YES;
-                    [self.navigationController pushViewController:rewardVC animated:YES];
-                    
 //                    [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
 //                        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
 //                        hud.bezelView.color = [UIColor blackColor];
@@ -249,6 +245,16 @@
                 });
                 break;
                 
+            }
+            case FunctionType_reward:{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    RewardVC *rewardVC = [[RewardVC alloc] init];
+                    rewardVC.wallet = tmpSelf.selectedWallet;
+                    rewardVC.hidesBottomBarWhenPushed = YES;
+                    [tmpSelf.navigationController pushViewController:rewardVC animated:YES];
+                });
+                break;
             }
                 
             default:
@@ -405,7 +411,7 @@
                                 return ;
                             }
                             NSDecimalNumber *canNet = [responseObject[@"result"]  decimalNumberFromHexString];
-                            NSDecimalNumber *d = [canNet decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]];
+                            NSDecimalNumber *d = [canNet decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                             
                             NSString *value = [d stringValue];
                             dispatch_async(dispatch_get_main_queue(), ^{
@@ -442,7 +448,7 @@
                             NSDecimalNumber *dec = [dic[@"result"] decimalNumberFromHexString];
                             NSString *str = [dec stringValue];
                             
-                            NSDecimalNumber *d = [dec decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]];
+                            NSDecimalNumber *d = [dec decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                             
                             NSString *value = [d stringValue];
                             dispatch_async(dispatch_get_main_queue(), ^{
@@ -478,14 +484,14 @@
                                          }
                                          NSDecimalNumber *balance = [balanceBit decimalNumberByDividingBy:unitINB];
                                          
-                                         NSDictionary *resource = result[@"Resources"];
-                                         NSDictionary *NET = resource[@"NET"];
-                                         NSDecimalNumber *mortgagedINBBit = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",NET[@"MortgagteINB"]]];
+                                         
+                                         NSDictionary *NET = result[@"Res"];
+                                         NSDecimalNumber *mortgagedINBBit = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",NET[@"Mortgage"]]];
                                          if(!mortgagedINBBit || [mortgagedINBBit isEqualToNumber:NSDecimalNumber.notANumber]){
                                              mortgagedINBBit = [NSDecimalNumber decimalNumberWithString:@"0"];
                                          }
                                          NSDecimalNumber *mortgagedINB = [mortgagedINBBit decimalNumberByDividingBy:unitINB]; //抵押的INB
-                                         NSDecimalNumber *canuseNET = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",NET[@"Usableness"]]]; //可用的NET
+                                         NSDecimalNumber *canuseNET = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",NET[@"Usable"]]]; //可用的NET
                                          if(!canuseNET || [canuseNET isEqualToNumber:NSDecimalNumber.notANumber]){
                                              canuseNET = [NSDecimalNumber decimalNumberWithString:@"0"];
                                          }
@@ -517,6 +523,91 @@
                                          
                                      }];
 }
+/** 浏览器接口 查询账户信息 **/
+-(void)request{
+    __block __weak typeof(self) tmpSelf = self;
+    
+    NSString *url = [NSString stringWithFormat:@"%@account/search?address=%@", App_Delegate.explorerHost, [App_Delegate.selectAddr add0xIfNeeded]];
+    [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
+        NSLog(@"%@", resonseObject);
+        [self.scrollView.mj_header endRefreshing];
+//        NSDictionary *result = resonseObject[@"result"];
+//
+//        if(result == nil || !result || [result isKindOfClass:[NSNull class]]){
+//            return;
+//        }
+//
+//        NSDecimalNumber *balanceBit = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",result[@"Balance"]]]; //余额
+//        if(!balanceBit || [balanceBit isEqualToNumber:NSDecimalNumber.notANumber]){
+//            balanceBit = [NSDecimalNumber decimalNumberWithString:@"0"];
+//        }
+//        NSDecimalNumber *balance = [balanceBit decimalNumberByDividingBy:unitINB];
+  
+//        NSDictionary *resDic = result[@"Res"];// 资源
+//        NSDecimalNumber *mortgagedINBBit = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",resDic[@"Mortgage"]]]; //抵押的INB
+//        if(!mortgagedINBBit || [mortgagedINBBit isEqualToNumber:NSDecimalNumber.notANumber]){
+//            mortgagedINBBit = [NSDecimalNumber decimalNumberWithString:@"0"];
+//        }
+//        NSDecimalNumber *mortgagedINB = [mortgagedINBBit decimalNumberByDividingBy:unitINB]; //抵押的INB
+//        NSDecimalNumber *canuseNET = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",resDic[@"Usable"]]]; //可用的NET
+//        if(!canuseNET || [canuseNET isEqualToNumber:NSDecimalNumber.notANumber]){
+//            canuseNET = [NSDecimalNumber decimalNumberWithString:@"0"];
+//        }
+//        NSDecimalNumber *usedNET = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",resDic[@"Used"]]]; //已经使用的NET
+//        if(!usedNET || [usedNET isEqualToNumber:NSDecimalNumber.notANumber]){
+//            usedNET = [NSDecimalNumber decimalNumberWithString:@"0"];
+//        }
+//        canuseNET = [canuseNET decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1024"]];
+//        usedNET = [usedNET decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1024"]];
+//        NSDecimalNumber *totalNET = [canuseNET decimalNumberByAdding:usedNET]; //总抵押的NET
+        
+         NSDecimalNumber *balance = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@", resonseObject[@"balance"]]];
+        if(!balance || [balance isEqualToNumber:NSDecimalNumber.notANumber]){
+            balance = [NSDecimalNumber decimalNumberWithString:@"0"];
+        }
+        
+        NSDecimalNumber *mortgagedINB = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@", resonseObject[@"mortgage"]]]; //抵押的INB
+        if(!mortgagedINB || [mortgagedINB isEqualToNumber:NSDecimalNumber.notANumber]){
+            mortgagedINB = [NSDecimalNumber decimalNumberWithString:@"0"];
+        }
+        
+        NSString *usableStr = [NSString stringWithFormat:@"%@",resonseObject[@"usable"]];
+        NSDecimalNumber *canuseNET = [NSDecimalNumber decimalNumberWithString:usableStr];
+        if(!canuseNET || [canuseNET isEqualToNumber:NSDecimalNumber.notANumber]){
+            canuseNET = [NSDecimalNumber decimalNumberWithString:@"0"];
+        }
+        canuseNET = [canuseNET decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1024"]];
+        NSDecimalNumber *usedNET = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",resonseObject[@"used"]]];
+        if(!usedNET || [usedNET isEqualToNumber:NSDecimalNumber.notANumber]){
+            usedNET = [NSDecimalNumber decimalNumberWithString:@"0"];
+        }
+        usedNET = [usedNET decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1024"]];
+        NSDecimalNumber *totalNET = [canuseNET decimalNumberByAdding:usedNET]; //总抵押的NET
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.balance = [balance doubleValue];
+            self.canUseNet = [canuseNET doubleValue];
+            self.totalNet = [totalNET doubleValue];
+            self.mortgageINB = [mortgagedINB doubleValue];
+            
+            
+            self.CPUView.remainingValue.text = [NSString stringWithFormat:@"%@kb",canuseNET];
+            self.CPUView.totalValue.text = [NSString stringWithFormat:@"%@kb",totalNET];
+            self.CPUView.mortgageValue.text = [NSString stringWithFormat:@"%.2f INB",[mortgagedINB doubleValue]];
+            
+            self.selectedWallet.mortgagedINB = [mortgagedINB doubleValue];
+            self.selectedWallet.balanceINB = [balance doubleValue];
+            [self.CPUView updataNet];
+            [self updatePrice];
+        });
+        
+ 
+        
+    } failed:^(NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+}
+
 #pragma mark ---- 通知
 -(void)addWalletNoti:(NSNotification *)noti{
     BasicWallet *wallet = noti.object;
@@ -552,8 +643,8 @@
 -(void)mortgageChangeNoti:(NSNotification *)noti{
 //    [self queryBalance];
 //    [self queryMortgage];
-    
-    [self queryAccountInfo];
+//    [self queryAccountInfo];
+    [self request];
 }
 #pragma mark ----
 //点击资源信息
@@ -715,7 +806,8 @@
     [self.accountNameBtn setTitle:selectedWallet.imTokenMeta.name forState:UIControlStateNormal];
     [self.accountNameBtn rightImgleftTitle:5];
     
-    [self queryAccountInfo];
+//    [self queryAccountInfo];
+    [self request];
 }
 
 // 十六进制数字字符串转换为大数。

@@ -33,6 +33,8 @@ static NSString *cellId_2 = @"redeemCell_2";
 @property (nonatomic, assign) double redeemTime;
 @property (nonatomic, assign) double redeemValue;
 
+@property (nonatomic, assign) NSInteger currentBlockNumber;
+
 @end
 
 @implementation redeemVC
@@ -45,9 +47,8 @@ static NSString *cellId_2 = @"redeemCell_2";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
+    [self requestBlockHeight];
     [self request];
-//    [self requestMortagaData];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -60,17 +61,17 @@ static NSString *cellId_2 = @"redeemCell_2";
     NSString *url = [NSString stringWithFormat:@"%@account/search?address=%@", App_Delegate.explorerHost, [App_Delegate.selectAddr add0xIfNeeded]];
     [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
         NSLog(@"%@", resonseObject);
-        double mortgagete = [resonseObject[@"mortgagte"] doubleValue]; //抵押的INB
+        double mortgagete = [resonseObject[@"mortgage"] doubleValue]; //抵押的INB
         double regular = [resonseObject[@"regular"] doubleValue]; //锁仓的INB
         NSArray *storeDTO = resonseObject[@"storeDTO"]; //锁仓
         
         NSMutableArray *arr = [LockModel mj_objectArrayWithKeyValuesArray:storeDTO];
         
-        double mor = mortgagete - regular;
+        double mor = mortgagete - regular; //抵押锁仓INB - 锁仓INB
         if ( mor > 0) {
             LockModel *morM = [[LockModel alloc] init];
             morM.amount = [NSString stringWithFormat:@"%f", mor];
-            morM.days = 0;
+            morM.lockHeight = 0;
             morM.address = App_Delegate.selectAddr;
             [arr addObject:morM];
         }
@@ -79,9 +80,9 @@ static NSString *cellId_2 = @"redeemCell_2";
         
         /** 赎回中 **/
         double redeemValue = [resonseObject[@"redeemValue"] doubleValue]; //赎回中的INB
-        double redeemTime = [resonseObject[@"redeemTime"] doubleValue];//赎回开始时间
+        int redeemBlock = [resonseObject[@"redeemStartHeight"] intValue];//赎回开始区块
         tmpSelf.redeems = @[@{@"redeemValue":@(redeemValue),
-                            @"redeemTime":@(redeemTime),
+                            @"redeemBlock":@(redeemBlock),
                             }]; //正在赎回的数据
         
         [tmpSelf.tableView reloadData];
@@ -133,7 +134,28 @@ static NSString *cellId_2 = @"redeemCell_2";
                                      }];
     
 }
-
+//获取当前块高度
+-(void)requestBlockHeight{
+    __block __weak typeof(self) tmpSelf = self;
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [NetworkUtil rpc_requetWithURL:delegate.rpcHost
+                            params:@{@"jsonrpc":@"2.0",
+                                     @"method":blockNumber_MethodName,
+                                     @"params":@[[App_Delegate.selectAddr add0xIfNeeded]],
+                                     @"id":@(67),
+                                     } completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+                                         
+                                         if (error) {
+                                             return ;
+                                         }
+                                         
+                                         NSString *str = responseObject[@"result"];
+                                         const char *hexChar = [str cStringUsingEncoding:NSUTF8StringEncoding];
+                                         int hexNumber;
+                                         sscanf(hexChar, "%x", &hexNumber);
+                                         tmpSelf.currentBlockNumber = hexNumber;
+                                     }];
+}
 #pragma mark ---- Notification Action
 -(void)redeemNoti:(NSNotification *)noti{
     [self request];
@@ -169,7 +191,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                 _nonce = [dic[@"result"] decimalNumberFromHexString];
                                 
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:@"0"];
-                                NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]];
+                                NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                                 _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardLock gasPrice:@"200000" gasLimit:@"21000" to:@"0x95aa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"ReceiveLockedAward:%@", rewardNonce] hexString] add0xIfNeeded] password:password chainID:kChainID];
                                 
                                 //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
@@ -235,7 +257,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                 _nonce = [dic[@"result"] decimalNumberFromHexString];
                                 
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:@"0"];
-                                NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]];
+                                NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                                 _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_receive gasPrice:@"200000" gasLimit:@"21000" to:@"0x95aa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:@"" password:password chainID:kChainID];
                                 
                                 //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
@@ -272,6 +294,22 @@ static NSString *cellId_2 = @"redeemCell_2";
     });
 }
 
+//计算收益
+-(void)calculateEarnings:(double)lockNumber rate:(double)rate lastReceiveTime:(double)lastReceiveTime{
+    //当前能解锁仓领取的钱数：
+//    1.锁仓时间不到最后期限：（当前最新区块的时间-上次领取时间）/86400*年化（整年）/365*锁仓额度
+//    2.锁仓时间超过最后期限：（（最后期限时间-上次领取时间）/86400*年化（整年）/365*锁仓额度）+锁仓额度
+    
+    int day = [NSDate getDifferenceByDate:lastReceiveTime];
+    if(day > 7){
+        //锁仓时间超过最后期限
+        
+    }else{
+        
+    }
+    
+}
+
 #pragma mark ---- UItableViewDelegate && Datasource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -296,10 +334,10 @@ static NSString *cellId_2 = @"redeemCell_2";
         
         NSDictionary *redemDic = self.redeems[indexPath.row];
         double redeemValue = [redemDic[@"redeemValue"] doubleValue];
-        double redeemTime = [redemDic[@"redeemTime"] doubleValue];
+        int redeemBlock = [redemDic[@"redeemBlock"] intValue];
         
         cell.value = redeemValue;
-        cell.time = redeemTime/1000.0;
+        [cell makeCurreentBlockNumber:self.currentBlockNumber startNumber:redeemBlock];
         __block __weak typeof(self) tmpSelf = self;
         cell.receiveBlock = ^{
             [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
@@ -330,20 +368,16 @@ static NSString *cellId_2 = @"redeemCell_2";
         }
         
         LockModel *lock = self.stores[indexPath.row];
+        
+        cell.model = lock;
+        cell.currentBlockNumber = self.currentBlockNumber;
+        
         NSInteger days = lock.days;
         double value_double = [lock.amount doubleValue];
         
         cell.mortgageValueLabel.text = [NSString stringWithFormat:@"%.4f", value_double];
         
         if(days == 0){
-            cell.rewardLable.text = @"0 INB";
-            cell.rate_7Label.text = @"0";
-            [cell.stateBtn setTitle:@"无抵押期限" forState:UIControlStateNormal];
-            [cell.stateBtn setBackgroundImage:[UIImage imageNamed:@"days_no_bg"] forState:UIControlStateNormal];
-            [cell.stateBtn setTitleColor:kColorWithHexValue(0xf5a623) forState:UIControlStateNormal];
-            cell.receiveTimeLabel.text = @"";
-            [cell.receiveBtn setTitle:@"赎回" forState:UIControlStateNormal];
-            
             cell.rewardBlock = ^{
                 dispatch_async(dispatch_get_main_queue(), ^{
                     RedeemINBVC *redeemVC = [[RedeemINBVC alloc] init];
@@ -352,38 +386,26 @@ static NSString *cellId_2 = @"redeemCell_2";
                 });
             };
         }else{
-            double lastReceiveTime = lock.lastReceivedTime;
-            NSInteger ind = [NSDate getDifferenceByDate:lastReceiveTime/1000.0];
-            
-            [cell.stateBtn setBackgroundImage:[UIImage imageNamed:@"days_bg"] forState:UIControlStateNormal];
-            [cell.stateBtn setTitleColor:kColorBlue forState:UIControlStateNormal];
-            if (days == 30){
-                cell.rate_7Label.text = [NSString stringWithFormat:@"%.2f", kRateReturn7_30];
-                [cell.stateBtn setTitle:@"30天" forState:UIControlStateNormal];
-            }else if (days == 90){
-                cell.rate_7Label.text = [NSString stringWithFormat:@"%.2f", kRateReturn7_90];
-                [cell.stateBtn setTitle:@"90天" forState:UIControlStateNormal];
-            }else if (days == 180){
-                cell.rate_7Label.text = [NSString stringWithFormat:@"%.2f", kRateReturn7_180];
-                [cell.stateBtn setTitle:@"180天" forState:UIControlStateNormal];
-            }else if (days == 360){
-                cell.rate_7Label.text = [NSString stringWithFormat:@"%.2f", kRateReturn7_360];
-                [cell.stateBtn setTitle:@"360天" forState:UIControlStateNormal];
-            }
-            
-            if(ind >= 7){
-                cell.receiveTimeLabel.text = @"";
-                cell.receiveBtn.userInteractionEnabled = YES;
-                [cell.receiveBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
-                [cell.receiveBtn setTitle:@"领取收益" forState:UIControlStateNormal];
-            }else{
-                cell.receiveTimeLabel.text = [NSString stringWithFormat:@"%d天后领取", 7-ind];
-                cell.receiveBtn.userInteractionEnabled = NO;
-                [cell.receiveBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_lightBlue"] forState:UIControlStateNormal];
-                [cell.receiveBtn setTitle:@"请等待" forState:UIControlStateNormal];
-            }
             cell.rewardBlock = ^{
-                NSLog(@"cell领取奖励3333。。。。%ld", (long)indexPath.row);
+                //领取奖励
+                LockModel *model = self.stores[indexPath.row];
+                [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+                    __block __weak typeof(self) tmpSelf = self;
+                    [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        @try {
+                            [self rewardRedemptionWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID password:password];
+                            [self rewardLockWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID nonce:[NSString stringWithFormat:@"%ld", (long)model.nonce] password:password];
+                        } @catch (NSException *exception) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                            });
+                        } @finally {
+                            
+                        }
+                    });
+                }];
             };
         }
         
@@ -394,7 +416,10 @@ static NSString *cellId_2 = @"redeemCell_2";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    LockModel *model = self.stores[indexPath.row];
+    
     MortgageDetailVC *detailVC = [[MortgageDetailVC alloc] initWithNibName:@"MortgageDetailVC" bundle:nil];
+    detailVC.lockModel = model;
     [self.navigationController pushViewController:detailVC animated:NO];
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{

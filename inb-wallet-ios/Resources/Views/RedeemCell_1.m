@@ -36,6 +36,32 @@
     }
 }
 
+-(void)makeCurreentBlockNumber:(NSInteger)currentNumber startNumber:(NSInteger)startNumber{
+    
+    if(self.value <= 0){
+        [self.tipBtn setTitle:[NSString stringWithFormat:@"暂无赎回"] forState:UIControlStateNormal];
+        [self.tipBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_lightBlue"] forState:UIControlStateNormal];
+        self.tipBtn.userInteractionEnabled = NO;
+        return;
+    }
+    if(currentNumber >= 3*(24*60*60) + startNumber){
+        //可以领取
+        [self.tipBtn setTitle:@"领取赎回" forState:UIControlStateNormal];
+        [self.tipBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
+        self.tipBtn.userInteractionEnabled = YES;
+    }else{
+        int m = 3*(24*60*60)/2.0 + startNumber - currentNumber;
+        int day = (m*2)/(24*60*60);
+        int hour = (m*2)%(24*60*60);
+        if (hour > 0) {
+            day += 1;
+        }
+        [self.tipBtn setTitle:[NSString stringWithFormat:@"%d天后完成赎回", day] forState:UIControlStateNormal];
+        [self.tipBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_lightBlue"] forState:UIControlStateNormal];
+        self.tipBtn.userInteractionEnabled = NO;
+    }
+}
+
 #pragma mark ----
 -(void)setValue:(double)value{
     _value = value;
@@ -44,15 +70,6 @@
 -(void)setTime:(double)time{
     _time = time;
     NSInteger ind = [NSDate getDifferenceByDate:_time];
-    if(ind > 3){
-        //可以领取
-        [self.tipBtn setTitle:@"领取赎回" forState:UIControlStateNormal];
-        [self.tipBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
-        self.tipBtn.userInteractionEnabled = YES;
-    }else{
-        [self.tipBtn setTitle:[NSString stringWithFormat:@"%ld天后完成赎回", (long)ind] forState:UIControlStateNormal];
-        [self.tipBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_lightBlue"] forState:UIControlStateNormal];
-        self.tipBtn.userInteractionEnabled = NO;
-    }
+   
 }
 @end

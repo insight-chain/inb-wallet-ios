@@ -72,6 +72,10 @@
 		FE6D855023220AB800023321 /* YNPageScrollMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D854323220AB700023321 /* YNPageScrollMenuView.m */; };
 		FE6D855323228AA900023321 /* MortgageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D855223228AA900023321 /* MortgageView.m */; };
 		FE6D855523228AC800023321 /* MortgageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE6D855423228AC800023321 /* MortgageView.xib */; };
+		FE84CF9423331D1200414411 /* RewardDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CF9223331D1200414411 /* RewardDetailVC.m */; };
+		FE84CF9523331D1200414411 /* RewardDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE84CF9323331D1200414411 /* RewardDetailVC.xib */; };
+		FE84CF982333A9CA00414411 /* countryNameCH.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE84CF972333A9CA00414411 /* countryNameCH.plist */; };
+		FE84CF9B2333B36200414411 /* CountryCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CF9A2333B36200414411 /* CountryCodeView.m */; };
 		FE92C41C22A78ED40043DA9D /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE92C41B22A78ED40043DA9D /* test.swift */; };
 		FE92C49622A792580043DA9D /* libscrypt.podspec in Resources */ = {isa = PBXBuildFile; fileRef = FE92C41E22A792580043DA9D /* libscrypt.podspec */; };
 		FE92C49722A792580043DA9D /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42222A792580043DA9D /* BTCBlock.m */; };
@@ -409,6 +413,12 @@
 		FE6D855123228AA900023321 /* MortgageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MortgageView.h; sourceTree = "<group>"; };
 		FE6D855223228AA900023321 /* MortgageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MortgageView.m; sourceTree = "<group>"; };
 		FE6D855423228AC800023321 /* MortgageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MortgageView.xib; sourceTree = "<group>"; };
+		FE84CF9123331D1200414411 /* RewardDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardDetailVC.h; sourceTree = "<group>"; };
+		FE84CF9223331D1200414411 /* RewardDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardDetailVC.m; sourceTree = "<group>"; };
+		FE84CF9323331D1200414411 /* RewardDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardDetailVC.xib; sourceTree = "<group>"; };
+		FE84CF972333A9CA00414411 /* countryNameCH.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = countryNameCH.plist; sourceTree = "<group>"; };
+		FE84CF992333B36200414411 /* CountryCodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountryCodeView.h; sourceTree = "<group>"; };
+		FE84CF9A2333B36200414411 /* CountryCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountryCodeView.m; sourceTree = "<group>"; };
 		FE92C41A22A78ED40043DA9D /* inb-wallet-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inb-wallet-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		FE92C41B22A78ED40043DA9D /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		FE92C41E22A792580043DA9D /* libscrypt.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libscrypt.podspec; sourceTree = "<group>"; };
@@ -859,6 +869,9 @@
 				FE1FCE7B2328F52E00F89A18 /* RewardRecordVC.h */,
 				FE1FCE7C2328F52E00F89A18 /* RewardRecordVC.m */,
 				FE1FCE7D2328F52E00F89A18 /* RewardRecordVC.xib */,
+				FE84CF9123331D1200414411 /* RewardDetailVC.h */,
+				FE84CF9223331D1200414411 /* RewardDetailVC.m */,
+				FE84CF9323331D1200414411 /* RewardDetailVC.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -999,6 +1012,16 @@
 				FE6D854423220AB700023321 /* YNPageScrollView.h */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		FE84CF962333A98800414411 /* CountryCode */ = {
+			isa = PBXGroup;
+			children = (
+				FE84CF972333A9CA00414411 /* countryNameCH.plist */,
+				FE84CF992333B36200414411 /* CountryCodeView.h */,
+				FE84CF9A2333B36200414411 /* CountryCodeView.m */,
+			);
+			path = CountryCode;
 			sourceTree = "<group>";
 		};
 		FE92C41D22A792580043DA9D /* Vendor */ = {
@@ -1189,6 +1212,7 @@
 		FE92C4E022A792F30043DA9D /* Vote */ = {
 			isa = PBXGroup;
 			children = (
+				FE84CF962333A98800414411 /* CountryCode */,
 				FE3FC30B22B90B1200A41205 /* Mode */,
 				FE92C4E122A792F30043DA9D /* Types */,
 				FE92C4E422A792F30043DA9D /* cellsAndHeaderOrFooter */,
@@ -2049,10 +2073,12 @@
 				FE92C63C22A792F50043DA9D /* SettingCell_2.xib in Resources */,
 				FE92C62A22A792F50043DA9D /* MnemonicWordHeaderView2.xib in Resources */,
 				FE1FCE6D2327C25300F89A18 /* RedeemINBVC.xib in Resources */,
+				FE84CF982333A9CA00414411 /* countryNameCH.plist in Resources */,
 				FE92C69B22A7C1660043DA9D /* Localizable.strings in Resources */,
 				FE92C49622A792580043DA9D /* libscrypt.podspec in Resources */,
 				FEE3B28322A641D3003B5244 /* Assets.xcassets in Resources */,
 				FE92C5F822A792F40043DA9D /* VoteDetailCell.xib in Resources */,
+				FE84CF9523331D1200414411 /* RewardDetailVC.xib in Resources */,
 				FEE3B28122A641D2003B5244 /* Main.storyboard in Resources */,
 				FE92C5FB22A792F40043DA9D /* NodeInfoCell.xib in Resources */,
 				FE92C4D022A792580043DA9D /* CoreBitcoin.podspec in Resources */,
@@ -2297,6 +2323,7 @@
 				FE92C4AE22A792580043DA9D /* BTCAssetAddress.m in Sources */,
 				FE92C5F522A792F40043DA9D /* NodeInfoCell.m in Sources */,
 				FE92C49D22A792580043DA9D /* BTCAssetID.m in Sources */,
+				FE84CF9423331D1200414411 /* RewardDetailVC.m in Sources */,
 				FE92C66122A792F50043DA9D /* LocalFileStorage.m in Sources */,
 				FE92C63322A792F50043DA9D /* UIView+CCAddition.m in Sources */,
 				FE92C49722A792580043DA9D /* BTCBlock.m in Sources */,
@@ -2311,6 +2338,7 @@
 				FE92C49C22A792580043DA9D /* BTCAssetType.m in Sources */,
 				FE92C65322A792F50043DA9D /* ETHMnemonicKeystore.m in Sources */,
 				FEE947DC2302BEB90004D696 /* NSBundle+FMListPlaceholder.m in Sources */,
+				FE84CF9B2333B36200414411 /* CountryCodeView.m in Sources */,
 				FE92C4B222A792580043DA9D /* BTC256.m in Sources */,
 				FE92C60A22A792F50043DA9D /* WalletImportVC.m in Sources */,
 				FE92C5EE22A792F40043DA9D /* UIButton+Layout.m in Sources */,

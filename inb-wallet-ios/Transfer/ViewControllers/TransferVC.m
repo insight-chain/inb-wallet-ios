@@ -145,7 +145,7 @@
         [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
         
         [NetworkUtil rpc_requetWithURL:delegate.rpcHost params:@{@"jsonrpc":@"2.0",
-                                                        @"method":@"eth_getTransactionCount",
+                                                        @"method":nonce_MethodName,
                                                         @"params":@[[self.wallet.address add0xIfNeeded],@"latest"],@"id":@(1)}
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 if (error) {
@@ -159,7 +159,7 @@
                                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                     @try {
                                         NSDecimalNumber *value = [NSDecimalNumber decimalNumberWithString:tmpSelf.numberTF.text];
-                                        NSDecimalNumber *bitValue = [value decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]];
+                                        NSDecimalNumber *bitValue = [value decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                                         TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_transfer gasPrice:@"200000" gasLimit:@"21000" to:tmpSelf.accountTF.text value:[bitValue stringValue] data:tmpSelf.noteTF.text password:password chainID:kChainID]; //41，3
                                         NSString *requestUrl = [NSString stringWithFormat:@"https://api-ropsten.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex=%@",signResult.signedTx]; //&apikey=SJMGV3C6S3CSUQQXC7CTQ72UCM966KD2XZ
                                         //https://api-kovan.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex=%@
@@ -167,13 +167,18 @@
                                         
                                         [NetworkUtil rpc_requetWithURL:delegate.rpcHost
                                                                 params:@{@"jsonrpc":@"2.0",
-                                                                         @"method":@"eth_sendRawTransaction",
+                                                                         @"method":sendTran_MethodName,
                                                                          @"params":@[[signResult.signedTx add0xIfNeeded]],
                                                                          @"id":@(1)}
                                                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                                                 [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
                                                                 
                                                                 if (error) {
+                                                                    [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:0.3 animted:NO];
+                                                                    return ;
+                                                                }
+                                                                NSString *errorStr = responseObject[@"error"];
+                                                                if(errorStr){
                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:0.3 animted:NO];
                                                                     return ;
                                                                 }

@@ -54,6 +54,7 @@
 "scan" = "扫一扫";
 
 "wallet.node" = "节点";
+"wallet.reward" = "收益奖励";
 
 "copyAddress" = "复制地址";
 "saveQRCode" = "保存二维码";

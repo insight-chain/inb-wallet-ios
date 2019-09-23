@@ -8,7 +8,9 @@
 
 #import "RewardVC.h"
 
+#import "VoteListVC.h"
 #import "RewardRecordVC.h"
+#import "MortgageDetailVC.h"
 
 #import "RedeemCell_2.h"
 
@@ -29,7 +31,10 @@ static NSString *cellId_2 = @"redeemCell_2";
 @property (weak, nonatomic) IBOutlet UIButton *goVoteBtn;
 
 @property (nonatomic, strong) NSArray *stores; //抵押数据
-
+@property (nonatomic, assign) NSInteger voteNumberValue; //投票数量
+@property (nonatomic, assign) NSInteger lastReceiveVoteAwardHeight; //上次领取投票时块高度
+@property (nonatomic, assign) double lastReceiveVoteAwardTime;//上次领取投票奖励的时间
+@property (nonatomic, assign) NSInteger currentBlockNumber;//当前最新块高度
 @end
 
 @implementation RewardVC
@@ -41,7 +46,13 @@ static NSString *cellId_2 = @"redeemCell_2";
      
     self.tableView.tableHeaderView = self.tableHeaderView;
     
-    if(1){ //参与过投票
+    
+    
+    [self requestBlockHeight];
+    [self request];
+    
+    
+    if(self.voteNumberValue > 0){ //参与过投票
         self.headerBg.image = [UIImage imageNamed:@"reward_vote_bg"];
         self.vote_no_tip.hidden = YES;
         self.goVoteBtn.hidden = YES;
@@ -57,7 +68,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         self.voteRewardBtn.hidden = YES;
     }
     
-    [self request];
+    
     
 }
 
@@ -76,7 +87,7 @@ static NSString *cellId_2 = @"redeemCell_2";
     NSString *url = [NSString stringWithFormat:@"%@account/search?address=%@", App_Delegate.explorerHost, [App_Delegate.selectAddr add0xIfNeeded]];
     [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
         NSLog(@"%@", resonseObject);
-        double mortgagete = [resonseObject[@"mortgagte"] doubleValue]; //抵押的INB
+        double mortgagete = [resonseObject[@"mortgage"] doubleValue]; //抵押的INB
         double regular = [resonseObject[@"regular"] doubleValue]; //锁仓的INB
         NSArray *storeDTO = resonseObject[@"storeDTO"]; //锁仓
         
@@ -86,7 +97,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         if ( mor > 0) {
             LockModel *morM = [[LockModel alloc] init];
             morM.amount = [NSString stringWithFormat:@"%f", mor];
-            morM.days = 0;
+            morM.lockHeight = 0;
             morM.address = App_Delegate.selectAddr;
             [arr addObject:morM];
         }
@@ -94,9 +105,13 @@ static NSString *cellId_2 = @"redeemCell_2";
         tmpSelf.stores = arr;
         
         /** 赎回中 **/
-        double redeemValue = [resonseObject[@"redeemValue"] doubleValue]; //赎回中的INB
-        double redeemTime = [resonseObject[@"redeemTime"] doubleValue];//赎回开始时间
+//        double redeemValue = [resonseObject[@"redeemValue"] doubleValue]; //赎回中的INB
+//        NSInteger redeemTime = [resonseObject[@"redeemStartHeight"] doubleValue];//赎回开始时间
         
+        /** 投票数量 **/
+//        tmpSelf.lastReceiveVoteAwardTime = [resonseObject[@"lastReceiveVoteAwardTime"] doubleValue]/1000;
+        tmpSelf.lastReceiveVoteAwardHeight = [resonseObject[@"lastReceiveVoteAwardHeight"] integerValue];
+        tmpSelf.voteNumberValue = [resonseObject[@"voteNumber"] integerValue];
         
         [tmpSelf.tableView reloadData];
         
@@ -104,11 +119,33 @@ static NSString *cellId_2 = @"redeemCell_2";
         NSLog(@"%@", error);
     }];
 }
-
+//获取当前块高度
+-(void)requestBlockHeight{
+    __block __weak typeof(self) tmpSelf = self;
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [NetworkUtil rpc_requetWithURL:delegate.rpcHost
+                            params:@{@"jsonrpc":@"2.0",
+                                     @"method":blockNumber_MethodName,
+                                     @"params":@[[App_Delegate.selectAddr add0xIfNeeded]],
+                                     @"id":@(67),
+                                     } completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+                                         
+                                         if (error) {
+                                             return ;
+                                         }
+                                         
+                                         NSString *str = responseObject[@"result"];
+                                         const char *hexChar = [str cStringUsingEncoding:NSUTF8StringEncoding];
+                                         int hexNumber;
+                                         sscanf(hexChar, "%x", &hexNumber);
+                                         tmpSelf.currentBlockNumber = hexNumber;
+                                     }];
+}
+//领取投票奖励
 
 #pragma mark ---- UITableViewDelegate && Datasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return self.stores.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     RedeemCell_2 *cell = [tableView dequeueReusableCellWithIdentifier:cellId_2];
@@ -118,7 +155,9 @@ static NSString *cellId_2 = @"redeemCell_2";
         [tableView registerNib:nib forCellReuseIdentifier:cellId_2];
         cell = [tableView dequeueReusableCellWithIdentifier:cellId_2];
     }
-    
+    LockModel *model = self.stores[indexPath.row];
+    cell.model = model;
+    cell.currentBlockNumber = self.currentBlockNumber;
     return cell;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -142,12 +181,25 @@ static NSString *cellId_2 = @"redeemCell_2";
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 10;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    LockModel *model = self.stores[indexPath.row];
+    
+    MortgageDetailVC *detailVC = [[MortgageDetailVC alloc] initWithNibName:@"MortgageDetailVC" bundle:nil];
+    detailVC.lockModel = model;
+    [self.navigationController pushViewController:detailVC animated:NO];
+}
 #pragma mark ---- Button Action
 //领取奖励
 - (IBAction)rewardAction:(UIButton *)sender {
 }
 //去投票
 - (IBAction)goVoteAction:(UIButton *)sender {
+    VoteListVC *listVC = [[VoteListVC alloc] init];
+    listVC.wallet = self.wallet;
+    listVC.navigationItem.title = NSLocalizedString(@"vote", @"投票");
+    listVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:listVC animated:YES];
 }
 
 //查看领取记录
@@ -157,4 +209,52 @@ static NSString *cellId_2 = @"redeemCell_2";
     [self.navigationController pushViewController:recordVC animated:YES];
     
 }
+
+#pragma mark ---- setter && getter
+-(void)setVoteNumberValue:(NSInteger)voteNumberValue{
+    _voteNumberValue = voteNumberValue;
+    if(_voteNumberValue > 0){ //参与过投票
+        self.headerBg.image = [UIImage imageNamed:@"reward_vote_bg"];
+        self.vote_no_tip.hidden = YES;
+        self.goVoteBtn.hidden = YES;
+        self.voteRewardValue.hidden = NO;
+        self.voteNumber.hidden = NO;
+        self.voteRewardBtn.hidden = NO;
+    }else{
+        self.headerBg.image = [UIImage imageNamed:@"reward_vote_no_bg"];
+        self.vote_no_tip.hidden = NO;
+        self.goVoteBtn.hidden = NO;
+        self.voteRewardValue.hidden = YES;
+        self.voteNumber.hidden = YES;
+        self.voteRewardBtn.hidden = YES;
+    }
+    
+    [self calulateReward:self.lastReceiveVoteAwardHeight voteNumber:_voteNumberValue/100000.0];
+    self.voteNumber.text = [NSString stringWithFormat:@"已投票数量 %.2f", _voteNumberValue/100000.0];
+}
+
+-(void)calulateReward:(NSInteger)startBlockNumber voteNumber:(double)voteNumber{
+//    前提：（当前区块高度-上次领投票奖励区块高度）/每天产生区块数>=7
+//    本次领取奖励=（当前区块高度-上次领投票奖励区块高度）/每天产生区块数（24*60*60/2）*年化（9%）/365*已投票数
+    
+    NSInteger perDayBlock = 24*60*60/2; //每天产生的去块数
+    double difDay = (self.currentBlockNumber - startBlockNumber) / (perDayBlock*1.0);
+    
+    double reward = difDay * 0.09 / 365 *voteNumber;
+    
+    self.voteRewardValue.text = [NSString stringWithFormat:@"%.5f INB", reward];
+    
+    if (difDay >= 7) {
+        //可以领取
+        [self.voteRewardBtn setTitle:[NSString stringWithFormat:@"领取奖励"] forState:UIControlStateNormal];
+        self.voteRewardBtn.userInteractionEnabled = YES;
+    }else{
+        NSInteger day = floor(difDay);
+        [self.voteRewardBtn setTitle:[NSString stringWithFormat:@"%d天后领取", 7-day] forState:UIControlStateNormal];
+        self.voteRewardBtn.userInteractionEnabled = NO;
+    }
+    
+
+}
+
 @end

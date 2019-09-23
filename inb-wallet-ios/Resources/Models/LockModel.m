@@ -12,7 +12,13 @@
 MJExtensionCodingImplementation
 
 +(NSDictionary *)mj_replacedKeyFromPropertyName{
-    return @{@"ID":@"id"};
+    return @{@"ID":@"id",
+             @"hashStr":@"hash",
+             };
+}
+
+-(NSInteger)days{
+    return self.lockHeight*2/(24*60*60);
 }
 
 @end

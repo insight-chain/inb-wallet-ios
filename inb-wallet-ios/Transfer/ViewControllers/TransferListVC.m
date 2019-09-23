@@ -14,6 +14,7 @@
 #import "TransferModel.h"
 #import "NetworkUtil.h"
 
+#import "NSDate+DateString.h"
 #import "MJRefresh.h"
 
 #import "FMListPlaceholder.h"
@@ -140,7 +141,7 @@
         listCell.valueLabel.text = [NSString stringWithFormat:@"+ %.4f INB", transfer.amount];
     }
     
-    listCell.timeLabel.text = transfer.timestamp;
+    listCell.timeLabel.text = [NSDate timestampSwitchTime:[transfer.timestamp doubleValue]/1000.0 formatter:@"yyyy-MM-dd HH:mm"];
     listCell.infoLabel.text = transfer.input;
     
     return listCell;

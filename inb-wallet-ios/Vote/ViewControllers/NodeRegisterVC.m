@@ -12,6 +12,8 @@
 #import "NetworkUtil.h"
 #import "WalletManager.h"
 
+#import "CountryCodeView.h"
+
 @interface NodeRegisterVC()
 
 @property(nonatomic, strong) UIScrollView *scrollView;
@@ -36,6 +38,9 @@
 @property(nonatomic, strong) InfoView *facebookInfo;
 @property(nonatomic, strong) InfoView *twitterInfo;
 @property(nonatomic, strong) InfoView *githubInfo;
+@property(nonatomic, strong) InfoView *countryInfo;
+
+@property(nonatomic, strong) CountryCodeView *countryView; //国家选择列表
 
 @property(nonatomic, strong) UIButton *submitBtn;
 
@@ -58,8 +63,28 @@
     [self.scrollContentView layoutIfNeeded];
     self.scrollContentView.frame = CGRectMake(0, 0, KWIDTH, CGRectGetMaxY(self.submitBtn.frame)+5);
     self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.scrollContentView.frame));
-    
+    [self getCountry];
 }
+
+
+-(void)getCountry{
+    NSLocale *locale = [NSLocale currentLocale];
+    NSArray *countryArray = [NSLocale ISOCountryCodes];
+    NSMutableDictionary *objectDic = [[NSMutableDictionary alloc] init];
+    for (NSString *countryCode in countryArray)
+    {
+        NSString *displayNameString = [locale displayNameForKey:NSLocaleCountryCode value:countryCode];
+        [objectDic setObject:displayNameString forKey:countryCode];
+    }
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:objectDic options:NSJSONWritingPrettyPrinted error:&error];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];//[objectDic jsonStringEncoded];
+    
+    NSLog(@"json：%@",jsonString);
+    
+    NSLog(@"%@",objectDic);
+}
+
 
 -(void)makeConstraints{
     
@@ -83,6 +108,7 @@
     [self.scrollContentView addSubview:self.facebookInfo];
     [self.scrollContentView addSubview:self.twitterInfo];
     [self.scrollContentView addSubview:self.githubInfo];
+    [self.scrollContentView addSubview:self.countryInfo];
     
     [self.scrollContentView addSubview:self.submitBtn];
     
@@ -157,28 +183,34 @@
         make.top.mas_equalTo(self.twitterInfo.mas_bottom).mas_offset(15);
         make.left.right.height.mas_equalTo(self.twitterInfo);
     }];
+    [self.countryInfo mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.githubInfo.mas_bottom).mas_offset(15);
+        make.left.right.height.mas_equalTo(self.twitterInfo);
+    }];
     [self.submitBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.githubInfo.mas_bottom).mas_offset(30);
+        make.top.mas_equalTo(self.countryInfo.mas_bottom).mas_offset(30);
         make.centerX.mas_equalTo(self.scrollContentView.mas_centerX);
         make.width.mas_equalTo(200);
         make.height.mas_equalTo(40);
     }];
 }
 
--(void)setNode:(Node *)node{
-    _node = node;
-    self.name.text = _node.name;
-    self.intro.text = _node.intro;
-    
-    self.ipInfo.info.text = _node.host;
-    self.portInfo.info.text = _node.port;
-    self.intro.text = _node.intro;
-}
-
+#pragma mark ---- UIButton Action
+//注册节点
 -(void)submitAction:(UIButton *)sender{
     [self registerToNode];
 }
-
+//选择国家
+-(void)countrySelect:(UIButton *)sender{
+    if(self.countryView == nil){
+        self.countryView = [[CountryCodeView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT)];
+        self.countryView.selectCountry = ^(NSString * _Nullable countryName, NSString * _Nonnull countryCode) {
+            NSLog(@"Name:%@---Code:%@", countryName, countryCode);
+        };
+    }
+    [App_Delegate.window addSubview:self.countryView];
+}
+#pragma mark ---- function
 //注册及节点
 -(void)registerToNode{
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -193,15 +225,16 @@
     NSString *email = @"ghyin22sight@insig222ht.io";
     NSString *attributeData = [NSString stringWithFormat:@"name/lgggg-age/200-jobs/bug-intro/%@",self.intro.text];
     
-    NSString *baseStr = @"inb|1|event|declare|e486016a2a5f701464252f6c9edabc4ef47f5ebe20bc6682c8d91f96300867a827155bea289de308273c6b763dad7bbdef5dd0df32829b049597a37210c2deb9";
-    NSString *dataStr = [NSString stringWithFormat:@"%@~%@~%@~%@~%@~%@~%@~%@~%@~%@", baseStr, ip, port, name, country, city, headerImgStr, homepageUrl, email, attributeData];
+    NSString *nodeID = @"8aa5fc69c92bb3e8acb71b0b42f2e0bfaf4b642a4a38b0efaf2d1270880ea4a187ea16d3811436833f05a08a512cddce920f0a988b75527548bb75d9628fa503";
+    // nodeID~ip~port~name~country(nation)~city~imageURL~website~email~data(key1/value1-key2/value2....)
+    NSString *dataStr = [NSString stringWithFormat:@"%@~%@~%@~%@~%@~%@~%@~%@~%@~%@", nodeID, ip, port, name, country, city, headerImgStr, homepageUrl, email, attributeData];
     
     [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         __block __weak typeof(self) tmpSelf = self;
         [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
         
         [NetworkUtil rpc_requetWithURL:delegate.rpcHost params:@{@"jsonrpc":@"2.0",
-                                                                 @"method":@"eth_getTransactionCount",
+                                                                 @"method":nonce_MethodName,
                                                                  @"params":@[[self.wallet.address add0xIfNeeded],@"latest"],@"id":@(1)}
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 if (error) {
@@ -215,7 +248,7 @@
                                     TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:self.wallet.walletID nonce:[nonce stringValue] txType:TxType_nodeRegister gasPrice:@"200000" gasLimit:@"21000" to:[self.wallet.address add0xIfNeeded] value:@"0" data:[dataStr hexString] password:password chainID:kChainID];
                                     [NetworkUtil rpc_requetWithURL:delegate.rpcHost
                                                             params:@{@"jsonrpc":@"2.0",
-                                                                     @"method":@"eth_sendRawTransaction",
+                                                                     @"method":sendTran_MethodName,
                                                                      @"params":@[[signResult.signedTx add0xIfNeeded]],
                                                                      @"id":@(1)}
                                                         completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
@@ -248,6 +281,18 @@
     }];
     
 }
+
+#pragma mark ----
+-(void)setNode:(Node *)node{
+    _node = node;
+    self.name.text = _node.name;
+    self.intro.text = _node.intro;
+    
+    self.ipInfo.info.text = _node.host;
+    self.portInfo.info.text = _node.port;
+    self.intro.text = _node.intro;
+}
+
 
 -(UILabel *)headImgStr{
     if(_headImgStr == nil){
@@ -394,12 +439,22 @@
     return _githubInfo;
 }
 
+-(InfoView *)countryInfo{
+    if(_countryInfo == nil){
+        _countryInfo = [[InfoView alloc] init];
+        _countryInfo.title.text = @"国家";
+        _countryInfo.info.enabled = NO;
+        
+    }
+    return _countryInfo;
+}
+
 -(UIButton *)submitBtn{
     if(_submitBtn == nil){
         _submitBtn = [[UIButton alloc] init];
         [_submitBtn setTitle:@"保 存" forState:UIControlStateNormal];
         [_submitBtn setBackgroundColor:kColorBlue];
-        [_submitBtn addTarget:self action:@selector(submitAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_submitBtn addTarget:self action:@selector(countrySelect:) forControlEvents:UIControlEventTouchUpInside]; //submitAction
     }
     return _submitBtn;
 }
