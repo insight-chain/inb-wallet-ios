@@ -62,7 +62,9 @@
 +(NSString *)pubToAddress:(NSData *)publicKey{
     NSString *stringToEncrypt = [[publicKey dataToHexString] substringFromIndex:2];
     NSString *sha3Keccak = [[[Keccak256_bridge alloc] init] encryptWithHex:stringToEncrypt];//[[[Keccak256 alloc] init] encrypt:stringToEncrypt];
-    return [sha3Keccak substringFromIndex:24];
+//    return [sha3Keccak substringFromIndex:24];
+    NSString *newAddr = [sha3Keccak substringFromIndex:26];
+    return [NSString stringWithFormat:@"95%@", newAddr];
 }
 
 

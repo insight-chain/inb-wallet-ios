@@ -192,7 +192,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                 
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:@"0"];
                                 NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
-                                _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardLock gasPrice:@"200000" gasLimit:@"21000" to:@"0x95aa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"ReceiveLockedAward:%@", rewardNonce] hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardLock gasPrice:@"200000" gasLimit:@"21000" to:@"0x9518a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"ReceiveLockedAward:%@", rewardNonce] hexString] add0xIfNeeded] password:password chainID:kChainID];
                                 
                                 //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
                                 dispatch_semaphore_signal(semaphoreLock);
@@ -258,7 +258,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                 
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:@"0"];
                                 NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
-                                _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_receive gasPrice:@"200000" gasLimit:@"21000" to:@"0x95aa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:@"" password:password chainID:kChainID];
+                                _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_receive gasPrice:@"200000" gasLimit:@"21000" to:@"0x9518a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:@"" password:password chainID:kChainID];
                                 
                                 //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
                                 dispatch_semaphore_signal(semaphoreLock);

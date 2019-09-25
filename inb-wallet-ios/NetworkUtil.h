@@ -26,7 +26,7 @@ static NSString *rpcHost = @"http://192.168.1.183:6001"; //@"http://192.168.1.18
 
 #define HTTP(host, path) [NSString stringWithFormat:@"%@%@", host, path]
 
-static int kChainID = 903;//891;//1314520;
+static int kChainID = 891;//903;//1314520;
 
 static NSString *getAccountInfo_MethodName = @"inb_getAccountInfo";
 static NSString *sendTran_MethodName   = @"inb_sendRawTransaction";  //发送交易的 method
