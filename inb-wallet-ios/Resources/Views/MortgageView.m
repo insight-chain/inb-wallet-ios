@@ -10,7 +10,7 @@
 @interface MortgageView()
 @property (weak, nonatomic) IBOutlet UILabel *netStrL; // "NET抵押"
 @property (weak, nonatomic) IBOutlet UIImageView *netTextFieldBg;
-@property (weak, nonatomic) IBOutlet UILabel *rateStrL; //"七日年化"
+@property (weak, nonatomic) IBOutlet UILabel *rateStrL; //"年化"
 @property (weak, nonatomic) IBOutlet UILabel *tipL_1;
 @property (weak, nonatomic) IBOutlet UILabel *tipL_2;
 @property (weak, nonatomic) IBOutlet UILabel *tipL_3;

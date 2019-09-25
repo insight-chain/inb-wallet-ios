@@ -76,6 +76,10 @@
 		FE84CF9523331D1200414411 /* RewardDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE84CF9323331D1200414411 /* RewardDetailVC.xib */; };
 		FE84CF982333A9CA00414411 /* countryNameCH.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE84CF972333A9CA00414411 /* countryNameCH.plist */; };
 		FE84CF9B2333B36200414411 /* CountryCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CF9A2333B36200414411 /* CountryCodeView.m */; };
+		FE84CFA8233A08D900414411 /* LYEmptyBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CF9F233A08D900414411 /* LYEmptyBaseView.m */; };
+		FE84CFA9233A08D900414411 /* UIView+Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFA1233A08D900414411 /* UIView+Empty.m */; };
+		FE84CFAA233A08D900414411 /* UIView+LYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFA2233A08D900414411 /* UIView+LYExtension.m */; };
+		FE84CFAB233A08D900414411 /* LYEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFA5233A08D900414411 /* LYEmptyView.m */; };
 		FE92C41C22A78ED40043DA9D /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE92C41B22A78ED40043DA9D /* test.swift */; };
 		FE92C49622A792580043DA9D /* libscrypt.podspec in Resources */ = {isa = PBXBuildFile; fileRef = FE92C41E22A792580043DA9D /* libscrypt.podspec */; };
 		FE92C49722A792580043DA9D /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42222A792580043DA9D /* BTCBlock.m */; };
@@ -419,6 +423,15 @@
 		FE84CF972333A9CA00414411 /* countryNameCH.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = countryNameCH.plist; sourceTree = "<group>"; };
 		FE84CF992333B36200414411 /* CountryCodeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountryCodeView.h; sourceTree = "<group>"; };
 		FE84CF9A2333B36200414411 /* CountryCodeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountryCodeView.m; sourceTree = "<group>"; };
+		FE84CF9F233A08D900414411 /* LYEmptyBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYEmptyBaseView.m; sourceTree = "<group>"; };
+		FE84CFA0233A08D900414411 /* LYEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYEmptyView.h; sourceTree = "<group>"; };
+		FE84CFA1233A08D900414411 /* UIView+Empty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Empty.m"; sourceTree = "<group>"; };
+		FE84CFA2233A08D900414411 /* UIView+LYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LYExtension.m"; sourceTree = "<group>"; };
+		FE84CFA3233A08D900414411 /* LYEmptyBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYEmptyBaseView.h; sourceTree = "<group>"; };
+		FE84CFA4233A08D900414411 /* LYEmptyViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYEmptyViewHeader.h; sourceTree = "<group>"; };
+		FE84CFA5233A08D900414411 /* LYEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYEmptyView.m; sourceTree = "<group>"; };
+		FE84CFA6233A08D900414411 /* UIView+LYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LYExtension.h"; sourceTree = "<group>"; };
+		FE84CFA7233A08D900414411 /* UIView+Empty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Empty.h"; sourceTree = "<group>"; };
 		FE92C41A22A78ED40043DA9D /* inb-wallet-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inb-wallet-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		FE92C41B22A78ED40043DA9D /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		FE92C41E22A792580043DA9D /* libscrypt.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libscrypt.podspec; sourceTree = "<group>"; };
@@ -1024,6 +1037,22 @@
 			path = CountryCode;
 			sourceTree = "<group>";
 		};
+		FE84CF9E233A08D900414411 /* LYEmptyView */ = {
+			isa = PBXGroup;
+			children = (
+				FE84CF9F233A08D900414411 /* LYEmptyBaseView.m */,
+				FE84CFA0233A08D900414411 /* LYEmptyView.h */,
+				FE84CFA1233A08D900414411 /* UIView+Empty.m */,
+				FE84CFA2233A08D900414411 /* UIView+LYExtension.m */,
+				FE84CFA3233A08D900414411 /* LYEmptyBaseView.h */,
+				FE84CFA4233A08D900414411 /* LYEmptyViewHeader.h */,
+				FE84CFA5233A08D900414411 /* LYEmptyView.m */,
+				FE84CFA6233A08D900414411 /* UIView+LYExtension.h */,
+				FE84CFA7233A08D900414411 /* UIView+Empty.h */,
+			);
+			path = LYEmptyView;
+			sourceTree = "<group>";
+		};
 		FE92C41D22A792580043DA9D /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1504,6 +1533,7 @@
 		FE92C55E22A792F40043DA9D /* Refer */ = {
 			isa = PBXGroup;
 			children = (
+				FE84CF9E233A08D900414411 /* LYEmptyView */,
 				FE6D853023220AB700023321 /* YNPageViewController */,
 				FEE947CB2302BEB90004D696 /* FMListPlaceholder */,
 				FE3FC2DE22B8D44700A41205 /* TZImagePickerController */,
@@ -2200,6 +2230,7 @@
 				FE92C5EF22A792F40043DA9D /* NSData+HexString.m in Sources */,
 				FE6D855323228AA900023321 /* MortgageView.m in Sources */,
 				FE92C63422A792F50043DA9D /* NSObject+CCAssociative.m in Sources */,
+				FE84CFA9233A08D900414411 /* UIView+Empty.m in Sources */,
 				FE3FC2A322AE7B6C00A41205 /* NSDate+DateString.m in Sources */,
 				FE3FC30A22B8D44700A41205 /* TZGifPhotoPreviewController.m in Sources */,
 				FE92C41C22A78ED40043DA9D /* test.swift in Sources */,
@@ -2251,6 +2282,7 @@
 				FE92C4CF22A792580043DA9D /* crypto_scrypt-nosse.c in Sources */,
 				FE92C5FC22A792F50043DA9D /* VoteListVC.m in Sources */,
 				FE1FCE6E2327C25300F89A18 /* RedeemINBVC.m in Sources */,
+				FE84CFA8233A08D900414411 /* LYEmptyBaseView.m in Sources */,
 				FE6D851E231E123600023321 /* ResourcePageViewController.m in Sources */,
 				FE4FFF4622C61B1A0024CB4D /* BIP44.m in Sources */,
 				FE92C4AC22A792580043DA9D /* BTCFancyEncryptedMessage.m in Sources */,
@@ -2288,6 +2320,7 @@
 				FE6D854723220AB800023321 /* UIViewController+YNPageExtend.m in Sources */,
 				FE92C61822A792F50043DA9D /* TransferVC.m in Sources */,
 				FE92C66322A792F50043DA9D /* WalletManager.m in Sources */,
+				FE84CFAA233A08D900414411 /* UIView+LYExtension.m in Sources */,
 				FE92C66722A798530043DA9D /* BigNumber.swift in Sources */,
 				FE92C4C222A792580043DA9D /* BTCBase58.m in Sources */,
 				FE92C65D22A792F50043DA9D /* MnemonicUtil.m in Sources */,
@@ -2404,6 +2437,7 @@
 				FE3FC30122B8D44700A41205 /* UIView+Layout.m in Sources */,
 				FE92C62022A792F50043DA9D /* WelcomConfirmMnemonicVC.m in Sources */,
 				FE92C4C022A792580043DA9D /* BTCPaymentMethod.m in Sources */,
+				FE84CFAB233A08D900414411 /* LYEmptyView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

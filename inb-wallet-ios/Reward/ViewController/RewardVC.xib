@@ -51,7 +51,6 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iSW-j5-nnN">
                     <rect key="frame" x="15" y="20" width="345" height="150"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="345" id="1Mh-7C-ZEk"/>
                         <constraint firstAttribute="height" constant="150" id="iyu-8f-PTz"/>
                     </constraints>
                 </imageView>
@@ -106,9 +105,11 @@
                 <constraint firstItem="wot-p0-o4z" firstAttribute="leading" secondItem="iSW-j5-nnN" secondAttribute="leading" constant="20" id="6CH-Ys-uTg"/>
                 <constraint firstItem="iSW-j5-nnN" firstAttribute="top" secondItem="bf1-3n-Az0" secondAttribute="top" constant="20" id="Ppq-s3-bRf"/>
                 <constraint firstItem="lMD-H7-j8n" firstAttribute="top" secondItem="iSW-j5-nnN" secondAttribute="top" constant="25" id="Rqd-gG-hVC"/>
+                <constraint firstAttribute="trailing" secondItem="iSW-j5-nnN" secondAttribute="trailing" constant="15" id="h0P-2U-fX3"/>
                 <constraint firstItem="zYu-0G-bZ6" firstAttribute="bottom" secondItem="iSW-j5-nnN" secondAttribute="bottom" constant="-20" id="hso-fl-w2x"/>
                 <constraint firstItem="wot-p0-o4z" firstAttribute="top" secondItem="iSW-j5-nnN" secondAttribute="top" constant="25" id="iQf-7W-hJC"/>
                 <constraint firstItem="zYu-0G-bZ6" firstAttribute="leading" secondItem="N4n-83-6TB" secondAttribute="leading" id="jpm-SM-3bc"/>
+                <constraint firstItem="iSW-j5-nnN" firstAttribute="leading" secondItem="bf1-3n-Az0" secondAttribute="leading" constant="15" id="jtg-96-kZl"/>
                 <constraint firstItem="N4n-83-6TB" firstAttribute="leading" secondItem="wot-p0-o4z" secondAttribute="leading" id="oXz-JR-fwz"/>
                 <constraint firstItem="iSW-j5-nnN" firstAttribute="centerX" secondItem="bf1-3n-Az0" secondAttribute="centerX" id="w1y-GE-d6p"/>
                 <constraint firstItem="Nad-2c-abA" firstAttribute="centerX" secondItem="iSW-j5-nnN" secondAttribute="centerX" id="zkF-yz-naQ"/>

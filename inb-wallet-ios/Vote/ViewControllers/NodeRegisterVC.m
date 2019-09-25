@@ -22,23 +22,38 @@
 @property(nonatomic, strong) UILabel *headImgStr; //设置头像
 @property(nonatomic, strong) UITextField *headImg;
 
-@property(nonatomic, strong) UILabel *nameStr; //头像
+@property(nonatomic, strong) UILabel *nameStr; //节点名称
 @property(nonatomic, strong) UITextField *name;
 @property(nonatomic, strong) UIView *sepView_1; // 分割线
+
+@property(nonatomic, strong) UILabel *ipStr; //节点IP
+@property(nonatomic, strong) UITextField *ipTF;
+
+@property(nonatomic, strong) UILabel *portStr; //节点端口号
+@property(nonatomic, strong) UITextField *portTF;
+
+@property(nonatomic, strong) UILabel *countryStr; //国家
+@property(nonatomic, strong) UIButton *countryBtn;
+@property(nonatomic, strong) NSString *countryCode; //国家码
 
 @property(nonatomic, strong) UILabel *introStr; //节点介绍
 @property(nonatomic, strong) UIImageView *introBg;
 @property(nonatomic, strong) UITextView *intro;
 
+@property(nonatomic, strong) UILabel *idStr; //节点ID
+@property(nonatomic, strong) UIImageView *idBg;
+@property(nonatomic, strong) UITextView *nodeID;
+
+
 @property(nonatomic, strong) UILabel *otherInfoStr; //其他信息
-@property(nonatomic, strong) InfoView *ipInfo;
-@property(nonatomic, strong) InfoView *portInfo;
+@property(nonatomic, strong) InfoView *receiveAccountInfo; //接收地址
+@property(nonatomic, strong) InfoView *websiteInfo; //官网
 @property(nonatomic, strong) InfoView *telegraphInfo;
 @property(nonatomic, strong) InfoView *wechatInfo;
 @property(nonatomic, strong) InfoView *facebookInfo;
 @property(nonatomic, strong) InfoView *twitterInfo;
 @property(nonatomic, strong) InfoView *githubInfo;
-@property(nonatomic, strong) InfoView *countryInfo;
+@property(nonatomic, strong) InfoView *emailInfo;
 
 @property(nonatomic, strong) CountryCodeView *countryView; //国家选择列表
 
@@ -95,20 +110,33 @@
     [self.scrollContentView addSubview:self.name];
     [self.scrollContentView addSubview:self.sepView_1];
     
+    [self.scrollContentView addSubview:self.ipStr];
+    [self.scrollContentView addSubview:self.ipTF];
+    
+    [self.scrollContentView addSubview:self.portStr];
+    [self.scrollContentView addSubview:self.portTF];
+    
+    [self.scrollContentView addSubview:self.countryStr];
+    [self.scrollContentView addSubview:self.countryBtn];
+    
+    [self.scrollContentView addSubview:self.idStr];
+    [self.scrollContentView addSubview:self.idBg];
+    [self.scrollContentView addSubview:self.nodeID];
+    
     [self.scrollContentView addSubview:self.introStr];
     [self.scrollContentView addSubview:self.introBg];
     [self.scrollContentView addSubview:self.intro];
 
     
     [self.scrollContentView addSubview:self.otherInfoStr];
-    [self.scrollContentView addSubview:self.ipInfo];
-    [self.scrollContentView addSubview:self.portInfo];
+    [self.scrollContentView addSubview:self.receiveAccountInfo];
+    [self.scrollContentView addSubview:self.websiteInfo];
     [self.scrollContentView addSubview:self.telegraphInfo];
     [self.scrollContentView addSubview:self.wechatInfo];
     [self.scrollContentView addSubview:self.facebookInfo];
     [self.scrollContentView addSubview:self.twitterInfo];
     [self.scrollContentView addSubview:self.githubInfo];
-    [self.scrollContentView addSubview:self.countryInfo];
+    [self.scrollContentView addSubview:self.emailInfo];
     
     [self.scrollContentView addSubview:self.submitBtn];
     
@@ -132,10 +160,55 @@
         make.left.right.mas_equalTo(self.nameStr);
         make.height.mas_equalTo(45);
     }];
-
-    [self.introStr mas_remakeConstraints:^(MASConstraintMaker *make) {
+    
+    [self.ipStr mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.name.mas_bottom).mas_offset(20);
-        make.left.mas_equalTo(self.nameStr);
+        make.left.mas_equalTo(15);
+    }];
+    [self.ipTF mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.ipStr.mas_bottom).mas_offset(10);
+        make.left.right.mas_equalTo(self.headImg);
+        make.height.mas_equalTo(45);
+    }];
+    
+    [self.portStr mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.ipTF.mas_bottom).mas_offset(20);
+        make.left.mas_equalTo(15);
+    }];
+    [self.portTF mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.portStr.mas_bottom).mas_offset(10);
+        make.left.right.mas_equalTo(self.ipTF);
+        make.height.mas_equalTo(45);
+    }];
+    
+    [self.countryStr mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.portTF.mas_bottom).mas_offset(20);
+        make.left.mas_equalTo(15);
+    }];
+    [self.countryBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.countryStr.mas_bottom).mas_offset(10);
+        make.left.right.mas_equalTo(self.ipTF);
+        make.height.mas_equalTo(45);
+    }];
+
+    [self.idStr mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.countryBtn.mas_bottom).mas_offset(20);
+        make.left.mas_equalTo(self.portStr);
+    }];
+    [self.idBg mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.idStr.mas_bottom).mas_offset(10);
+        make.left.right.mas_equalTo(self.name);
+        make.height.mas_equalTo(150);
+    }];
+    [self.nodeID mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.idStr.mas_bottom).mas_offset(10);
+        make.left.right.mas_equalTo(self.name);
+        make.height.mas_equalTo(150);
+    }];
+    
+    [self.introStr mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.nodeID.mas_bottom).mas_offset(20);
+        make.left.mas_equalTo(self.idStr);
     }];
     [self.introBg mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.introStr.mas_bottom).mas_offset(10);
@@ -153,19 +226,19 @@
         make.top.mas_equalTo(self.introBg.mas_bottom).mas_offset(15);
         make.left.right.mas_equalTo(self.introStr);
     }];
-    [self.ipInfo mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.receiveAccountInfo mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.otherInfoStr.mas_bottom).mas_offset(20);
         make.left.right.mas_equalTo(self.name);
         make.height.mas_equalTo(45);
     }];
-    [self.portInfo mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.ipInfo.mas_bottom).mas_offset(15);
-        make.left.right.mas_equalTo(self.ipInfo);
-        make.height.mas_equalTo(self.ipInfo);
+    [self.websiteInfo mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.receiveAccountInfo.mas_bottom).mas_offset(15);
+        make.left.right.mas_equalTo(self.receiveAccountInfo);
+        make.height.mas_equalTo(self.receiveAccountInfo);
     }];
     [self.telegraphInfo mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.portInfo.mas_bottom).mas_offset(15);
-        make.left.right.height.mas_equalTo(self.portInfo);
+        make.top.mas_equalTo(self.websiteInfo.mas_bottom).mas_offset(15);
+        make.left.right.height.mas_equalTo(self.websiteInfo);
     }];
     [self.wechatInfo mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.telegraphInfo.mas_bottom).mas_offset(15);
@@ -183,12 +256,12 @@
         make.top.mas_equalTo(self.twitterInfo.mas_bottom).mas_offset(15);
         make.left.right.height.mas_equalTo(self.twitterInfo);
     }];
-    [self.countryInfo mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.emailInfo mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.githubInfo.mas_bottom).mas_offset(15);
         make.left.right.height.mas_equalTo(self.twitterInfo);
     }];
     [self.submitBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.countryInfo.mas_bottom).mas_offset(30);
+        make.top.mas_equalTo(self.emailInfo.mas_bottom).mas_offset(30);
         make.centerX.mas_equalTo(self.scrollContentView.mas_centerX);
         make.width.mas_equalTo(200);
         make.height.mas_equalTo(40);
@@ -202,10 +275,13 @@
 }
 //选择国家
 -(void)countrySelect:(UIButton *)sender{
+    __block __weak typeof(self) tmpSelf = self;
     if(self.countryView == nil){
         self.countryView = [[CountryCodeView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT)];
         self.countryView.selectCountry = ^(NSString * _Nullable countryName, NSString * _Nonnull countryCode) {
             NSLog(@"Name:%@---Code:%@", countryName, countryCode);
+            [tmpSelf.countryBtn setTitle:countryName forState:UIControlStateNormal];
+            tmpSelf.countryCode = countryCode;
         };
     }
     [App_Delegate.window addSubview:self.countryView];
@@ -215,19 +291,19 @@
 -(void)registerToNode{
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
-    NSString *ip = self.ipInfo.info.text;
-    NSString *port = self.portInfo.info.text;
+    NSString *ip = self.ipTF.text?:@"";
+    NSString *port = self.portTF.text?:@"";
     NSString *name = self.name.text;
-    NSString *country = @"China";
-    NSString *city = @"111111111";
-    NSString *headerImgStr = @"www.ima1112222ge.com";
-    NSString *homepageUrl = @"www.baid222u.com"; //主页
-    NSString *email = @"ghyin22sight@insig222ht.io";
-    NSString *attributeData = [NSString stringWithFormat:@"name/lgggg-age/200-jobs/bug-intro/%@",self.intro.text];
+    NSString *country = self.countryCode;
+    NSString *headerImgStr = self.headImg.text ? : @"";
+    NSString *homepageUrl = self.websiteInfo.info.text?:@""; //主页
+    NSString *email = self.emailInfo.info.text ? : @"";
+    NSString *attributeData = [NSString stringWithFormat:@"name/%@-intro/%@",self.name.text,self.intro.text];
     
-    NSString *nodeID = @"8aa5fc69c92bb3e8acb71b0b42f2e0bfaf4b642a4a38b0efaf2d1270880ea4a187ea16d3811436833f05a08a512cddce920f0a988b75527548bb75d9628fa503";
+    NSString *nodeID = self.nodeID.text ? : @"";// @"8aa5fc69c92bb3e8acb71b0b42f2e0bfaf4b642a4a38b0efaf2d1270880ea4a187ea16d3811436833f05a08a512cddce920f0a988b75527548bb75d9628fa503";
     // nodeID~ip~port~name~country(nation)~city~imageURL~website~email~data(key1/value1-key2/value2....)
-    NSString *dataStr = [NSString stringWithFormat:@"%@~%@~%@~%@~%@~%@~%@~%@~%@~%@", nodeID, ip, port, name, country, city, headerImgStr, homepageUrl, email, attributeData];
+    NSString *receiveAccount = self.receiveAccountInfo.info.text?:@""; //接收账号
+    NSString *dataStr = [NSString stringWithFormat:@"%@~%@~%@~%@~%@~%@~%@~%@~%@~%@", nodeID, ip, port, receiveAccount, name, country, headerImgStr, homepageUrl, email, attributeData];
     
     [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         __block __weak typeof(self) tmpSelf = self;
@@ -288,8 +364,8 @@
     self.name.text = _node.name;
     self.intro.text = _node.intro;
     
-    self.ipInfo.info.text = _node.host;
-    self.portInfo.info.text = _node.port;
+    self.ipTF.text = _node.host;
+    self.portTF.text = _node.port;
     self.intro.text = _node.intro;
 }
 
@@ -341,6 +417,86 @@
     }
     return _name;
 }
+
+-(UILabel *)ipStr{
+    if (_ipStr == nil) {
+        _ipStr = [[UILabel alloc] init];
+        _ipStr.font = AdaptedFontSize(15);
+        _ipStr.textColor = kColorTitle;
+        _ipStr.text = @"节点IP";
+    }
+    return _ipStr;
+}
+-(UITextField *)ipTF{
+    if (_ipTF == nil) {
+        
+        _ipTF = [[UITextField alloc] init];
+        _ipTF.background = [UIImage imageNamed:@"textField_bg"];
+        _ipTF.textColor = kColorTitle;
+        UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 35)];
+        _ipTF.leftView = leftView;
+        _ipTF.leftViewMode = UITextFieldViewModeAlways;
+        
+        _ipTF.font = AdaptedFontSize(15);
+        _ipTF.backgroundColor = [UIColor whiteColor];
+        _ipTF.placeholder = @"请输入节点IP";
+    }
+    return _ipTF;
+}
+
+-(UILabel *)portStr{
+    if (_portStr == nil) {
+        _portStr = [[UILabel alloc] init];
+        _portStr.font = AdaptedFontSize(15);
+        _portStr.textColor = kColorTitle;
+        _portStr.text = @"节点端口号";
+    }
+    return _portStr;
+}
+-(UITextField *)portTF{
+    if (_portTF == nil) {
+        
+        _portTF = [[UITextField alloc] init];
+        _portTF.background = [UIImage imageNamed:@"textField_bg"];
+        _portTF.textColor = kColorTitle;
+        UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 35)];
+        _portTF.leftView = leftView;
+        _portTF.leftViewMode = UITextFieldViewModeAlways;
+        
+        _portTF.font = AdaptedFontSize(15);
+        _portTF.backgroundColor = [UIColor whiteColor];
+        _portTF.placeholder = @"请输入节点端口号";
+    }
+    return _portTF;
+}
+
+-(UILabel *)countryStr{
+    if (_countryStr == nil) {
+        _countryStr = [[UILabel alloc] init];
+        _countryStr.font = AdaptedFontSize(15);
+        _countryStr.textColor = kColorTitle;
+        _countryStr.text = @"国家";
+    }
+    return _countryStr;
+}
+-(UIButton *)countryBtn{
+    if (_countryBtn == nil) {
+        
+        _countryBtn = [[UIButton alloc] init];
+        [_countryBtn setBackgroundImage:[UIImage imageNamed:@"textField_bg"] forState:UIControlStateNormal];
+        [_countryBtn setTitleColor:kColorTitle forState:UIControlStateNormal];
+        
+        _countryBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        _countryBtn.titleLabel.textAlignment = NSTextAlignmentLeft;
+        _countryBtn.titleLabel.font = AdaptedFontSize(15);
+        _countryBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, -10);
+        
+        [_countryBtn addTarget:self action:@selector(countrySelect:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _countryBtn;
+}
+
 -(UIView *)sepView_1{
     if (_sepView_1 == nil) {
         _sepView_1 = [[UIView alloc] init];
@@ -375,6 +531,32 @@
     return _intro;
 }
 
+-(UILabel *)idStr{
+    if (_idStr == nil) {
+        _idStr = [[UILabel alloc] init];
+        _idStr.font = AdaptedFontSize(15);
+        _idStr.textColor = kColorTitle;
+        _idStr.text = @"节点ID";
+    }
+    return _idStr;
+}
+-(UIImageView *)idBg{
+    if (_idBg == nil) {
+        _idBg = [[UIImageView alloc] init];
+        UIImage *img = [UIImage imageNamed:@"textView_bg"];
+        img = [img resizableImageWithCapInsets:UIEdgeInsetsMake(img.size.height/2.0, img.size.width/2.0, img.size.height/2.0, img.size.width/2.0) resizingMode:UIImageResizingModeStretch];
+        _idBg.image = img;
+    }
+    return _idBg;
+}
+-(UITextView *)nodeID{
+    if (_nodeID == nil) {
+        _nodeID = [[UITextView alloc] init];
+        
+    }
+    return _nodeID;
+}
+
 -(UILabel *)otherInfoStr{
     if (_otherInfoStr == nil) {
         _otherInfoStr = [[UILabel alloc] init];
@@ -385,21 +567,21 @@
     return _otherInfoStr;
 }
 
--(InfoView *)ipInfo{
-    if(_ipInfo == nil){
-        _ipInfo = [[InfoView alloc] init];
-        _ipInfo.title.text = @"节点IP";
-        _ipInfo.backgroundColor = [UIColor clearColor];
+-(InfoView *)receiveAccountInfo{
+    if(_receiveAccountInfo == nil){
+        _receiveAccountInfo = [[InfoView alloc] init];
+        _receiveAccountInfo.title.text = @"接收地址";
+        _receiveAccountInfo.backgroundColor = [UIColor clearColor];
     }
-    return _ipInfo;
+    return _receiveAccountInfo;
 }
--(InfoView *)portInfo{
-    if(_portInfo == nil){
-        _portInfo = [[InfoView alloc] init];
-        _portInfo.title.text = @"端口号";
-        _portInfo.backgroundColor = [UIColor clearColor];
+-(InfoView *)websiteInfo{
+    if(_websiteInfo == nil){
+        _websiteInfo = [[InfoView alloc] init];
+        _websiteInfo.title.text = @"官方网址";
+        _websiteInfo.backgroundColor = [UIColor clearColor];
     }
-    return _portInfo;
+    return _websiteInfo;
 }
 
 -(InfoView *)telegraphInfo{
@@ -439,14 +621,13 @@
     return _githubInfo;
 }
 
--(InfoView *)countryInfo{
-    if(_countryInfo == nil){
-        _countryInfo = [[InfoView alloc] init];
-        _countryInfo.title.text = @"国家";
-        _countryInfo.info.enabled = NO;
+-(InfoView *)emailInfo{
+    if(_emailInfo == nil){
+        _emailInfo = [[InfoView alloc] init];
+        _emailInfo.title.text = @"邮箱";
         
     }
-    return _countryInfo;
+    return _emailInfo;
 }
 
 -(UIButton *)submitBtn{

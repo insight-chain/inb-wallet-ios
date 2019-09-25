@@ -176,7 +176,7 @@
 -(UILabel *)cpuLabel{
     if (_cpuLabel == nil) {
         _cpuLabel = [[UILabel alloc] init];
-        _cpuLabel.text = NSLocalizedString(@"netResources", @"NET资源");
+        _cpuLabel.text = NSLocalizedString(@"Resource", @"资源(Res)");
         _cpuLabel.font = AdaptedBoldFontSize(15);
         _cpuLabel.textColor = kColorTitle;
     }
@@ -234,7 +234,7 @@
 -(UILabel *)mortgageLabel{
     if (_mortgageLabel == nil) {
         _mortgageLabel = [[UILabel alloc] init];
-        _mortgageLabel.text = NSLocalizedString(@"mortgage", @"抵押");
+        _mortgageLabel.text = NSLocalizedString(@"Resource.hasMortgage", @"已抵押");
         _mortgageLabel.font = AdaptedFontSize(15);
         _mortgageLabel.textColor = kColorTitle;
     }

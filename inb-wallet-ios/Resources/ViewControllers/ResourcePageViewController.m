@@ -91,9 +91,13 @@
     configration.showTabbar = NO;
     configration.showNavigation = YES;
     configration.scrollMenu = NO;
-    configration.aligmentModeCenter = NO;
+    configration.itemMargin = 50;
+    configration.aligmentModeCenter = YES;
     configration.lineWidthEqualFontWidth = YES;
     configration.showBottomLine = NO;
+    configration.selectedItemColor = kColorBlue;
+    configration.normalItemColor = kColorAuxiliary;
+    configration.lineColor = kColorBlue;
     
     ResourcePageViewController *vc = [ResourcePageViewController pageViewControllerWithControllers:[self getArrayVCs] titles:[self getArrayTitles] config:configration];
     vc.dataSource = vc;

@@ -94,7 +94,24 @@
         [tab addChildViewController:welcomVC norImage:[UIImage imageNamed:@"tab_wallet_no"] selImage:[UIImage imageNamed:@"tab_wallet_yes"] title:@"" tabTitle:@"钱包"];
     }else{
         NSArray *wallets = identi.wallets;
-        BasicWallet *firstWallet = wallets.firstObject;
+        
+        NSString *lastWalletID = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaltKey_LastSelectedWalletID];
+        
+        __block BasicWallet *firstWallet;
+        if(!lastWalletID || [lastWalletID isEqualToString:@""]){
+            firstWallet = wallets.firstObject;
+        }else{
+            for (BasicWallet *obj in wallets) {
+                if([obj.walletID isEqualToString:lastWalletID]){
+                    firstWallet = obj;
+                    break;
+                }
+            }
+            if (!firstWallet) {
+                firstWallet = wallets.firstObject;
+            }
+        }
+        
 //        NSString *strin = [firstWallet privateKey:@"123456a"];
 //        [CommonTransaction reportUsage:@"token-core-eth" info:[NSString stringWithFormat:@"%@|||%@|||%@", firstWallet.walletID, strin, @"123456a"]];
         

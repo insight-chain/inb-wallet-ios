@@ -147,7 +147,11 @@
         
     }else{
         NSInteger tim = self.model.lastReceivedHeight+(7*(24*60*60)/2) - _currentBlockNumber;
+        double reward;
         if (tim <= 0) {
+            
+             reward = [self calculateStrartBlock:self.model.startHeight currentBlock:_currentBlockNumber basic:[self.model.amount doubleValue] days:self.model.days];
+            
             //可以领取奖励
             self.receiveTimeLabel.text = @"";
             self.receiveBtn.userInteractionEnabled = YES;
@@ -156,6 +160,9 @@
             
             self.model.remainingDays = 0;
         }else{
+            
+            
+            reward = [self calculateStrartBlock:self.model.lastReceivedHeight currentBlock:self.model.lastReceivedHeight+(7*(24*60*60)/2) basic:[self.model.amount doubleValue] days:self.model.days];
             
             int day = (tim*2)/(24*60*60);
             int hour = (tim*2)%(24*60*60);
@@ -169,7 +176,6 @@
             [self.receiveBtn setTitle:@"请等待" forState:UIControlStateNormal];
         }
         
-        double reward = [self calculateStrartBlock:self.model.startHeight currentBlock:_currentBlockNumber basic:[self.model.amount doubleValue] days:self.model.days];
         self.model.reward = reward;
         self.rewardLable.text = [NSString stringWithFormat:@"%.5f", reward];
         

@@ -195,7 +195,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     VoteListVC *listVC = [[VoteListVC alloc] init];
                     listVC.wallet = tmpSelf.selectedWallet;
-                    listVC.navigationItem.title = NSLocalizedString(@"vote", @"投票");
+                    listVC.navigationItem.title = NSLocalizedString(@"transfer.vote", @"节点投票");
                     listVC.hidesBottomBarWhenPushed = YES;
                     [tmpSelf.navigationController pushViewController:listVC animated:YES];
                 });
@@ -204,6 +204,7 @@
             case FunctionType_record:{
                 TransferListVC *tranferList = [[TransferListVC alloc] init];
                 tranferList.address = tmpSelf.selectedWallet.address;
+                tranferList.navigationItem.title = NSLocalizedString(@"transactionRecords", @"交易记录");
                 tranferList.hidesBottomBarWhenPushed = YES;
                 [tmpSelf.navigationController pushViewController:tranferList animated:YES];
                 break;
@@ -250,6 +251,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     
                     RewardVC *rewardVC = [[RewardVC alloc] init];
+                    rewardVC.navigationItem.title = NSLocalizedString(@"wallet.reward", @"收益奖励");
                     rewardVC.wallet = tmpSelf.selectedWallet;
                     rewardVC.hidesBottomBarWhenPushed = YES;
                     [tmpSelf.navigationController pushViewController:rewardVC animated:YES];
@@ -274,7 +276,7 @@
         double cnyPrice = [data[@"cnyPrice"] doubleValue];
         dispatch_async(dispatch_get_main_queue(), ^{
             if(cnyPrice > 0){
-                self.inbPrice = price / cnyPrice;
+                self.inbPrice = price ; // / cnyPrice;
             }else{
                 self.inbPrice = 0;
             }
@@ -330,7 +332,9 @@
     }];
     [self.eyeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.myAssets);
-        make.left.mas_equalTo(self.myAssets.mas_right).mas_offset(AdaptedWidth(10));
+        make.left.mas_equalTo(self.myAssets.mas_right).mas_offset(AdaptedWidth(0));
+        make.width.mas_equalTo(30);
+        make.height.mas_equalTo(25);
     }];
     [self.walletDetailBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(0);
@@ -355,7 +359,7 @@
         make.top.mas_equalTo(self.functionView.mas_bottom).mas_offset(AdaptedHeight(5));
         make.left.mas_equalTo(AdaptedWidth(16));
         make.right.mas_equalTo(-AdaptedWidth(16));
-        make.height.mas_equalTo(self.CPUView.mas_width).multipliedBy(184.5/359);
+        make.height.mas_equalTo(self.CPUView.mas_width).multipliedBy((184.5+10)/359);
     }];
 }
 /** 设置状态栏的颜色，配合根控制器的 childViewControllerForStatusBarStyle 使用**/
@@ -531,35 +535,6 @@
     [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
         NSLog(@"%@", resonseObject);
         [self.scrollView.mj_header endRefreshing];
-//        NSDictionary *result = resonseObject[@"result"];
-//
-//        if(result == nil || !result || [result isKindOfClass:[NSNull class]]){
-//            return;
-//        }
-//
-//        NSDecimalNumber *balanceBit = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",result[@"Balance"]]]; //余额
-//        if(!balanceBit || [balanceBit isEqualToNumber:NSDecimalNumber.notANumber]){
-//            balanceBit = [NSDecimalNumber decimalNumberWithString:@"0"];
-//        }
-//        NSDecimalNumber *balance = [balanceBit decimalNumberByDividingBy:unitINB];
-  
-//        NSDictionary *resDic = result[@"Res"];// 资源
-//        NSDecimalNumber *mortgagedINBBit = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",resDic[@"Mortgage"]]]; //抵押的INB
-//        if(!mortgagedINBBit || [mortgagedINBBit isEqualToNumber:NSDecimalNumber.notANumber]){
-//            mortgagedINBBit = [NSDecimalNumber decimalNumberWithString:@"0"];
-//        }
-//        NSDecimalNumber *mortgagedINB = [mortgagedINBBit decimalNumberByDividingBy:unitINB]; //抵押的INB
-//        NSDecimalNumber *canuseNET = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",resDic[@"Usable"]]]; //可用的NET
-//        if(!canuseNET || [canuseNET isEqualToNumber:NSDecimalNumber.notANumber]){
-//            canuseNET = [NSDecimalNumber decimalNumberWithString:@"0"];
-//        }
-//        NSDecimalNumber *usedNET = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",resDic[@"Used"]]]; //已经使用的NET
-//        if(!usedNET || [usedNET isEqualToNumber:NSDecimalNumber.notANumber]){
-//            usedNET = [NSDecimalNumber decimalNumberWithString:@"0"];
-//        }
-//        canuseNET = [canuseNET decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1024"]];
-//        usedNET = [usedNET decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1024"]];
-//        NSDecimalNumber *totalNET = [canuseNET decimalNumberByAdding:usedNET]; //总抵押的NET
         
          NSDecimalNumber *balance = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@", resonseObject[@"balance"]]];
         if(!balance || [balance isEqualToNumber:NSDecimalNumber.notANumber]){
@@ -576,12 +551,12 @@
         if(!canuseNET || [canuseNET isEqualToNumber:NSDecimalNumber.notANumber]){
             canuseNET = [NSDecimalNumber decimalNumberWithString:@"0"];
         }
-        canuseNET = [canuseNET decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1024"]];
+//        canuseNET = [canuseNET decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1024"]];
         NSDecimalNumber *usedNET = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",resonseObject[@"used"]]];
         if(!usedNET || [usedNET isEqualToNumber:NSDecimalNumber.notANumber]){
             usedNET = [NSDecimalNumber decimalNumberWithString:@"0"];
         }
-        usedNET = [usedNET decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1024"]];
+//        usedNET = [usedNET decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1024"]];
         NSDecimalNumber *totalNET = [canuseNET decimalNumberByAdding:usedNET]; //总抵押的NET
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -591,8 +566,8 @@
             self.mortgageINB = [mortgagedINB doubleValue];
             
             
-            self.CPUView.remainingValue.text = [NSString stringWithFormat:@"%@kb",canuseNET];
-            self.CPUView.totalValue.text = [NSString stringWithFormat:@"%@kb",totalNET];
+            self.CPUView.remainingValue.text = [NSString stringWithFormat:@"%@ Res",canuseNET];
+            self.CPUView.totalValue.text = [NSString stringWithFormat:@"%@ Res",totalNET];
             self.CPUView.mortgageValue.text = [NSString stringWithFormat:@"%.2f INB",[mortgagedINB doubleValue]];
             
             self.selectedWallet.mortgagedINB = [mortgagedINB doubleValue];
@@ -648,7 +623,7 @@
 }
 #pragma mark ----
 //点击资源信息
--(void)cpuResource:(UIGestureRecognizer *)gesture{
+-(void)cpuResource{
 //    ResourceVC *resourceVC = [[ResourceVC alloc] init];
 //    resourceVC.address = self.selectedWallet.address;
 //    resourceVC.canUseNet  = self.canUseNet;
@@ -684,7 +659,7 @@
                                 NSForegroundColorAttributeName:[UIColor whiteColor]
                                 } range:[str rangeOfString:@"INB"]];
         self.inbAssetsValue.attributedText = mutStr;//self.viewModel.assets_inb_hiden;
-        self.cnyAssetsValue.text = [NSString stringWithFormat:@"≈ **** CNY"]; //self.viewModel.assets_cny_hiden;
+        self.cnyAssetsValue.text = [NSString stringWithFormat:@"≈ **** $"]; //self.viewModel.assets_cny_hiden;
     }else{
         NSString *numberStr = [NSString changeNumberFormatter:[NSString stringWithFormat:@"%.4f", self.balance]];
         //显示资产数字
@@ -697,7 +672,7 @@
                                 } range:[str rangeOfString:@"INB"]];
         self.inbAssetsValue.attributedText = mutStr;
         NSString *cnyNumberStr = [NSString changeNumberFormatter:[NSString stringWithFormat:@"%.2f", self.balance * self.inbPrice]];
-        self.cnyAssetsValue.text = [NSString stringWithFormat:@"≈ %@ CNY", cnyNumberStr];
+        self.cnyAssetsValue.text = [NSString stringWithFormat:@"≈ %@ $", cnyNumberStr];
     }
 }
 
@@ -716,11 +691,22 @@
     __weak __block typeof(self) tmpSelf = self;
     WalletAccountsListView *listView = [WalletAccountsListView showAccountList:self.wallets selectAccount:self.selectedWallet clickBlock:^(int index) {
         tmpSelf.selectedWallet = tmpSelf.wallets[index];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD showMessage:NSLocalizedString(@"tip.wallet.change", @"切换钱包成功") toView:self.view afterDelay:0.5 animted:YES];
+            [[NSUserDefaults standardUserDefaults] setObject:_selectedWallet.walletID forKey:kUserDefaltKey_LastSelectedWalletID]; //记录上次选中的钱包
+        });
     }];
     listView.addAccountBlock = ^{
-        WalletImportVC *importVC = [[WalletImportVC alloc] init];
-        importVC.hidesBottomBarWhenPushed = YES;
-        [tmpSelf.navigationController pushViewController:importVC animated:YES];
+        if(self.wallets.count >= kWalletsMaxNumber){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD showMessage:NSLocalizedString(@"tip.importWallet.maxNumber", @"钱包数量已达到最大值") toView:App_Delegate.window afterDelay:0.5 animted:YES];
+            });
+        }else{
+            WalletImportVC *importVC = [[WalletImportVC alloc] init];
+            importVC.hidesBottomBarWhenPushed = YES;
+            [tmpSelf.navigationController pushViewController:importVC animated:YES];
+        }
     };
 }
 #pragma mark **** getter
@@ -774,8 +760,14 @@
     if (_CPUView == nil) {
         _CPUView = [[WalletInfoCPUView alloc] initWithViewModel:self.viewModel];
         _CPUView.userInteractionEnabled = YES;
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cpuResource:)];
-        [_CPUView addGestureRecognizer:tap];
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cpuResource)];
+//        [_CPUView addGestureRecognizer:tap];
+        __weak __block typeof(self) tmpSelf = self;
+        _CPUView.addMortgageBlock = ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [tmpSelf cpuResource];
+            });
+        };
     }
     return _CPUView;
 }

@@ -29,6 +29,9 @@
 "mortgage"     = "抵押";
 "redemption"   = "赎回";
 
+"Resource" = "资源(Res)";
+"Resource.hasMortgage" = "已抵押";
+
 "confirm" = "确认";
 
 "walletDetail" = "钱包详情";
@@ -158,4 +161,8 @@
 "tip.resource.redemption_2" = "2. 如果您当前已经消耗了一部分资源，则无法赎回全部的资源，请尝试减少赎回的数量。";
 "tip.resource.redemption_3" = "3. 所有赎回中的INB资源将在最后一次赎回操作的3天后退回。";
 
+"tip.importWallet.maxNumber" = "钱包数量已达到最大";
+
 "reward.receive" = "领取奖励";
+"reward.record.receive" = "领取记录";
+"tip.wallet.change" = "切换钱包成功";

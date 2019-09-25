@@ -10,5 +10,13 @@
 		<key>US</key>
 		<string>美国</string>
 	</dict>
+	<dict>
+		<key>CA</key>
+		<string>加拿大</string>
+	</dict>
+	<dict>
+		<key>PH</key>
+		<string>菲律宾</string>
+	</dict>
 </array>
 </plist>

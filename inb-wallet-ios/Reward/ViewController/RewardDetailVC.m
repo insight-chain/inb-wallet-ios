@@ -56,7 +56,7 @@
         cell.typeName.text = @"抵押期限";
         cell.value.text = @"--";
     }else if(indexPath.row == 3){
-        cell.typeName.text = @"七日年化";
+        cell.typeName.text = @"年化";
         cell.value.text = @"--";
     }else if(indexPath.row == 4){
         cell.typeName.text = @"抵押日期";

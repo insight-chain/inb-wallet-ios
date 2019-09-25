@@ -51,13 +51,12 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
 }
 
 
 -(void)setNode:(Node *)node{
     _node = node;
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:node.image]];
+    [self.headerImage sd_setImageWithURL:[NSURL URLWithString:node.image] placeholderImage:[UIImage imageNamed:@"headerImgDefault"]];
     self.nameLabel.text = node.name;
     self.addresslabel.text = node.address;
     self.introLabel.text = node.intro;

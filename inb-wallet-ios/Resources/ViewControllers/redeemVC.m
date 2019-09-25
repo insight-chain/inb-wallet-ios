@@ -73,7 +73,7 @@ static NSString *cellId_2 = @"redeemCell_2";
             morM.amount = [NSString stringWithFormat:@"%f", mor];
             morM.lockHeight = 0;
             morM.address = App_Delegate.selectAddr;
-            [arr addObject:morM];
+            [arr insertObject:morM atIndex:0];
         }
         
         tmpSelf.stores = arr;
@@ -367,6 +367,8 @@ static NSString *cellId_2 = @"redeemCell_2";
             cell = [tableView dequeueReusableCellWithIdentifier:cellId_2];
         }
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         LockModel *lock = self.stores[indexPath.row];
         
         cell.model = lock;
@@ -417,6 +419,10 @@ static NSString *cellId_2 = @"redeemCell_2";
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     LockModel *model = self.stores[indexPath.row];
+    
+    if (model.days == 0) {
+        return;
+    }
     
     MortgageDetailVC *detailVC = [[MortgageDetailVC alloc] initWithNibName:@"MortgageDetailVC" bundle:nil];
     detailVC.lockModel = model;

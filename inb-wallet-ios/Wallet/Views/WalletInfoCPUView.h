@@ -10,6 +10,9 @@
  */
 #import <UIKit/UIKit.h>
 @class WalletInfoViewModel;
+
+typedef void(^AddMortgageBlock)();
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletInfoCPUView : UIView
@@ -17,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) UILabel *remainingValue; //net 可用量
 @property(nonatomic, strong) UILabel *totalValue; // net总量
 @property(nonatomic, strong) UILabel *mortgageValue; // 抵押的INB量
+
+@property(nonatomic, copy) AddMortgageBlock addMortgageBlock;
 
 -(instancetype)initWithViewModel:(WalletInfoViewModel *)viewModel;
 

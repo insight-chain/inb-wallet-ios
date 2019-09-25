@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void(^MortgageConfirmBlock)(NSInteger type, NSString *value);
 
 @interface MortgageView : UIView
-@property (weak, nonatomic) IBOutlet UILabel *rateL; //七日年化label
+@property (weak, nonatomic) IBOutlet UILabel *rateL; //年化label
 @property (weak, nonatomic) IBOutlet UITextField *netInputTF;
 @property (weak, nonatomic) IBOutlet UIButton *days_Btn_0;
 @property (weak, nonatomic) IBOutlet UIButton *days_Btn_30;

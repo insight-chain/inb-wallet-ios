@@ -11,6 +11,8 @@
 
 #import "BasicWallet.h"
 
+#import "SDWebImage.h"
+
 @interface WalletAccountsListView()<UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, assign) int selectedIndex;
@@ -129,6 +131,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     }
     BasicWallet *wallet = self.accounts[indexPath.row];
+    [cell.imageHeaderView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"headerImgDefault"]];
     cell.nameLabel.text = wallet.imTokenMeta.name;
     cell.addressLabel.text = wallet.address;
     if (indexPath.row == self.selectedIndex) {

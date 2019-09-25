@@ -23,6 +23,8 @@
 @property(nonatomic, strong) UIImageView *progressBlue;
 @property(nonatomic, strong) UIImageView *progressGray;
 
+@property (nonatomic, strong) UIButton *addMortgage; //新增抵押
+
 @end
 
 @implementation WalletInfoCPUView
@@ -39,7 +41,8 @@
         [self addSubview:self.mortgageValue];
         [self addSubview:self.progressBlue];
         [self addSubview:self.progressGray];
-        [self addSubview:self.moreBtn];
+        [self addSubview:self.addMortgage];
+//        [self addSubview:self.moreBtn];
         [self makeConstraints];
         
         self.remainingValue.text = @"0Kb";// viewModel.cpu_remaining;
@@ -58,6 +61,16 @@
         make.top.mas_equalTo(self.bgImg).mas_offset(AdaptedWidth(20)+7);
         make.left.mas_equalTo(self.bgImg).mas_offset(AdaptedWidth(15)+7);
     }];
+    
+    [self.mortgage mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.cpuResource.mas_bottom);
+        make.right.mas_equalTo(self.mortgageValue.mas_left);
+    }];
+    [self.mortgageValue mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.mortgage);
+        make.right.mas_equalTo(self.total.mas_right);
+    }];
+    
     [self.remaining mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.cpuResource);
         make.top.mas_equalTo(self.cpuResource.mas_bottom).mas_offset((25));//AdaptedWidth
@@ -86,17 +99,11 @@
         make.right.mas_equalTo(self.totalValue.mas_right);
         make.width.mas_greaterThanOrEqualTo(AdaptedWidth(12));
     }];
-    [self.mortgage mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.addMortgage mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.bgImg.mas_centerX);
         make.bottom.mas_equalTo(self.bgImg.mas_bottom).mas_offset(-AdaptedWidth(20));
-        make.left.mas_equalTo(self.remainingValue);
-    }];
-    [self.mortgageValue mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.mortgage);
-        make.left.mas_equalTo(self.mortgage.mas_right).mas_offset(AdaptedWidth(5));
-    }];
-    [self.moreBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.mortgage);
-        make.right.mas_equalTo(self.total);
+        make.height.mas_equalTo(30);
+        make.width.mas_equalTo(120);
     }];
 }
 
@@ -135,9 +142,18 @@
     }];
 }
 
+#pragma mark ---- UIButton Action
+-(void)toAddMortgageAction:(UIButton *)sender{
+    if (self.addMortgageBlock) {
+        self.addMortgageBlock();
+    }
+}
+
+#pragma mark ----
 -(UIImageView *)bgImg{
     if (_bgImg == nil) {
         UIImage *img = [UIImage imageNamed:@"wallet_cpu_bg"];
+        _bgImg.contentMode = UIViewContentModeScaleAspectFit;
         _bgImg = [[UIImageView alloc] initWithImage:[img resizableImageWithCapInsets:UIEdgeInsetsMake(img.size.height/2.0, img.size.width/2.0, img.size.height/2.0, img.size.width/2.0) resizingMode:UIImageResizingModeStretch]];
     }
     return _bgImg;
@@ -145,7 +161,7 @@
 -(UILabel *)cpuResource{
     if (_cpuResource == nil) {
         _cpuResource = [[UILabel alloc] init];
-        _cpuResource.text = NSLocalizedString(@"netResources", @"NET资源");
+        _cpuResource.text = NSLocalizedString(@"Resource", @"资源(Res)");
         _cpuResource.textColor = kColorTitle;
         _cpuResource.font = AdaptedBoldFontSize(15);
     }
@@ -188,7 +204,7 @@
 -(UILabel *)mortgage{
     if (_mortgage == nil) {
         _mortgage = [[UILabel alloc] init];
-        _mortgage.text = NSLocalizedString(@"mortgage", @"抵押");
+        _mortgage.text = NSLocalizedString(@"Resource.hasMortgage", @"已抵押");
         _mortgage.textColor = kColorTitle;
         _mortgage.font = AdaptedFontSize(15);
     }
@@ -215,6 +231,18 @@
         _progressGray = [[UIImageView alloc] initWithImage:[img resizableImageWithCapInsets:UIEdgeInsetsMake(0, img.size.width-1, 0, 1) resizingMode:UIImageResizingModeStretch]];
     }
     return _progressGray;
+}
+-(UIButton *)addMortgage{
+    if (_addMortgage == nil) {
+        _addMortgage = [[UIButton alloc] init];
+        [_addMortgage setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
+        [_addMortgage setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _addMortgage.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_addMortgage setTitle:NSLocalizedString(@"addMortgageResources", @"新增抵押资源") forState:UIControlStateNormal];
+        [_addMortgage addTarget:self action:@selector(toAddMortgageAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _addMortgage;
 }
 -(UIButton *)moreBtn{
     if (_moreBtn == nil) {

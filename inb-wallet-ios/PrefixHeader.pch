@@ -128,15 +128,18 @@ typedef enum{
 
     #define unitINB [NSDecimalNumber decimalNumberWithString:@"100000"]
 
-    static NSInteger kMaxSeleceNodesNumber = 30;
+    #define kUserDefaltKey_LastSelectedWalletID @"LastSelectedWalletID"
 
-    /** 七日年化收益率 **/
+    static NSInteger kMaxSeleceNodesNumber = 10; //最大节点投票数
+
+    /** 年化收益率 **/
     static double kRateReturn7_30  = 1; //30天的七日年化
     static double kRateReturn7_90  = 3; //90天的七日年化
     static double kRateReturn7_180 = 5; //180天的七日年化
     static double kRateReturn7_360 = 9; //360天的七日年化
     static double kRateVote = 9; //抵押投票奖励年化
 
+    static NSInteger kWalletsMaxNumber = 20; //导入钱包的最大数量
     static NSString *kWei = @"100000";//位
 
     /* ********************** */

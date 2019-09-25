@@ -153,7 +153,7 @@
 -(UIButton *)voteBtn{
     if (_voteBtn == nil) {
         _voteBtn = [[UIButton alloc] init];
-        [_voteBtn setTitle:NSLocalizedString(@"vote", @"投票") forState:UIControlStateNormal];
+        [_voteBtn setTitle:NSLocalizedString(@"transfer.vote", @"节点投票") forState:UIControlStateNormal];
         [_voteBtn setImage:[UIImage imageNamed:@"wallet_vote"] forState:UIControlStateNormal];
         [_voteBtn setTitleColor:kColorTitle forState:UIControlStateNormal];
         _voteBtn.titleLabel.font = AdaptedFontSize(14);

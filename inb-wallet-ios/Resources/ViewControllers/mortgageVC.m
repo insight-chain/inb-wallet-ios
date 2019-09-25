@@ -31,7 +31,7 @@
     self.mortgageView.confirmBlcok = ^(NSInteger type, NSString *netValue) {
         
         if (type < 0) {
-            [MBProgressHUD showMessage:@"请选择抵押日期" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+            [MBProgressHUD showMessage:@"请选择抵押日期" toView:App_Delegate.window afterDelay:0.5 animted:YES];
             return ;
         }
         
@@ -65,7 +65,7 @@
                 
             } @catch (NSException *exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                    [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.5 animted:YES];
                 });
             } @finally {
                 [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];

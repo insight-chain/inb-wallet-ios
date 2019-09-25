@@ -11,6 +11,7 @@
 #import "TransferMessageCell.h"
 #import "TransferFooterView.h"
 
+#import "BasicWebViewController.h"
 #import "NetworkUtil.h"
 
 #define cellId_1 @"messageType_1"
@@ -141,21 +142,21 @@
         cell.rightBtnType = 1;
     }else if(indexPath.row == 2){
         cell.typeName.text = @"抵押期限";
-        cell.value.text = [NSString stringWithFormat:@"%ld天", (long)[self daysForTime]];
+        cell.value.text = [NSString stringWithFormat:@"%ld块 ≈%ld天", (long)self.lockModel.lockHeight, (long)self.lockModel.days];
     }else if(indexPath.row == 3){
-        cell.typeName.text = @"七日年化";
+        cell.typeName.text = @"年化";
         cell.value.text = [NSString stringWithFormat:@"%.2f%%", [self rateFor7day]];
     }else if(indexPath.row == 4){
-        cell.typeName.text = @"抵押日期";
-        cell.value.text = @"--";
+        cell.typeName.text = @"开始块高度"; //@"抵押日期";
+        cell.value.text = [NSString stringWithFormat:@"%ld", self.lockModel.startHeight];//@"--";
     }else if(indexPath.row == 5){
         cell.typeName.text = @"区块号";
         cell.value.text = [NSString stringWithFormat:@"%ld", (long)self.lockModel.startHeight];
         cell.showRightBtn = YES;
         cell.rightBtnType = 1;
     }else if(indexPath.row == 6){
-        cell.typeName.text = @"交易时间";
-        cell.value.text = @"--";
+        cell.typeName.text = @"结束块高度"; //@"交易时间";
+        cell.value.text = [NSString stringWithFormat:@"%ld", self.lockModel.startHeight+self.lockModel.lockHeight];//@"--";
     }else if(indexPath.row == 7){
         cell.typeName.text = @"交易号";
         cell.value.text = self.lockModel.hashStr;
@@ -167,6 +168,16 @@
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.row == 7) {
+        BasicWebViewController *webView = [[BasicWebViewController alloc] init];
+        webView.urlStr = [NSString stringWithFormat:@"%@TransactionHash?transactionHash=%@",App_Delegate.webHost, [self.lockModel.hashStr add0xIfNeeded]];
+        webView.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webView animated:YES];
+    }
+}
 
 #pragma mark ---- Button Action
 //领取按钮

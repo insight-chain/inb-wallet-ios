@@ -23,7 +23,7 @@ typedef void(^RewardBlock)(void);
 
 @property (weak, nonatomic) IBOutlet UIButton *receiveBtn; //领取按钮
 @property (weak, nonatomic) IBOutlet UILabel *mortgageValueLabel;//抵押数量
-@property (weak, nonatomic) IBOutlet UILabel *rate_7Label; //七日年化
+@property (weak, nonatomic) IBOutlet UILabel *rate_7Label; //年化
 @property (weak, nonatomic) IBOutlet UIButton *stateBtn; //状态
 
 @property (nonatomic, copy) RewardBlock rewardBlock; //领取/赎回奖励

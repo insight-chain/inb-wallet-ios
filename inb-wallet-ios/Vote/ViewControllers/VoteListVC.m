@@ -119,7 +119,7 @@
 
 -(void)requestNodes{
     __block __weak typeof(self) tmpSelf = self;
-    AppDelegate *delegate = [UIApplication sharedApplication].delegate;
+    AppDelegate *delegate = App_Delegate;
     NSString *url = [NSString stringWithFormat:@"%@node/info?page=1&limit=200", delegate.explorerHost];
     [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
         NSLog(@"%@", resonseObject);
@@ -240,6 +240,7 @@
     Node *node = self.nodesList[indexPath.row];
     
     NodeInfoVC *nodeInfo = [[NodeInfoVC alloc] init];
+    nodeInfo.wallet = self.wallet;
     nodeInfo.node = node;
     nodeInfo.selectedNodes = self.selectedNodes;
     nodeInfo.totalNode = kMaxSeleceNodesNumber; //self.nodesList.count;

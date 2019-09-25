@@ -11,6 +11,7 @@
 #import "VoteListVC.h"
 #import "RewardRecordVC.h"
 #import "MortgageDetailVC.h"
+#import "RedeemINBVC.h"
 
 #import "RedeemCell_2.h"
 
@@ -74,9 +75,10 @@ static NSString *cellId_2 = @"redeemCell_2";
 
 -(void)makeNavigation{
     UIButton *rightBtn = [[UIButton alloc] init];
-    [rightBtn setTitle:NSLocalizedString(@"reward.receive", @"领取奖励") forState:UIControlStateNormal];
+    [rightBtn setTitle:NSLocalizedString(@"reward.record.receive", @"领取记录") forState:UIControlStateNormal];
     [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [rightBtn addTarget:self action:@selector(toRecordAction:) forControlEvents:UIControlEventTouchUpInside];
+    rightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     
 }
@@ -87,9 +89,28 @@ static NSString *cellId_2 = @"redeemCell_2";
     NSString *url = [NSString stringWithFormat:@"%@account/search?address=%@", App_Delegate.explorerHost, [App_Delegate.selectAddr add0xIfNeeded]];
     [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
         NSLog(@"%@", resonseObject);
-        double mortgagete = [resonseObject[@"mortgage"] doubleValue]; //抵押的INB
-        double regular = [resonseObject[@"regular"] doubleValue]; //锁仓的INB
-        NSArray *storeDTO = resonseObject[@"storeDTO"]; //锁仓
+        
+        double mortgagete; //抵押的INB
+        double regular; //锁仓的INB
+        NSArray *storeDTO; //锁仓数组
+        id oo = resonseObject[@"address"];
+        if(!resonseObject[@"address"] || [resonseObject[@"address"] isKindOfClass:[NSNull class]]){
+            mortgagete = 0;
+            regular = 0;
+            storeDTO = @[]; //锁仓
+            
+            tmpSelf.lastReceiveVoteAwardHeight = 0;
+            tmpSelf.voteNumberValue = 0;
+            
+        }else{
+            mortgagete = [resonseObject[@"mortgage"] doubleValue]; //抵押的INB
+            regular = [resonseObject[@"regular"] doubleValue]; //锁仓的INB
+            storeDTO = resonseObject[@"storeDTO"]; //锁仓
+            
+            tmpSelf.lastReceiveVoteAwardHeight = [resonseObject[@"lastReceiveVoteAwardHeight"] integerValue];
+            tmpSelf.voteNumberValue = [resonseObject[@"voteNumber"] integerValue];
+            
+        }
         
         NSMutableArray *arr = [LockModel mj_objectArrayWithKeyValuesArray:storeDTO];
         
@@ -99,7 +120,7 @@ static NSString *cellId_2 = @"redeemCell_2";
             morM.amount = [NSString stringWithFormat:@"%f", mor];
             morM.lockHeight = 0;
             morM.address = App_Delegate.selectAddr;
-            [arr addObject:morM];
+            [arr insertObject:morM atIndex:0];
         }
         
         tmpSelf.stores = arr;
@@ -110,8 +131,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         
         /** 投票数量 **/
 //        tmpSelf.lastReceiveVoteAwardTime = [resonseObject[@"lastReceiveVoteAwardTime"] doubleValue]/1000;
-        tmpSelf.lastReceiveVoteAwardHeight = [resonseObject[@"lastReceiveVoteAwardHeight"] integerValue];
-        tmpSelf.voteNumberValue = [resonseObject[@"voteNumber"] integerValue];
+        
         
         [tmpSelf.tableView reloadData];
         
@@ -155,9 +175,25 @@ static NSString *cellId_2 = @"redeemCell_2";
         [tableView registerNib:nib forCellReuseIdentifier:cellId_2];
         cell = [tableView dequeueReusableCellWithIdentifier:cellId_2];
     }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     LockModel *model = self.stores[indexPath.row];
     cell.model = model;
     cell.currentBlockNumber = self.currentBlockNumber;
+    
+    if(model.days == 0){
+        cell.rewardBlock = ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                RedeemINBVC *redeemVC = [[RedeemINBVC alloc] init];
+                
+                self.navigationController.navigationBar.topItem.title = @"";
+                redeemVC.navigationItem.title = NSLocalizedString(@"redemption", @"赎回");
+                redeemVC.canTotal =  [model.amount doubleValue];
+                [self.navigationController pushViewController:redeemVC animated:YES];
+            });
+        };
+    }
     return cell;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -185,6 +221,10 @@ static NSString *cellId_2 = @"redeemCell_2";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     LockModel *model = self.stores[indexPath.row];
     
+    if (model.days == 0) {
+        return ;
+    }
+    
     MortgageDetailVC *detailVC = [[MortgageDetailVC alloc] initWithNibName:@"MortgageDetailVC" bundle:nil];
     detailVC.lockModel = model;
     [self.navigationController pushViewController:detailVC animated:NO];
@@ -196,6 +236,9 @@ static NSString *cellId_2 = @"redeemCell_2";
 //去投票
 - (IBAction)goVoteAction:(UIButton *)sender {
     VoteListVC *listVC = [[VoteListVC alloc] init];
+    /** 导航栏返回按钮文字 **/
+    self.navigationController.navigationBar.topItem.title = @"";
+    
     listVC.wallet = self.wallet;
     listVC.navigationItem.title = NSLocalizedString(@"vote", @"投票");
     listVC.hidesBottomBarWhenPushed = YES;
@@ -205,6 +248,11 @@ static NSString *cellId_2 = @"redeemCell_2";
 //查看领取记录
 -(void)toRecordAction:(UIButton *)sender{
     RewardRecordVC *recordVC = [[RewardRecordVC alloc] init];
+    
+    /** 导航栏返回按钮文字 **/
+    self.navigationController.navigationBar.topItem.title = @"";
+    
+    recordVC.navigationItem.title = NSLocalizedString(@"reward.record.receive", @"领取记录");
     recordVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:recordVC animated:YES];
     
