@@ -65,6 +65,10 @@
         }else if (_model.days == 360){
             self.rate_7Label.text = [NSString stringWithFormat:@"%.2f", kRateReturn7_360];
             [self.stateBtn setTitle:@"360天" forState:UIControlStateNormal];
+        }else if (_model.days == 1){
+            //测试
+            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f", 0];
+            [self.stateBtn setTitle:@"1天" forState:UIControlStateNormal];
         }
     }
     
@@ -138,7 +142,7 @@
         //到期
         [self.stateBtn setBackgroundImage:[UIImage imageNamed:@"days_no_bg"] forState:UIControlStateNormal];
         [self.stateBtn setTitle:@"抵押已到期" forState:UIControlStateNormal];
-        [self.receiveBtn setTitle:@"赎回" forState:UIControlStateNormal];
+        [self.receiveBtn setTitle:@"领取" forState:UIControlStateNormal];
         
         double reward = [self calculateStrartBlock:self.model.startHeight currentBlock:self.model.startHeight+self.model.lockHeight basic:[self.model.amount doubleValue] days:self.model.days];
         self.model.reward = reward;

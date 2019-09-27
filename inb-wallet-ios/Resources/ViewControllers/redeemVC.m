@@ -61,11 +61,12 @@ static NSString *cellId_2 = @"redeemCell_2";
     NSString *url = [NSString stringWithFormat:@"%@account/search?address=%@", App_Delegate.explorerHost, [App_Delegate.selectAddr add0xIfNeeded]];
     [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
         NSLog(@"%@", resonseObject);
-        double mortgagete = [resonseObject[@"mortgage"] doubleValue]; //抵押的INB
+        NSDictionary *res = resonseObject[@"res"];
+        double mortgagete = [res[@"mortgage"] doubleValue]; //抵押的INB
         double regular = [resonseObject[@"regular"] doubleValue]; //锁仓的INB
         NSArray *storeDTO = resonseObject[@"storeDTO"]; //锁仓
         
-        NSMutableArray *arr = [LockModel mj_objectArrayWithKeyValuesArray:storeDTO];
+        NSMutableArray *arr = [LockModel mj_objectArrayWithKeyValuesArray:storeDTO]?:@[].mutableCopy;
         
         double mor = mortgagete - regular; //抵押锁仓INB - 锁仓INB
         if ( mor > 0) {
@@ -192,7 +193,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                 
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:@"0"];
                                 NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
-                                _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardLock gasPrice:@"200000" gasLimit:@"21000" to:@"0x9518a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"ReceiveLockedAward:%@", rewardNonce] hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardLock gasPrice:@"200000" gasLimit:@"21000" to:App_Delegate.selectAddr value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"ReceiveLockedAward:%@", rewardNonce] hexString] add0xIfNeeded] password:password chainID:kChainID];
                                 
                                 //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
                                 dispatch_semaphore_signal(semaphoreLock);
@@ -391,13 +392,13 @@ static NSString *cellId_2 = @"redeemCell_2";
             cell.rewardBlock = ^{
                 //领取奖励
                 LockModel *model = self.stores[indexPath.row];
-                [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+                [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) { 
                     __block __weak typeof(self) tmpSelf = self;
                     [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         @try {
-                            [self rewardRedemptionWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID password:password];
-                            [self rewardLockWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID nonce:[NSString stringWithFormat:@"%ld", (long)model.nonce] password:password];
+//                            [self rewardRedemptionWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID password:password];
+                            [self rewardLockWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID nonce:model.hashStr password:password];
                         } @catch (NSException *exception) {
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];

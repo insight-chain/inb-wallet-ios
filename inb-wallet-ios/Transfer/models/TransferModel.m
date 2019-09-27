@@ -9,5 +9,10 @@
 #import "TransferModel.h"
 
 @implementation TransferModel
+MJExtensionCodingImplementation
+
++(NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{@"tradingHash":@"hash"};
+}
 
 @end

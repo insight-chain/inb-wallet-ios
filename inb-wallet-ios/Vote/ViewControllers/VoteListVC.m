@@ -267,7 +267,7 @@
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT - voteBarViewHeight) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.bounces = NO;
+//        _tableView.bounces = NO;
         _tableView.backgroundColor = [UIColor whiteColor];
     }
     return _tableView;

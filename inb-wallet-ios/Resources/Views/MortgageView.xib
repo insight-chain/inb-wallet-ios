@@ -12,7 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MortgageView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="525"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="725"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NET抵押" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pyd-MD-QdD">
@@ -34,9 +34,9 @@
                     </constraints>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="white_bg" translatesAutoresizingMaskIntoConstraints="NO" id="shx-pu-Pyu">
-                    <rect key="frame" x="15" y="147" width="345" height="200"/>
+                    <rect key="frame" x="15" y="147" width="345" height="400"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="200" id="FIg-Q7-ucy"/>
+                        <constraint firstAttribute="height" constant="400" id="FIg-Q7-ucy"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bj4-aS-aF3">
@@ -51,59 +51,26 @@
                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GLe-OC-eKX">
-                    <rect key="frame" x="30" y="257" width="51" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="跳过" backgroundImage="days_select_gray_bg"/>
-                    <connections>
-                        <action selector="daysSelectBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="orE-29-766"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="30" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfd-pA-Bfq">
-                    <rect key="frame" x="96" y="257" width="51" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
-                    <state key="normal" title="30 天" backgroundImage="days_select_gray_bg"/>
-                    <connections>
-                        <action selector="daysSelectBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="Qfa-t1-uYh"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="180" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ce-zE-HKU">
-                    <rect key="frame" x="228" y="257" width="51" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="180 天" backgroundImage="days_select_gray_bg"/>
-                    <connections>
-                        <action selector="daysSelectBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="6Gj-0C-b1g"/>
-                    </connections>
-                </button>
-                <button opaque="NO" tag="360" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e6M-7a-s5S">
-                    <rect key="frame" x="294" y="257" width="51" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="360 天" backgroundImage="days_select_gray_bg"/>
-                    <connections>
-                        <action selector="daysSelectBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="54e-7u-LlV"/>
-                    </connections>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. 注意在INB网络上面的任何交易都会占用CPU与NET。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UJj-gK-yqq">
-                    <rect key="frame" x="15" y="367" width="345" height="16"/>
+                    <rect key="frame" x="15" y="567" width="345" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. 所占用的资源在一定时间后会返还" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3N-iD-Nea">
-                    <rect key="frame" x="15" y="393" width="345" height="16"/>
+                    <rect key="frame" x="15" y="593" width="345" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. 您可以在任何时候赎回资源，但是会有3天的等待期。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MQa-VK-MuM">
-                    <rect key="frame" x="15" y="419" width="345" height="16"/>
+                    <rect key="frame" x="15" y="619" width="345" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lro-BL-nfy">
-                    <rect key="frame" x="87.5" y="465" width="200" height="40"/>
+                    <rect key="frame" x="87.5" y="665" width="200" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="200" id="ocP-Pp-MZl"/>
                         <constraint firstAttribute="height" constant="40" id="rij-Id-iji"/>
@@ -134,58 +101,215 @@
                         <action selector="netTFCancelBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="KyP-dJ-o8L"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="90" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAA-CB-nd0">
-                    <rect key="frame" x="162" y="257" width="51" height="60"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="90 天" backgroundImage="days_select_gray_bg"/>
+                <button opaque="NO" tag="30" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y92-MW-aAj">
+                    <rect key="frame" x="30" y="274" width="315" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="qfy-fT-XAg"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="btn_round_gray"/>
                     <connections>
-                        <action selector="daysSelectBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="L31-wc-sd2"/>
+                        <action selector="daysSelectBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="tKL-L2-xy1"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="锁仓期 ≈ 30天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u4h-72-Thv">
+                    <rect key="frame" x="239" y="285.5" width="91" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="129.6 万区块" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nqn-bU-Nt4">
+                    <rect key="frame" x="45" y="285.5" width="82" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" tag="90" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wss-iW-ehe">
+                    <rect key="frame" x="30" y="329" width="315" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="7gB-38-sSA"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="btn_round_gray"/>
+                    <connections>
+                        <action selector="daysSelectBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="ZTI-b2-xaq"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="锁仓期 ≈90天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S62-Dw-NV2">
+                    <rect key="frame" x="242.5" y="340.5" width="87.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="129.6 万区块" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XEm-8H-ePq">
+                    <rect key="frame" x="45" y="340.5" width="82" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" tag="180" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iU-y2-mnj">
+                    <rect key="frame" x="30" y="384" width="315" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="P9L-TK-2Aw"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="btn_round_gray"/>
+                    <connections>
+                        <action selector="daysSelectBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="wOp-TO-HYh"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="锁仓期 ≈ 180天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2b-ec-1Vs">
+                    <rect key="frame" x="232.5" y="395.5" width="97.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="129.6 万区块" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fux-5I-I46">
+                    <rect key="frame" x="45" y="395.5" width="82" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" tag="360" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YFo-KT-4LB">
+                    <rect key="frame" x="30" y="439" width="315" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="zWL-KU-qj6"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="btn_round_gray"/>
+                    <connections>
+                        <action selector="daysSelectBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="emN-Z5-fFv"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="锁仓期 ≈ 360天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlA-Sp-eAo">
+                    <rect key="frame" x="230" y="450.5" width="100" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="129.6 万区块" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLD-wY-2Dm">
+                    <rect key="frame" x="45" y="450.5" width="82" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7f7-nK-bTf">
+                    <rect key="frame" x="30" y="494" width="315" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="VUi-6v-Zu8"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="btn_round_gray"/>
+                    <connections>
+                        <action selector="daysSelectBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="gDy-Pi-wLh"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ijd-w2-L27">
+                    <rect key="frame" x="330" y="514" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="不选择抵押期限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMS-FL-eXx">
+                    <rect key="frame" x="45" y="505.5" width="100" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" tag="1000" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNM-1C-7dD">
+                    <rect key="frame" x="274" y="175" width="64" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="测试" backgroundImage="btn_bg_blue">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="daysSelectBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="MK6-l5-o5M"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.96470588235294119" green="0.96862745098039216" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="MQa-VK-MuM" firstAttribute="trailing" secondItem="b3N-iD-Nea" secondAttribute="trailing" id="0VF-yJ-X5v"/>
+                <constraint firstItem="3iU-y2-mnj" firstAttribute="top" secondItem="wss-iW-ehe" secondAttribute="bottom" constant="15" id="13H-IM-3hB"/>
+                <constraint firstItem="ijd-w2-L27" firstAttribute="centerY" secondItem="7f7-nK-bTf" secondAttribute="centerY" id="3cC-xX-eeT"/>
                 <constraint firstItem="b3N-iD-Nea" firstAttribute="trailing" secondItem="UJj-gK-yqq" secondAttribute="trailing" id="3zR-ER-4Gm"/>
                 <constraint firstItem="UJj-gK-yqq" firstAttribute="trailing" secondItem="shx-pu-Pyu" secondAttribute="trailing" id="50k-b9-LKl"/>
+                <constraint firstItem="VMS-FL-eXx" firstAttribute="centerY" secondItem="7f7-nK-bTf" secondAttribute="centerY" id="5NI-D2-qgI"/>
                 <constraint firstItem="UJj-gK-yqq" firstAttribute="top" secondItem="shx-pu-Pyu" secondAttribute="bottom" constant="20" id="679-7j-lGi"/>
+                <constraint firstItem="fux-5I-I46" firstAttribute="centerY" secondItem="3iU-y2-mnj" secondAttribute="centerY" id="7tx-MO-Xqn"/>
+                <constraint firstItem="wss-iW-ehe" firstAttribute="leading" secondItem="y92-MW-aAj" secondAttribute="leading" id="8X1-VN-cYJ"/>
+                <constraint firstItem="Nqn-bU-Nt4" firstAttribute="leading" secondItem="y92-MW-aAj" secondAttribute="leading" constant="15" id="B0T-1x-ofr"/>
                 <constraint firstAttribute="trailing" secondItem="shx-pu-Pyu" secondAttribute="trailing" constant="15" id="Bkz-Mh-Be1"/>
+                <constraint firstItem="GLD-wY-2Dm" firstAttribute="centerY" secondItem="YFo-KT-4LB" secondAttribute="centerY" id="BnQ-jN-4yD"/>
+                <constraint firstItem="u4h-72-Thv" firstAttribute="trailing" secondItem="y92-MW-aAj" secondAttribute="trailing" constant="-15" id="DgR-aq-Fs8"/>
+                <constraint firstItem="y92-MW-aAj" firstAttribute="trailing" secondItem="shx-pu-Pyu" secondAttribute="trailing" constant="-15" id="Dns-Qt-Dho"/>
+                <constraint firstItem="7f7-nK-bTf" firstAttribute="leading" secondItem="YFo-KT-4LB" secondAttribute="leading" id="F3v-x6-3O6"/>
                 <constraint firstItem="b3N-iD-Nea" firstAttribute="leading" secondItem="UJj-gK-yqq" secondAttribute="leading" id="GTV-ds-Krl"/>
                 <constraint firstItem="Bj4-aS-aF3" firstAttribute="top" secondItem="shx-pu-Pyu" secondAttribute="top" constant="30" id="HBw-wx-peE"/>
+                <constraint firstItem="XEm-8H-ePq" firstAttribute="leading" secondItem="wss-iW-ehe" secondAttribute="leading" constant="15" id="I64-hW-Itb"/>
                 <constraint firstItem="nh8-Pc-1Ny" firstAttribute="centerX" secondItem="Bj4-aS-aF3" secondAttribute="centerX" id="IA4-p3-dAD"/>
+                <constraint firstItem="YFo-KT-4LB" firstAttribute="leading" secondItem="3iU-y2-mnj" secondAttribute="leading" id="Igt-ES-oDd"/>
                 <constraint firstItem="mtf-0u-9Zk" firstAttribute="top" secondItem="Pyd-MD-QdD" secondAttribute="bottom" constant="10" id="K3W-4u-zQx"/>
                 <constraint firstItem="Pyd-MD-QdD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="L0p-G1-cYD"/>
                 <constraint firstItem="Ueq-bE-Biu" firstAttribute="top" secondItem="mtf-0u-9Zk" secondAttribute="top" constant="5" id="Lfm-5V-1fs"/>
                 <constraint firstItem="vx3-Pj-NWH" firstAttribute="leading" secondItem="Pyd-MD-QdD" secondAttribute="leading" id="LjV-vf-2tg"/>
+                <constraint firstItem="y92-MW-aAj" firstAttribute="leading" secondItem="shx-pu-Pyu" secondAttribute="leading" constant="15" id="MAD-fK-dCz"/>
                 <constraint firstItem="Pyd-MD-QdD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="N0i-Mg-6Oh"/>
+                <constraint firstItem="wss-iW-ehe" firstAttribute="trailing" secondItem="y92-MW-aAj" secondAttribute="trailing" id="N3i-RS-jWS"/>
                 <constraint firstItem="Ueq-bE-Biu" firstAttribute="bottom" secondItem="mtf-0u-9Zk" secondAttribute="bottom" constant="-5" id="OG5-yJ-aKK"/>
                 <constraint firstItem="b3N-iD-Nea" firstAttribute="top" secondItem="UJj-gK-yqq" secondAttribute="bottom" constant="10" id="P1i-nu-03V"/>
+                <constraint firstItem="3iU-y2-mnj" firstAttribute="leading" secondItem="wss-iW-ehe" secondAttribute="leading" id="QQG-Dw-CoG"/>
+                <constraint firstItem="YFo-KT-4LB" firstAttribute="trailing" secondItem="3iU-y2-mnj" secondAttribute="trailing" id="SMf-tF-ef4"/>
+                <constraint firstItem="fux-5I-I46" firstAttribute="leading" secondItem="3iU-y2-mnj" secondAttribute="leading" constant="15" id="Wo7-Pj-4WN"/>
+                <constraint firstItem="y92-MW-aAj" firstAttribute="top" secondItem="nh8-Pc-1Ny" secondAttribute="bottom" constant="35" id="YRA-AN-WiP"/>
+                <constraint firstItem="3iU-y2-mnj" firstAttribute="trailing" secondItem="wss-iW-ehe" secondAttribute="trailing" id="YxL-f5-PHk"/>
                 <constraint firstItem="vx3-Pj-NWH" firstAttribute="top" secondItem="mtf-0u-9Zk" secondAttribute="bottom" constant="20" id="bAE-5w-VSA"/>
+                <constraint firstItem="tlA-Sp-eAo" firstAttribute="trailing" secondItem="YFo-KT-4LB" secondAttribute="trailing" constant="-15" id="caz-GV-ADR"/>
+                <constraint firstItem="XEm-8H-ePq" firstAttribute="centerY" secondItem="wss-iW-ehe" secondAttribute="centerY" id="cuL-Zu-j8e"/>
                 <constraint firstItem="Bj4-aS-aF3" firstAttribute="centerX" secondItem="shx-pu-Pyu" secondAttribute="centerX" id="f56-Pk-j8a"/>
                 <constraint firstItem="MQa-VK-MuM" firstAttribute="leading" secondItem="b3N-iD-Nea" secondAttribute="leading" id="ftL-9Q-Dmc"/>
+                <constraint firstItem="wss-iW-ehe" firstAttribute="top" secondItem="y92-MW-aAj" secondAttribute="bottom" constant="15" id="gQa-jJ-1hD"/>
+                <constraint firstItem="Nqn-bU-Nt4" firstAttribute="centerY" secondItem="y92-MW-aAj" secondAttribute="centerY" id="gqY-cH-2zS"/>
+                <constraint firstItem="GLD-wY-2Dm" firstAttribute="leading" secondItem="YFo-KT-4LB" secondAttribute="leading" constant="15" id="gwg-Ae-FTu"/>
                 <constraint firstItem="shx-pu-Pyu" firstAttribute="top" secondItem="vx3-Pj-NWH" secondAttribute="bottom" constant="10" id="hZv-TU-d8x"/>
                 <constraint firstItem="Lro-BL-nfy" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hhS-c7-v2x"/>
                 <constraint firstItem="UJj-gK-yqq" firstAttribute="leading" secondItem="shx-pu-Pyu" secondAttribute="leading" id="iUb-hL-JaK"/>
+                <constraint firstItem="7f7-nK-bTf" firstAttribute="top" secondItem="YFo-KT-4LB" secondAttribute="bottom" constant="15" id="iYf-uM-qdi"/>
+                <constraint firstItem="S62-Dw-NV2" firstAttribute="centerY" secondItem="wss-iW-ehe" secondAttribute="centerY" id="jNG-Sd-Crc"/>
                 <constraint firstAttribute="trailing" secondItem="mtf-0u-9Zk" secondAttribute="trailing" constant="15" id="jcD-Au-onx"/>
                 <constraint firstItem="Kaw-gD-S2Y" firstAttribute="centerY" secondItem="mtf-0u-9Zk" secondAttribute="centerY" id="kSP-da-ZM5"/>
                 <constraint firstItem="MQa-VK-MuM" firstAttribute="top" secondItem="b3N-iD-Nea" secondAttribute="bottom" constant="10" id="km4-V8-3BG"/>
                 <constraint firstItem="Lro-BL-nfy" firstAttribute="top" secondItem="MQa-VK-MuM" secondAttribute="bottom" constant="30" id="lZ6-bL-xza"/>
+                <constraint firstItem="o2b-ec-1Vs" firstAttribute="trailing" secondItem="3iU-y2-mnj" secondAttribute="trailing" constant="-15" id="lao-ka-CRW"/>
                 <constraint firstAttribute="bottom" secondItem="Lro-BL-nfy" secondAttribute="bottom" constant="20" id="mII-6c-gz9"/>
                 <constraint firstItem="mtf-0u-9Zk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="nsJ-3E-bXX"/>
+                <constraint firstItem="VMS-FL-eXx" firstAttribute="leading" secondItem="7f7-nK-bTf" secondAttribute="leading" constant="15" id="oWq-E3-oD5"/>
+                <constraint firstItem="ijd-w2-L27" firstAttribute="trailing" secondItem="7f7-nK-bTf" secondAttribute="trailing" constant="-15" id="pZl-bN-3Yw"/>
                 <constraint firstItem="Ueq-bE-Biu" firstAttribute="leading" secondItem="Kaw-gD-S2Y" secondAttribute="trailing" constant="5" id="qni-oi-d3u"/>
+                <constraint firstItem="tlA-Sp-eAo" firstAttribute="centerY" secondItem="YFo-KT-4LB" secondAttribute="centerY" id="rU9-KI-azx"/>
                 <constraint firstItem="Kaw-gD-S2Y" firstAttribute="leading" secondItem="mtf-0u-9Zk" secondAttribute="leading" constant="10" id="rvD-67-Hxl"/>
                 <constraint firstItem="Ueq-bE-Biu" firstAttribute="trailing" secondItem="mtf-0u-9Zk" secondAttribute="trailing" id="s0l-wd-Hjf"/>
+                <constraint firstItem="7f7-nK-bTf" firstAttribute="trailing" secondItem="YFo-KT-4LB" secondAttribute="trailing" id="s47-I7-kmw"/>
+                <constraint firstItem="o2b-ec-1Vs" firstAttribute="centerY" secondItem="3iU-y2-mnj" secondAttribute="centerY" id="t1K-CS-yo8"/>
+                <constraint firstItem="u4h-72-Thv" firstAttribute="centerY" secondItem="y92-MW-aAj" secondAttribute="centerY" id="t4e-E3-104"/>
                 <constraint firstItem="Ueq-bE-Biu" firstAttribute="centerY" secondItem="mtf-0u-9Zk" secondAttribute="centerY" id="uU0-hT-MtA"/>
                 <constraint firstItem="nh8-Pc-1Ny" firstAttribute="top" secondItem="Bj4-aS-aF3" secondAttribute="bottom" constant="10" id="vTi-cK-psr"/>
                 <constraint firstItem="shx-pu-Pyu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="vx7-eT-Qk5"/>
+                <constraint firstItem="S62-Dw-NV2" firstAttribute="trailing" secondItem="wss-iW-ehe" secondAttribute="trailing" constant="-15" id="wTQ-Kh-cDr"/>
+                <constraint firstItem="YFo-KT-4LB" firstAttribute="top" secondItem="3iU-y2-mnj" secondAttribute="bottom" constant="15" id="yuW-Ug-jeN"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="days_Btn_0" destination="GLe-OC-eKX" id="hgL-Go-k12"/>
-                <outlet property="days_Btn_180" destination="7ce-zE-HKU" id="FPG-wz-FoO"/>
-                <outlet property="days_Btn_30" destination="cfd-pA-Bfq" id="NRx-1A-Eyg"/>
-                <outlet property="days_Btn_360" destination="e6M-7a-s5S" id="NxM-Ty-kzR"/>
-                <outlet property="days_Btn_90" destination="gAA-CB-nd0" id="w9P-zh-YoR"/>
+                <outlet property="days_Btn_0" destination="7f7-nK-bTf" id="H1f-UG-XcX"/>
+                <outlet property="days_Btn_180" destination="3iU-y2-mnj" id="gry-iM-nFT"/>
+                <outlet property="days_Btn_30" destination="y92-MW-aAj" id="kaN-Zr-5RP"/>
+                <outlet property="days_Btn_360" destination="YFo-KT-4LB" id="LJo-L2-gyE"/>
+                <outlet property="days_Btn_90" destination="wss-iW-ehe" id="KJQ-v8-rL7"/>
+                <outlet property="days_blockNumber_0" destination="VMS-FL-eXx" id="gT8-8g-Drz"/>
+                <outlet property="days_blockNumber_180" destination="fux-5I-I46" id="MfG-8t-Eya"/>
+                <outlet property="days_blockNumber_30" destination="Nqn-bU-Nt4" id="ocm-Pf-MUe"/>
+                <outlet property="days_blockNumber_360" destination="GLD-wY-2Dm" id="wvR-ZA-cZn"/>
+                <outlet property="days_blockNumber_90" destination="XEm-8H-ePq" id="IQl-lg-wFM"/>
+                <outlet property="days_time_0" destination="ijd-w2-L27" id="AoQ-Jg-bgt"/>
+                <outlet property="days_time_180" destination="o2b-ec-1Vs" id="m7p-mw-VMp"/>
+                <outlet property="days_time_30" destination="u4h-72-Thv" id="WBu-2y-z8b"/>
+                <outlet property="days_time_360" destination="tlA-Sp-eAo" id="mMG-Jo-jWI"/>
+                <outlet property="days_time_90" destination="S62-Dw-NV2" id="K3l-gh-O9o"/>
                 <outlet property="netInputTF" destination="Kaw-gD-S2Y" id="zHw-9q-m70"/>
                 <outlet property="netStrL" destination="Pyd-MD-QdD" id="txe-rI-9xf"/>
                 <outlet property="netTextFieldBg" destination="mtf-0u-9Zk" id="ePY-Qm-TM3"/>
@@ -195,13 +319,13 @@
                 <outlet property="tipL_2" destination="b3N-iD-Nea" id="O5T-7t-62a"/>
                 <outlet property="tipL_3" destination="MQa-VK-MuM" id="8UY-EM-9N2"/>
             </connections>
-            <point key="canvasLocation" x="-127.2" y="153.37331334332833"/>
+            <point key="canvasLocation" x="-127.2" y="152.47376311844079"/>
         </view>
     </objects>
     <resources>
         <image name="btn_bg_blue" width="30.5" height="40"/>
+        <image name="btn_round_gray" width="315" height="40"/>
         <image name="cancel" width="15" height="15"/>
-        <image name="days_select_gray_bg" width="51" height="60"/>
         <image name="white_bg" width="12.5" height="12.5"/>
     </resources>
 </document>

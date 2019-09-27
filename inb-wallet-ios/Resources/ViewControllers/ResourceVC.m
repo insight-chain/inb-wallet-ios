@@ -62,8 +62,8 @@
     self.mortgageLabel.font = AdaptedBoldFontSize(16);
     self.canRedemptionLabel.text = @"";
     
-    self.cpuView.balanceValue.text = [NSString stringWithFormat:@"%.5fkb",self.canUseNet];
-    self.cpuView.totalValue.text = [NSString stringWithFormat:@"%.fkb", self.totalNet];
+    self.cpuView.balanceValue.text = [NSString stringWithFormat:@"%d RES",(int)self.canUseNet];
+    self.cpuView.totalValue.text = [NSString stringWithFormat:@"%d RES", (int)self.totalNet];
     self.cpuView.mortgageValue.text = [NSString stringWithFormat:@"%.2f INB", self.mortgageINB];
     
     [self.cpuView updataProgress]; //更新进度条图片

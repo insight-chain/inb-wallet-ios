@@ -13,6 +13,8 @@
 
 @interface RequestVC ()
 
+@property (nonatomic, strong) UILabel *tipLabel;
+
 @property(nonatomic, strong) UIView *maskView; //蒙版遮罩
 @property(nonatomic, strong) UIImageView *bgView; //收款背景图
 
@@ -29,8 +31,15 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    /** View被导航栏遮挡问题的解决 **/
+    if( ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7.0)) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+        self.modalPresentationCapturesStatusBarAppearance = NO;
+    }
+    
     self.address.text = self.addressStr;
-    self.QRImg.image = [UIImage createQRImgae:self.address.text size:AdaptedWidth(195) centerImg:nil centerImgSize:0];
+    self.QRImg.image = [UIImage createQRImgae:self.address.text size:AdaptedWidth(230) centerImg:nil centerImgSize:0];
     
     self.addressaCopy.selected = NO;
 }
@@ -39,52 +48,42 @@
     [super viewWillAppear:animated];
     
     UIWindow *window = [[UIApplication sharedApplication].windows lastObject];
-//    [window addSubview:self.maskView];
-    [self.view addSubview:self.maskView];
+
     
-    self.maskView.frame = CGRectMake(0, 0, window.frame.size.width, window.frame.size.height);
-    [self.maskView addSubview:self.bgView];
-    
-    [self.maskView addSubview:self.QRImg];
-    [self.maskView addSubview:self.address];
-    [self.maskView addSubview:self.addressaCopy];
-    [self.maskView addSubview:self.saveQR];
+    [self.view addSubview:self.tipLabel];
+    [self.view addSubview:self.QRImg];
+    [self.view addSubview:self.address];
+    [self.view addSubview:self.addressaCopy];
+    [self.view addSubview:self.saveQR];
     
     
-    [self.bgView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.maskView.mas_centerX);
-        make.centerY.mas_equalTo(self.maskView.mas_centerY);
-        make.width.mas_equalTo(AdaptedWidth(320));
-        make.height.mas_equalTo(AdaptedWidth(430));
+    [self.tipLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.top.mas_equalTo(AdaptedWidth(45));
     }];
     
     [self.QRImg mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.top.mas_equalTo(self.bgView.mas_top).mas_offset(AdaptedWidth(40));
-        make.height.width.mas_equalTo(AdaptedWidth(195));
+        make.centerX.mas_equalTo(self.view.mas_centerX);
+        make.top.mas_equalTo(self.tipLabel.mas_bottom).mas_offset(AdaptedWidth(15));
+        make.height.width.mas_equalTo(AdaptedWidth(230));
     }];
     [self.address mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.QRImg.mas_centerX);
-        make.top.mas_equalTo(self.QRImg.mas_bottom).mas_offset(AdaptedWidth(25));
+        make.width.mas_equalTo(self.QRImg.mas_width);
+        make.top.mas_equalTo(self.QRImg.mas_bottom).mas_offset(AdaptedWidth(15));
     }];
     [self.addressaCopy mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.address.mas_centerX);
-        make.top.mas_equalTo(self.address.mas_bottom).mas_offset(AdaptedWidth(15));
+        make.top.mas_equalTo(self.address.mas_bottom).mas_offset(AdaptedWidth(25));
         make.width.mas_equalTo(AdaptedWidth(75));
         make.height.mas_equalTo(AdaptedWidth(30));
     }];
     [self.saveQR mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.bgView.mas_centerX);
-        make.bottom.mas_equalTo(self.bgView.mas_bottom).mas_offset(AdaptedWidth(-30));
+        make.centerX.mas_equalTo(self.addressaCopy.mas_centerX);
+        make.top.mas_equalTo(self.addressaCopy.mas_bottom).mas_offset(AdaptedWidth(30));
         make.width.mas_equalTo(AdaptedWidth(195));
         make.height.mas_equalTo(AdaptedWidth(40));
     }];
-    
-//    self.maskView.hidden = YES;
-        [UIView animateWithDuration:0.5 animations:^{
-//           self.maskView.frame = CGRectMake(0, 0, window.frame.size.width, window.frame.size.height);
-//            self.maskView.hidden = NO;
-        }];
     
 }
 -(void)viewDidAppear:(BOOL)animated{
@@ -108,14 +107,23 @@
 -(void)saveQRAction:(UIButton *)sender{
     [[TZImageManager manager] savePhotoWithImage:self.QRImg.image completion:^(NSError *error) {
         if (error) {
-            [MBProgressHUD showMessage:@"保存二维码失败" toView:[[UIApplication sharedApplication].windows lastObject] afterDelay:0.5 animted:YES];
+            [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.saveCode.failed", @"保存二维码失败") toView:[[UIApplication sharedApplication].windows lastObject] afterDelay:0.5 animted:YES];
         }else{
-            [MBProgressHUD showMessage:@"保存二维码成功" toView:[[UIApplication sharedApplication].windows lastObject] afterDelay:0.5 animted:YES];
+            [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.saveCode.success", @"保存二维码成功") toView:[[UIApplication sharedApplication].windows lastObject] afterDelay:0.5 animted:YES];
         }
     }];
 }
 
 #pragma mark ---- getter
+- (UILabel *)tipLabel{
+    if (_tipLabel == nil) {
+        _tipLabel = [[UILabel alloc] init];
+        _tipLabel.textColor = kColorTitle;
+        _tipLabel.font = AdaptedFontSize(15);
+        _tipLabel.text = NSLocalizedString(@"collection.tip.scan", @"扫一扫，向我支付INB");
+    }
+    return _tipLabel;
+}
 -(UIView *)maskView{
     if (_maskView == nil) {
         _maskView = [[UIView alloc] init];
@@ -141,8 +149,10 @@
 -(UILabel *)address{
     if (_address == nil) {
         _address = [[UILabel alloc] init];
-        _address.font = AdaptedFontSize(12);
+        _address.numberOfLines = 0;
+        _address.font = AdaptedFontSize(15);
         _address.textColor = kColorAuxiliary2;
+        _address.textAlignment = NSTextAlignmentCenter;
     }
     return _address;
 }

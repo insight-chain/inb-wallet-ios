@@ -58,6 +58,11 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.99963909387588501" green="1" blue="0.99975615739822388" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="amountLabel" destination="aHM-bQ-kpd" id="bVl-bC-zfh"/>
+                <outlet property="timeLabel" destination="PdA-tM-KXk" id="ln1-Hw-L9i"/>
+                <outlet property="typeLabel" destination="fHd-cM-nET" id="Sg9-hK-IZc"/>
+            </connections>
             <point key="canvasLocation" x="97.826086956521749" y="50.558035714285715"/>
         </tableViewCell>
     </objects>

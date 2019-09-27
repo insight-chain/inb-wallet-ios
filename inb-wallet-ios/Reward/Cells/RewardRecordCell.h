@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TransferModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RewardRecordCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *amountLabel;
+
+@property (nonatomic, strong) TransferModel *model;
 
 @end
 

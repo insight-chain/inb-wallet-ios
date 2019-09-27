@@ -228,6 +228,10 @@
                                                                      [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.failed", @"投票失败") toView:tmpSelf.view afterDelay:0.3 animted:NO];
                                                                      return ;
                                                                  }
+                                                                 
+                                                                 if(responseObject[@"error"]){
+                                                                     [MBProgressHUD showMessage:responseObject[@"error"] toView:tmpSelf.view afterDelay:0.3 animted:NO];
+                                                                 }
                                                                  NSLog(@"%@---%@",[responseObject  class], responseObject);
                                                                  
                                                                  dispatch_async(dispatch_get_main_queue(), ^{

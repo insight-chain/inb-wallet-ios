@@ -29,8 +29,9 @@
 "mortgage"     = "抵押";
 "redemption"   = "赎回";
 
-"Resource" = "资源(Res)";
+"Resource" = "资源(RES)";
 "Resource.hasMortgage" = "已抵押";
+"Resource.record" = "抵押记录";
 
 "confirm" = "确认";
 
@@ -80,6 +81,8 @@
 "backup.tip_2" = "请勿通过网络工具传输私钥，一旦被黑客获取将造成不可挽回的损失";
 
 "record.trading.empty" = "暂无交易历史";
+
+"collection.tip.scan" = "扫一扫，向我支付INB";
 
 "transfer.sendMoney" = "发款方";
 "transfer.collectionMoney" = "收款方";
@@ -166,3 +169,6 @@
 "reward.receive" = "领取奖励";
 "reward.record.receive" = "领取记录";
 "tip.wallet.change" = "切换钱包成功";
+
+"message.tip.saveCode.success" = "保存二维码成功";
+"message.tip.saveCode.failed" = "保存二维码失败";

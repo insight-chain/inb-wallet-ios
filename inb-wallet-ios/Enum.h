@@ -73,8 +73,17 @@ typedef NS_ENUM(NSInteger, TxType) {
     TxType_receive, //领取赎回
     TxType_rewardLock, //锁仓奖励
     TxType_rewardVote, //投票奖励
-    TxType_payment, //代付
-    TxType_nodeRegister,  //注册节点
+    
+    TxType_updateNodeInfo, //更新节点信息 TxType_nodeRegister,  //注册节点
+    
+    TxType_specila,  //特殊效益
+    TxType_contract, //创建合约
+    TxType_issueLightToken, //发行token
+    TxType_transferLightToken, //token转账
+    
+    TxType_insteadMortgage, //代他人抵押
+//    TxType_payment, //代付
+    
 };
 
 

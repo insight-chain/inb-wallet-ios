@@ -11,7 +11,8 @@
 #import <UIKit/UIKit.h>
 @class WalletInfoViewModel;
 
-typedef void(^AddMortgageBlock)();
+typedef void(^AddMortgageBlock)(void);
+typedef void(^ToMortgageRecordBlock)(void);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) UILabel *mortgageValue; // 抵押的INB量
 
 @property(nonatomic, copy) AddMortgageBlock addMortgageBlock;
+@property(nonatomic, copy) ToMortgageRecordBlock toMortgageBlock;
 
 -(instancetype)initWithViewModel:(WalletInfoViewModel *)viewModel;
 

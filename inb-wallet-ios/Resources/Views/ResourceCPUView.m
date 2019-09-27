@@ -21,6 +21,8 @@
 
 @property(nonatomic, strong) UILabel *redemptionLabel; //赎回
 
+@property (nonatomic, strong) UIButton *resetBtn; //资源重置
+
 @end
 
 @implementation ResourceCPUView
@@ -176,7 +178,7 @@
 -(UILabel *)cpuLabel{
     if (_cpuLabel == nil) {
         _cpuLabel = [[UILabel alloc] init];
-        _cpuLabel.text = NSLocalizedString(@"Resource", @"资源(Res)");
+        _cpuLabel.text = NSLocalizedString(@"Resource", @"资源(RES)");
         _cpuLabel.font = AdaptedBoldFontSize(15);
         _cpuLabel.textColor = kColorTitle;
     }

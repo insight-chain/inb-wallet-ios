@@ -18,6 +18,9 @@ MJExtensionCodingImplementation
 }
 
 -(NSInteger)days{
+    if(self.lockHeight == 100){
+        return 1;
+    }
     return self.lockHeight*2/(24*60*60);
 }
 

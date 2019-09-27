@@ -15,6 +15,7 @@
 #import "VoteListVC.h"
 #import "RewardVC.h"
 
+#import "redeemVC.h"
 #import "TransferVC.h"
 #import "ResourceVC.h"
 #import "TransferListVC.h"
@@ -94,7 +95,8 @@
     [NotificationCenter addObserver:self selector:@selector(mortgageChangeNoti:) name:NOTI_MORTGAGE_CHANGE object:nil];
     [NotificationCenter addObserver:self selector:@selector(mortgageChangeNoti:) name:NOTI_BALANCE_CHANGE object:nil];
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-kBottomBarHeight)];
+    
     if (@available(iOS 11.0, *)) {
         self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever; //贯穿整个屏幕
     } else {
@@ -160,7 +162,7 @@
 //                    qrVC.codeConfig = qrConfig;
 //                    qrVC.hidesBottomBarWhenPushed = YES;
 //                    [tmpSelf.navigationController pushViewController:qrVC animated:YES];
-                    if(tmpSelf.mortgageINB < 100000){
+                    if(tmpSelf.mortgageINB < 10000){
                         [MBProgressHUD showMessage:@"抵押INB数量不足,请前往抵押" toView:tmpSelf.view afterDelay:0.3 animted:YES];
                     }else{
                         [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
@@ -359,7 +361,7 @@
         make.top.mas_equalTo(self.functionView.mas_bottom).mas_offset(AdaptedHeight(5));
         make.left.mas_equalTo(AdaptedWidth(16));
         make.right.mas_equalTo(-AdaptedWidth(16));
-        make.height.mas_equalTo(self.CPUView.mas_width).multipliedBy((184.5+10)/359);
+        make.height.mas_equalTo(self.CPUView.mas_width).multipliedBy((253.5)/359);
     }];
 }
 /** 设置状态栏的颜色，配合根控制器的 childViewControllerForStatusBarStyle 使用**/
@@ -536,27 +538,42 @@
         NSLog(@"%@", resonseObject);
         [self.scrollView.mj_header endRefreshing];
         
-         NSDecimalNumber *balance = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@", resonseObject[@"balance"]]];
-        if(!balance || [balance isEqualToNumber:NSDecimalNumber.notANumber]){
+        NSString *address = resonseObject[@"address"];
+        
+        NSDecimalNumber *balance; //余额
+        NSDecimalNumber *mortgagedINB; //抵押的INB
+        NSDecimalNumber *canuseNET; //可用的资源
+        NSDecimalNumber *usedNET; //已使用的资源
+        if (!address || [address isKindOfClass:[NSNull class]]) {
             balance = [NSDecimalNumber decimalNumberWithString:@"0"];
-        }
-        
-        NSDecimalNumber *mortgagedINB = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@", resonseObject[@"mortgage"]]]; //抵押的INB
-        if(!mortgagedINB || [mortgagedINB isEqualToNumber:NSDecimalNumber.notANumber]){
             mortgagedINB = [NSDecimalNumber decimalNumberWithString:@"0"];
+            canuseNET = [NSDecimalNumber decimalNumberWithString:@"0"];
+            usedNET = [NSDecimalNumber decimalNumberWithString:@"0"];
+            return ;
+        }else{
+            balance = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@", resonseObject[@"balance"]]];
+            if(!balance || [balance isEqualToNumber:NSDecimalNumber.notANumber]){
+                balance = [NSDecimalNumber decimalNumberWithString:@"0"];
+            }
+            
+            NSDictionary *res = resonseObject[@"res"];
+            mortgagedINB = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@", res[@"mortgage"]]]; //抵押的INB
+            if(!mortgagedINB || [mortgagedINB isEqualToNumber:NSDecimalNumber.notANumber]){
+                mortgagedINB = [NSDecimalNumber decimalNumberWithString:@"0"];
+            }
+            
+            NSString *usableStr = [NSString stringWithFormat:@"%@",res[@"usable"]];
+             canuseNET = [NSDecimalNumber decimalNumberWithString:usableStr];
+            if(!canuseNET || [canuseNET isEqualToNumber:NSDecimalNumber.notANumber]){
+                canuseNET = [NSDecimalNumber decimalNumberWithString:@"0"];
+            }
+            
+            usedNET = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",res[@"used"]]];
+            if(!usedNET || [usedNET isEqualToNumber:NSDecimalNumber.notANumber]){
+                usedNET = [NSDecimalNumber decimalNumberWithString:@"0"];
+            }
         }
         
-        NSString *usableStr = [NSString stringWithFormat:@"%@",resonseObject[@"usable"]];
-        NSDecimalNumber *canuseNET = [NSDecimalNumber decimalNumberWithString:usableStr];
-        if(!canuseNET || [canuseNET isEqualToNumber:NSDecimalNumber.notANumber]){
-            canuseNET = [NSDecimalNumber decimalNumberWithString:@"0"];
-        }
-//        canuseNET = [canuseNET decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1024"]];
-        NSDecimalNumber *usedNET = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@",resonseObject[@"used"]]];
-        if(!usedNET || [usedNET isEqualToNumber:NSDecimalNumber.notANumber]){
-            usedNET = [NSDecimalNumber decimalNumberWithString:@"0"];
-        }
-//        usedNET = [usedNET decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1024"]];
         NSDecimalNumber *totalNET = [canuseNET decimalNumberByAdding:usedNET]; //总抵押的NET
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -566,8 +583,8 @@
             self.mortgageINB = [mortgagedINB doubleValue];
             
             
-            self.CPUView.remainingValue.text = [NSString stringWithFormat:@"%@ Res",canuseNET];
-            self.CPUView.totalValue.text = [NSString stringWithFormat:@"%@ Res",totalNET];
+            self.CPUView.remainingValue.text = [NSString stringWithFormat:@"%@ RES",canuseNET];
+            self.CPUView.totalValue.text = [NSString stringWithFormat:@"%@ RES",totalNET];
             self.CPUView.mortgageValue.text = [NSString stringWithFormat:@"%.2f INB",[mortgagedINB doubleValue]];
             
             self.selectedWallet.mortgagedINB = [mortgagedINB doubleValue];
@@ -579,6 +596,8 @@
  
         
     } failed:^(NSError * _Nonnull error) {
+        [self.scrollView.mj_header endRefreshing];
+        [MBProgressHUD showMessage:@"网络请求失败" toView:App_Delegate.window afterDelay:0.5 animted:YES];
         NSLog(@"%@", error);
     }];
 }
@@ -766,6 +785,15 @@
         _CPUView.addMortgageBlock = ^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 [tmpSelf cpuResource];
+            });
+        };
+        _CPUView.toMortgageBlock = ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                redeemVC *vc2 = [[redeemVC alloc] init];
+                vc2.navigationItem.title = NSLocalizedString(@"mortgage", @"抵押");
+                vc2.hidesBottomBarWhenPushed = YES;
+                
+                [self.navigationController pushViewController:vc2 animated:YES];
             });
         };
     }

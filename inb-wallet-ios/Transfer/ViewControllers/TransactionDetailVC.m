@@ -16,6 +16,8 @@
 #import "TransferMessageCell.h"
 #import "TransferMessage_2Cell.h"
 
+#import "NSDate+DateString.h"
+
 #define cellId_1 @"messageType_1"
 #define cellId_2 @"messageType_2"
 
@@ -145,7 +147,7 @@
     }else if (indexPath.row == 3){
         if(self.tranferModel.type == tradingType_vote){
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
-            cell_1.value.text = self.tranferModel.timestamp;
+            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm"];
             cell_1.showRightBtn = NO;
             return cell_1;
         }else{
@@ -164,7 +166,7 @@
             return cell_1;
         }else{
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
-            cell_1.value.text = self.tranferModel.timestamp;
+            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm"];
             cell_1.showRightBtn = NO;
             return cell_1;
         }

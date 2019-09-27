@@ -37,21 +37,20 @@
 -(void)awakeFromNib{
     [super awakeFromNib];
     
-    self.days_Btn_30.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.days_Btn_30.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self.days_Btn_30 setTitle:@"30\n天" forState:UIControlStateNormal];
+    self.days_blockNumber_30.text = [NSString stringWithFormat:@"%d区块", (24*60*60)/2*30];
+    self.days_time_30.text = [NSString stringWithFormat:@"锁仓期 ≈%d天", 30];
     
-    self.days_Btn_90.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.days_Btn_90.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self.days_Btn_90 setTitle:@"90\n天" forState:UIControlStateNormal];
+    self.days_blockNumber_90.text = [NSString stringWithFormat:@"%d区块", (24*60*60)/2*90];
+    self.days_time_90.text = [NSString stringWithFormat:@"锁仓期 ≈%d天", 90];
     
-    self.days_Btn_180.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.days_Btn_180.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self.days_Btn_180 setTitle:@"180\n天" forState:UIControlStateNormal];
+    self.days_blockNumber_180.text = [NSString stringWithFormat:@"%d区块", (24*60*60)/2*180];
+    self.days_time_180.text = [NSString stringWithFormat:@"锁仓期 ≈%d天", 180];
     
-    self.days_Btn_360.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.days_Btn_360.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self.days_Btn_360 setTitle:@"360\n天" forState:UIControlStateNormal];
+    self.days_blockNumber_360.text = [NSString stringWithFormat:@"%d区块", (24*60*60)/2*360];
+    self.days_time_360.text = [NSString stringWithFormat:@"锁仓期 ≈%d天", 360];
+    
+    self.days_blockNumber_0.text = [NSString stringWithFormat:@"不选择抵押期限"];
+    self.days_time_0.text = @"";
 }
 
 #pragma mark ---- Button Action
@@ -62,92 +61,153 @@
     switch (tag) {
         case 0:{
             if (self.selectDays != 0) {
-                [self.days_Btn_0 setBackgroundImage:[UIImage imageNamed:@"days_select_blue_bg"] forState:UIControlStateNormal];
+                [self.days_Btn_0 setBackgroundImage:[UIImage imageNamed:@"btn_round_blue"] forState:UIControlStateNormal];
+                self.days_blockNumber_0.textColor = [UIColor whiteColor];
+                self.days_time_0.textColor = [UIColor whiteColor];
                 
-                [self.days_Btn_30 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-                [self.days_Btn_90 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-                [self.days_Btn_180 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-                [self.days_Btn_360 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
+                [self.days_Btn_30 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+                self.days_blockNumber_30.textColor = kColorAuxiliary2;
+                self.days_time_30.textColor = kColorAuxiliary2;
                 
-                [self.days_Btn_0 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-                [self.days_Btn_30 setTitleColor:kColorBlue forState:UIControlStateNormal];
-                [self.days_Btn_90 setTitleColor:kColorBlue forState:UIControlStateNormal];
-                [self.days_Btn_180 setTitleColor:kColorBlue forState:UIControlStateNormal];
-                [self.days_Btn_360 setTitleColor:kColorBlue forState:UIControlStateNormal];
+                [self.days_Btn_90 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+                self.days_blockNumber_90.textColor = kColorAuxiliary2;
+                self.days_time_90.textColor = kColorAuxiliary2;
+                
+                [self.days_Btn_180 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+                self.days_blockNumber_180.textColor = kColorAuxiliary2;
+                self.days_time_180.textColor = kColorAuxiliary2;
+                
+                [self.days_Btn_360 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+                self.days_blockNumber_360.textColor = kColorAuxiliary2;
+                self.days_time_360.textColor = kColorAuxiliary2;
+                
+                
                 self.rateL.text = [NSString stringWithFormat:@"0%%"];
                 self.selectDays = 0;
             }
             break;
         }
         case 30:{
-            [self.days_Btn_0 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_30 setBackgroundImage:[UIImage imageNamed:@"days_select_blue_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_90 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_180 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_360 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
+            [self.days_Btn_0 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_0.textColor = kColorAuxiliary2;
+            self.days_time_0.textColor = kColorAuxiliary2;
             
-            [self.days_Btn_0 setTitleColor:kColorBlue forState:UIControlStateNormal];
-            [self.days_Btn_30 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [self.days_Btn_90 setTitleColor:kColorBlue forState:UIControlStateNormal];
-            [self.days_Btn_180 setTitleColor:kColorBlue forState:UIControlStateNormal];
-            [self.days_Btn_360 setTitleColor:kColorBlue forState:UIControlStateNormal];
+            [self.days_Btn_30 setBackgroundImage:[UIImage imageNamed:@"btn_round_blue"] forState:UIControlStateNormal];
+            self.days_blockNumber_30.textColor = [UIColor whiteColor];
+            self.days_time_30.textColor = [UIColor whiteColor];
+            
+            [self.days_Btn_90 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_90.textColor = kColorAuxiliary2;
+            self.days_time_90.textColor = kColorAuxiliary2;
+            
+            [self.days_Btn_180 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_180.textColor = kColorAuxiliary2;
+            self.days_time_180.textColor = kColorAuxiliary2;
+            
+            [self.days_Btn_360 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_360.textColor = kColorAuxiliary2;
+            self.days_time_360.textColor = kColorAuxiliary2;
             
             self.rateL.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_30];
             self.selectDays = 30;
             break;
         }
         case 90:{
-            [self.days_Btn_0 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_30 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_90 setBackgroundImage:[UIImage imageNamed:@"days_select_blue_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_180 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_360 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
+            [self.days_Btn_0 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_0.textColor = kColorAuxiliary2;
+            self.days_time_0.textColor = kColorAuxiliary2;
             
-            [self.days_Btn_0 setTitleColor:kColorBlue forState:UIControlStateNormal];
-            [self.days_Btn_30 setTitleColor:kColorBlue forState:UIControlStateNormal];
-            [self.days_Btn_90 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [self.days_Btn_180 setTitleColor:kColorBlue forState:UIControlStateNormal];
-            [self.days_Btn_360 setTitleColor:kColorBlue forState:UIControlStateNormal];
+            [self.days_Btn_30 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_30.textColor = kColorAuxiliary2;
+            self.days_time_30.textColor = kColorAuxiliary2;
+            
+            [self.days_Btn_90 setBackgroundImage:[UIImage imageNamed:@"btn_round_blue"] forState:UIControlStateNormal];
+            self.days_blockNumber_90.textColor = [UIColor whiteColor];
+            self.days_time_90.textColor = [UIColor whiteColor];
+            
+            [self.days_Btn_180 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_180.textColor = kColorAuxiliary2;
+            self.days_time_180.textColor = kColorAuxiliary2;
+            
+            [self.days_Btn_360 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_360.textColor = kColorAuxiliary2;
+            self.days_time_360.textColor = kColorAuxiliary2;
             
             self.rateL.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_90];
             self.selectDays = 90;
             break;
         }
         case 180:{
-            [self.days_Btn_0 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_30 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_90 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_180 setBackgroundImage:[UIImage imageNamed:@"days_select_blue_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_360 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
+            [self.days_Btn_0 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_0.textColor = kColorAuxiliary2;
+            self.days_time_0.textColor = kColorAuxiliary2;
             
-            [self.days_Btn_0 setTitleColor:kColorBlue forState:UIControlStateNormal];
-            [self.days_Btn_30 setTitleColor:kColorBlue forState:UIControlStateNormal];
-            [self.days_Btn_90 setTitleColor:kColorBlue forState:UIControlStateNormal];
-            [self.days_Btn_180 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            [self.days_Btn_360 setTitleColor:kColorBlue forState:UIControlStateNormal];
+            [self.days_Btn_30 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_30.textColor = kColorAuxiliary2;
+            self.days_time_30.textColor = kColorAuxiliary2;
+            
+            [self.days_Btn_90 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_90.textColor = kColorAuxiliary2;
+            self.days_time_90.textColor = kColorAuxiliary2;
+            
+            [self.days_Btn_180 setBackgroundImage:[UIImage imageNamed:@"btn_round_blue"] forState:UIControlStateNormal];
+            self.days_blockNumber_180.textColor = [UIColor whiteColor];
+            self.days_time_180.textColor = [UIColor whiteColor];
+            
+            [self.days_Btn_360 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_360.textColor = kColorAuxiliary2;
+            self.days_time_360.textColor = kColorAuxiliary2;
             
             self.rateL.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_180];
             self.selectDays = 180;
             break;
         }
         case 360:{
-            [self.days_Btn_0 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_30 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_90 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_180 setBackgroundImage:[UIImage imageNamed:@"days_select_gray_bg"] forState:UIControlStateNormal];
-            [self.days_Btn_360 setBackgroundImage:[UIImage imageNamed:@"days_select_blue_bg"] forState:UIControlStateNormal];
+            [self.days_Btn_0 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_0.textColor = kColorAuxiliary2;
+            self.days_time_0.textColor = kColorAuxiliary2;
             
-            [self.days_Btn_0 setTitleColor:kColorBlue forState:UIControlStateNormal];
-            [self.days_Btn_30 setTitleColor:kColorBlue forState:UIControlStateNormal];
-            [self.days_Btn_90 setTitleColor:kColorBlue forState:UIControlStateNormal];
-            [self.days_Btn_180 setTitleColor:kColorBlue forState:UIControlStateNormal];
-            [self.days_Btn_360 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self.days_Btn_30 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_30.textColor = kColorAuxiliary2;
+            self.days_time_30.textColor = kColorAuxiliary2;
+            
+            [self.days_Btn_90 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_90.textColor = kColorAuxiliary2;
+            self.days_time_90.textColor = kColorAuxiliary2;
+            
+            [self.days_Btn_180 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_180.textColor = kColorAuxiliary2;
+            self.days_time_180.textColor = kColorAuxiliary2;
+            
+            [self.days_Btn_360 setBackgroundImage:[UIImage imageNamed:@"btn_round_blue"] forState:UIControlStateNormal];
+            self.days_blockNumber_360.textColor = [UIColor whiteColor];
+            self.days_time_360.textColor = [UIColor whiteColor];
             
             self.rateL.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_360];
             self.selectDays = 360;
             break;
         }
         default:
+            [self.days_Btn_0 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_0.textColor = kColorAuxiliary2;
+            self.days_time_0.textColor = kColorAuxiliary2;
+            
+            [self.days_Btn_30 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_30.textColor = kColorAuxiliary2;
+            self.days_time_30.textColor = kColorAuxiliary2;
+            
+            [self.days_Btn_90 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_90.textColor = kColorAuxiliary2;
+            self.days_time_90.textColor = kColorAuxiliary2;
+            
+            [self.days_Btn_180 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_180.textColor = kColorAuxiliary2;
+            self.days_time_180.textColor = kColorAuxiliary2;
+            
+            [self.days_Btn_360 setBackgroundImage:[UIImage imageNamed:@"btn_round_gray"] forState:UIControlStateNormal];
+            self.days_blockNumber_360.textColor = kColorAuxiliary2;
+            self.days_time_360.textColor = kColorAuxiliary2;
+            self.selectDays = 1000; //表示测试
             break;
     }
 }

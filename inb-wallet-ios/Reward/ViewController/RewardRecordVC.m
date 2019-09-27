@@ -14,6 +14,8 @@
 
 #import "NetworkUtil.h"
 
+#import "TransferModel.h"
+
 #import "MJRefresh.h"
 #import "LYEmptyViewHeader.h"
 
@@ -22,7 +24,7 @@ static NSString *kCellId = @"rewardRecordCell";
 @interface RewardRecordVC ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (nonatomic, strong) NSMutableArray *recordsData;
+@property (nonatomic, strong) NSMutableArray<TransferModel *> *recordsData;
 
 @property (nonatomic, strong) LYEmptyView *noDataView;
 @property (nonatomic, strong) LYEmptyView *noNetworkView;
@@ -42,28 +44,34 @@ static NSString *kCellId = @"rewardRecordCell";
         [self requestRecord];
     }];
     
+    [self.tableView.mj_header beginRefreshing];
+    self.tableView.ly_emptyView = self.noDataView;
 }
 
 -(void)requestRecord{
-    NSString *url = [NSString stringWithFormat:@"%@transaction/award?address=%@", App_Delegate.explorerHost, App_Delegate.selectAddr];
+    __block __weak typeof(self) tmpSelf = self;
+    
+    NSString *url = [NSString stringWithFormat:@"%@transaction/award?address=%@", App_Delegate.explorerHost, [App_Delegate.selectAddr add0xIfNeeded]];
     [NetworkUtil getRequest:url params:@{}
                     success:^(id  _Nonnull resonseObject) {
                         
                         [self.tableView.mj_header endRefreshing];
                         [self.tableView.mj_footer endRefreshing];
                         
+                        
                         NSInteger totalPage = [resonseObject[@"totalPages"] integerValue];
                         NSInteger totalCount = [resonseObject[@"totalCount"] integerValue];
                         NSArray *items = resonseObject[@"items"];
                         
-                        NSLog(@"%@", resonseObject);
+                        tmpSelf.recordsData = [TransferModel mj_objectArrayWithKeyValuesArray:items];
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            
-                            [self.tableView ly_startLoading];
+                            [self.tableView reloadData];
+                            [self.tableView ly_endLoading];
                         });
                     } failed:^(NSError * _Nonnull error) {
                         
+                        [self.tableView ly_endLoading];
                         [self.tableView.mj_header endRefreshing];
                         [self.tableView.mj_footer endRefreshing];
                         
@@ -74,7 +82,7 @@ static NSString *kCellId = @"rewardRecordCell";
 
 #pragma mark ---- UITableViewDelegate && Datasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1; //self.recordsData.count;
+    return self.recordsData.count;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -84,10 +92,13 @@ static NSString *kCellId = @"rewardRecordCell";
         [tableView registerNib:nib forCellReuseIdentifier:kCellId];
         cell = [tableView dequeueReusableCellWithIdentifier:kCellId];
     }
+    TransferModel *model = self.recordsData[indexPath.row];
+    cell.model = model;
     
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     RewardDetailVC *rewardVC = [[RewardDetailVC alloc] init];
     rewardVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:rewardVC animated:YES];
@@ -111,5 +122,10 @@ static NSString *kCellId = @"rewardRecordCell";
     }
     return _noDataView;
 }
-
+-(NSMutableArray<TransferModel *> *)recordsData{
+    if(_recordsData == nil){
+        _recordsData = @[].mutableCopy;
+    }
+    return _recordsData;
+}
 @end

@@ -15,6 +15,8 @@
 #import "TransactionSignedResult.h"
 #import "NetworkUtil.h"
 
+#define kFooterViewHeight 725
+
 @interface mortgageVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) MortgageView *mortgageView;
@@ -60,6 +62,11 @@
                     NSInteger block = 360*(24*60*60) / 2;
                     NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
                     [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                }else if(type == 1000){
+                    //测试
+                    NSInteger block = 100;
+                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
+                    [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
                 }
                 
                 
@@ -75,7 +82,7 @@
         }];
         
     };
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 525)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, kFooterViewHeight)];
     [footerView addSubview:self.mortgageView];
     self.tableView.tableFooterView = footerView;
     self.tableView.delegate = self;
@@ -230,7 +237,7 @@
 #pragma makr ----
 -(MortgageView *)mortgageView{
     if (_mortgageView == nil) {
-        _mortgageView = [[MortgageView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 525)];
+        _mortgageView = [[MortgageView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, kFooterViewHeight)];
     }
     return _mortgageView;
 }

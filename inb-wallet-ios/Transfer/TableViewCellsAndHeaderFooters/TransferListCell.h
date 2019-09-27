@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TransferModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel; //时间
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel; //备注信息
 
+@property (nonatomic, strong) TransferModel *transferModel;
 
 @end
 

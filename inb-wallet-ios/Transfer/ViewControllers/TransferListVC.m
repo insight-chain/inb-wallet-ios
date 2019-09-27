@@ -14,7 +14,6 @@
 #import "TransferModel.h"
 #import "NetworkUtil.h"
 
-#import "NSDate+DateString.h"
 #import "MJRefresh.h"
 
 #import "FMListPlaceholder.h"
@@ -99,50 +98,8 @@
     }
     
     TransferModel *transfer = self.recordArr[indexPath.row];
-    
-    if(transfer.type == tradingType_transfer && transfer.direction == 2){
-        //转入
-        listCell.addressLabel.text = transfer.from;
-        listCell.typeLabel.text = @" 收款 ";
-        listCell.typeLabel.layer.borderColor = kColorBlue.CGColor;
-        listCell.typeLabel.layer.cornerRadius = 3;
-        listCell.typeLabel.layer.borderWidth = 1;
-        listCell.valueLabel.text = [NSString stringWithFormat:@"+ %.4f INB", transfer.amount];
-        
-    }else if(transfer.type == tradingType_transfer && transfer.direction == 1){
-        //转出
-        listCell.addressLabel.text = transfer.to;
-        listCell.typeLabel.text = @" 转账 ";
-        listCell.typeLabel.layer.borderColor = kColorBlue.CGColor;
-        listCell.typeLabel.layer.cornerRadius = 3;
-        listCell.typeLabel.layer.borderWidth = 1;
-        listCell.valueLabel.text = [NSString stringWithFormat:@"- %.4f INB", transfer.amount];
-    }else if(transfer.type == tradingType_vote){
-        //投票
-        listCell.addressLabel.text = transfer.to;
-        listCell.typeLabel.text = @" 投票 ";
-        listCell.typeLabel.layer.borderColor = kColorBlue.CGColor;
-        listCell.typeLabel.layer.cornerRadius = 3;
-        listCell.typeLabel.layer.borderWidth = 1;
-        listCell.valueLabel.text = [NSString stringWithFormat:@"- %.4f INB", transfer.amount];
-    }else if(transfer.type == tradingType_mortgage){
-        listCell.addressLabel.text = transfer.to;
-        listCell.typeLabel.text = @" 抵押 ";
-        listCell.typeLabel.layer.borderColor = kColorBlue.CGColor;
-        listCell.typeLabel.layer.cornerRadius = 3;
-        listCell.typeLabel.layer.borderWidth = 1;
-        listCell.valueLabel.text = [NSString stringWithFormat:@"- %.4f INB", transfer.amount];
-    }else if(transfer.type == tradingType_unMortgage){
-        listCell.addressLabel.text = transfer.to;
-        listCell.typeLabel.text = @" 赎回 ";
-        listCell.typeLabel.layer.borderColor = kColorBlue.CGColor;
-        listCell.typeLabel.layer.cornerRadius = 3;
-        listCell.typeLabel.layer.borderWidth = 1;
-        listCell.valueLabel.text = [NSString stringWithFormat:@"+ %.4f INB", transfer.amount];
-    }
-    
-    listCell.timeLabel.text = [NSDate timestampSwitchTime:[transfer.timestamp doubleValue]/1000.0 formatter:@"yyyy-MM-dd HH:mm"];
-    listCell.infoLabel.text = transfer.input;
+    listCell.transferModel = transfer;
+  
     
     return listCell;
 }

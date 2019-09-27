@@ -59,7 +59,7 @@
     [self.headerImage sd_setImageWithURL:[NSURL URLWithString:node.image] placeholderImage:[UIImage imageNamed:@"headerImgDefault"]];
     self.nameLabel.text = node.name;
     self.addresslabel.text = node.address;
-    self.introLabel.text = node.intro;
+    self.introLabel.text = ([node.intro isEqualToString:@""] || node.intro == nil) ? @"无介绍" : node.intro;
     self.correctRatioLable.text = [NSString stringWithFormat:@"%@%.2f%%", NSLocalizedString(@"vote.support", @"支持率"), node.voteRatio*100];
     self.voteBtn.selected = node.isVoted ? YES : NO;
     self.locationLabel.text = node.city;
