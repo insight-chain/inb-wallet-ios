@@ -11,6 +11,7 @@
 #import "WalletCreatedVC.h"
 #import "BasicWebViewController.h"
 
+#import "BIP44.h"
 #import "WalletMeta.h"
 #import "WalletManager.h"
 
@@ -298,7 +299,7 @@
         metadata.passwordHint = self.tipPassword.text;
         metadata.chainType = chain_eth;
         metadata.chain = [WalletMeta getChainStr:chain_eth];
-        wallet = [WalletManager importFromMnemonic:self.keyTextView.text metadata:metadata encryptBy:self.password.text path:@"m/49'/0'/0'"];//m/44'/60'/0'/0/0
+        wallet = [WalletManager importFromMnemonic:self.keyTextView.text metadata:metadata encryptBy:self.password.text path:BIP44.eth];//@"m/49'/0'/0'"
         
     }
     [MBProgressHUD hideHUDForView:self.view animated:YES];

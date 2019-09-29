@@ -549,7 +549,7 @@
             mortgagedINB = [NSDecimalNumber decimalNumberWithString:@"0"];
             canuseNET = [NSDecimalNumber decimalNumberWithString:@"0"];
             usedNET = [NSDecimalNumber decimalNumberWithString:@"0"];
-            return ;
+            
         }else{
             balance = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%@", resonseObject[@"balance"]]];
             if(!balance || [balance isEqualToNumber:NSDecimalNumber.notANumber]){

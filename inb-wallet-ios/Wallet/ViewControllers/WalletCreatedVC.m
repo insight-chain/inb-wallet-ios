@@ -13,6 +13,7 @@
 #import "WelcomBackupTipVC.h"
 #import "MnemonicUtil.h"
 
+#import "BIP44.h"
 #import "WalletMeta.h"
 #import "WalletManager.h"
 #import "Identity.h"
@@ -228,7 +229,7 @@
             metadata.passwordHint = tmpSelf.tipPassword.text;
             metadata.chainType = chain_eth;
             metadata.chain = [WalletMeta getChainStr:chain_eth];
-            wallet = [WalletManager importFromMnemonic:mnemonic metadata:metadata encryptBy:tmpSelf.password.text path:@"m/49'/0'/0'"]; //m/44'/60'/0'/0/0
+            wallet = [WalletManager importFromMnemonic:mnemonic metadata:metadata encryptBy:tmpSelf.password.text path:BIP44.eth]; //@"m/49'/0'/0'"
             [NotificationCenter postNotificationName:NOTI_ADD_WALLET object:wallet userInfo:@{}];
 
         }else{

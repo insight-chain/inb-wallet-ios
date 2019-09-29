@@ -81,7 +81,7 @@ static LocalFileStorage *_storage;
                 WalletMeta *meta = [[WalletMeta alloc] initWith:chain_eth source:self.keystore.meta.sourceType network:network_main];
                 meta.passwordHint = self.keystore.meta.passwordHint;
                 meta.name = name ? name : @"ETH";
-                BasicWallet *wallet = [self importFromMnemonic:mnemonic metadata:meta password:password path:@"m/49'/0'/0'"]; //BIP44.eth m/44'/60'/0'/0/0
+                BasicWallet *wallet = [self importFromMnemonic:mnemonic metadata:meta password:password path:BIP44.eth]; //@"m/49'/0'/0'"
                 [wallets addObject:wallet];
                 break;
             }
