@@ -80,6 +80,8 @@
 		FE84CFA9233A08D900414411 /* UIView+Empty.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFA1233A08D900414411 /* UIView+Empty.m */; };
 		FE84CFAA233A08D900414411 /* UIView+LYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFA2233A08D900414411 /* UIView+LYExtension.m */; };
 		FE84CFAB233A08D900414411 /* LYEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFA5233A08D900414411 /* LYEmptyView.m */; };
+		FE84CFB223407E3B00414411 /* LXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFAE23407E3A00414411 /* LXAlertView.m */; };
+		FE84CFB323407E3B00414411 /* UILabel+LXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFB123407E3A00414411 /* UILabel+LXAdd.m */; };
 		FE92C41C22A78ED40043DA9D /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE92C41B22A78ED40043DA9D /* test.swift */; };
 		FE92C49622A792580043DA9D /* libscrypt.podspec in Resources */ = {isa = PBXBuildFile; fileRef = FE92C41E22A792580043DA9D /* libscrypt.podspec */; };
 		FE92C49722A792580043DA9D /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42222A792580043DA9D /* BTCBlock.m */; };
@@ -432,6 +434,10 @@
 		FE84CFA5233A08D900414411 /* LYEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYEmptyView.m; sourceTree = "<group>"; };
 		FE84CFA6233A08D900414411 /* UIView+LYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LYExtension.h"; sourceTree = "<group>"; };
 		FE84CFA7233A08D900414411 /* UIView+Empty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Empty.h"; sourceTree = "<group>"; };
+		FE84CFAE23407E3A00414411 /* LXAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXAlertView.m; sourceTree = "<group>"; };
+		FE84CFAF23407E3A00414411 /* UILabel+LXAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LXAdd.h"; sourceTree = "<group>"; };
+		FE84CFB023407E3A00414411 /* LXAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXAlertView.h; sourceTree = "<group>"; };
+		FE84CFB123407E3A00414411 /* UILabel+LXAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LXAdd.m"; sourceTree = "<group>"; };
 		FE92C41A22A78ED40043DA9D /* inb-wallet-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inb-wallet-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		FE92C41B22A78ED40043DA9D /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		FE92C41E22A792580043DA9D /* libscrypt.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libscrypt.podspec; sourceTree = "<group>"; };
@@ -1053,6 +1059,17 @@
 			path = LYEmptyView;
 			sourceTree = "<group>";
 		};
+		FE84CFAD23407E3A00414411 /* LXAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				FE84CFAE23407E3A00414411 /* LXAlertView.m */,
+				FE84CFAF23407E3A00414411 /* UILabel+LXAdd.h */,
+				FE84CFB023407E3A00414411 /* LXAlertView.h */,
+				FE84CFB123407E3A00414411 /* UILabel+LXAdd.m */,
+			);
+			path = LXAlertView;
+			sourceTree = "<group>";
+		};
 		FE92C41D22A792580043DA9D /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1533,6 +1550,7 @@
 		FE92C55E22A792F40043DA9D /* Refer */ = {
 			isa = PBXGroup;
 			children = (
+				FE84CFAD23407E3A00414411 /* LXAlertView */,
 				FE84CF9E233A08D900414411 /* LYEmptyView */,
 				FE6D853023220AB700023321 /* YNPageViewController */,
 				FEE947CB2302BEB90004D696 /* FMListPlaceholder */,
@@ -2326,6 +2344,7 @@
 				FE92C65D22A792F50043DA9D /* MnemonicUtil.m in Sources */,
 				FE4FFF3D22C5F1340024CB4D /* BTCKey+Category.m in Sources */,
 				FE92C66F22A79BB20043DA9D /* Data+Extension.swift in Sources */,
+				FE84CFB223407E3B00414411 /* LXAlertView.m in Sources */,
 				FE92C63722A792F50043DA9D /* ResourceVC.m in Sources */,
 				FE92C69622A7BE940043DA9D /* TabBarVC.m in Sources */,
 				FE92C61F22A792F50043DA9D /* WelcomBackupTipVC.m in Sources */,
@@ -2362,6 +2381,7 @@
 				FE92C49722A792580043DA9D /* BTCBlock.m in Sources */,
 				FE92C63D22A792F50043DA9D /* SettingCell.m in Sources */,
 				FE92C60822A792F50043DA9D /* WalletCreatedVC.m in Sources */,
+				FE84CFB323407E3B00414411 /* UILabel+LXAdd.m in Sources */,
 				FE1FCE842328F57700F89A18 /* RewardRecordCell.m in Sources */,
 				FE92C61A22A792F50043DA9D /* TransactionDetailVC.m in Sources */,
 				FE92C63B22A792F50043DA9D /* SettingCell_2.m in Sources */,

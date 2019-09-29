@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger ID;
 @property (nonatomic, strong) NSString *address;
 
-@property (nonatomic, assign, readonly) NSInteger days;
+@property (nonatomic, assign, readonly) NSInteger days; //预估天数
 @property (nonatomic, assign) NSInteger nonce;
 
 @property (nonatomic, strong) NSString *received; //领取过d

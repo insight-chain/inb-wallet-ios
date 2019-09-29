@@ -139,6 +139,7 @@ typedef enum{
     static double kRateReturn7_360 = 9; //360天的七日年化
     static double kRateVote = 9; //抵押投票奖励年化
 
+static NSInteger kDayNumbers = 3000;//(24*60*60)/2; // 每天预估出的块数
     static NSInteger kWalletsMaxNumber = 20; //导入钱包的最大数量
     static NSString *kWei = @"100000";//位
 

@@ -8,8 +8,11 @@
 
 #import "LockModel.h"
 
+
+
 @implementation LockModel
 MJExtensionCodingImplementation
+
 
 +(NSDictionary *)mj_replacedKeyFromPropertyName{
     return @{@"ID":@"id",
@@ -18,10 +21,12 @@ MJExtensionCodingImplementation
 }
 
 -(NSInteger)days{
-    if(self.lockHeight == 100){
-        return 1;
+    double dd = self.lockHeight / kDayNumbers;
+    if(dd > 0){
+        return ceil(dd); //向上取整
+    }else{
+        return 0;
     }
-    return self.lockHeight*2/(24*60*60);
 }
 
 @end

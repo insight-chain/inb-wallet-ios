@@ -37,16 +37,16 @@
 -(void)awakeFromNib{
     [super awakeFromNib];
     
-    self.days_blockNumber_30.text = [NSString stringWithFormat:@"%d区块", (24*60*60)/2*30];
+    self.days_blockNumber_30.text = [NSString stringWithFormat:@"%d区块", kDayNumbers*30];
     self.days_time_30.text = [NSString stringWithFormat:@"锁仓期 ≈%d天", 30];
     
-    self.days_blockNumber_90.text = [NSString stringWithFormat:@"%d区块", (24*60*60)/2*90];
+    self.days_blockNumber_90.text = [NSString stringWithFormat:@"%d区块", kDayNumbers*90];
     self.days_time_90.text = [NSString stringWithFormat:@"锁仓期 ≈%d天", 90];
     
-    self.days_blockNumber_180.text = [NSString stringWithFormat:@"%d区块", (24*60*60)/2*180];
+    self.days_blockNumber_180.text = [NSString stringWithFormat:@"%d区块", kDayNumbers*180];
     self.days_time_180.text = [NSString stringWithFormat:@"锁仓期 ≈%d天", 180];
     
-    self.days_blockNumber_360.text = [NSString stringWithFormat:@"%d区块", (24*60*60)/2*360];
+    self.days_blockNumber_360.text = [NSString stringWithFormat:@"%d区块", kDayNumbers*360];
     self.days_time_360.text = [NSString stringWithFormat:@"锁仓期 ≈%d天", 360];
     
     self.days_blockNumber_0.text = [NSString stringWithFormat:@"不选择抵押期限"];

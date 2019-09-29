@@ -7,12 +7,21 @@
 //
 
 #import "TransferModel.h"
-
 @implementation TransferModel
 MJExtensionCodingImplementation
 
 +(NSDictionary *)mj_replacedKeyFromPropertyName{
     return @{@"tradingHash":@"hash"};
 }
++(NSDictionary *)mj_objectClassInArray{
+    return @{@"transactionLog":@"InlineTransfer"};
+}
+@end
 
+#pragma mark ---- 内联交易
+@implementation InlineTransfer
+MJExtensionCodingImplementation
++(NSDictionary *)mj_replacedKeyFromPropertyName{
+    return @{@"ID":@"id"};
+}
 @end

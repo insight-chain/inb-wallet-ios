@@ -47,24 +47,24 @@
                 if(type == 0){ //普通抵押
                     [tmpSelf mortgageAddr:tmpSelf.address walletID:tmpSelf.walletID inbNumber:netValue password:password];
                 }else if(type == 30){ //锁仓30天
-                    NSInteger block = 30*(24*60*60) / 2;
+                    NSInteger block = 30*kDayNumbers;
                     NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
                     [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
                 }else if (type == 90){
-                    NSInteger block = 90*(24*60*60) / 2;
+                    NSInteger block = 90*kDayNumbers;
                     NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
                     [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
                 }else if (type == 180){
-                    NSInteger block = 180*(24*60*60) / 2;
+                    NSInteger block = 180*kDayNumbers;
                     NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
                     [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
                 }else if (type == 360){
-                    NSInteger block = 360*(24*60*60) / 2;
+                    NSInteger block = 360*kDayNumbers;
                     NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
                     [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
                 }else if(type == 1000){
                     //测试
-                    NSInteger block = 100;
+                    NSInteger block = 1000;
                     NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
                     [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
                 }

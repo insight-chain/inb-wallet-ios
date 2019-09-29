@@ -20,27 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inb-wallet-ios/Resources/ViewControllers/redeemVC.m"
-            timestampString = "591270377.682598"
+            timestampString = "591438161.573506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "401"
-            endingLineNumber = "401"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "inb-wallet-ios/Resources/ViewControllers/redeemVC.m"
-            timestampString = "591270377.6833971"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "279"
-            endingLineNumber = "279"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "-rewardRedemptionWithAddr:walletID:password:"
             landmarkType = "7">
          </BreakpointContent>
@@ -51,13 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "inb-wallet-ios/Resources/ViewControllers/redeemVC.m"
-            timestampString = "591270377.683722"
+            filePath = "inb-wallet-ios/Resources/ViewControllers/BaseResourcePageViewController.m"
+            timestampString = "591438161.573907"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
-            landmarkName = "-rewardLockWithAddr:walletID:nonce:password:"
+            startingLineNumber = "605"
+            endingLineNumber = "605"
+            landmarkName = "-pageScrollView"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -67,13 +51,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "inb-wallet-ios/Reward/ViewController/RewardRecordVC.m"
-            timestampString = "591270377.684014"
+            filePath = "inb-wallet-ios/Resources/ViewControllers/BaseResourcePageViewController.m"
+            timestampString = "591438161.57415"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "-requestRecord"
+            startingLineNumber = "518"
+            endingLineNumber = "518"
+            landmarkName = "-scrollViewWillBeginDragging:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

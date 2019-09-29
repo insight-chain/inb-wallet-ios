@@ -21,8 +21,6 @@
 
 @property(nonatomic, strong) UILabel *redemptionLabel; //赎回
 
-@property (nonatomic, strong) UIButton *resetBtn; //资源重置
-
 @end
 
 @implementation ResourceCPUView
@@ -44,6 +42,7 @@
         [self addSubview:self.mortgageValue];
         [self addSubview:self.redemptionLabel];
         [self addSubview:self.redemptionValue];
+        [self addSubview:self.resetBtn];
         
         [self makeConstraints];
         
@@ -68,6 +67,7 @@
         [self addSubview:self.mortgageValue];
         [self addSubview:self.redemptionLabel];
         [self addSubview:self.redemptionValue];
+        [self addSubview:self.resetBtn];
         
         self.balanceValue.text = @"122kb";
         self.totalValue.text = @"320kb";
@@ -86,7 +86,8 @@
         make.top.mas_equalTo(20-7);
         make.left.mas_equalTo(15-7);
         make.right.mas_equalTo(-(15-7));
-        make.bottom.mas_equalTo(self.redemptionLabel.mas_bottom).mas_offset(20+7);
+//        make.bottom.mas_equalTo(self.redemptionLabel.mas_bottom).mas_offset(20+7);
+        make.bottom.mas_equalTo(self.resetBtn.mas_bottom).mas_offset(20+7);
     }];
     [self.cpuLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.bgImg.mas_top).mas_offset(20+7);
@@ -137,6 +138,12 @@
         make.centerY.mas_equalTo(self.redemptionLabel);
         make.right.mas_equalTo(self.mortgageValue.mas_right);
     }];
+    [self.resetBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.redemptionLabel.mas_bottom).mas_offset(30);
+        make.left.mas_equalTo(self.redemptionLabel.mas_left);
+        make.right.mas_equalTo(self.redemptionValue.mas_right);
+        make.height.mas_equalTo(40);
+    }];
 }
 
 -(void)updataProgress{
@@ -165,6 +172,13 @@
     self.totalImg.frame = grayRect;
 }
 
+-(void)resetResAction:(UIButton *)sender{
+    if(self.resetRes){
+        self.resetRes();
+    }
+}
+
+#pragma mark ---- lazy load
 -(UIImageView *)bgImg{
     if (_bgImg == nil) {
         _bgImg = [[UIImageView alloc] init];
@@ -266,5 +280,15 @@
         _redemptionValue.font = AdaptedFontSize(15);
     }
     return _redemptionValue;
+}
+-(UIButton *)resetBtn{
+    if (_resetBtn == nil) {
+        _resetBtn = [[UIButton alloc] init];
+        [_resetBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
+        [_resetBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _resetBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [_resetBtn addTarget:self action:@selector(resetResAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _resetBtn;
 }
 @end

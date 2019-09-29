@@ -44,18 +44,21 @@
         self.tipBtn.userInteractionEnabled = NO;
         return;
     }
-    if(currentNumber >= 3*(24*60*60) + startNumber){
+    
+    if(currentNumber >= 3*kDayNumbers + startNumber){
         //可以领取
         [self.tipBtn setTitle:@"领取赎回" forState:UIControlStateNormal];
         [self.tipBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
         self.tipBtn.userInteractionEnabled = YES;
     }else{
-        int m = 3*(24*60*60)/2.0 + startNumber - currentNumber;
-        int day = (m*2)/(24*60*60);
-        int hour = (m*2)%(24*60*60);
-        if (hour > 0) {
-            day += 1;
-        }
+//        int m = 3*kDayNumbers + startNumber - currentNumber;
+//        int day = (m*2)/(24*60*60);
+//        int hour = (m*2)%(24*60*60);
+//        if (hour > 0) {
+//            day += 1;
+//        }
+        double mm = (3*kDayNumbers+startNumber - currentNumber)*1.0 / kDayNumbers;
+        int day = ceil(mm); //向上取整
         [self.tipBtn setTitle:[NSString stringWithFormat:@"%d天后完成赎回", day] forState:UIControlStateNormal];
         [self.tipBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_lightBlue"] forState:UIControlStateNormal];
         self.tipBtn.userInteractionEnabled = NO;

@@ -46,6 +46,7 @@ static NSString *cellId_2 = @"redeemCell_2";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.backgroundColor = kColorBackground;
 
     [self requestBlockHeight];
     [self request];
@@ -64,7 +65,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         NSDictionary *res = resonseObject[@"res"];
         double mortgagete = [res[@"mortgage"] doubleValue]; //抵押的INB
         double regular = [resonseObject[@"regular"] doubleValue]; //锁仓的INB
-        NSArray *storeDTO = resonseObject[@"storeDTO"]; //锁仓
+        NSArray *storeDTO = resonseObject[@"store"]; //锁仓
         
         NSMutableArray *arr = [LockModel mj_objectArrayWithKeyValuesArray:storeDTO]?:@[].mutableCopy;
         

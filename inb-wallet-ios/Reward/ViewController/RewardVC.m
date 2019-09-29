@@ -124,7 +124,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                 NSDictionary *res = resonseObject[@"res"];
                 mortgagete = [res[@"mortgage"] doubleValue]; //抵押的INB
                 regular = [resonseObject[@"regular"] doubleValue]; //锁仓的INB
-                storeDTO = resonseObject[@"storeDTO"]; //锁仓
+                storeDTO = resonseObject[@"store"]; //锁仓
                 
                 tmpSelf.lastReceiveVoteAwardHeight = [resonseObject[@"lastReceiveVoteAwardHeight"] integerValue];
                 tmpSelf.voteNumberValue = [resonseObject[@"voteNumber"] integerValue];
@@ -451,6 +451,9 @@ static NSString *cellId_2 = @"redeemCell_2";
                                 }
                                 dispatch_async(dispatch_get_main_queue(), ^{
                                     [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
+                                    
+                                    [self.voteRewardBtn setTitle:[NSString stringWithFormat:@"领取成功"] forState:UIControlStateNormal];
+                                    
                                     [self.tableView.mj_header beginRefreshing];
                                 });
                                 
@@ -530,32 +533,43 @@ static NSString *cellId_2 = @"redeemCell_2";
         self.voteRewardBtn.hidden = YES;
     }
     
-    [self calulateReward:self.lastReceiveVoteAwardHeight voteNumber:_voteNumberValue/100000.0];
+    [self calulateReward:self.lastReceiveVoteAwardHeight lockedNumber:7*kDayNumbers voteNumber:_voteNumberValue/100000.0];
     self.voteNumber.text = [NSString stringWithFormat:@"已投票数量 %.2f", _voteNumberValue/100000.0];
 }
 
--(void)calulateReward:(NSInteger)startBlockNumber voteNumber:(double)voteNumber{
+/**
+ *  startBlockNumber 上次领取投票高度
+ *  lockedNumber 期限高度
+ */
+-(void)calulateReward:(NSInteger)startBlockNumber lockedNumber:(NSInteger)lockedNumber voteNumber:(double)voteNumber{
 //    前提：（当前区块高度-上次领投票奖励区块高度）/每天产生区块数>=7
 //    本次领取奖励=（当前区块高度-上次领投票奖励区块高度）/每天产生区块数（24*60*60/2）*年化（9%）/365*已投票数
     
-    NSInteger perDayBlock = 60;//24*60*60/2; //每天产生的去块数
+    NSInteger perDayBlock = kDayNumbers;//24*60*60/2; //每天产生的去块数
     double difDay = (self.currentBlockNumber - startBlockNumber) / (perDayBlock*1.0);
+
     
-    NSDecimalNumber *baseDec = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",(difDay * 0.09 / 365)]];
-//    double reward = difDay * 0.09 / 365 *voteNumber;
-//    self.voteRewardValue.text = [NSString stringWithFormat:@"%.5f INB", reward];
-    NSDecimalNumber *rewardDec = [baseDec decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f", voteNumber]]];
     
-    self.voteRewardValue.text = [NSString stringWithFormat:@"%@ INB", rewardDec.stringValue];
-    
-    if (difDay >= 7) {
+    if (self.currentBlockNumber >= (startBlockNumber+lockedNumber)) { // 当前区块高度 < 上次领取投票高度 + 期限区块高度
         //可以领取
         [self.voteRewardBtn setTitle:[NSString stringWithFormat:@"领取奖励"] forState:UIControlStateNormal];
         self.voteRewardBtn.userInteractionEnabled = YES;
+        
+        NSDecimalNumber *baseDec = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",((lockedNumber*1.0/kDayNumbers) * 0.09 / 365)]];
+        NSDecimalNumber *rewardDec = [baseDec decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f", voteNumber]]];
+        self.voteRewardValue.text = [NSString stringWithFormat:@"%@ INB", rewardDec.stringValue];
+        
     }else{
-        NSInteger day = floor(difDay);
-        [self.voteRewardBtn setTitle:[NSString stringWithFormat:@"%d天后领取", 7-day] forState:UIControlStateNormal];
+        
+        double dd = (startBlockNumber + lockedNumber - self.currentBlockNumber) / (kDayNumbers*1.0);
+        NSInteger day = floor(dd);
+        [self.voteRewardBtn setTitle:[NSString stringWithFormat:@"%d天后领取", day] forState:UIControlStateNormal];
         self.voteRewardBtn.userInteractionEnabled = NO;
+        
+        
+        NSDecimalNumber *baseDec = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",(difDay * 0.09 / 365)]];
+        NSDecimalNumber *rewardDec = [baseDec decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f", voteNumber]]];
+        self.voteRewardValue.text = [NSString stringWithFormat:@"%@ INB", rewardDec.stringValue];
     }
     
 

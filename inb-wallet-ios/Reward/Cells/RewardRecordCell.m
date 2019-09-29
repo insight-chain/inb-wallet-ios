@@ -24,7 +24,8 @@
 -(void)setModel:(TransferModel *)model{
     _model = model;
     self.timeLabel.text = [NSDate timestampSwitchTime:_model.timestamp/1000 formatter:@"yyyy-MM-dd HH:mm"];
-    self.amountLabel.text = [NSString stringWithFormat:@"+%.5f INB", _model.amount];
+    InlineTransfer *inlineTransfer = _model.transactionLog[0];
+    self.amountLabel.text = [NSString stringWithFormat:@"+%.5f INB", inlineTransfer.amount/100000.0];
     if (_model.type == TxType_rewardLock) {
         self.typeLabel.text = @"锁仓收益";
     }else if(TxType_rewardVote == _model.type){

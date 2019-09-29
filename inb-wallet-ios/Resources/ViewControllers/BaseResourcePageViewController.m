@@ -178,7 +178,7 @@
     self.headerBgView.contentSize = CGSizeMake(KWIDTH, self.headerView.yn_height);
     [self.headerBgView addSubview:self.headerView];
     self.headerViewOriginHeight = self.headerBgView.frame.size.height;
-    self.headerBgView.scrollEnabled = NO;
+    self.headerBgView.scrollEnabled = YES;
     
     _insetTop = self.headerBgView.yn_height + menuHeight; //+菜单默认高度
     

@@ -67,7 +67,7 @@
             [self.stateBtn setTitle:@"360天" forState:UIControlStateNormal];
         }else if (_model.days == 1){
             //测试
-            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f", 0];
+            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f", kRateReturn7_30];
             [self.stateBtn setTitle:@"1天" forState:UIControlStateNormal];
         }
     }
@@ -110,8 +110,8 @@
     }
     
 //    double reward = basicValue * (rate/100.0/365) * day;
-    
-    double totalCan = dif/(24*60*60/2)*(rate/100)/365*basicValue;
+    //本次领取奖励=（当前区块高度-上次领投票奖励区块高度）/每天产生区块数（24*60*60/2）*年化（9%）/365
+    double totalCan = dif/kDayNumbers*(rate/100)/365*basicValue;
     double reward = totalCan - [self.model.received doubleValue];
 
     return reward;
@@ -150,12 +150,10 @@
         self.rewardLable.text = [NSString stringWithFormat:@"%.5f", reward+[self.model.amount doubleValue]];
         
     }else{
-        NSInteger tim = self.model.lastReceivedHeight+(7*(24*60*60)/2) - _currentBlockNumber;
+        NSInteger tim = self.model.lastReceivedHeight+(7*kDayNumbers) - _currentBlockNumber;
         double reward;
         if (tim <= 0) {
-            
              reward = [self calculateStrartBlock:self.model.startHeight currentBlock:_currentBlockNumber basic:[self.model.amount doubleValue] days:self.model.days];
-            
             //可以领取奖励
             self.receiveTimeLabel.text = @"";
             self.receiveBtn.userInteractionEnabled = YES;
@@ -166,13 +164,11 @@
         }else{
             
             
-            reward = [self calculateStrartBlock:self.model.lastReceivedHeight currentBlock:self.model.lastReceivedHeight+(7*(24*60*60)/2) basic:[self.model.amount doubleValue] days:self.model.days];
+            reward = [self calculateStrartBlock:self.model.lastReceivedHeight currentBlock:self.model.lastReceivedHeight+(7*kDayNumbers) basic:[self.model.amount doubleValue] days:self.model.days];
             
-            int day = (tim*2)/(24*60*60);
-            int hour = (tim*2)%(24*60*60);
-            if (hour > 0) {
-                day += 1;
-            }
+            
+            double dd = tim/(kDayNumbers*1.0);
+            int day = ceil(dd);
             self.model.remainingDays = day;
             self.receiveTimeLabel.text = [NSString stringWithFormat:@"%d块≈%d天后领取", tim, day];
             self.receiveBtn.userInteractionEnabled = NO;

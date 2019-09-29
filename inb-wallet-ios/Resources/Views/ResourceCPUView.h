@@ -10,6 +10,7 @@
  */
 #import <UIKit/UIKit.h>
 
+typedef void(^ResourceReset)(void);
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ResourceCPUView : UIView
@@ -17,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) UILabel *totalValue;   // NET 总量
 @property(nonatomic, strong) UILabel *mortgageValue; //抵押的INB值
 @property(nonatomic, strong) UILabel *redemptionValue; //赎回的值
+@property (nonatomic, strong) UIButton *resetBtn; //资源重置
+
+@property(nonatomic, copy) ResourceReset resetRes; //资源重置
 
 -(void)updataProgress; //更新进度条
 
