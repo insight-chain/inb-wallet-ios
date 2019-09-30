@@ -99,7 +99,10 @@ static NSString *kCellId = @"rewardRecordCell";
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    TransferModel *model = self.recordsData[indexPath.row];
     RewardDetailVC *rewardVC = [[RewardDetailVC alloc] init];
+    rewardVC.model = model;
     rewardVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:rewardVC animated:YES];
 }

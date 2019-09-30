@@ -57,7 +57,7 @@
 
 "scan" = "扫一扫";
 
-"wallet.node" = "节点";
+"wallet.node" = "节点申请";
 "wallet.reward" = "收益奖励";
 
 "copyAddress" = "复制地址";
@@ -104,7 +104,7 @@
 "vote.node.empty" = "暂无投票节点";
 
 "pledgedResources" = "已抵押资源";
-"addMortgageResources" = "新增抵押资源";
+"addMortgageResources" = "新增抵押";
 "voteTotal" = "投票总数";
 "submitVote" = "提交投票";
 "accountBalance" = "账户余额";

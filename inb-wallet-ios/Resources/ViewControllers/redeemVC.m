@@ -62,10 +62,36 @@ static NSString *cellId_2 = @"redeemCell_2";
     NSString *url = [NSString stringWithFormat:@"%@account/search?address=%@", App_Delegate.explorerHost, [App_Delegate.selectAddr add0xIfNeeded]];
     [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
         NSLog(@"%@", resonseObject);
-        NSDictionary *res = resonseObject[@"res"];
-        double mortgagete = [res[@"mortgage"] doubleValue]; //抵押的INB
-        double regular = [resonseObject[@"regular"] doubleValue]; //锁仓的INB
-        NSArray *storeDTO = resonseObject[@"store"]; //锁仓
+        NSDictionary *res;
+        double mortgagete;
+        double regular;
+        NSArray *storeDTO;
+        
+        double redeemValue;
+        int redeemBlock;
+        
+        NSString *addr = resonseObject[@"address"];
+        if (addr == nil || [addr isKindOfClass:[NSNull class]]) {
+            res = @{};
+            mortgagete = 0.0; //抵押的INB
+            regular = 0.0; //锁仓的INB
+            storeDTO = @[]; //锁仓
+            
+            redeemValue = 0; //赎回中的INB
+            redeemBlock = 0;//赎回开始区块
+            
+        }else{
+            res = resonseObject[@"res"];
+            mortgagete = [res[@"mortgage"] doubleValue]; //抵押的INB
+            regular = [resonseObject[@"regular"] doubleValue]; //锁仓的INB
+            storeDTO = resonseObject[@"store"]; //锁仓
+            
+            /** 赎回中 **/
+            redeemValue = [resonseObject[@"redeemValue"] doubleValue]; //赎回中的INB
+            redeemBlock = [resonseObject[@"redeemStartHeight"] intValue];//赎回开始区块
+        }
+        
+        
         
         NSMutableArray *arr = [LockModel mj_objectArrayWithKeyValuesArray:storeDTO]?:@[].mutableCopy;
         
@@ -80,9 +106,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         
         tmpSelf.stores = arr;
         
-        /** 赎回中 **/
-        double redeemValue = [resonseObject[@"redeemValue"] doubleValue]; //赎回中的INB
-        int redeemBlock = [resonseObject[@"redeemStartHeight"] intValue];//赎回开始区块
+        
         tmpSelf.redeems = @[@{@"redeemValue":@(redeemValue),
                             @"redeemBlock":@(redeemBlock),
                             }]; //正在赎回的数据
@@ -186,7 +210,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                          @"params":@[[addr add0xIfNeeded],@"latest"],@"id":@(1)}
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 if (error) {
-                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                    [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                     return ;
                                 }
                                 NSDictionary *dic = (NSDictionary *)responseObject;
@@ -211,7 +235,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                          }
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 
-                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                 NSLog(@"%@", responseObject);
                                 if (error) {
                                     return ;
@@ -252,7 +276,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                          @"params":@[[addr add0xIfNeeded],@"latest"],@"id":@(1)}
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 if (error) {
-                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                    [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                     return ;
                                 }
                                 NSDictionary *dic = (NSDictionary *)responseObject;
@@ -277,7 +301,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                          }
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 
-                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                 NSLog(@"%@", responseObject);
                                 if (error) {
                                     return ;
@@ -344,14 +368,14 @@ static NSString *cellId_2 = @"redeemCell_2";
         cell.receiveBlock = ^{
             [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
                 __block __weak typeof(self) tmpSelf = self;
-                [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
+                [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     @try {
                         [self rewardRedemptionWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID password:password];
                     } @catch (NSException *exception) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                            [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                            [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.5 animted:YES];
                         });
                     } @finally {
                         
@@ -395,15 +419,15 @@ static NSString *cellId_2 = @"redeemCell_2";
                 LockModel *model = self.stores[indexPath.row];
                 [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) { 
                     __block __weak typeof(self) tmpSelf = self;
-                    [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
+                    [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         @try {
 //                            [self rewardRedemptionWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID password:password];
                             [self rewardLockWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID nonce:model.hashStr password:password];
                         } @catch (NSException *exception) {
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.5 animted:YES];
                             });
                         } @finally {
                             

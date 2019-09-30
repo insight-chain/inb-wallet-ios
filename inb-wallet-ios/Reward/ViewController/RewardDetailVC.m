@@ -26,11 +26,18 @@
     [super viewDidLoad];
     
     self.tableView.tableHeaderView = self.headerView;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    InlineTransfer *tr = self.model.transactionLog[0];
+    self.headerValueLabel.text = [NSString stringWithFormat:@"%.5f INB", tr.amount/100000.0];
 }
 
 #pragma mark ---- UITableViewDelegate && Datasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 8;
+    return 7;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TransferMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId_1];
@@ -44,34 +51,32 @@
     
     if (indexPath.row == 0) {
         cell.typeName.text = @"付款地址";
-        cell.value.text = @"0x95dfa123asdsar1edwada3erASfcdq23";
+        InlineTransfer *tr = self.model.transactionLog[0];
+        cell.value.text = tr.from;
         cell.showRightBtn = YES;
         cell.rightBtnType = 1;
     }else if (indexPath.row == 1){
         cell.typeName.text = @"收款地址";
-        cell.value.text = @"--";
+        cell.value.text = self.model.to;
         cell.showRightBtn = YES;
         cell.rightBtnType = 1;
     }else if(indexPath.row == 2){
-        cell.typeName.text = @"抵押期限";
-        cell.value.text = @"--";
-    }else if(indexPath.row == 3){
         cell.typeName.text = @"年化";
-        cell.value.text = @"--";
+        cell.value.text = [NSString stringWithFormat:@"%.2f%%", kRateVote];
+    }else if(indexPath.row == 3){
+        cell.typeName.text = @"领取日期";
+        cell.value.text = [NSDate timestampSwitchTime:self.model.timestamp/1000 formatter:@"yyyy-MM-dd HH-mm"];
     }else if(indexPath.row == 4){
-        cell.typeName.text = @"抵押日期";
-        cell.value.text = @"--";
-    }else if(indexPath.row == 5){
         cell.typeName.text = @"区块号";
-        cell.value.text = @"--";
+        cell.value.text = [NSString stringWithFormat:@"%ld", (long)self.model.blockId];
         cell.showRightBtn = YES;
         cell.rightBtnType = 1;
-    }else if(indexPath.row == 6){
+    }else if(indexPath.row == 5){
         cell.typeName.text = @"交易时间";
-        cell.value.text = @"--";
-    }else if(indexPath.row == 7){
-        cell.typeName.text = @"交易号";
-        cell.value.text = @"-";
+        cell.value.text = [NSDate timestampSwitchTime:self.model.timestamp/1000 formatter:@"yyyy-MM-dd HH-mm"];
+    }else if(indexPath.row == 6){
+        cell.typeName.text = @"交易哈希";
+        cell.value.text = self.model.tradingHash;
         cell.showRightBtn = YES;
         cell.rightBtnType = 2;
         cell.showSeperatorView = NO;

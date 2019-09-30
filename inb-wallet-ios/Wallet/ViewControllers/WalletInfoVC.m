@@ -640,6 +640,46 @@
 //    [self queryAccountInfo];
     [self request];
 }
+#pragma mark ---- UIScrollViewDelegate
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    float y= scrollView.contentOffset.y;
+    if(y > 35){
+        //显示导航栏背景色
+        //    如果不想让其他页面的导航栏变为透明 需要重置
+        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+        //恢复黑线
+        [self.navigationController.navigationBar setShadowImage:nil];
+    }else{
+        //导航栏背景色为透明
+        //设置导航栏背景图片为一个空的image，这样就透明了
+        [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+        //去掉透明后导航栏下边的黑边
+        [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+        
+    }
+   
+    
+//     //scrollView已经有拖拽手势，直接拿到scrollView的拖拽手势
+//    UIPanGestureRecognizer *pan = scrollView.panGestureRecognizer;
+//    //获取到拖拽的速度 >0 向下拖动 <0 向上拖动
+//    CGFloat velocity = [pan velocityInView:scrollView].y;
+//    if (velocity <- 5) { //向上拖动，隐藏导航栏
+//        //    如果不想让其他页面的导航栏变为透明 需要重置
+//        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+//        //恢复黑线
+//        [self.navigationController.navigationBar setShadowImage:nil];
+//
+//    }else if (velocity > 20) { //向下拖动，显示导航栏
+//        //设置导航栏背景图片为一个空的image，这样就透明了
+//        [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+//        //去掉透明后导航栏下边的黑边
+//        [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+//
+//    }else if(velocity == 0){ //停止拖拽
+//
+//    }
+}
 #pragma mark ----
 //点击资源信息
 -(void)cpuResource{
@@ -691,7 +731,7 @@
                                 } range:[str rangeOfString:@"INB"]];
         self.inbAssetsValue.attributedText = mutStr;
         NSString *cnyNumberStr = [NSString changeNumberFormatter:[NSString stringWithFormat:@"%.2f", self.balance * self.inbPrice]];
-        self.cnyAssetsValue.text = [NSString stringWithFormat:@"≈ %@ $", cnyNumberStr];
+        self.cnyAssetsValue.text = [NSString stringWithFormat:@"≈ $%@", cnyNumberStr];
     }
 }
 

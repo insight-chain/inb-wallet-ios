@@ -124,7 +124,7 @@
     double total = [self.totalValue.text doubleValue];
     double ratio;
     if(total <= 0){
-        ratio = 1;
+        ratio = 0;
     }else{
         ratio = canUse/total;
     }
@@ -262,7 +262,7 @@
         [_addMortgage setImage:[UIImage imageNamed:@"btn_add_icon"] forState:UIControlStateNormal];
         [_addMortgage setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _addMortgage.titleLabel.font = [UIFont systemFontOfSize:15];
-        [_addMortgage setTitle:NSLocalizedString(@"addMortgageResources", @"新增抵押资源") forState:UIControlStateNormal];
+        [_addMortgage setTitle:NSLocalizedString(@"addMortgageResources", @"新增抵押") forState:UIControlStateNormal];
         _addMortgage.titleEdgeInsets = UIEdgeInsetsMake(0, _addMortgage.imageView.frame.size.width/2+5, 0, -_addMortgage.imageView.frame.size.width/2-5);
         _addMortgage.imageEdgeInsets = UIEdgeInsetsMake(0, -_addMortgage.imageView.frame.size.width/2-5, 0, _addMortgage.imageView.frame.size.width/2+5);
         [_addMortgage addTarget:self action:@selector(toAddMortgageAction:) forControlEvents:UIControlEventTouchUpInside];

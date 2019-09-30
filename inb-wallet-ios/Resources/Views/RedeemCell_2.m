@@ -106,6 +106,7 @@
             break;
         }
         default:
+            rate = kRateReturn7_30;
             break;
     }
     

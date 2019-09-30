@@ -151,7 +151,7 @@
     double total = [self.totalValue.text doubleValue];
     double ratio;
     if(total <= 0){
-        ratio = 1;
+        ratio = 0;
     }else{
         ratio = canUse/total;
     }

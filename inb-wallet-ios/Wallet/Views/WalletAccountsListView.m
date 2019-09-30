@@ -33,6 +33,8 @@
 
 #define cellId @"accountListCell"
 
+static double cellHeight = 70;
+
 @implementation WalletAccountsListView
 
 +(instancetype)showAccountList:(NSArray *)accounts selectAccount:(nonnull BasicWallet *)selected clickBlock:(nonnull void (^)(int))clickBlock{
@@ -85,7 +87,9 @@
     [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.bottom.mas_equalTo(self.addAccountView.mas_top);
-        make.height.mas_equalTo(280);
+//        make.height.mas_lessThanOrEqualTo(280);
+        double hei = self.accounts.count * cellHeight;
+        make.height.mas_equalTo( hei> 280 ? 280 : hei);
     }];
     [self.addAccountView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
@@ -170,6 +174,7 @@
         _tableView = [[UITableView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
 }
@@ -208,4 +213,17 @@
     }
     return _packUpImg;
 }
+
+-(void)setAccounts:(NSArray *)accounts{
+    _accounts = accounts;
+    
+    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(self.addAccountView.mas_top);
+        double hei = self.accounts.count * cellHeight;
+        make.height.mas_equalTo( hei> 280 ? 280 : hei);
+    }];
+    
+}
+
 @end

@@ -269,7 +269,7 @@
     if (_addMortgageBtn == nil) {
         _addMortgageBtn = [[UIButton alloc] init];
         [_addMortgageBtn setImage:[UIImage imageNamed:@"addMortgage"] forState:UIControlStateNormal];
-        [_addMortgageBtn setTitle:NSLocalizedString(@"addMortgageResources", @"新增抵押资源") forState:UIControlStateNormal];
+        [_addMortgageBtn setTitle:NSLocalizedString(@"addMortgageResources", @"新增抵押") forState:UIControlStateNormal];
         [_addMortgageBtn setTitleColor:kColorTitle forState:UIControlStateNormal];
         _addMortgageBtn.titleLabel.font = AdaptedFontSize(15);
         _addMortgageBtn.titleLabel.textColor = kColorTitle;

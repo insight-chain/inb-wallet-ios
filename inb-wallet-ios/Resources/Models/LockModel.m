@@ -21,7 +21,7 @@ MJExtensionCodingImplementation
 }
 
 -(NSInteger)days{
-    double dd = self.lockHeight / kDayNumbers;
+    double dd = self.lockHeight*1.0 / kDayNumbers;
     if(dd > 0){
         return ceil(dd); //向上取整
     }else{

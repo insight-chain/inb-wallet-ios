@@ -63,43 +63,59 @@
         NSString *url = [NSString stringWithFormat:@"%@account/search?address=%@", App_Delegate.explorerHost, [App_Delegate.selectAddr add0xIfNeeded]];
         [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
             NSLog(@"%@", resonseObject);
+            
+            NSInteger startNumber;
+            
             NSString *address = resonseObject[@"address"];
-            if (address) {
+            if(address == nil || [address isKindOfClass:[NSNull class]]){
+                startNumber = 0;
+                
+                tmpSelf.startBlockNumber = [NSDecimalNumber decimalNumberWithString:@"0"];
+                
+            }else{
                 NSDictionary *res = resonseObject[@"res"];
-                NSInteger startNumber = [res[@"height"] integerValue];
+                startNumber = [res[@"height"] integerValue];
                 tmpSelf.startBlockNumber = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%d", startNumber]];
-                [tmpSelf reqestBlockHeight:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                    NSLog(@"%@", responseObject);
-                    if (error) {
-                        return ;
+            }
+            [tmpSelf reqestBlockHeight:^(id  _Nullable responseObject, NSError * _Nullable error) {
+                NSLog(@"%@", responseObject);
+                if (error) {
+                    return ;
+                }
+                
+                NSString *str = responseObject[@"result"];
+                const char *hexChar = [str cStringUsingEncoding:NSUTF8StringEncoding];
+                int hexNumber;
+                sscanf(hexChar, "%x", &hexNumber);
+                tmpSelf.currentBlockNumber = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%d", hexNumber]];
+                
+                //同步栅栏任务，刷新UI
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    if([self.startBlockNumber intValue] == 0){
+                        [self.cpuView.resetBtn setTitle:@"暂无抵押资源" forState:UIControlStateNormal];
+                        [self.cpuView.resetBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_lightBlue"] forState:UIControlStateNormal];
+                        self.cpuView.resetBtn.userInteractionEnabled = NO;
+                        return;
                     }
                     
-                    NSString *str = responseObject[@"result"];
-                    const char *hexChar = [str cStringUsingEncoding:NSUTF8StringEncoding];
-                    int hexNumber;
-                    sscanf(hexChar, "%x", &hexNumber);
-                    tmpSelf.currentBlockNumber = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%d", hexNumber]];
+                    NSDecimalNumber *canResetNumber = [self.startBlockNumber decimalNumberByAdding:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%d", daysBlockNumber]]];
+                    NSComparisonResult result = [self.currentBlockNumber compare:canResetNumber];
                     
-                    //同步栅栏任务，刷新UI
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        NSDecimalNumber *canResetNumber = [self.startBlockNumber decimalNumberByAdding:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%d", daysBlockNumber]]];
-                        NSComparisonResult result = [self.currentBlockNumber compare:canResetNumber];
-                        if (result == NSOrderedDescending || result == NSOrderedSame) {
-                            //大于等于,
-                            [self.cpuView.resetBtn setTitle:@"领取资源" forState:UIControlStateNormal];
-                            [self.cpuView.resetBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
-                            self.cpuView.resetBtn.userInteractionEnabled = YES;
-                        }else{
-                            [self.cpuView.resetBtn setTitle:@"已领取资源" forState:UIControlStateNormal];
-                            [self.cpuView.resetBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_lightBlue"] forState:UIControlStateNormal];
-                            self.cpuView.resetBtn.userInteractionEnabled = NO;
-                        }
-                    });
-                    
-                }];
-            }else{
-                tmpSelf.startBlockNumber = [NSDecimalNumber decimalNumberWithString:@"0"];
-            }
+                    if (result == NSOrderedDescending || result == NSOrderedSame) {
+                        //大于等于,
+                        [self.cpuView.resetBtn setTitle:@"领取资源" forState:UIControlStateNormal];
+                        [self.cpuView.resetBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
+                        self.cpuView.resetBtn.userInteractionEnabled = YES;
+                    }else{
+                        [self.cpuView.resetBtn setTitle:@"已领取资源" forState:UIControlStateNormal];
+                        [self.cpuView.resetBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_lightBlue"] forState:UIControlStateNormal];
+                        self.cpuView.resetBtn.userInteractionEnabled = NO;
+                    }
+                });
+                
+            }];
+            
         } failed:^(NSError * _Nonnull error) {
             NSLog(@"%@", error);
         }];

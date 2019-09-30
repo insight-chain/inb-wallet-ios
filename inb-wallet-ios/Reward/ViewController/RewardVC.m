@@ -567,7 +567,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         self.voteRewardBtn.userInteractionEnabled = NO;
         
         
-        NSDecimalNumber *baseDec = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",(difDay * 0.09 / 365)]];
+        NSDecimalNumber *baseDec = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",((lockedNumber/kDayNumbers*1.0) * 0.09 / 365)]];
         NSDecimalNumber *rewardDec = [baseDec decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f", voteNumber]]];
         self.voteRewardValue.text = [NSString stringWithFormat:@"%@ INB", rewardDec.stringValue];
     }

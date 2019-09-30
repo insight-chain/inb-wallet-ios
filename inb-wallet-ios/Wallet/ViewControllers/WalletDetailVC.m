@@ -49,42 +49,62 @@
         self.extendedLayoutIncludesOpaqueBars = NO;
         self.modalPresentationCapturesStatusBarAppearance = NO;
     }
+    /** 导航栏返回按钮文字 **/
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
     
     [self initNavitaion];
     __block __weak typeof(self) tmpSelf = self;
-    self.exportView = [[MoreView alloc] initWithTitle:NSLocalizedString(@"exportPrivateKey", @"导出当前私钥") click:^{
+    self.exportView = [[MoreView alloc] initWithTitle:NSLocalizedString(@"backupWallet", @"备份钱包") click:^{
         dispatch_async(dispatch_get_main_queue(), ^{
-            [SavePrivatekeyWaringView showSaveWaringWith:^{
-                [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
-                    [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        @try {
-                            NSString *private = [tmpSelf.wallet privateKey:password];
-                            NSString *menmonry = [tmpSelf.wallet exportMnemonic:password];
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                WalletBackupVC *backupVC = [[WalletBackupVC alloc] init];
-                                backupVC.privateKey = private;
-                                backupVC.menmonryKey = menmonry;
-                                backupVC.name = tmpSelf.wallet.name;
-                                backupVC.hidesBottomBarWhenPushed = YES;
-                                [tmpSelf.navigationController pushViewController:backupVC animated:YES];
-                            });
-                        } @catch (NSException *exception) {
-                            if([exception.name isEqualToString:@"PasswordError"]){
+            
+            [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                });
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    if(![tmpSelf.wallet verifyPassword:password]){
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [MBProgressHUD hideHUDForView:self.view animated:YES];
+                            [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                        });
+                    }else{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [MBProgressHUD hideHUDForView:self.view animated:YES];
+                            [SavePrivatekeyWaringView showSaveWaringWith:^{
                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                    [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                                    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                                }); dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                    @try {
+                                        NSString *private = [tmpSelf.wallet privateKey:password];
+                                        NSString *menmonry = [tmpSelf.wallet exportMnemonic:password];
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                            WalletBackupVC *backupVC = [[WalletBackupVC alloc] init];
+                                            backupVC.navigationItem.title = NSLocalizedString(@"backupWallet", @"备份钱包");
+                                            backupVC.privateKey = private;
+                                            backupVC.menmonryKey = menmonry;
+                                            backupVC.name = tmpSelf.wallet.name;
+                                            backupVC.hidesBottomBarWhenPushed = YES;
+                                            [tmpSelf.navigationController pushViewController:backupVC animated:YES];
+                                        });
+                                    } @catch (NSException *exception) {
+                                        if([exception.name isEqualToString:@"PasswordError"]){
+                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                                [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                                            });
+                                        }
+                                    } @finally {
+                                        
+                                    }
                                 });
-                            }
-                        } @finally {
-                            
-                        }
-                        
-                    });
-                }];
+                            }];
+                        });
+                    }
+                });
             }];
-            });
+        });
 
     }];
     self.changePasswordView = [[MoreView alloc] initWithTitle:NSLocalizedString(@"changePassword_wallet", @"修改钱包密码") click:^{
@@ -206,9 +226,26 @@
 #pragma mark ---- Button Action
 //删除账户
 -(void)deleteWalletAction:(UIButton *)sender{
-    [self.wallet deleteWallet];
-    [self.navigationController popViewControllerAnimated:YES];
-    [NotificationCenter postNotificationName:NOTI_DELETE_WALLET object:self.wallet];
+    [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        });
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            __block BOOL passwordVer = NO;
+            passwordVer = [self.wallet verifyPassword:password];
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                if (!passwordVer) {
+                    [MBProgressHUD showMessage:@"密码错误" toView:self.view afterDelay:0.5 animted:YES];
+                }else{
+                    [self.wallet deleteWallet];
+                    [self.navigationController popViewControllerAnimated:YES];
+                    [NotificationCenter postNotificationName:NOTI_DELETE_WALLET object:self.wallet];
+                }
+            });
+        });
+    }];
+    
 }
 -(void)addressCopy:(UIButton *)sender{
     UIPasteboard *board = [UIPasteboard generalPasteboard];

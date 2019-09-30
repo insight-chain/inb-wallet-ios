@@ -48,25 +48,25 @@
         make.right.mas_equalTo(self.gatheringBtn.mas_left).mas_offset(AdaptedWidth(-70));
         make.width.height.mas_equalTo(self.gatheringBtn);
     }];
-    [self.nodeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.recordTransactionBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.gatheringBtn.mas_top);
         make.left.mas_equalTo(self.gatheringBtn.mas_right).mas_offset(AdaptedWidth(70));
         make.width.height.mas_equalTo(self.gatheringBtn);
     }];
-    [self.voteBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.backupBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.transferBtn);
         make.top.mas_equalTo(self.transferBtn.mas_bottom).mas_offset(AdaptedHeight(15));
         make.bottom.mas_equalTo(0);
         make.width.height.mas_equalTo(self.gatheringBtn);
     }];
-    [self.recordTransactionBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.voteBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.gatheringBtn);
-        make.top.mas_equalTo(self.voteBtn);
+        make.top.mas_equalTo(self.backupBtn);
         make.width.height.mas_equalTo(self.gatheringBtn);
     }];
-    [self.backupBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.nodeBtn);
-        make.top.mas_equalTo(self.recordTransactionBtn);
+    [self.nodeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.recordTransactionBtn);
+        make.top.mas_equalTo(self.voteBtn);
         make.width.height.mas_equalTo(self.gatheringBtn);
     }];
     
@@ -142,7 +142,7 @@
 -(UIButton *)nodeBtn{
     if (_nodeBtn == nil) {
         _nodeBtn = [[UIButton alloc] init];
-        [_nodeBtn setTitle:NSLocalizedString(@"wallet.node", @"节点") forState:UIControlStateNormal];
+        [_nodeBtn setTitle:NSLocalizedString(@"wallet.node", @"节点申请") forState:UIControlStateNormal];
         [_nodeBtn setImage:[UIImage imageNamed:@"wallet_node"] forState:UIControlStateNormal];
         [_nodeBtn setTitleColor:kColorTitle forState:UIControlStateNormal];
         _nodeBtn.titleLabel.font = AdaptedFontSize(14);

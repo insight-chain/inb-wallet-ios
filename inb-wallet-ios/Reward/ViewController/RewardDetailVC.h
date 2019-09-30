@@ -9,10 +9,13 @@
  * 收益详情
  */
 #import <UIKit/UIKit.h>
+#import "TransferModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface RewardDetailVC : UIViewController
+
+@property (nonatomic, strong) TransferModel *model;
 
 @end
 
