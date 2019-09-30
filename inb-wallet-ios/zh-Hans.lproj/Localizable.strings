@@ -59,6 +59,7 @@
 
 "wallet.node" = "节点申请";
 "wallet.reward" = "收益奖励";
+"wallet.create.successed" = "钱包创建成功";
 
 "copyAddress" = "复制地址";
 "saveQRCode" = "保存二维码";

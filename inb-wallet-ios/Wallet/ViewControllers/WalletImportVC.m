@@ -10,6 +10,7 @@
 
 #import "WalletCreatedVC.h"
 #import "BasicWebViewController.h"
+#import "WelcomBackupTipVC.h"
 
 #import "BIP44.h"
 #import "WalletMeta.h"
@@ -103,6 +104,9 @@
 
 -(void)initNavition{
     self.navigationItem.titleView = self.sliderBar;
+    /** 导航栏返回按钮文字 **/
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
 }
 
 -(void)makeConstraints{
@@ -281,34 +285,65 @@
         return;
     }
     
-    BasicWallet *wallet;
+    __block BasicWallet *wallet;
+    NSString *nameStr = self.accountName.text;
+    NSString *passwordTipStr = self.tipPassword.text;
+    NSString *passwordStr = self.password.text;
+    NSString *keyStr = [self.keyTextView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    if (self.selectImportType == ImportType_private) {
-        WalletMeta *metadata = [[WalletMeta alloc] initWith:source_privateKey];
-        metadata.segWit = @"P2WPKH";
-        metadata.name = self.accountName.text;
-        metadata.passwordHint = self.tipPassword.text;
-        metadata.chainType = chain_eth;
-        metadata.chain = [WalletMeta getChainStr:chain_eth];
-        wallet = [WalletManager importFromPrivateKey:self.keyTextView.text encryptedBy:self.password.text metadata:metadata accountName:@"import"];//[WalletManager importFromMnemonic:mnemonic metadata:metadata encryptBy:tmpSelf.password.text path:@"m/44'/60'/0'/0/0"];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @try {
+            if (self.selectImportType == ImportType_private) {
+                WalletMeta *metadata = [[WalletMeta alloc] initWith:source_privateKey];
+                metadata.segWit = @"P2WPKH";
+                metadata.name = nameStr;
+                metadata.passwordHint = passwordTipStr;
+                metadata.chainType = chain_eth;
+                metadata.chain = [WalletMeta getChainStr:chain_eth];
+                wallet = [WalletManager importFromPrivateKey:keyStr encryptedBy:passwordStr metadata:metadata accountName:@"import"];//[WalletManager importFromMnemonic:mnemonic metadata:metadata encryptBy:tmpSelf.password.text path:@"m/44'/60'/0'/0/0"];
+                
+            }else{
+                WalletMeta *metadata = [[WalletMeta alloc] initWith:source_mnemonic];
+                metadata.segWit = @"P2WPKH";
+                metadata.name = nameStr;
+                metadata.passwordHint = passwordTipStr;
+                metadata.chainType = chain_eth;
+                metadata.chain = [WalletMeta getChainStr:chain_eth];
+                
+                wallet = [WalletManager importFromMnemonic:keyStr metadata:metadata encryptBy:passwordStr path:BIP44.eth];//@"m/49'/0'/0'"
+                
+            }
+            
+        } @catch (NSException *exception) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //回到主线程
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [MBProgressHUD showMessage: self.selectImportType == ImportType_private ? @"私钥有误":@"助记词有误" toView:self.view afterDelay:2 animted:YES];
+            });
+        } @finally {
+        }
         
-    }else{
-        WalletMeta *metadata = [[WalletMeta alloc] initWith:source_mnemonic];
-        metadata.segWit = @"P2WPKH";
-        metadata.name = self.accountName.text;
-        metadata.passwordHint = self.tipPassword.text;
-        metadata.chainType = chain_eth;
-        metadata.chain = [WalletMeta getChainStr:chain_eth];
-        wallet = [WalletManager importFromMnemonic:self.keyTextView.text metadata:metadata encryptBy:self.password.text path:BIP44.eth];//@"m/49'/0'/0'"
-        
-    }
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [NotificationCenter postNotificationName:NOTI_ADD_WALLET object:wallet];
-    [self.navigationController popViewControllerAnimated:YES];
+        if(wallet){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [NotificationCenter postNotificationName:NOTI_ADD_WALLET object:wallet];
+                //回到主线程
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [MBProgressHUD showMessage:NSLocalizedString(@"wallet.create.successed", @"钱包创建成功") toView:self.view afterDelay:2 animted:YES];
+                [self.navigationController popViewControllerAnimated:YES];
+                //            WelcomBackupTipVC *welcomTipVC = [[WelcomBackupTipVC alloc] initWithNibName:NSStringFromClass([WelcomBackupTipVC class]) bundle:nil];
+                //            welcomTipVC.wallet = wallet;
+                //            welcomTipVC.password = self.password.text;
+                //            welcomTipVC.navigationItem.title =NSLocalizedString(@"backupWallet", @"备份钱包");
+                //            welcomTipVC.hidesBottomBarWhenPushed = YES;
+                //            [self.navigationController pushViewController:welcomTipVC animated:YES];
+            });
+        }
+    });
 }
 //创建钱包
 -(void)createAction:(UIButton *)sender{
     WalletCreatedVC *createVC = [[WalletCreatedVC alloc] init];
+    
     createVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:createVC animated:YES];
 }

@@ -61,6 +61,7 @@
             backupVC.navigationItem.title = NSLocalizedString(@"backupWallet", @"备份钱包");
             backupVC.memonry = mnemonry;
             backupVC.privateKey = privateKey;
+            backupVC.needVertify = tmpSelf.needVertify;
             [tmpSelf.navigationController pushViewController:backupVC animated:YES];
         });
     });

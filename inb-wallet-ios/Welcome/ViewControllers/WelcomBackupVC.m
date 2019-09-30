@@ -45,6 +45,7 @@
     
     
     //TODO...
+
     self.memonryWords = [self.memonry componentsSeparatedByString:@" "];
     
     
@@ -62,10 +63,14 @@
 
 #pragma mark ---- Button Action
 -(void)nextStepAction:(UIButton *)sender{
-    WelcomConfirmMnemonicVC *confirmVC = [[WelcomConfirmMnemonicVC alloc] init];
-    confirmVC.menmonryWords = self.memonryWords;
-    confirmVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:confirmVC animated:YES];
+    if(self.needVertify){
+        WelcomConfirmMnemonicVC *confirmVC = [[WelcomConfirmMnemonicVC alloc] init];
+        confirmVC.menmonryWords = self.memonryWords;
+        confirmVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:confirmVC animated:YES];
+    }else{
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark ---- UICollectionDataSource && Delegate
@@ -140,7 +145,11 @@
             CGPoint center = nextBtn.center;
             center.x = footer.center.x;
             nextBtn.center = center;
-            [nextBtn setTitle:NSLocalizedString(@"nextStep", @"下一步") forState:UIControlStateNormal];
+            if(self.needVertify){
+                [nextBtn setTitle:NSLocalizedString(@"nextStep", @"下一步") forState:UIControlStateNormal];
+            }else{
+                [nextBtn setTitle:NSLocalizedString(@"done", @"完成") forState:UIControlStateNormal];
+            }
             [nextBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [nextBtn addTarget:self action:@selector(nextStepAction:) forControlEvents:UIControlEventTouchUpInside];
             [footer addSubview:nextBtn];

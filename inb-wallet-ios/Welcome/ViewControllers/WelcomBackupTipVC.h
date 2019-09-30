@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WelcomBackupTipVC : UIViewController
 @property(nonatomic, strong) BasicWallet *wallet;
 @property(nonatomic, strong) NSString *password;
+@property (nonatomic, assign) BOOL needVertify; //是否需要验证
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,6 +8,8 @@
 
 #import "TransferVC.h"
 
+#import "RequestVC.h"
+
 #import "WalletManager.h"
 
 #import "PasswordInputView.h"
@@ -47,6 +49,7 @@
         self.extendedLayoutIncludesOpaqueBars = NO;
         self.modalPresentationCapturesStatusBarAppearance = NO;
     }
+    [self initNavi];
     
     [self.view addSubview:self.coinTF];
     [self.view addSubview:self.accountLabel];
@@ -107,7 +110,27 @@
     [super viewWillAppear:animated];
 
 }
+#pragma mark ---- 导航栏
+-(void)initNavi{
+    /** 导航栏返回按钮文字 **/
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+    
+    UIButton *collecBtn = [[UIButton alloc] init];
+    [collecBtn setTitle:NSLocalizedString(@"collection", @"收款") forState:UIControlStateNormal];
+    [collecBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [collecBtn addTarget:self action:@selector(collecAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:collecBtn];
+}
 #pragma mark ---- Button Action
+//收款
+-(void)collecAction:(UIButton *)sender{
+    RequestVC *requestVC = [[RequestVC alloc] init];
+    requestVC.addressStr = App_Delegate.selectAddr;
+    requestVC.navigationItem.title = NSLocalizedString(@"collection", @"收款");
+    requestVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:requestVC animated:YES];
+}
 //扫一扫
 -(void)scanAction:(UIButton *)sender{
     SWQRCodeConfig *qrConfig = [[SWQRCodeConfig alloc] init];
@@ -206,6 +229,40 @@
     
 }
 
+#pragma mark ---- UITextFieldDelegate
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(nonnull NSString *)string{
+    // 提升交互:动态设置按钮可行不可行
+    NSArray *tfs = @[_accountTF, _numberTF];
+    if([self getButtonEnableByCurrentTF:textField shouldChangeCharactersInRange:range replacementString:string tfArr:tfs]){
+        [self.senderBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
+        self.senderBtn.userInteractionEnabled = YES;
+    }else{
+        [self.senderBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_lightBlue"] forState:UIControlStateNormal];
+        self.senderBtn.userInteractionEnabled = NO;
+    }
+    return YES;
+}
+- (BOOL)getButtonEnableByCurrentTF:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string tfArr:(NSArray *)tfArr;{
+    if (string.length) {// 文本增加
+        NSMutableArray *newTFs = [NSMutableArray arrayWithArray:tfArr];
+        [newTFs removeObject:textField];
+        for (UITextField *tempTF in newTFs) {
+            if (tempTF.text.length==0) return NO;
+        }
+    }else{// 文本删除
+        if (textField.text.length-range.length==0) {// 当前TF文本被删完
+            return NO;
+        }else{
+            NSMutableArray *newTFs = [NSMutableArray arrayWithArray:tfArr];
+            [newTFs removeObject:textField];
+            for (UITextField *tempTF in newTFs) {
+                if (tempTF.text.length==0) return NO;
+            }
+        }
+    }
+    return YES;
+}
+
 #pragma mark ----
 -(UITextField *)coinTF{
     if (_coinTF == nil) {
@@ -238,6 +295,7 @@
         UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 45)];
         _accountTF.leftViewMode = UITextFieldViewModeAlways;
         _accountTF.leftView = leftView;
+        _accountTF.delegate = self;
         
         UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5+25+5+25+5, 45)];
         UIButton *pasteBtn = [[UIButton alloc] init]; //粘贴
@@ -291,6 +349,7 @@
         UIView *leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 45)];
         _numberTF.leftViewMode = UITextFieldViewModeAlways;
         _numberTF.leftView = leftView;
+        _numberTF.delegate = self;
         
         UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10+AdaptedWidth(30)+10, 45)];
         UIButton *fullBtn = [[UIButton alloc] init]; //全部
@@ -364,8 +423,9 @@
 -(UIButton *)senderBtn{
     if (_senderBtn == nil) {
         _senderBtn = [[UIButton alloc] init];
-        UIImage *img = [UIImage imageNamed:@"btn_bg_blue"];
+        UIImage *img = [UIImage imageNamed:@"btn_bg_lightBlue"];
         img = [img resizableImageWithCapInsets:UIEdgeInsetsMake(img.size.height/2.0, img.size.width/2.0, img.size.height/2.0, img.size.width/2.0) resizingMode:UIImageResizingModeStretch];
+        _senderBtn.userInteractionEnabled = NO;
         [_senderBtn setBackgroundImage:img forState:UIControlStateNormal];
         [_senderBtn setTitle:NSLocalizedString(@"transfer.send", @"发送") forState:UIControlStateNormal];
         [_senderBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

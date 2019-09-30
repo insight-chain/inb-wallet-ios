@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface WelcomBackupVC : UIViewController
 @property(nonatomic, strong) NSString *memonry;
 @property(nonatomic, strong) NSString *privateKey;
+@property (nonatomic, assign) BOOL needVertify; //是否需要验证
 @end
 
 NS_ASSUME_NONNULL_END

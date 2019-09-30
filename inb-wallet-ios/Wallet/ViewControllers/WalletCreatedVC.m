@@ -59,6 +59,7 @@
         self.extendedLayoutIncludesOpaqueBars = NO;
         self.modalPresentationCapturesStatusBarAppearance = NO;
     }
+    self.navigationItem.title = NSLocalizedString(@"createWallet", @"创建钱包");
     
     [self makeConstraints];
     
@@ -216,6 +217,9 @@
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    NSString *nameStr = [self.accountName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet
+                                                                                ]]; //去除字符串两端的韩航和空格
     __weak __block typeof(self) tmpSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
@@ -225,7 +229,7 @@
             NSString *mnemonic = [MnemonicUtil generateMnemonic];
             WalletMeta *metadata = [[WalletMeta alloc] initWith:source_mnemonic];
             metadata.segWit = @"P2WPKH";
-            metadata.name = tmpSelf.accountName.text;
+            metadata.name = nameStr;
             metadata.passwordHint = tmpSelf.tipPassword.text;
             metadata.chainType = chain_eth;
             metadata.chain = [WalletMeta getChainStr:chain_eth];
@@ -246,9 +250,10 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             //回到主线程
             [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [MBProgressHUD showMessage:NSLocalizedString(@"", @"钱包创建成功") toView:tmpSelf.view afterDelay:2 animted:YES];
+            [MBProgressHUD showMessage:NSLocalizedString(@"wallet.create.successed", @"钱包创建成功") toView:tmpSelf.view afterDelay:2 animted:YES];
             
             WelcomBackupTipVC *welcomTipVC = [[WelcomBackupTipVC alloc] initWithNibName:NSStringFromClass([WelcomBackupTipVC class]) bundle:nil];
+            welcomTipVC.needVertify = YES; //需要验证
             welcomTipVC.wallet = wallet;
             welcomTipVC.password = self.password.text;
             welcomTipVC.navigationItem.title =NSLocalizedString(@"backupWallet", @"备份钱包");
