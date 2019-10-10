@@ -118,9 +118,9 @@
     }];
     
     [self.addressCopyBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.addressBg.mas_bottom).mas_offset(AdaptedHeight(-kMidMargin));
-        make.right.mas_equalTo(self.addressBg.mas_right).mas_offset(AdaptedWidth(-kLittleMargin));
-        make.width.height.mas_equalTo(AdaptedWidth(kBigMargin));
+        make.bottom.mas_equalTo(self.addressBg.mas_bottom).mas_offset(AdaptedHeight(-kMidMargin-5));
+        make.right.mas_equalTo(self.addressBg.mas_right).mas_offset(AdaptedWidth(-kLittleMargin-5));
+        make.width.height.mas_equalTo(AdaptedWidth(kBigMargin+10));
     }];
     
     [self.menmonryLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -138,9 +138,9 @@
         make.right.mas_equalTo(self.menmonryBg.mas_right).mas_offset(AdaptedWidth(-kLittleMargin));
     }];
     [self.menmonryCopy mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.menmonryBg.mas_bottom).mas_offset(AdaptedHeight(-kMidMargin));
-        make.right.mas_equalTo(self.menmonryBg.mas_right).mas_offset(AdaptedWidth(-kLittleMargin));
-        make.width.height.mas_equalTo(AdaptedWidth(kBigMargin));
+        make.bottom.mas_equalTo(self.menmonryBg.mas_bottom).mas_offset(AdaptedHeight(-kMidMargin-5));
+        make.right.mas_equalTo(self.menmonryBg.mas_right).mas_offset(AdaptedWidth(-kLittleMargin-5));
+        make.width.height.mas_equalTo(AdaptedWidth(kBigMargin+10));
     }];
     
     [sepView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -174,21 +174,14 @@
 -(void)addressCopy:(UIButton *)sender{
     UIPasteboard *board = [UIPasteboard generalPasteboard];
     board.string = self.privateKey;
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeAnnularDeterminate;
-    hud.label.text = @"私钥已复制到剪贴板";
-    [hud setRemoveFromSuperViewOnHide:YES];
-    [hud hideAnimated:YES afterDelay:2];
+    
+    [MBProgressHUD showMessage:NSLocalizedString(@"wallet.copy.private.success", @"私钥已复制到剪贴板") toView:self.view afterDelay:1.5 animted:YES];
 }
 //复制助记词
 -(void)mnemonicCopy:(UIButton *)sender{
     UIPasteboard *board = [UIPasteboard generalPasteboard];
     board.string = self.menmonryKey;
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeAnnularDeterminate;
-    hud.label.text = @"助记词已复制到剪贴板";
-    [hud setRemoveFromSuperViewOnHide:YES];
-    [hud hideAnimated:YES afterDelay:2];
+    [MBProgressHUD showMessage:NSLocalizedString(@"wallet.copy.memonry.success", @"助记词已复制到剪贴板") toView:self.view afterDelay:1.5 animted:YES];
 }
 #pragma mark ----
 -(UILabel *)accountNameLabel{

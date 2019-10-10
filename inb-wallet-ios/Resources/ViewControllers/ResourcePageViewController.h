@@ -6,7 +6,6 @@
 //  Copyright © 2019 insightChain_iOS开发. All rights reserved.
 //
 
-#import "BaseResourcePageViewController.h"
 #import "YNPageViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 

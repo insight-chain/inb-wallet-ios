@@ -52,6 +52,7 @@
     /** 导航栏返回按钮文字 **/
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+   
     
     [self initNavitaion];
     __block __weak typeof(self) tmpSelf = self;
@@ -66,7 +67,7 @@
                     if(![tmpSelf.wallet verifyPassword:password]){
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [MBProgressHUD hideHUDForView:self.view animated:YES];
-                            [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                            [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
                         });
                     }else{
                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -92,7 +93,7 @@
                                         if([exception.name isEqualToString:@"PasswordError"]){
                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                 [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                                [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                                                [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
                                             });
                                         }
                                     } @finally {
@@ -131,6 +132,14 @@
     self.createTime.text = [NSDate timestampSwitchTime:self.wallet.imTokenMeta.timestamp formatter:@"yyyy-MM-dd HH:mm:ss"];
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    //设置导航栏背景图片为一个空的image，这样就透明了
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    //去掉透明后导航栏下边的黑边
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+}
 -(void)initNavitaion{
     UIButton *deleteBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 18, 18)];
     [deleteBtn setBackgroundImage:[UIImage imageNamed:@"nav_delete"] forState:UIControlStateNormal];
@@ -189,9 +198,9 @@
         make.top.mas_equalTo(self.addressBg.mas_top).mas_offset(AdaptedHeight(15));
     }];
     [self.addressCopyBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.addressBg.mas_bottom).mas_offset(AdaptedHeight(-15));
-        make.right.mas_equalTo(self.addressBg.mas_right).mas_offset(AdaptedWidth(-10));
-        make.width.height.mas_equalTo(AdaptedWidth(20));
+        make.bottom.mas_equalTo(self.addressBg.mas_bottom).mas_offset(AdaptedHeight(-10));
+        make.right.mas_equalTo(self.addressBg.mas_right).mas_offset(AdaptedWidth(-5));
+        make.width.height.mas_equalTo(AdaptedWidth(30));
     }];
 //    [self.createTimeStr mas_remakeConstraints:^(MASConstraintMaker *make) {
 //        make.top.mas_equalTo(self.addressBg.mas_bottom).mas_offset(AdaptedHeight(topMargin));
@@ -236,7 +245,7 @@
             dispatch_sync(dispatch_get_main_queue(), ^{
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
                 if (!passwordVer) {
-                    [MBProgressHUD showMessage:@"密码错误" toView:self.view afterDelay:0.5 animted:YES];
+                    [MBProgressHUD showMessage:@"密码错误" toView:self.view afterDelay:1 animted:YES];
                 }else{
                     [self.wallet deleteWallet];
                     [self.navigationController popViewControllerAnimated:YES];
@@ -250,11 +259,7 @@
 -(void)addressCopy:(UIButton *)sender{
     UIPasteboard *board = [UIPasteboard generalPasteboard];
     board.string = self.address.text;
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    hud.mode = MBProgressHUDModeAnnularDeterminate;
-    hud.label.text = @"私钥已复制到剪贴板";
-    [hud setRemoveFromSuperViewOnHide:YES];
-    [hud hideAnimated:YES afterDelay:2];
+    [MBProgressHUD showMessage:NSLocalizedString(@"wallet.copy.address.success", @"地址复制到剪贴板") toView:self.view afterDelay:1.5 animted:YES];
 }
 #pragma mark ---- getter
 -(UILabel *)accountStr{

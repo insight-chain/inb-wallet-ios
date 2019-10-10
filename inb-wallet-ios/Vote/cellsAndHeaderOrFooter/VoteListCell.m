@@ -64,8 +64,10 @@
     self.voteBtn.selected = node.isVoted ? YES : NO;
     self.locationLabel.text = node.city;
     if (self.voteBtn.selected) {
+        self.voteLabel.text = NSLocalizedString(@"vote.selected", @"已选");
         self.selectBox.image = [UIImage imageNamed:@"selectBox_yes"];
     }else{
+        self.voteLabel.text = NSLocalizedString(@"vote", @"投票");
         self.selectBox.image = [UIImage imageNamed:@"selectBox_no"];
     }
 }
@@ -75,8 +77,10 @@
 - (IBAction)voteAction:(UIButton *)sender {
     sender.selected = !sender.selected;
     if (sender.selected) {
+        self.voteLabel.text = NSLocalizedString(@"vote.selected", @"已选");
         self.selectBox.image = [UIImage imageNamed:@"selectBox_yes"];
     }else{
+        self.voteLabel.text = NSLocalizedString(@"vote", @"投票");
         self.selectBox.image = [UIImage imageNamed:@"selectBox_no"];
     }
     self.node.isVoted = sender.selected;

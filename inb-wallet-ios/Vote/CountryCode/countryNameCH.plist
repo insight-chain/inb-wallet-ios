@@ -18,5 +18,17 @@
 		<key>PH</key>
 		<string>菲律宾</string>
 	</dict>
+	<dict>
+		<key>JP</key>
+		<string>日本</string>
+	</dict>
+	<dict>
+		<key>KR</key>
+		<string>韩国</string>
+	</dict>
+	<dict>
+		<key>SG</key>
+		<string>新加坡</string>
+	</dict>
 </array>
 </plist>

@@ -189,6 +189,7 @@
         _tableView = [[UITableView alloc] init];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
 }
@@ -213,6 +214,7 @@
     }
     [self.selectedNodes removeAllObjects];
     [self reload];
+    [self hideList];
 }
 #pragma mark ---- UITableViewDatasource && delegete
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

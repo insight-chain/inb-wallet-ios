@@ -66,6 +66,16 @@
     [self removeFromSuperview];
 }
 
++(NSArray *)countryList{
+    if (LanguageIsEnglish) {
+        NSString *listPathEN = [[NSBundle mainBundle] pathForResource:@"countryNameCH" ofType:@"plist"];
+        return [[NSArray alloc] initWithContentsOfFile:listPathEN];
+    }else{
+        NSString *listPathEN = [[NSBundle mainBundle] pathForResource:@"countryNameCH" ofType:@"plist"];
+        return [[NSArray alloc] initWithContentsOfFile:listPathEN];
+    }
+}
+
 #pragma mark ---- UIPickerViewDelegate && Datasource
 //有几列
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{

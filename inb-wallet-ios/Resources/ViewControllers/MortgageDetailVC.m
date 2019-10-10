@@ -38,12 +38,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    /** 导航栏返回按钮文字 **/
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+    
     self.tableView.separatorStyle  = UITableViewCellSelectionStyleNone;
     self.tableView.tableHeaderView = self.tableHeaderView;
     self.tableFooter = [[TransferFooterView alloc] init];
     self.tableFooter.frame = CGRectMake(0, 0, KWIDTH, AdaptedWidth(202));
     self.tableView.tableFooterView = self.tableFooter;
-    self.tableFooter.info = @"";
+    self.tableFooter.info = self.lockModel.hashStr;
     
     self.morgageValue.text = [NSString changeNumberFormatter:[NSString stringWithFormat:@"%.5f INB", [self.lockModel.amount doubleValue]]];
     self.rewardValue.text = [NSString changeNumberFormatter:[NSString stringWithFormat:@"%.5f INB", self.lockModel.reward]];
@@ -129,7 +133,7 @@
     }
     
     cell.showRightBtn = NO;
-    
+    cell.value.textColor = kColorTitle;
     if (indexPath.row == 0) {
         cell.typeName.text = @"付款地址";
         cell.value.text = [self.lockModel.address add0xIfNeeded];
@@ -159,7 +163,8 @@
         cell.value.text = [NSString stringWithFormat:@"%ld", self.lockModel.startHeight+self.lockModel.lockHeight];//@"--";
     }else if(indexPath.row == 7){
         cell.typeName.text = @"交易号";
-        cell.value.text = self.lockModel.hashStr;
+        cell.value.text = NSLocalizedString(@"transfer.query", @"交易查询");
+        cell.value.textColor = kColorBlue;
         cell.showRightBtn = YES;
         cell.rightBtnType = 2;
         cell.showSeperatorView = NO;
@@ -173,6 +178,7 @@
     
     if (indexPath.row == 7) {
         BasicWebViewController *webView = [[BasicWebViewController alloc] init];
+        webView.navigationItem.title = NSLocalizedString(@"transfer.query", @"交易查询");
         webView.urlStr = [NSString stringWithFormat:@"%@TransactionHash?transactionHash=%@",App_Delegate.webHost, [self.lockModel.hashStr add0xIfNeeded]];
         webView.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:webView animated:YES];

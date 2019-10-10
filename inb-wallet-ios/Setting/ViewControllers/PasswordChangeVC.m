@@ -147,7 +147,7 @@
 
 -(void)doneAction:(UIButton *)sender{
     if (![self.password_2.text isEqualToString:self.password_3.text]) {
-        [MBProgressHUD showMessage:@"新密码不一致" toView:self.view afterDelay:0.3 animted:YES];
+        [MBProgressHUD showMessage:@"新密码不一致" toView:self.view afterDelay:0.7 animted:YES];
         return ;
     }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];

@@ -66,7 +66,7 @@
     //设置导航栏背景图片为一个空的image，这样就透明了
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     //去掉透明后导航栏下边的黑边
-    [self.navigationController.navigationBar setShadowImage:nil];
+//    [self.navigationController.navigationBar setShadowImage:nil];
 }
 - (UIImage *)imageWithColor:(UIColor *)color{
     //创建1像素区域并开始图片绘制

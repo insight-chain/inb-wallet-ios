@@ -104,7 +104,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="all_wait_bg" translatesAutoresizingMaskIntoConstraints="NO" id="dnM-47-2ZO">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="all_wait_bg" translatesAutoresizingMaskIntoConstraints="NO" id="dnM-47-2ZO">
                     <rect key="frame" x="15" y="53" width="345" height="45"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="ymQ-9l-RkJ"/>
@@ -154,7 +154,7 @@
         </view>
     </objects>
     <resources>
-        <image name="all_wait_bg" width="345" height="45"/>
+        <image name="all_wait_bg" width="224.5" height="45"/>
         <image name="btn_bg_white" width="10.5" height="30"/>
     </resources>
 </document>

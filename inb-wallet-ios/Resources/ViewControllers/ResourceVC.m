@@ -237,7 +237,7 @@
                 } @catch (NSException *exception) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                        [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                        [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.7 animted:YES];
                     });
                     
                 } @finally {

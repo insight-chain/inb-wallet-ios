@@ -20,7 +20,7 @@
 #import "NetworkUtil.h"
 #define daysBlockNumber ((5*60)/2)   //预估一天产生的块
 
-@interface ResourcePageViewController ()<PageViewControllerDataSource, PageViewControllerDelegate, YNPageViewControllerDelegate, YNPageViewControllerDataSource>
+@interface ResourcePageViewController ()<YNPageViewControllerDelegate, YNPageViewControllerDataSource>
 
 @property (nonatomic, strong) ResourceCPUView *cpuView;
 
@@ -223,8 +223,12 @@
 
 +(instancetype)suspendTopPausePageVC{
     YNPageConfigration *configration = [YNPageConfigration defaultConfig];
+    configration.itemFont = [UIFont systemFontOfSize:16];
+    configration.selectedItemFont = [UIFont systemFontOfSize:16];
+    configration.menuHeight = 30;
+    configration.scrollViewBackgroundColor = kColorBackground;
     configration.pageStyle = YNPageStyleSuspensionTopPause;
-    configration.headerViewCouldScale = YES;
+    configration.headerViewCouldScale = NO;
     configration.showTabbar = NO;
     configration.showNavigation = YES;
     configration.scrollMenu = NO;
@@ -237,20 +241,23 @@
     configration.lineColor = kColorBlue;
     
     ResourcePageViewController *vc = [ResourcePageViewController pageViewControllerWithControllers:[self getArrayVCs] titles:[self getArrayTitles] config:configration];
+    /** 导航栏返回按钮文字 **/
+    vc.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    vc.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
     vc.dataSource = vc;
     vc.delegate = vc;
     
     ResourceCPUView *cpuView = [[ResourceCPUView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 290)];
+    cpuView.backgroundColor = kColorBackground;
     cpuView.resetRes = ^{
         
     };
     vc.cpuView = cpuView;
     vc.headerView = cpuView;
     
-    vc.pageIndex = 1;
+    vc.pageIndex = 0;
     
     __weak typeof(ResourcePageViewController *) weakVC = vc;
-    
     vc.bgScrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         
         NSInteger refreshPage = weakVC.pageIndex;

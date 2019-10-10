@@ -63,7 +63,7 @@
     
     self.coinTF.text = @"INB";
     self.coinTF.enabled = NO; //不可编辑，不可相应其他点击事件
-    self.balanceLabel.text = [NSString stringWithFormat:@"可用余额 %.2f INBP", self.balance];
+    self.balanceLabel.text = [NSString stringWithFormat:@"可用余额 %.2f INB", self.balance];
     
     [self.coinTF mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
@@ -161,6 +161,18 @@
 }
 //发送交易
 -(void)transformAction:(UIButton *)sender{
+    
+    if(!([self.accountTF.text hasPrefix:@"0x95"] && [self.accountTF.text length] == 42)){
+        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.failed.noAddress", @"地址格式不正确") toView:self.view afterDelay:1 animted:YES];
+        return;
+    }
+    
+    NSDecimalNumber *value = [NSDecimalNumber decimalNumberWithString:self.numberTF.text];
+    if(self.wallet.balanceINB < value.doubleValue){
+        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.failed.noBalance", @"余额不足") toView:self.view afterDelay:1 animted:YES];
+        return;
+    }
+    
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
     [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
@@ -173,7 +185,7 @@
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 if (error) {
                                     [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                    [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:0.3 animted:NO];
+                                    [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
                                     return ;
                                 }
                                 NSDictionary *dic = (NSDictionary *)responseObject;
@@ -197,18 +209,18 @@
                                                                 [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
                                                                 
                                                                 if (error) {
-                                                                    [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:0.3 animted:NO];
+                                                                    [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
                                                                     return ;
                                                                 }
                                                                 NSString *errorStr = responseObject[@"error"];
                                                                 if(errorStr){
-                                                                    [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:0.3 animted:NO];
+                                                                    [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
                                                                     return ;
                                                                 }
                                                                 NSLog(@"%@---%@",[responseObject  class], responseObject);
                                                                 
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                                                    [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.success", @"转账成功") toView:tmpSelf.view afterDelay:0.3 animted:NO];
+                                                                    [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.success", @"转账成功") toView:tmpSelf.view afterDelay:1 animted:NO];
                                                                     [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];
                                                                 });
                                                             }];
@@ -216,7 +228,7 @@
                                     } @catch (NSException *exception) {
                                         dispatch_async(dispatch_get_main_queue(), ^{
                                             [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                            [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                                            [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
                                         });
                                         
                                     } @finally {

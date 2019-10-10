@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSArray *wallets;
 
 -(instancetype)initWithJSON:(NSDictionary *)json;
+-(instancetype)initEmptyWithMetadata:(WalletMeta *)metadata mnemonic:(NSString *)mnemonic password:(NSString *)password;
 -(instancetype)initWithMetadata:(WalletMeta *)metadata mnemonic:(NSString *)mnemonic password:(NSString *)password;
 
 -(instancetype)initBTCWithMetadata:(WalletMeta *)metadata mnemonic:(NSString *)mnemonic password:(NSString *)password;
@@ -56,6 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * return @{@"mnemonic":String, @"identity":Identity}
  */
++(NSDictionary *)createEmptyIdentityWithPassword:(NSString *)password metadata:(WalletMeta *)metadata;
 +(NSDictionary *)createIdentityWithPassword:(NSString *)password metadata:(WalletMeta *)metadata;
 +(Identity *)recoverIdentityWithMetadata:(WalletMeta *)metadata mnemonic:(NSString *)mnemonic password:(NSString *)password;
 

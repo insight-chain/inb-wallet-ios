@@ -69,7 +69,7 @@
     self.selectedNodesList.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.headerView.balanceINB = self.wallet.balanceINB;
     self.headerView.mortgageINB = self.wallet.mortgagedINB;
-    self.headerView.voteTotalValue.text = [NSString stringWithFormat:@"%.2f INB", self.wallet.mortgagedINB*self.selectedNode.count];
+    self.headerView.voteTotalValue.text = [NSString stringWithFormat:@"%.2f", self.wallet.mortgagedINB*self.selectedNode.count];
     __block __weak typeof(self) tmpSelf = self;
     self.headerView.addMortgageBlock = ^(double inbNumber) {
         if (inbNumber != 0) {
@@ -99,7 +99,7 @@
     
     //    如果不想让其他页面的导航栏变为透明 需要重置
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
+//    [self.navigationController.navigationBar setShadowImage:nil];
     
 }
 
@@ -110,7 +110,7 @@
     [self.voteButton mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.selectedNodesList.mas_bottom);
         make.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(AdaptedWidth(50));
+        make.height.mas_equalTo(50);
         if (iPhoneX) {
             make.bottom.mas_equalTo(self.view.mas_bottom).mas_offset(-20);
         }else{
@@ -164,7 +164,7 @@
             } @catch (NSException *exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                    [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                    [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
                 });
                 
             } @finally {
@@ -179,7 +179,7 @@
 -(void)voteSubmitAction:(UIButton *)sender{
 //    [self registerToNode];
     if(self.selectedNode.count <= 0){
-        [MBProgressHUD showMessage:@"请先选择节点" toView:self.view afterDelay:0.3 animted:YES];
+        [MBProgressHUD showMessage:@"请先选择节点" toView:self.view afterDelay:1.5 animted:YES];
         return;
     }
     __block __weak typeof(self) tmpSelf = self;
@@ -199,7 +199,7 @@
                              completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                  if (error) {
                                      [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:0.3 animted:NO];
+                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
                                      return ;
                                  }
                                  NSDictionary *dic = (NSDictionary *)responseObject;
@@ -225,17 +225,17 @@
                                                                  [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
                                                                  
                                                                  if (error) {
-                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.failed", @"投票失败") toView:tmpSelf.view afterDelay:0.3 animted:NO];
+                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.failed", @"投票失败") toView:tmpSelf.view afterDelay:1 animted:NO];
                                                                      return ;
                                                                  }
                                                                  
                                                                  if(responseObject[@"error"]){
-                                                                     [MBProgressHUD showMessage:responseObject[@"error"] toView:tmpSelf.view afterDelay:0.3 animted:NO];
+                                                                     [MBProgressHUD showMessage:responseObject[@"error"][@"message"] toView:tmpSelf.view afterDelay:1.5 animted:NO];
                                                                  }
                                                                  NSLog(@"%@---%@",[responseObject  class], responseObject);
                                                                  
                                                                  dispatch_async(dispatch_get_main_queue(), ^{
-                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.success", @"投票成功") toView:tmpSelf.view afterDelay:0.3 animted:NO];
+                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.success", @"投票成功") toView:tmpSelf.view afterDelay:1 animted:NO];
                                                                      [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];
                                                                  });
                                                              }];
@@ -243,7 +243,7 @@
                                      } @catch (NSException *exception) {
                                          dispatch_async(dispatch_get_main_queue(), ^{
                                              [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                             [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                                             [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
                                          });
                                          
                                      } @finally {
@@ -312,7 +312,7 @@
     if (scrollView.contentOffset.y >= AdaptedHeight(150)) {
         //    如果不想让其他页面的导航栏变为透明 需要重置
         [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-        [self.navigationController.navigationBar setShadowImage:nil];
+//        [self.navigationController.navigationBar setShadowImage:nil];
     }else{
         //    //设置导航栏背景图片为一个空的image，这样就透明了
         [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];

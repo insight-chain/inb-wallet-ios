@@ -32,6 +32,9 @@
 "Resource" = "资源(RES)";
 "Resource.hasMortgage" = "已抵押";
 "Resource.record" = "抵押记录";
+"Resource.redemptioning" = "正在赎回";
+"Resource.mortgageList" = "抵押列表";
+"Resource.mortgage.detail" = "抵押详情";
 
 "confirm" = "确认";
 
@@ -100,9 +103,20 @@
 "transfer.send" = "发送";
 "transfer.result.success" = "转账成功";
 "transfer.result.failed" = "转账失败";
+"transfer.failed.noBalance" = "余额不足";
+"transfer.failed.noAddress" = "地址格式不正确";
+"transfer.typeName.mortgage" = "抵押资源";
+"transfer.typeName.redemption.apply" = "抵押赎回";
+"transfer.typeName.redemption.receive" = "赎回领取";
+"transfer.typeName.redemption.reward" = "领取抵押收益";
+"transfer.typeName.vote" = "节点投票";
+"transfer.typeName.vote.reward" = "领取投票收益";
+"transfer.query" = "交易查询";
 
 "vote.support" = "支持率";
 "vote.node.empty" = "暂无投票节点";
+"vote.selected" = "已选";
+
 
 "pledgedResources" = "已抵押资源";
 "addMortgageResources" = "新增抵押";
@@ -131,6 +145,9 @@
 "placeholder.inbNumber.input" = "请输入INB数量";
 
 "wallet.accountName" = "身份名称";
+"wallet.copy.address.success" = "钱包地址已复制到剪贴板";
+"wallet.copy.private.success" = "私钥已复制到剪贴板";
+"wallet.copy.memonry.success" = "助记词已复制到剪贴板";
 
 "done"  = "完成";
 "clear" = "清空";
@@ -138,6 +155,7 @@
 "node.server" = "服务器";
 "node.team" = "团队介绍";
 "node.contact" = "联系方式";
+"node.detail" = "节点详情";
 
 "backup.tip_1" = "妥善备份钱包才能保障您的资产安全。卸载程序或删除钱包后，您需要备份文件来恢复钱包";
 "backup.tip_2" = "请在四周无人、确保没有摄像头的安全环境下进行备份";
@@ -158,9 +176,9 @@
 "setting.aboutUs.website" = "官方网站";
 "setting.aboutUs.weChat" = "微信公众号";
 
-"tip.resource.mortgage_1" = "1. 注意在INB网络上面的任何交易都会占用NET资源。";
-"tip.resource.mortgage_2" = "2. 所占用的资源在一定时间后悔返还。";
-"tip.resource.mortgage_3" = "3. 您可以在任何时候赎回资源，但是会有3天的等待期。";
+"tip.resource.mortgage_1" = "1.注意在INB网络上面的任何交易都会占用NET资源。";
+"tip.resource.mortgage_2" = "2.所占用的资源在一定时间后悔返还。";
+"tip.resource.mortgage_3" = "3.您可以在任何时候赎回资源，但是会有3天的等待期。";
 "tip.resource.redemption_1" = "1. 仅能赎回自己抵押的资源。";
 "tip.resource.redemption_2" = "2. 如果您当前已经消耗了一部分资源，则无法赎回全部的资源，请尝试减少赎回的数量。";
 "tip.resource.redemption_3" = "3. 所有赎回中的INB资源将在最后一次赎回操作的3天后退回。";
@@ -173,3 +191,4 @@
 
 "message.tip.saveCode.success" = "保存二维码成功";
 "message.tip.saveCode.failed" = "保存二维码失败";
+"message.tip.noNodes" = "未选择节点";

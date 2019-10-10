@@ -12,8 +12,10 @@
 
 +(void)showMessage:(NSString *)message toView:(UIView *)view afterDelay:(double)delay animted:(BOOL)animated{
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:animated];
-    hud.mode = MBProgressHUDModeAnnularDeterminate;
+    hud.bezelView.backgroundColor = kColorWithRGBA(0, 0, 0, 0.65);
+    hud.mode = MBProgressHUDModeText;
     hud.label.text = message;
+    hud.label.textColor = [UIColor whiteColor];
     [hud setRemoveFromSuperViewOnHide:YES];
     [hud hideAnimated:animated afterDelay:delay];
     [view bringSubviewToFront:hud];

@@ -53,7 +53,6 @@
 		FE6D8513231CC09800023321 /* RedeemCell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE6D8511231CC09800023321 /* RedeemCell_1.xib */; };
 		FE6D8517231CC0B600023321 /* RedeemCell_2.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D8515231CC0B600023321 /* RedeemCell_2.m */; };
 		FE6D8518231CC0B600023321 /* RedeemCell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE6D8516231CC0B600023321 /* RedeemCell_2.xib */; };
-		FE6D851B231D1EBD00023321 /* BaseResourcePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D851A231D1EBD00023321 /* BaseResourcePageViewController.m */; };
 		FE6D851E231E123600023321 /* ResourcePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D851D231E123600023321 /* ResourcePageViewController.m */; };
 		FE6D8521231E6D1F00023321 /* BaseTableViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D8520231E6D1F00023321 /* BaseTableViewVC.m */; };
 		FE6D8525231F602500023321 /* PageScrollMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D8524231F602500023321 /* PageScrollMenuView.m */; };
@@ -82,6 +81,7 @@
 		FE84CFAB233A08D900414411 /* LYEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFA5233A08D900414411 /* LYEmptyView.m */; };
 		FE84CFB223407E3B00414411 /* LXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFAE23407E3A00414411 /* LXAlertView.m */; };
 		FE84CFB323407E3B00414411 /* UILabel+LXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFB123407E3A00414411 /* UILabel+LXAdd.m */; };
+		FE84CFB62341E6B700414411 /* UIColor+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFB52341E6B700414411 /* UIColor+Image.m */; };
 		FE92C41C22A78ED40043DA9D /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE92C41B22A78ED40043DA9D /* test.swift */; };
 		FE92C49622A792580043DA9D /* libscrypt.podspec in Resources */ = {isa = PBXBuildFile; fileRef = FE92C41E22A792580043DA9D /* libscrypt.podspec */; };
 		FE92C49722A792580043DA9D /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42222A792580043DA9D /* BTCBlock.m */; };
@@ -382,8 +382,6 @@
 		FE6D8514231CC0B600023321 /* RedeemCell_2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedeemCell_2.h; sourceTree = "<group>"; };
 		FE6D8515231CC0B600023321 /* RedeemCell_2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedeemCell_2.m; sourceTree = "<group>"; };
 		FE6D8516231CC0B600023321 /* RedeemCell_2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedeemCell_2.xib; sourceTree = "<group>"; };
-		FE6D8519231D1EBD00023321 /* BaseResourcePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseResourcePageViewController.h; sourceTree = "<group>"; };
-		FE6D851A231D1EBD00023321 /* BaseResourcePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseResourcePageViewController.m; sourceTree = "<group>"; };
 		FE6D851C231E123600023321 /* ResourcePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResourcePageViewController.h; sourceTree = "<group>"; };
 		FE6D851D231E123600023321 /* ResourcePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResourcePageViewController.m; sourceTree = "<group>"; };
 		FE6D851F231E6D1F00023321 /* BaseTableViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTableViewVC.h; sourceTree = "<group>"; };
@@ -438,6 +436,8 @@
 		FE84CFAF23407E3A00414411 /* UILabel+LXAdd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LXAdd.h"; sourceTree = "<group>"; };
 		FE84CFB023407E3A00414411 /* LXAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXAlertView.h; sourceTree = "<group>"; };
 		FE84CFB123407E3A00414411 /* UILabel+LXAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LXAdd.m"; sourceTree = "<group>"; };
+		FE84CFB42341E6B700414411 /* UIColor+Image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Image.h"; sourceTree = "<group>"; };
+		FE84CFB52341E6B700414411 /* UIColor+Image.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Image.m"; sourceTree = "<group>"; };
 		FE92C41A22A78ED40043DA9D /* inb-wallet-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inb-wallet-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		FE92C41B22A78ED40043DA9D /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		FE92C41E22A792580043DA9D /* libscrypt.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libscrypt.podspec; sourceTree = "<group>"; };
@@ -1234,6 +1234,8 @@
 				FEE947C92302A4C80004D696 /* UITableView+PlaceHolder.m */,
 				FE6D852E2321140400023321 /* UIView+YNPageExtend.h */,
 				FE6D852D2321140300023321 /* UIView+YNPageExtend.m */,
+				FE84CFB42341E6B700414411 /* UIColor+Image.h */,
+				FE84CFB52341E6B700414411 /* UIColor+Image.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1661,8 +1663,6 @@
 			children = (
 				FE92C57F22A792F40043DA9D /* ResourceVC.h */,
 				FE92C58022A792F40043DA9D /* ResourceVC.m */,
-				FE6D8519231D1EBD00023321 /* BaseResourcePageViewController.h */,
-				FE6D851A231D1EBD00023321 /* BaseResourcePageViewController.m */,
 				FE6D851C231E123600023321 /* ResourcePageViewController.h */,
 				FE6D851D231E123600023321 /* ResourcePageViewController.m */,
 				FE6D851F231E6D1F00023321 /* BaseTableViewVC.h */,
@@ -2258,7 +2258,6 @@
 				FE92C4A722A792580043DA9D /* BTCProtocolSerialization.m in Sources */,
 				FE92C60722A792F50043DA9D /* WalletsVC.m in Sources */,
 				FE3FC2D822B77F6D00A41205 /* PasswordInputView.m in Sources */,
-				FE6D851B231D1EBD00023321 /* BaseResourcePageViewController.m in Sources */,
 				FE3FC30722B8D44700A41205 /* TZPhotoPreviewCell.m in Sources */,
 				FE92C4CE22A792580043DA9D /* sha256.c in Sources */,
 				FE92C4BE22A792580043DA9D /* BTCHashID.m in Sources */,
@@ -2310,6 +2309,7 @@
 				FE3FC2FC22B8D44700A41205 /* TZImageCropManager.m in Sources */,
 				FE92C4A622A792580043DA9D /* BTCMnemonic.m in Sources */,
 				FE92C60122A792F50043DA9D /* WalletInfoViewModel.m in Sources */,
+				FE84CFB62341E6B700414411 /* UIColor+Image.m in Sources */,
 				FE6D85292320ECF600023321 /* UIScrollView+PageExtend.m in Sources */,
 				FE1FCE7A2328951500F89A18 /* LockModel.m in Sources */,
 				FED3FF8C22BCB1FF005918B3 /* Keccak256_bridge.swift in Sources */,

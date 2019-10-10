@@ -76,11 +76,11 @@
                         <rect key="frame" x="342" y="131" width="18" height="18"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQA-f2-fmx">
-                        <rect key="frame" x="295" y="127.5" width="65" height="25"/>
+                        <rect key="frame" x="295" y="122.5" width="65" height="35"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="65" id="VTD-g1-q07"/>
-                            <constraint firstAttribute="height" constant="25" id="xMU-DT-OsO"/>
+                            <constraint firstAttribute="height" constant="35" id="xMU-DT-OsO"/>
                         </constraints>
                         <state key="normal">
                             <color key="titleColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -106,7 +106,7 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Us4-sI-7Rc" secondAttribute="trailing" constant="15" id="5xJ-ug-UA3"/>
                     <constraint firstItem="bQA-f2-fmx" firstAttribute="centerY" secondItem="XYb-2R-O8L" secondAttribute="centerY" id="ATC-vb-hng"/>
-                    <constraint firstItem="bf3-Kz-nnF" firstAttribute="top" secondItem="bQA-f2-fmx" secondAttribute="bottom" constant="15" id="CZG-dG-SBr"/>
+                    <constraint firstItem="bf3-Kz-nnF" firstAttribute="top" secondItem="bQA-f2-fmx" secondAttribute="bottom" constant="10" id="CZG-dG-SBr"/>
                     <constraint firstItem="qQX-O2-H17" firstAttribute="centerY" secondItem="nk5-o0-OCh" secondAttribute="centerY" id="DNu-SG-5su"/>
                     <constraint firstItem="mSn-7G-RwR" firstAttribute="leading" secondItem="eis-6G-nPe" secondAttribute="leading" id="EMa-1c-6zR"/>
                     <constraint firstItem="eis-6G-nPe" firstAttribute="top" secondItem="f3T-Mr-b04" secondAttribute="bottom" constant="19" id="L5D-J2-pOT"/>

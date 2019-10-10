@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) SelectCountry selectCountry;
 
++(NSArray *)countryList;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -741,7 +741,7 @@
         
         
         UILabel *contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(_messageLab.frame)+20, AlertView_W, 10)];
-        contentLabel.text= NSLocalizedString(@"depositWallet", @"已存入INBP钱包");
+        contentLabel.text= NSLocalizedString(@"depositWallet", @"已存入INB钱包");
         contentLabel.textAlignment=NSTextAlignmentCenter;
         contentLabel.textColor = kColorWithHexValue(0x333333);
         contentLabel.font= [UIFont systemFontOfSize:14.0];

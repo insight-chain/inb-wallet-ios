@@ -15,7 +15,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -54,17 +54,17 @@
         [self.stateBtn setBackgroundImage:[UIImage imageNamed:@"days_bg"] forState:UIControlStateNormal];
         [self.stateBtn setTitleColor:kColorBlue forState:UIControlStateNormal];
         if (_model.days == 30){
-            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f", kRateReturn7_30];
-            [self.stateBtn setTitle:@"30天" forState:UIControlStateNormal];
+            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_30];
+            [self.stateBtn setTitle:[NSString stringWithFormat:@"%.2f万区块", _model.lockHeight/10000.0] forState:UIControlStateNormal];
         }else if (_model.days == 90){
-            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f", kRateReturn7_90];
-            [self.stateBtn setTitle:@"90天" forState:UIControlStateNormal];
+            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_90];
+            [self.stateBtn setTitle:[NSString stringWithFormat:@"%.2f万区块", _model.lockHeight/10000.0] forState:UIControlStateNormal];
         }else if (_model.days == 180){
-            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f", kRateReturn7_180];
-            [self.stateBtn setTitle:@"180天" forState:UIControlStateNormal];
+            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_180];
+            [self.stateBtn setTitle:[NSString stringWithFormat:@"%.2f万区块", _model.lockHeight/10000.0] forState:UIControlStateNormal];
         }else if (_model.days == 360){
-            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f", kRateReturn7_360];
-            [self.stateBtn setTitle:@"360天" forState:UIControlStateNormal];
+            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_360];
+            [self.stateBtn setTitle:[NSString stringWithFormat:@"%.2f万区块", _model.lockHeight/10000.0] forState:UIControlStateNormal];
         }else if (_model.days == 1){
             //测试
             self.rate_7Label.text = [NSString stringWithFormat:@"%.2f", kRateReturn7_30];
@@ -128,7 +128,7 @@
     if(self.model.days == 0){
         self.rewardLable.text = @"0 INB";
         self.rewardLable.text = @"0 INB";
-        self.rate_7Label.text = @"0";
+        self.rate_7Label.text = @"0%";
         [self.stateBtn setTitle:@"无抵押期限" forState:UIControlStateNormal];
         [self.stateBtn setBackgroundImage:[UIImage imageNamed:@"days_no_bg"] forState:UIControlStateNormal];
         [self.stateBtn setTitleColor:kColorWithHexValue(0xf5a623) forState:UIControlStateNormal];
@@ -171,7 +171,7 @@
             double dd = tim/(kDayNumbers*1.0);
             int day = ceil(dd);
             self.model.remainingDays = day;
-            self.receiveTimeLabel.text = [NSString stringWithFormat:@"%d块≈%d天后领取", tim, day];
+            self.receiveTimeLabel.text = [NSString stringWithFormat:@"%d个区块≈%d天后领取l奖励", tim, day];
             self.receiveBtn.userInteractionEnabled = NO;
             [self.receiveBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_lightBlue"] forState:UIControlStateNormal];
             [self.receiveBtn setTitle:@"请等待" forState:UIControlStateNormal];

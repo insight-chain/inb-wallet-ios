@@ -56,7 +56,7 @@ static NSString *cellId_2 = @"redeemCell_2";
     [self makeNavigation];
      
     self.tableView.tableHeaderView = self.tableHeaderView;
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     
     [self requestBlockHeight];
@@ -268,7 +268,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                     } @catch (NSException *exception) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                            [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                            [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
                         });
                     } @finally {
                         
@@ -293,9 +293,9 @@ static NSString *cellId_2 = @"redeemCell_2";
     UILabel *allStr = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(imgV.frame)+10, CGRectGetMinY(imgV.frame), 150, CGRectGetHeight(imgV.frame))];
     allStr.textColor = [UIColor whiteColor];
     allStr.font = [UIFont systemFontOfSize:14];
-    allStr.text = @"全网待发放投票奖励";
+    allStr.text = @"全网待领取抵押奖励";
     
-    UILabel *valueL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(allStr.frame), CGRectGetMinY(allStr.frame), CGRectGetWidth(imgV.frame)-CGRectGetMaxX(allStr.frame)-10, CGRectGetHeight(allStr.frame))];
+    UILabel *valueL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(allStr.frame), CGRectGetMinY(allStr.frame), CGRectGetWidth(imgV.frame)-CGRectGetMaxX(allStr.frame)-10-10, CGRectGetHeight(allStr.frame))];
     valueL.textAlignment = NSTextAlignmentRight;
     valueL.textColor = [UIColor whiteColor];
     valueL.font = [UIFont systemFontOfSize:14];
@@ -479,7 +479,7 @@ static NSString *cellId_2 = @"redeemCell_2";
             } @catch (NSException *exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                    [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                    [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
                 });
             } @finally {
                 

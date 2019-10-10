@@ -9,6 +9,8 @@
 #import "TabBarVC.h"
 #import "CCNavigationController.h"
 
+#import "UIColor+Image.h"
+
 @interface TabBarVC ()
 
 @end
@@ -55,11 +57,14 @@
     /** 导航栏返回按钮文字 **/
     childVC.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     childVC.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
-    
+
     childVC.title = title;
     childVC.tabBarItem.image = [norImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];//渲染模式初始化
     childVC.tabBarItem.selectedImage = [selImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     childVC.tabBarItem.title = tabTitle;
+    childVC.navigationController.navigationBar.translucent = NO;
+    //去掉透明后导航栏下边的黑边
+    [childVC.navigationController.navigationBar setShadowImage:[UIImage new]];
     
     [self addChildViewController:nav];
 }

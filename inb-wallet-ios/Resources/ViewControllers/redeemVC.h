@@ -16,4 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)request;
 @end
 
+#pragma mark ---- tableFooterView
+@interface TableFooterView : UIView
+@end
+
 NS_ASSUME_NONNULL_END

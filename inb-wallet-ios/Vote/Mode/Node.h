@@ -24,8 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) NSString *name; //节点名称
 @property(nonatomic, strong) NSString *address; //节点地址
 @property(nonatomic, strong) NSString *city; //城市
-@property(nonatomic, strong) NSString *country; //国家
-@property(nonatomic, assign) NSInteger countryCode;
+@property(nonatomic, strong, readonly) NSString *countryName; //国家
+@property(nonatomic, strong) NSString *countryCode;
 @property(nonatomic, strong) NSString *email; //邮箱
 @property(nonatomic, strong) NSString *data;
 @property(nonatomic, strong) NSString *ID; // id

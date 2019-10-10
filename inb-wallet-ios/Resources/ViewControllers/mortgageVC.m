@@ -15,7 +15,7 @@
 #import "TransactionSignedResult.h"
 #import "NetworkUtil.h"
 
-#define kFooterViewHeight 725
+#define kFooterViewHeight 722
 
 @interface mortgageVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -33,14 +33,15 @@
     self.mortgageView.confirmBlcok = ^(NSInteger type, NSString *netValue) {
         
         if (type < 0) {
-            [MBProgressHUD showMessage:@"请选择抵押日期" toView:App_Delegate.window afterDelay:0.5 animted:YES];
+            [MBProgressHUD showMessage:@"请选择抵押日期" toView:App_Delegate.window afterDelay:1.5 animted:YES];
             return ;
         }
         
         [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
+                MBProgressHUD *nn = [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
+                nn.bezelView.backgroundColor = kColorWithRGBA(0, 0, 0, 0.65);
             });
             
             @try {
@@ -72,7 +73,7 @@
                 
             } @catch (NSException *exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.5 animted:YES];
+                    [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.7 animted:YES];
                 });
             } @finally {
                 [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
@@ -82,6 +83,11 @@
         }];
         
     };
+    self.mortgageView.doubtBlock = ^{
+        
+    };
+    
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];//消除group类型的空白
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, kFooterViewHeight)];
     [footerView addSubview:self.mortgageView];
     self.tableView.tableFooterView = footerView;
@@ -229,8 +235,17 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     return nil;
 }
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return nil;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.00001;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    return nil;
+}
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 525;
+    return 0.0001;
 }
 
 

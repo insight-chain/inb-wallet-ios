@@ -33,7 +33,7 @@
 
 #define cellId @"voteListCell"
 
-#define voteBarViewHeight (iPhoneX ? AdaptedWidth(50)+20 : AdaptedWidth(50))
+#define voteBarViewHeight (iPhoneX ? 50+20 : 50)
 
 @implementation VoteListVC
 
@@ -45,25 +45,22 @@
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.voteBarView];
     
-//    [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.left.right.mas_equalTo(0);
-//        make.bottom.mas_equalTo(self.voteBarView.mas_top);
-//    }];
-//    [self.voteBarView mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.mas_equalTo(0);
-////        make.top.mas_equalTo(self.tableView.mas_bottom);
-//        make.height.mas_equalTo(voteBarViewHeight);
-//        make.bottom.mas_equalTo(self.view);
-//    }];
+
     
     __block __weak typeof(self) tmpSelf = self;
     
     /** 导航栏返回按钮文字 **/
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+    //去掉透明后导航栏下边的黑线
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     
     self.voteBarView.subVote = ^{
         dispatch_async(dispatch_get_main_queue(), ^{
+            if(tmpSelf.selectedNodes.count == 0){
+                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.noNodes",@"未选择节点") toView:App_Delegate.window afterDelay:1 animted:YES];
+                return ;
+            }
             VoteDetailVC *detailVC = [[VoteDetailVC alloc] init];
             detailVC.wallet = tmpSelf.wallet;
             detailVC.selectedNode = tmpSelf.selectedNodes;
@@ -133,6 +130,10 @@
         [tmpSelf.tableView.mj_header endRefreshing];
         [tmpSelf.tableView.mj_footer endRefreshing];
         [tmpSelf.tableView reloadData];
+        
+        [tmpSelf.selectedNodes removeAllObjects];
+        [tmpSelf.voteBarView reloadNodes:tmpSelf.selectedNodes];
+        
     } failed:^(NSError * _Nonnull error) {
         [tmpSelf.nodesList removeAllObjects];
         [tmpSelf.tableView reloadData];
@@ -214,6 +215,9 @@
         [tableView registerNib:nib forCellReuseIdentifier:cellId];
         cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     Node *node = self.nodesList[indexPath.row];
     cell.node = node;
     __block __weak typeof(self) tmpSelf = self;
@@ -221,7 +225,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if(node.isVoted){
                 if (tmpSelf.selectedNodes.count > kMaxSeleceNodesNumber) {
-                    [MBProgressHUD showMessage:@"选择的节点数目已达到最大" toView:tmpSelf.view afterDelay:0.3 animted:YES];
+                    [MBProgressHUD showMessage:@"选择的节点数目已达到最大" toView:tmpSelf.view afterDelay:1.5 animted:YES];
                     node.isVoted = NO;
                     return ;
                 }
@@ -240,6 +244,7 @@
     Node *node = self.nodesList[indexPath.row];
     
     NodeInfoVC *nodeInfo = [[NodeInfoVC alloc] init];
+    nodeInfo.title = NSLocalizedString(@"node.detail", @"节点详情");
     nodeInfo.wallet = self.wallet;
     nodeInfo.node = node;
     nodeInfo.selectedNodes = self.selectedNodes;
@@ -264,7 +269,7 @@
 #pragma mark ---- setter && getter
 -(UITableView *)tableView{
     if (_tableView == nil ) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT - voteBarViewHeight) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT - voteBarViewHeight - kNavigationBarHeight) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
 //        _tableView.bounces = NO;
@@ -274,7 +279,7 @@
 }
 -(VoteBarView *)voteBarView{
     if (_voteBarView == nil) {
-        _voteBarView = [[VoteBarView alloc] initWithFrame:CGRectMake(0, (KHEIGHT-voteBarViewHeight), KWIDTH, voteBarViewHeight)];
+        _voteBarView = [[VoteBarView alloc] initWithFrame:CGRectMake(0, (KHEIGHT-voteBarViewHeight-kNavigationBarHeight), KWIDTH, voteBarViewHeight)];
         
     }
     return _voteBarView;

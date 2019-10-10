@@ -31,7 +31,7 @@
 
 -(YNPageTableView *)tableView{
     if(_tableView == nil){
-        _tableView = [[YNPageTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+        _tableView = [[YNPageTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
         
     }
     return _tableView;

@@ -67,7 +67,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = kColorBackground;
     
-    self.self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    self.self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT-kNavigationBarHeight)];
     [self.view addSubview:self.scrollView];
     
     self.scrollContentView = [[UIView alloc] init];
@@ -96,7 +96,6 @@
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];//[objectDic jsonStringEncoded];
     
     NSLog(@"json：%@",jsonString);
-    
     NSLog(@"%@",objectDic);
 }
 
@@ -157,7 +156,7 @@
     }];
     [self.name mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.nameStr.mas_bottom).mas_offset(10);
-        make.left.right.mas_equalTo(self.nameStr);
+        make.left.right.mas_equalTo(self.headImg);
         make.height.mas_equalTo(45);
     }];
     
@@ -275,6 +274,7 @@
 }
 //选择国家
 -(void)countrySelect:(UIButton *)sender{
+    [self.view endEditing:YES];
     __block __weak typeof(self) tmpSelf = self;
     if(self.countryView == nil){
         self.countryView = [[CountryCodeView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT)];
@@ -298,10 +298,10 @@
     NSString *headerImgStr = self.headImg.text ? : @"";
     NSString *homepageUrl = self.websiteInfo.info.text?:@""; //主页
     NSString *email = self.emailInfo.info.text ? : @"";
-    NSString *attributeData = [NSString stringWithFormat:@"name/%@-intro/%@",self.name.text,self.intro.text];
+    NSString *attributeData = [NSString stringWithFormat:@"name/%@-intro/%@-wechat/%@-telegraph/%@-facebook/%@-twitter/%@-github/%@",self.name.text,self.intro.text,self.wechatInfo.info.text, self.telegraphInfo.info.text,self.facebookInfo.info.text,self.twitterInfo.info.text,self.githubInfo.info.text];
     
     NSString *nodeID = self.nodeID.text ? : @"";// @"8aa5fc69c92bb3e8acb71b0b42f2e0bfaf4b642a4a38b0efaf2d1270880ea4a187ea16d3811436833f05a08a512cddce920f0a988b75527548bb75d9628fa503";
-    // nodeID~ip~port~name~country(nation)~city~imageURL~website~email~data(key1/value1-key2/value2....)
+    // nodeID~ip~port~name~country(nation)~receiveAccount~imageURL~website~email~data(key1/value1-key2/value2....)
     NSString *receiveAccount = self.receiveAccountInfo.info.text?:@""; //接收账号
     NSString *dataStr = [NSString stringWithFormat:@"%@~%@~%@~%@~%@~%@~%@~%@~%@~%@", nodeID, ip, port, receiveAccount, name, country, headerImgStr, homepageUrl, email, attributeData];
     
@@ -315,7 +315,7 @@
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 if (error) {
                                     [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                    [MBProgressHUD showMessage:NSLocalizedString(@"修改节点失败", @"修改节点失败") toView:tmpSelf.view afterDelay:0.3 animted:NO];
+                                    [MBProgressHUD showMessage:NSLocalizedString(@"修改节点失败", @"修改节点失败") toView:tmpSelf.view afterDelay:1.5 animted:NO];
                                     return ;
                                 }
                                 NSDictionary *dic = (NSDictionary *)responseObject;
@@ -331,20 +331,20 @@
                                                             [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
                                                             
                                                             if (error) {
-                                                                [MBProgressHUD showMessage:NSLocalizedString(@"修改节点失败", @"修改节点失败") toView:tmpSelf.view afterDelay:0.3 animted:NO];
+                                                                [MBProgressHUD showMessage:NSLocalizedString(@"修改节点失败", @"修改节点失败") toView:tmpSelf.view afterDelay:1.5 animted:NO];
                                                                 return ;
                                                             }
                                                             NSLog(@"%@---%@",[responseObject  class], responseObject);
                                                             
                                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                                [MBProgressHUD showMessage:NSLocalizedString(@"修改节点成功", @"修改节点成功") toView:tmpSelf.view afterDelay:0.3 animted:NO];
+                                                                [MBProgressHUD showMessage:NSLocalizedString(@"修改节点成功", @"修改节点成功") toView:tmpSelf.view afterDelay:1.5 animted:NO];
                                                                 [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];
                                                             });
                                                         }];
                                 }@catch (NSException *exception) {
                                     dispatch_async(dispatch_get_main_queue(), ^{
                                         [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                        [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                                        [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
                                     });
                                     
                                 } @finally {
@@ -361,12 +361,35 @@
 #pragma mark ----
 -(void)setNode:(Node *)node{
     _node = node;
+    self.headImg.text = _node.image;
     self.name.text = _node.name;
     self.intro.text = _node.intro;
     
     self.ipTF.text = _node.host;
     self.portTF.text = _node.port;
-    self.intro.text = _node.intro;
+    [self.countryBtn setTitle:_node.countryName forState:UIControlStateNormal];
+    self.nodeID.text = _node.nodeId;
+    
+    self.receiveAccountInfo.info.text = @"";
+    self.websiteInfo.info.text = _node.webSite;
+    self.websiteInfo.info.text = _node.telegraph;
+    self.wechatInfo.info.text = _node.wechat;
+    self.facebookInfo.info.text = _node.facebook;
+    self.twitterInfo.info.text = _node.twitter;
+//    self.githubInfo.info.text = _node.git
+    self.emailInfo.info.text = _node.email;
+    
+    NSString *dataStr = _node.data;
+    if(!dataStr){
+        self.intro.text = @"";
+    }else{
+        NSData *jsonData = [dataStr dataUsingEncoding:NSUTF8StringEncoding];
+        NSError *err;
+        NSDictionary *dataDic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                            options:NSJSONReadingMutableContainers
+                                                              error:&err];
+        self.intro.text = dataDic[@"intro"];
+    }
 }
 
 
@@ -635,7 +658,7 @@
         _submitBtn = [[UIButton alloc] init];
         [_submitBtn setTitle:@"保 存" forState:UIControlStateNormal];
         [_submitBtn setBackgroundColor:kColorBlue];
-        [_submitBtn addTarget:self action:@selector(countrySelect:) forControlEvents:UIControlEventTouchUpInside]; //submitAction
+        [_submitBtn addTarget:self action:@selector(submitAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _submitBtn;
 }

@@ -36,6 +36,11 @@
     self.canUseL.text = [NSString stringWithFormat:@"可赎回 %.2f INB", _canTotal];
 }
 -(void)makeNavi{
+    
+    /** 导航栏返回按钮文字 **/
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+    
     UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 30)];
     [rightBtn setTitle:NSLocalizedString(@"done", @"完成") forState:UIControlStateNormal];
     [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -100,7 +105,7 @@
                                 }
                                 
                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                    [MBProgressHUD showMessage:@"赎回请求发送成功" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                                    [MBProgressHUD showMessage:@"赎回请求发送成功" toView:tmpSelf.view afterDelay:1.5 animted:YES];
                                     [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                 });
                                 
@@ -124,7 +129,7 @@
     
     __block double inbV = [self.inbTF.text doubleValue];
     if (inbV > self.canTotal) {
-        [MBProgressHUD showMessage:@"输入INB数量超出可用值" toView:self.view afterDelay:0.5 animted:YES];
+        [MBProgressHUD showMessage:@"输入INB数量超出可用值" toView:self.view afterDelay:1.5 animted:YES];
         return;
     } 
     __block __weak typeof(self) tmpSelf = self;
@@ -138,7 +143,7 @@
             [tmpSelf unMortgageAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID inbNumber:self.inbTF.text password:password];
         } @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.5 animted:YES];
+                [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.7 animted:YES];
             });
         } @finally {
             [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];

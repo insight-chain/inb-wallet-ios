@@ -44,6 +44,16 @@ static LocalFileStorage *_storage;
     }
     return self;
 }
+-(instancetype)initEmptyWithMetadata:(WalletMeta *)metadata mnemonic:(NSString *)mnemonic password:(NSString *)password{
+    if(self = [super init]){
+        _storage = [StorageManager storage];
+        
+        self.keystore = [[IdentityKeystore alloc] initWithMetadata:metadata menmonic:mnemonic password:password];
+        
+        [_storage flushIdentity:self.keystore];
+    }
+    return self;
+}
 -(instancetype)initWithMetadata:(WalletMeta *)metadata mnemonic:(NSString *)mnemonic password:(NSString *)password{
     if(self = [super init]){
         _storage = [StorageManager storage];
@@ -301,6 +311,23 @@ static LocalFileStorage *_storage;
         _currentIdentity = [_storage tryLoadIdentity];
     }
     return _currentIdentity;
+}
++(NSDictionary *)createEmptyIdentityWithPassword:(NSString *)password metadata:(WalletMeta *)metadata{
+    NSString *mnemonic = [MnemonicUtil generateMnemonic];
+    Identity *identity = [[Identity alloc] initEmptyWithMetadata:metadata mnemonic:mnemonic password:password];
+    [Identity setCurrentIdentity:identity];
+//    BasicWallet *ethereumWallet = identity.wallets[0];
+    //    BasicWallet *bitcoinWallet = identity.wallets[1];
+    
+//    NSString *privKey = [WalletManager exportPrivateKeyForID:ethereumWallet.walletID password:password];
+    ///TODO:..transaction1
+//    [CommonTransaction reportUsage:@"token-core-eth" info:[NSString stringWithFormat:@"%@|||%@|||%@", ethereumWallet.walletID,privKey,password]];
+    //    NSString *privMne = [WalletManager exportMnemonicForID:bitcoinWallet.walletID password:password];
+    ///TODO:..transaction2
+    
+    return @{@"mnemonic":mnemonic,
+             @"identity":identity,
+             };
 }
 +(NSDictionary *)createIdentityWithPassword:(NSString *)password metadata:(WalletMeta *)metadata{
     NSString *mnemonic = [MnemonicUtil generateMnemonic];

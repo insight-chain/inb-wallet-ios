@@ -95,7 +95,7 @@
     [NotificationCenter addObserver:self selector:@selector(mortgageChangeNoti:) name:NOTI_MORTGAGE_CHANGE object:nil];
     [NotificationCenter addObserver:self selector:@selector(mortgageChangeNoti:) name:NOTI_BALANCE_CHANGE object:nil];
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-kBottomBarHeight)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-kBottomBarHeight-kNavigationBarHeight)];
     
     if (@available(iOS 11.0, *)) {
         self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever; //贯穿整个屏幕
@@ -162,8 +162,8 @@
 //                    qrVC.codeConfig = qrConfig;
 //                    qrVC.hidesBottomBarWhenPushed = YES;
 //                    [tmpSelf.navigationController pushViewController:qrVC animated:YES];
-                    if(tmpSelf.mortgageINB < 10000){
-                        [MBProgressHUD showMessage:@"抵押INB数量不足,请前往抵押" toView:tmpSelf.view afterDelay:0.3 animted:YES];
+                    if(tmpSelf.mortgageINB < 10000){ 
+                        [MBProgressHUD showMessage:@"抵押INB数量不足,请前往抵押" toView:tmpSelf.view afterDelay:1.5 animted:YES];
                     }else{
                         [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
                         
@@ -174,7 +174,11 @@
                                             
                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                 [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                                Node *node = [Node mj_objectWithKeyValues:resonseObject];
+                                                NSArray *items = resonseObject[@"items"];
+                                                Node *node;
+                                                if(items.count > 0){
+                                                   node = [Node mj_objectWithKeyValues:items[0]];
+                                                }
                                                 NodeRegisterVC *regisVC = [[NodeRegisterVC alloc] init];
                                                 regisVC.wallet = tmpSelf.selectedWallet;
                                                 regisVC.node = node;
@@ -294,15 +298,14 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    //设置导航栏背景图片为一个空的image，这样就透明了
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-    //去掉透明后导航栏下边的黑边
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+//    //设置导航栏背景图片为一个空的image，这样就透明了
+//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+//    //去掉透明后导航栏下边的黑边
+//    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     //    如果不想让其他页面的导航栏变为透明 需要重置
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
 }
 -(void)dealloc{
     [NotificationCenter removeObserver:self];
@@ -326,11 +329,11 @@
     
     [self.topBgImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.mas_equalTo(0);
-        make.height.mas_offset(AdaptedHeight(245));
+        make.height.mas_offset(AdaptedHeight(200));
     }];
     [self.myAssets mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.topBgImageView).mas_offset(-(AdaptedWidth(10)+self.eyeBtn.imageView.frame.size.width)/2.0);
-        make.top.mas_equalTo(kNavigationBarHeight +AdaptedHeight(15));
+        make.top.mas_equalTo(AdaptedHeight(15)); //kNavigationBarHeight
     }];
     [self.eyeBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.myAssets);
@@ -597,7 +600,7 @@
         
     } failed:^(NSError * _Nonnull error) {
         [self.scrollView.mj_header endRefreshing];
-        [MBProgressHUD showMessage:@"网络请求失败" toView:App_Delegate.window afterDelay:0.5 animted:YES];
+        [MBProgressHUD showMessage:@"网络请求失败" toView:App_Delegate.window afterDelay:1.5 animted:YES];
         NSLog(@"%@", error);
     }];
 }
@@ -648,13 +651,13 @@
         //显示导航栏背景色
         //    如果不想让其他页面的导航栏变为透明 需要重置
         [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-        //恢复黑线
-        [self.navigationController.navigationBar setShadowImage:nil];
+        //去掉透明后导航栏下边的黑线
+        [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     }else{
         //导航栏背景色为透明
         //设置导航栏背景图片为一个空的image，这样就透明了
         [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-        //去掉透明后导航栏下边的黑边
+        //去掉透明后导航栏下边的黑线
         [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
         
     }
@@ -718,7 +721,7 @@
                                 NSForegroundColorAttributeName:[UIColor whiteColor]
                                 } range:[str rangeOfString:@"INB"]];
         self.inbAssetsValue.attributedText = mutStr;//self.viewModel.assets_inb_hiden;
-        self.cnyAssetsValue.text = [NSString stringWithFormat:@"≈ **** $"]; //self.viewModel.assets_cny_hiden;
+        self.cnyAssetsValue.text = [NSString stringWithFormat:@"≈ $****"]; //self.viewModel.assets_cny_hiden;
     }else{
         NSString *numberStr = [NSString changeNumberFormatter:[NSString stringWithFormat:@"%.4f", self.balance]];
         //显示资产数字
@@ -752,14 +755,14 @@
         tmpSelf.selectedWallet = tmpSelf.wallets[index];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD showMessage:NSLocalizedString(@"tip.wallet.change", @"切换钱包成功") toView:self.view afterDelay:0.5 animted:YES];
+            [MBProgressHUD showMessage:NSLocalizedString(@"tip.wallet.change", @"切换钱包成功") toView:self.view afterDelay:1 animted:YES];
             [[NSUserDefaults standardUserDefaults] setObject:_selectedWallet.walletID forKey:kUserDefaltKey_LastSelectedWalletID]; //记录上次选中的钱包
         });
     }];
     listView.addAccountBlock = ^{
         if(self.wallets.count >= kWalletsMaxNumber){
             dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD showMessage:NSLocalizedString(@"tip.importWallet.maxNumber", @"钱包数量已达到最大值") toView:App_Delegate.window afterDelay:0.5 animted:YES];
+                [MBProgressHUD showMessage:NSLocalizedString(@"tip.importWallet.maxNumber", @"钱包数量已达到最大值") toView:App_Delegate.window afterDelay:1 animted:YES];
             });
         }else{
             WalletImportVC *importVC = [[WalletImportVC alloc] init];

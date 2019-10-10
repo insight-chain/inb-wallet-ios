@@ -100,16 +100,16 @@
 -(void)addressCopyAction:(UIButton *)sender{
     UIPasteboard *board = [UIPasteboard generalPasteboard];
     board.string = self.addressStr;
-    [MBProgressHUD showMessage:@"地址已复制到剪贴板" toView:[[UIApplication sharedApplication].windows lastObject] afterDelay:0.5 animted:YES];
+    [MBProgressHUD showMessage:@"地址已复制到剪贴板" toView:[[UIApplication sharedApplication].windows lastObject] afterDelay:1.5 animted:YES];
     self.addressaCopy.selected = YES;
 }
 //保存二维码
 -(void)saveQRAction:(UIButton *)sender{
     [[TZImageManager manager] savePhotoWithImage:self.QRImg.image completion:^(NSError *error) {
         if (error) {
-            [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.saveCode.failed", @"保存二维码失败") toView:[[UIApplication sharedApplication].windows lastObject] afterDelay:0.5 animted:YES];
+            [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.saveCode.failed", @"保存二维码失败") toView:[[UIApplication sharedApplication].windows lastObject] afterDelay:1.5 animted:YES];
         }else{
-            [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.saveCode.success", @"保存二维码成功") toView:[[UIApplication sharedApplication].windows lastObject] afterDelay:0.5 animted:YES];
+            [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.saveCode.success", @"保存二维码成功") toView:[[UIApplication sharedApplication].windows lastObject] afterDelay:1.5 animted:YES];
         }
     }];
 }
@@ -166,7 +166,7 @@
         UIImage *lightImg = [UIImage imageNamed:@"btn_bg_lightBlue"];
         lightImg = [lightImg resizableImageWithCapInsets:UIEdgeInsetsMake(lightImg.size.height/2.0, lightImg.size.width/2.0, lightImg.size.height/2.0, lightImg.size.width/2.0) resizingMode:UIImageResizingModeStretch];
         [_addressaCopy setBackgroundImage:img forState:UIControlStateNormal];
-        [_addressaCopy setBackgroundImage:lightImg forState:UIControlStateSelected];
+//        [_addressaCopy setBackgroundImage:lightImg forState:UIControlStateSelected];
         [_addressaCopy addTarget:self action:@selector(addressCopyAction:) forControlEvents:UIControlEventTouchUpInside];
         
     }

@@ -13,14 +13,14 @@
           "height" : 1
         },
         "cap-insets" : {
-          "bottom" : 45,
-          "top" : 44,
-          "right" : 383,
-          "left" : 65
+          "bottom" : 36,
+          "top" : 35,
+          "right" : 2,
+          "left" : 2
         }
       },
       "idiom" : "universal",
-      "filename" : "all_wait_bg@2x.png",
+      "filename" : "nav_bg@2x.png",
       "scale" : "2x"
     },
     {
@@ -32,14 +32,14 @@
           "height" : 1
         },
         "cap-insets" : {
-          "bottom" : 67,
-          "top" : 67,
-          "right" : 574,
-          "left" : 98
+          "bottom" : 54,
+          "top" : 53,
+          "right" : 3,
+          "left" : 2
         }
       },
       "idiom" : "universal",
-      "filename" : "all_wait_bg@3x.png",
+      "filename" : "nav_bg@3x.png",
       "scale" : "3x"
     }
   ],

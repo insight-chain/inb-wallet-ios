@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     /** 进度条初始化 **/
-    self.progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kNavigationBarHeight, KWIDTH, 2)];
+    self.progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 2)];
     self.progressView.backgroundColor = [UIColor clearColor];
     self.progressView.trackTintColor = [UIColor clearColor];//设置进度条颜色
     self.progressView.progressTintColor = kColorBlue; //设置进度条上进度的颜色

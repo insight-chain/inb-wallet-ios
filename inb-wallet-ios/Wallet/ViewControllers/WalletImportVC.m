@@ -14,7 +14,9 @@
 
 #import "BIP44.h"
 #import "WalletMeta.h"
+#import "Identity.h"
 #import "WalletManager.h"
+#import "StorageManager.h"
 
 #import "SliderBar.h"
 
@@ -278,21 +280,35 @@
 -(void)importAction:(UIButton *)sender{
     
     if(self.password.text.length < 6){
-        [MBProgressHUD showMessage:NSLocalizedString(@"password.setting.error.tooshort", @"设置密码长度小于5") toView:self.view afterDelay:2 animted:YES];
+        [MBProgressHUD showMessage:NSLocalizedString(@"password.setting.error.tooshort", @"设置密码长度小于5") toView:self.view afterDelay:1.5 animted:YES];
         return;
     }else if(self.password.text.length > 16){
-        [MBProgressHUD showMessage:NSLocalizedString(@"password.setting.error.toolong", @"设置密码长度大于16") toView:self.view afterDelay:2 animted:YES];
+        [MBProgressHUD showMessage:NSLocalizedString(@"password.setting.error.toolong", @"设置密码长度大于16") toView:self.view afterDelay:1.5 animted:YES];
         return;
     }
+    
     
     __block BasicWallet *wallet;
     NSString *nameStr = self.accountName.text;
     NSString *passwordTipStr = self.tipPassword.text;
     NSString *passwordStr = self.password.text;
     NSString *keyStr = [self.keyTextView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
+            Identity *identi = [Identity currentIdentity];
+            if(identi == nil || identi.wallets.count == 0){
+                /** 创建钱包 **/
+                WalletMeta *metadata = [[WalletMeta alloc] initWith:source_newIdentity];
+                metadata.segWit = @"P2WPKH";
+                metadata.name = nameStr;
+                metadata.passwordHint = passwordTipStr;
+                NSDictionary *dic = [Identity createEmptyIdentityWithPassword:passwordStr metadata:metadata];
+                identi = dic[@"identity"];
+            }
+            
             if (self.selectImportType == ImportType_private) {
                 WalletMeta *metadata = [[WalletMeta alloc] initWith:source_privateKey];
                 metadata.segWit = @"P2WPKH";
@@ -318,7 +334,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 //回到主线程
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [MBProgressHUD showMessage: self.selectImportType == ImportType_private ? @"私钥有误":@"助记词有误" toView:self.view afterDelay:2 animted:YES];
+                [MBProgressHUD showMessage: self.selectImportType == ImportType_private ? @"私钥有误":@"助记词有误" toView:self.view afterDelay:1.5 animted:YES];
             });
         } @finally {
         }
@@ -328,7 +344,7 @@
                 [NotificationCenter postNotificationName:NOTI_ADD_WALLET object:wallet];
                 //回到主线程
                 [MBProgressHUD hideHUDForView:self.view animated:YES];
-                [MBProgressHUD showMessage:NSLocalizedString(@"wallet.create.successed", @"钱包创建成功") toView:self.view afterDelay:2 animted:YES];
+                [MBProgressHUD showMessage:NSLocalizedString(@"wallet.create.successed", @"钱包创建成功") toView:self.view afterDelay:1.5 animted:YES];
                 [self.navigationController popViewControllerAnimated:YES];
                 //            WelcomBackupTipVC *welcomTipVC = [[WelcomBackupTipVC alloc] initWithNibName:NSStringFromClass([WelcomBackupTipVC class]) bundle:nil];
                 //            welcomTipVC.wallet = wallet;
@@ -378,7 +394,7 @@
 -(UITextView *)keyPlaceHolder{
     if (_keyPlaceHolder == nil) {
         _keyPlaceHolder = [[UITextView alloc] init];
-        _keyPlaceHolder.textColor = kColorAuxiliary2;
+        _keyPlaceHolder.textColor = kColorAuxiliary;
         _keyPlaceHolder.font = AdaptedFontSize(15);
         _keyPlaceHolder.editable = NO; //不可编辑
         _keyPlaceHolder.backgroundColor = [UIColor clearColor];

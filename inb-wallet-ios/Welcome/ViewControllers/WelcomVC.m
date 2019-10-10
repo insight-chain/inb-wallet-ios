@@ -88,7 +88,7 @@
 -(void)viewWillDisappear:(BOOL)animated{
     //    如果不想让其他页面的导航栏变为透明 需要重置
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
+//    [self.navigationController.navigationBar setShadowImage:nil];
 }
 
 /** 设置状态栏的颜色，配合根控制器的 childViewControllerForStatusBarStyle 使用**/

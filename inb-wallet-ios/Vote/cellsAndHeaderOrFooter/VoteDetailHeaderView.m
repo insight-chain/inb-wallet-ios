@@ -72,14 +72,14 @@
     
     [self.bgImg mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
-        make.height.mas_equalTo(AdaptedHeight(264));
+        make.height.mas_equalTo(AdaptedHeight(264-kNavigationBarHeight));
     }];
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.mas_centerX);
         if(iPhoneX){
-            make.top.mas_equalTo(AdaptedWidth(81)+24);
+            make.top.mas_equalTo(AdaptedWidth(81-kNavigationBarHeight)+24);
         }else{
-            make.top.mas_equalTo(AdaptedWidth(81));
+            make.top.mas_equalTo(AdaptedWidth(81-kNavigationBarHeight));
         }
     }];
     [self.mortgageValue mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -248,11 +248,11 @@
         _cpuValue.backgroundColor = kColorBackground;
         _cpuValue.layer.borderWidth = 1;
         _cpuValue.layer.borderColor = kColorSeparate.CGColor;
-        _cpuValue.textAlignment = NSTextAlignmentRight;
+        _cpuValue.textAlignment = NSTextAlignmentLeft;
 //        _cpuValue.delegate = self;
         UIView *rightV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
-        _cpuValue.rightView = rightV;
-        _cpuValue.rightViewMode = UITextFieldViewModeAlways;
+        _cpuValue.leftView = rightV;
+        _cpuValue.leftViewMode = UITextFieldViewModeAlways;
     }
     return _cpuValue;
 }

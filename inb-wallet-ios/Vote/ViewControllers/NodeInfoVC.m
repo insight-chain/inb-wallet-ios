@@ -23,6 +23,8 @@
 #define cellId_2 @"nodeInfoCell"
 #define cellId_3 @"settingCell"
 
+#define voteBarViewHeight (iPhoneX ? 50+20 : 50)
+
 @interface NodeInfoVC ()<UITableViewDelegate, UITableViewDataSource>
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) VoteBarView *voteBarView;
@@ -33,6 +35,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    /** 导航栏返回按钮文字 **/
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+    
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.voteBarView];
@@ -42,6 +48,12 @@
     __block __weak typeof(self) tmpSelf = self;
     self.voteBarView.subVote = ^{
         dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if(tmpSelf.selectedNodes.count == 0){
+                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.noNodes",@"未选择节点") toView:App_Delegate.window afterDelay:1 animted:YES];
+                return ;
+            }
+            
             VoteDetailVC *detailVC = [[VoteDetailVC alloc] init];
             detailVC.wallet = tmpSelf.wallet;
             detailVC.selectedNode = tmpSelf.selectedNodes;
@@ -71,11 +83,9 @@
     [self.voteBarView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(self.tableView.mas_bottom);
-        if(iPhoneX){
-            make.height.mas_equalTo(AdaptedWidth(50)+20);
-        }else{
-            make.height.mas_equalTo(AdaptedWidth(50));
-        }
+       
+        make.height.mas_equalTo(voteBarViewHeight);
+        
         make.bottom.mas_equalTo(self.view);
     }];
 }
@@ -103,9 +113,10 @@
             [tableView registerNib:nib forCellReuseIdentifier:cellId_1];
             cell = [tableView dequeueReusableCellWithIdentifier:cellId_1];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.headerImg sd_setImageWithURL:[NSURL URLWithString:self.node.image] placeholderImage:[UIImage imageNamed:@"headerImgDefault"]];
-        cell.country.text = self.node.country;
-        cell.city.text = self.node.city;
+        cell.country.text = self.node.countryName;
+        cell.city.text = self.node.countryName;
         cell.website.text = self.node.webSite;
         cell.name.text = self.node.name;
         cell.address.text = self.node.address;
@@ -138,8 +149,9 @@
             [tableView registerNib:nib forCellReuseIdentifier:cellId_2];
             cell = [tableView dequeueReusableCellWithIdentifier:cellId_2];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         if (indexPath.section == 1) {
-            cell.infoLable.text = self.node.serverIntro;
+            cell.infoLable.text = [NSString stringWithFormat:@"%@:%@", self.node.host, self.node.port];//self.node.serverIntro;
         }else{
             cell.infoLable.text = self.node.intro;
         }
@@ -151,22 +163,23 @@
             [tableView registerNib:nib forCellReuseIdentifier:cellId_3];
             cell = [tableView dequeueReusableCellWithIdentifier:cellId_3];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.hideSubTitle = NO;
         cell.hideAuxiliaryImg = YES;
         cell.hideSeperator = NO;
         cell.hideRightImg = YES;
         if (indexPath.row == 0) {
             cell.title.text = @"官方twitter";
-            cell.subTitle.text = @"http://www.insightchain.io";
+            cell.subTitle.text = self.node.twitter;
         }else if (indexPath.row == 1){
             cell.title.text = @"官方点电报";
-            cell.subTitle.text = @"http://www.insightchain.io";
+            cell.subTitle.text = self.node.telegraph;
         }else if(indexPath.row == 2){
             cell.title.text = @"官方微信";
-            cell.subTitle.text = @"Insightchain";
+            cell.subTitle.text = self.node.wechat;
         }else if (indexPath.row == 3){
             cell.title.text = @"Facebook";
-            cell.subTitle.text = @"Insightchain";
+            cell.subTitle.text = self.node.facebook;
         }
         return cell;
     }else{

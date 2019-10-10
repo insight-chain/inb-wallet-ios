@@ -141,7 +141,7 @@
     int count = (int)self.menmonryWords.count;
     for (int i=0; i<count; i++) {
         if(![self.contentView.contentView.words[i] isEqualToString:self.menmonryWords[i]]){
-            [MBProgressHUD showMessage:@"助记词顺序错误，请重新确认" toView:self.view afterDelay:0.5 animted:YES];
+            [MBProgressHUD showMessage:@"助记词顺序错误，请重新确认" toView:self.view afterDelay:1.5 animted:YES];
             return ;
         }
     }

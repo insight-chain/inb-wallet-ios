@@ -155,7 +155,7 @@
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         [NetworkUtil getRequest:HTTP(hostUrl_211, @"wallet/version") params:@{@"appType":@(3)}success:^(id  _Nonnull resonseObject) {
             NSLog(@"检查更新---%@", resonseObject);
-            [UpdateView showUpadate:@"2.3.5" intro:@"1.全新挖矿奖励机制上线\n2.新增INB红包收发功能\n3.新增INBP钱包功能\n4.优化个人认证流程" updateBlock:^{
+            [UpdateView showUpadate:@"2.3.5" intro:@"1.全新挖矿奖励机制上线\n2.新增INB红包收发功能\n3.新增INB钱包功能\n4.优化个人认证流程" updateBlock:^{
                 
             }];
         } failed:^(NSError * _Nonnull error) {

@@ -209,10 +209,10 @@
     self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
     
     if(self.password.text.length < 6){
-        [MBProgressHUD showMessage:NSLocalizedString(@"password.setting.error.tooshort", @"设置密码长度小于5") toView:self.view afterDelay:2 animted:YES];
+        [MBProgressHUD showMessage:NSLocalizedString(@"password.setting.error.tooshort", @"设置密码长度小于5") toView:self.view afterDelay:1.5 animted:YES];
         return;
     }else if(self.password.text.length > 16){
-        [MBProgressHUD showMessage:NSLocalizedString(@"password.setting.error.toolong", @"设置密码长度大于16") toView:self.view afterDelay:2 animted:YES];
+        [MBProgressHUD showMessage:NSLocalizedString(@"password.setting.error.toolong", @"设置密码长度大于16") toView:self.view afterDelay:1.5 animted:YES];
         return;
     }
     
@@ -250,7 +250,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             //回到主线程
             [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [MBProgressHUD showMessage:NSLocalizedString(@"wallet.create.successed", @"钱包创建成功") toView:tmpSelf.view afterDelay:2 animted:YES];
+            [MBProgressHUD showMessage:NSLocalizedString(@"wallet.create.successed", @"钱包创建成功") toView:tmpSelf.view afterDelay:1.5 animted:YES];
             
             WelcomBackupTipVC *welcomTipVC = [[WelcomBackupTipVC alloc] initWithNibName:NSStringFromClass([WelcomBackupTipVC class]) bundle:nil];
             welcomTipVC.needVertify = YES; //需要验证

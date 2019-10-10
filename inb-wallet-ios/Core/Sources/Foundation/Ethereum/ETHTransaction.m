@@ -114,9 +114,11 @@
         [base addObject:[BigNumberTest parse:self.r padding:NO paddingLen:-1]];
         [base addObject:[BigNumberTest parse:self.s padding:NO paddingLen:-1]];
         [base addObject:[BigNumberTest parse:self.txType padding:NO paddingLen:-1]];
+        [base addObject:[BigNumberTest parse:@"" padding:NO paddingLen:-1]];
         return base;
     }else{
         [base addObject:[BigNumberTest parse:self.txType padding:NO paddingLen:-1]];
+        [base addObject:[BigNumberTest parse:@"" padding:NO paddingLen:-1]];
         return base;
     }
 }
