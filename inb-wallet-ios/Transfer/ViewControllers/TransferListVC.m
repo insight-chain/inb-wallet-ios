@@ -115,7 +115,7 @@
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
-#pragma mark ----
+#pragma mark ---- lazy load
 -(NSMutableArray *)recordArr{
     if (_recordArr == nil) {
         _recordArr = @[].mutableCopy;
