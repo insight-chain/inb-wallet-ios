@@ -41,15 +41,15 @@
         
         [self makeSubViews];
         
-        NSString *str = [NSString stringWithFormat:@"%.4f INB", self.mortgageINB];
+        NSString *str = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.mortgageINB]]];
         NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str attributes:@{NSFontAttributeName:AdaptedBoldFontSize(30), NSForegroundColorAttributeName:[UIColor whiteColor]}];
         [attrStr setAttributes:@{NSFontAttributeName:AdaptedBoldFontSize(20), NSForegroundColorAttributeName:[UIColor whiteColor]} range:[str rangeOfString:@"INB"]];
         self.mortgageValue.attributedText = attrStr;
         
-        self.balanceValue.text = [NSString stringWithFormat:@"%@: %.4f INB", NSLocalizedString(@"accountBalance", @"账户余额"), self.balanceINB];
+        self.balanceValue.text = [NSString stringWithFormat:@"%@: %@ INB", NSLocalizedString(@"accountBalance", @"账户余额"), [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.balanceINB]]];
         
-        self.voteTotalValue.text = [NSString stringWithFormat:@"%.4f", 0.00];
-        self.cpuValue.text = [NSString stringWithFormat:@"%d", 0]; 
+        self.voteTotalValue.text = [NSString stringWithFormat:@"%.2f", 0.00];
+//        self.cpuValue.text = [NSString stringWithFormat:@"%d", 0]; 
     }
     return self;
 }
@@ -63,10 +63,10 @@
     [self addSubview:self.contentBgImg];
     [self addSubview:self.voteTotalLabel];
     [self addSubview:self.voteTotalValue];
-    [self addSubview:self.INBLabel_1];
+//    [self addSubview:self.INBLabel_1];
     [self addSubview:self.cpuLabel];
     [self addSubview:self.cpuValue];
-    [self addSubview:self.INBLabel_2];
+//    [self addSubview:self.INBLabel_2];
     
     [self addSubview:self.addMortgageBtn];
     
@@ -101,12 +101,13 @@
     }];
     [self.voteTotalValue mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.voteTotalLabel.mas_centerY);
-        make.right.mas_equalTo(self.INBLabel_1.mas_left).mas_offset(AdaptedWidth(-10));
-    }];
-    [self.INBLabel_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.voteTotalValue.mas_centerY);
+//        make.right.mas_equalTo(self.INBLabel_1.mas_left).mas_offset(AdaptedWidth(-10));
         make.right.mas_equalTo(self.contentBgImg.mas_right).mas_offset(AdaptedWidth(-(15+20)));
     }];
+//    [self.INBLabel_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.mas_equalTo(self.voteTotalValue.mas_centerY);
+//        make.right.mas_equalTo(self.contentBgImg.mas_right).mas_offset(AdaptedWidth(-(15+20)));
+//    }];
     [self.cpuLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.voteTotalLabel.mas_left);
         make.centerY.mas_equalTo(self.cpuValue);
@@ -115,21 +116,24 @@
         make.top.mas_equalTo(self.voteTotalLabel.mas_bottom).mas_offset(AdaptedWidth(15));
         make.right.mas_equalTo(self.voteTotalValue.mas_right);
         make.height.mas_equalTo(AdaptedWidth(40));
-        make.width.mas_equalTo(self.cpuValue.mas_height).multipliedBy(218.0/40.0);
+        make.width.mas_equalTo(self.cpuValue.mas_height).multipliedBy(238.0/40.0);
     }];
-    [self.INBLabel_2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.cpuValue);
-        make.right.mas_equalTo(self.INBLabel_1);
-    }];
+//    [self.INBLabel_2 mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.mas_equalTo(self.cpuValue);
+//        make.right.mas_equalTo(self.INBLabel_1);
+//    }];
     [self.addMortgageBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.cpuValue.mas_bottom).mas_offset(AdaptedWidth(20));
         make.centerX.mas_equalTo(self.contentBgImg);
-        make.height.mas_equalTo(AdaptedWidth(60));
+        make.left.mas_equalTo(self.cpuLabel.mas_left);
+        make.right.mas_equalTo(self.cpuValue.mas_right);
+        make.height.mas_equalTo(AdaptedWidth(35));
     }];
     
     
     [self layoutIfNeeded];
-    [self.addMortgageBtn topImgbelowTitle:AdaptedWidth(5)];
+//    [self.addMortgageBtn topImgbelowTitle:AdaptedWidth(5)];
+    [self.addMortgageBtn leftImgRightTitle:AdaptedWidth(5)];
     self.cpuValue.layer.cornerRadius = 4;
     self.cpuValue.layer.masksToBounds = YES;
     CGRect fr = self.frame;
@@ -140,14 +144,14 @@
 -(void)setMortgageINB:(double)mortgageINB{
     _mortgageINB = mortgageINB;
     
-    NSString *str = [NSString stringWithFormat:@"%.4f INB", self.mortgageINB];
+    NSString *str = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.mortgageINB]]];
     NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str attributes:@{NSFontAttributeName:AdaptedBoldFontSize(30), NSForegroundColorAttributeName:[UIColor whiteColor]}];
     [attrStr setAttributes:@{NSFontAttributeName:AdaptedBoldFontSize(20), NSForegroundColorAttributeName:[UIColor whiteColor]} range:[str rangeOfString:@"INB"]];
     self.mortgageValue.attributedText = attrStr;
 }
 -(void)setBalanceINB:(double)balanceINB{
     _balanceINB = balanceINB;
-    self.balanceValue.text = [NSString stringWithFormat:@"%@: %.4f INB", NSLocalizedString(@"accountBalance", @"账户余额"), self.balanceINB];
+    self.balanceValue.text = [NSString stringWithFormat:@"%@: %@ INB", NSLocalizedString(@"accountBalance", @"账户余额"), [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.balanceINB]]];
 }
 
 #pragma mark ---- Button Action
@@ -219,6 +223,7 @@
         _voteTotalValue = [[UILabel alloc] init];
         _voteTotalValue.font = AdaptedFontSize(15);
         _voteTotalValue.textColor = kColorBlue;
+        
     }
     return _voteTotalValue;
 }
@@ -228,13 +233,14 @@
         _INBLabel_1.text = @"INB";
         _INBLabel_1.textColor = kColorBlue;
         _INBLabel_1.font = AdaptedFontSize(15);
+        _INBLabel_1.hidden = YES;
     }
     return _INBLabel_1;
 }
 -(UILabel *)cpuLabel{
     if (_cpuLabel == nil ) {
         _cpuLabel = [[UILabel alloc] init];
-        _cpuLabel.text = @"+NET";
+        _cpuLabel.text = @"+RES";
         _cpuLabel.textColor = kColorTitle;
         _cpuLabel.font = AdaptedFontSize(15);
     }
@@ -244,15 +250,22 @@
     if (_cpuValue == nil) {
         _cpuValue = [[UITextField alloc] init];
         _cpuValue.font = AdaptedFontSize(15);
-        _cpuValue.textColor = kColorBlue;
+        _cpuValue.textColor = kColorTitle;
         _cpuValue.backgroundColor = kColorBackground;
         _cpuValue.layer.borderWidth = 1;
         _cpuValue.layer.borderColor = kColorSeparate.CGColor;
         _cpuValue.textAlignment = NSTextAlignmentLeft;
 //        _cpuValue.delegate = self;
-        UIView *rightV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
-        _cpuValue.leftView = rightV;
+        UIView *leftV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
+        _cpuValue.leftView = leftV;
         _cpuValue.leftViewMode = UITextFieldViewModeAlways;
+        _cpuValue.placeholder = @"请输入抵押数量";
+        
+        self.INBLabel_2.frame = CGRectMake(0, 0, 35, 20);
+        _cpuValue.rightView = self.INBLabel_2;
+        _cpuValue.rightViewMode = UITextFieldViewModeAlways;
+        
+        _cpuValue.keyboardType = UIKeyboardTypeDecimalPad;
     }
     return _cpuValue;
 }
@@ -268,9 +281,10 @@
 -(UIButton *)addMortgageBtn{
     if (_addMortgageBtn == nil) {
         _addMortgageBtn = [[UIButton alloc] init];
-        [_addMortgageBtn setImage:[UIImage imageNamed:@"addMortgage"] forState:UIControlStateNormal];
+        [_addMortgageBtn setImage:[UIImage imageNamed:@"btn_add_icon"] forState:UIControlStateNormal];
         [_addMortgageBtn setTitle:NSLocalizedString(@"addMortgageResources", @"新增抵押") forState:UIControlStateNormal];
-        [_addMortgageBtn setTitleColor:kColorTitle forState:UIControlStateNormal];
+        [_addMortgageBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
+        [_addMortgageBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _addMortgageBtn.titleLabel.font = AdaptedFontSize(15);
         _addMortgageBtn.titleLabel.textColor = kColorTitle;
         [_addMortgageBtn addTarget:self action:@selector(addMortgageAction:) forControlEvents:UIControlEventTouchUpInside];

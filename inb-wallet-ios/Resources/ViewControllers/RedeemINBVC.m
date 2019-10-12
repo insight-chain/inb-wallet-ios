@@ -33,7 +33,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.canUseL.text = [NSString stringWithFormat:@"可赎回 %.2f INB", _canTotal];
+    self.canUseL.text = [NSString stringWithFormat:@"可赎回 %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f", _canTotal]]];
 }
 -(void)makeNavi{
     
@@ -60,7 +60,7 @@
     //创建穿行队列
     dispatch_queue_t customQuue = dispatch_queue_create("unMortgage.nerwork", DISPATCH_QUEUE_SERIAL);
     //创建信号量并初始化总量为1
-    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
+//    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
     
     
     
@@ -81,38 +81,51 @@
                                 
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:inbNumber];
                                 NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
-                                _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_unMortgage gasPrice:@"200000" gasLimit:@"21000" to:@"0x9518a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[@"unmortgageNet" hexString] add0xIfNeeded] password:password chainID:kChainID];
-                                
-                                //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-                                dispatch_semaphore_signal(semaphoreLock);
-                            }];
-        //相当于枷锁
-        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
-        
-        //发送第二个请求
-        [NetworkUtil rpc_requetWithURL:rpcHost
-                                params:@{@"jsonrpc":@"2.0",
-                                         @"method":sendTran_MethodName,
-                                         @"params":@[[_signResult.signedTx add0xIfNeeded]],
-                                         @"id":@(67),
-                                         }
-                            completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                
-                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                NSLog(@"%@", responseObject);
-                                if (error) {
-                                    return ;
+                                @try {
+                                    _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_unMortgage gasPrice:@"200000" gasLimit:@"21000" to:@"0x9518a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[@"unmortgageNet" hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                    //发送第二个请求
+                                    [NetworkUtil rpc_requetWithURL:rpcHost
+                                                            params:@{@"jsonrpc":@"2.0",
+                                                                     @"method":sendTran_MethodName,
+                                                                     @"params":@[[_signResult.signedTx add0xIfNeeded]],
+                                                                     @"id":@(67),
+                                                                     }
+                                                        completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+                                                            
+                                                            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                                            NSLog(@"%@", responseObject);
+                                                            if (error) {
+                                                                return ;
+                                                            }
+                                                            
+                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [MBProgressHUD showMessage:@"赎回请求发送成功" toView:tmpSelf.view afterDelay:1.5 animted:YES];
+                                                                [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
+                                                            });
+                                                            
+                                                            //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
+//                                                            dispatch_semaphore_signal(semaphoreLock);
+                                                        }];
+                                } @catch (NSException *exception) {
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                        [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.7 animted:YES];
+                                    });
+                                } @finally {
+                                    //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
+//                                    dispatch_semaphore_signal(semaphoreLock);
+                                    if(!_signResult){
+                                        return ;
+                                    }
                                 }
                                 
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    [MBProgressHUD showMessage:@"赎回请求发送成功" toView:tmpSelf.view afterDelay:1.5 animted:YES];
-                                    [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
-                                });
-                                
-                                //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-                                dispatch_semaphore_signal(semaphoreLock);
                             }];
-        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
+        
+        //相当于枷锁
+//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
+//
+//
+//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"任务完成");
         });

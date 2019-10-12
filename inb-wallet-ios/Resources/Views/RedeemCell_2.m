@@ -54,20 +54,20 @@
         [self.stateBtn setBackgroundImage:[UIImage imageNamed:@"days_bg"] forState:UIControlStateNormal];
         [self.stateBtn setTitleColor:kColorBlue forState:UIControlStateNormal];
         if (_model.days == 30){
-            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_30];
+            self.rate_7Label.text = [NSString stringWithFormat:@"%.1f%%", kRateReturn7_30];
             [self.stateBtn setTitle:[NSString stringWithFormat:@"%.2f万区块", _model.lockHeight/10000.0] forState:UIControlStateNormal];
         }else if (_model.days == 90){
-            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_90];
+            self.rate_7Label.text = [NSString stringWithFormat:@"%.1f%%", kRateReturn7_90];
             [self.stateBtn setTitle:[NSString stringWithFormat:@"%.2f万区块", _model.lockHeight/10000.0] forState:UIControlStateNormal];
         }else if (_model.days == 180){
-            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_180];
+            self.rate_7Label.text = [NSString stringWithFormat:@"%.1f%%", kRateReturn7_180];
             [self.stateBtn setTitle:[NSString stringWithFormat:@"%.2f万区块", _model.lockHeight/10000.0] forState:UIControlStateNormal];
         }else if (_model.days == 360){
-            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_360];
+            self.rate_7Label.text = [NSString stringWithFormat:@"%.1f%%", kRateReturn7_360];
             [self.stateBtn setTitle:[NSString stringWithFormat:@"%.2f万区块", _model.lockHeight/10000.0] forState:UIControlStateNormal];
         }else if (_model.days == 1){
             //测试
-            self.rate_7Label.text = [NSString stringWithFormat:@"%.2f", kRateReturn7_30];
+            self.rate_7Label.text = [NSString stringWithFormat:@"%.1f", kRateReturn7_30];
             [self.stateBtn setTitle:@"1天" forState:UIControlStateNormal];
         }
     }
@@ -171,7 +171,7 @@
             double dd = tim/(kDayNumbers*1.0);
             int day = ceil(dd);
             self.model.remainingDays = day;
-            self.receiveTimeLabel.text = [NSString stringWithFormat:@"%d个区块≈%d天后领取l奖励", tim, day];
+            self.receiveTimeLabel.text = [NSString stringWithFormat:@"%d个区块≈%d天后领取奖励", tim, day];
             self.receiveBtn.userInteractionEnabled = NO;
             [self.receiveBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_lightBlue"] forState:UIControlStateNormal];
             [self.receiveBtn setTitle:@"请等待" forState:UIControlStateNormal];

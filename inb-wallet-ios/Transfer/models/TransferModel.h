@@ -29,6 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) int direction;         //当前地址交易方向：1、为from 2、为to
 @property(nonatomic, assign) int status;            //交易状态：1、成功 2、失败
 
+/** 锁仓交易使用 **/
+@property (nonatomic, strong, readonly) NSDecimalNumber *lockNumber; //锁仓的快数
+@property (nonatomic, assign, readonly) NSInteger lockDays; //锁仓的块数对应的高度
+@property (nonatomic, assign, readonly) double lockRate; //锁仓快数对应的利率
+
 @property (nonatomic, strong) NSArray *transactionLog; //内联交易数组
 
 @end

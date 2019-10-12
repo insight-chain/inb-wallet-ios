@@ -46,10 +46,10 @@
         
         [self makeConstraints];
         
-        self.balanceValue.text = @"122ms";
-        self.totalValue.text = @"320ms";
-        self.mortgageValue.text = @"99.99 INB";
-        self.redemptionValue.text = @"--";
+        self.balanceValue.text = @"0 RES";
+        self.totalValue.text = @"0 RES";
+        self.mortgageValue.text = @"0 INB";
+        self.redemptionValue.text = @"0 INB";
     }
     return self;
 }
@@ -69,10 +69,10 @@
         [self addSubview:self.redemptionValue];
         [self addSubview:self.resetBtn];
         
-        self.balanceValue.text = @"122kb";
-        self.totalValue.text = @"320kb";
-        self.mortgageValue.text = @"99.99 INB";
-        self.redemptionValue.text = @"--";
+        self.balanceValue.text = @"0 RES";
+        self.totalValue.text = @"0 RES";
+        self.mortgageValue.text = @"0 INB";
+        self.redemptionValue.text = @"0 INB";
         
         [self makeConstraints];
         [self layoutIfNeeded];
@@ -267,7 +267,7 @@
 -(UILabel *)redemptionLabel{
     if (_redemptionLabel == nil) {
         _redemptionLabel = [[UILabel alloc] init];
-        _redemptionLabel.text = NSLocalizedString(@"redemption", @"赎回");
+        _redemptionLabel.text = NSLocalizedString(@"Resource.redemption.ing", @"赎回中");
         _redemptionLabel.textColor = kColorTitle;
         _redemptionLabel.font = AdaptedFontSize(15);
     }

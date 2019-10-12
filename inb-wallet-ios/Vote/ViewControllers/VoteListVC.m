@@ -58,7 +58,7 @@
     self.voteBarView.subVote = ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             if(tmpSelf.selectedNodes.count == 0){
-                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.noNodes",@"未选择节点") toView:App_Delegate.window afterDelay:1 animted:YES];
+                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.noNodes",@"未选择节点，请选择后提交") toView:App_Delegate.window afterDelay:1.5 animted:YES];
                 return ;
             }
             VoteDetailVC *detailVC = [[VoteDetailVC alloc] init];

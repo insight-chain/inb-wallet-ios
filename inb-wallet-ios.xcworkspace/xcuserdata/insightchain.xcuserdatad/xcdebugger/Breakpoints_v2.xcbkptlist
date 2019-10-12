@@ -19,22 +19,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "inb-wallet-ios/Resources/ViewControllers/redeemVC.m"
-            timestampString = "592325318.8514071"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "311"
-            endingLineNumber = "311"
-            landmarkName = "-rewardRedemptionWithAddr:walletID:password:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "inb-wallet-ios/Resources/ViewControllers/BaseResourcePageViewController.m"
             timestampString = "592300937.192402"
             startingColumnNumber = "9223372036854775807"
@@ -68,7 +52,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inb-wallet-ios/Welcome/ViewControllers/WelcomBackupVC.m"
-            timestampString = "592325318.852693"
+            timestampString = "592486646.84404"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
@@ -84,7 +68,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inb-wallet-ios/Extensions/UIColor+Image.m"
-            timestampString = "592325318.853312"
+            timestampString = "592486646.8446259"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "13"
@@ -148,11 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inb-wallet-ios/Resources/ViewControllers/redeemVC.m"
-            timestampString = "592325318.853972"
+            timestampString = "592489372.126749"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "-requestMortagaData"
             landmarkType = "7">
          </BreakpointContent>
@@ -163,13 +147,157 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "inb-wallet-ios/Wallet/ViewControllers/WalletImportVC.m"
-            timestampString = "592325318.854144"
+            filePath = "inb-wallet-ios/Resources/ViewControllers/mortgageVC.m"
+            timestampString = "592486646.848289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
-            landmarkName = "-importAction:"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__25-[mortgageVC viewDidLoad]_block_invoke_2"
+                  moduleName = "inb-wallet-ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/insightchain/Desktop/insightChain/inb-wallet-ios/inb-wallet-ios/Resources/ViewControllers/mortgageVC.m"
+                  timestampString = "592491032.159165"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "3810">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__25-[mortgageVC viewDidLoad]_block_invoke_4"
+                  moduleName = "inb-wallet-ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/insightchain/Desktop/insightChain/inb-wallet-ios/inb-wallet-ios/Resources/ViewControllers/mortgageVC.m"
+                  timestampString = "592491032.160592"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "19">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "inb-wallet-ios/Resources/ViewControllers/mortgageVC.m"
+            timestampString = "592486646.848816"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "-mortgageAddr:walletID:inbNumber:password:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "inb-wallet-ios/Resources/ViewControllers/mortgageVC.m"
+            timestampString = "592486646.848932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "-mortgageAddr:walletID:inbNumber:password:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "inb-wallet-ios/Resources/ViewControllers/mortgageVC.m"
+            timestampString = "592486646.8490289"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "-mortgageAddr:walletID:inbNumber:password:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "inb-wallet-ios/Vote/ViewControllers/NodeRegisterVC.m"
+            timestampString = "592486646.849176"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
+            landmarkName = "-setNode:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "inb-wallet-ios/Resources/ViewControllers/mortgageVC.m"
+            timestampString = "592486646.849548"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
+            landmarkName = "-lockAddr:days:walletID:inbNumber:password:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "inb-wallet-ios/Resources/ViewControllers/mortgageVC.m"
+            timestampString = "592486646.849633"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "-mortgageAddr:walletID:inbNumber:password:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "inb-wallet-ios/Transfer/TableViewCellsAndHeaderFooters/TransferListCell.m"
+            timestampString = "592489372.1269439"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "-makeContent:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -181,53 +181,12 @@
 //确认
 -(void)confirmAction:(UIButton *)sender{
 //    if(self.selectedType == 1){ //抵押
-    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
         [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
             __block __weak typeof(self) tmpSelf = self;
             [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 @try {
-//                    TransactionSignedResult *signResult = [WalletManager inbMortgageWithWalletID:tmpSelf.walletID value:tmpSelf.inbNumberTF.text password:password chainID:891];
-//                    [NetworkUtil rpc_requetWithURL:delegate.rpcHost params:@{@"jsonrpc":@"2.0",
-//                                                                    @"method":@"eth_getTransactionCount",
-//                                                                    @"params":@[[self.address add0xIfNeeded],@"latest"],@"id":@(1)}
-//                                        completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-//                                            if (error) {
-//                                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-//                                                return ;
-//                                            }
-//                                            NSDictionary *dic = (NSDictionary *)responseObject;
-//                                            NSDecimalNumber *nonce = [dic[@"result"] decimalNumberFromHexString];
-////                                            NSDecimalNumber *dd;
-////                                            if([nonce integerValue] != 0){
-////                                                 dd = [nonce decimalNumberByAdding:[NSDecimalNumber decimalNumberWithString:@"1"]];
-////                                            }else{
-////                                                dd = nonce;
-////                                            }
-//                                            NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:tmpSelf.inbNumberTF.text];
-//                                            NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:@"1000000000000000000"]];
-//                                            TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.walletID nonce:[nonce stringValue] txType:self.selectedType == 1?TxType_moetgage:TxType_unMortgage gasPrice:@"200000" gasLimit:@"21000" to:@"0x95aa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[self.selectedType == 1 ? @"mortgageNet":@"unmortgageNet" hexString] add0xIfNeeded] password:password chainID:kChainID];
-//
-//                                            [NetworkUtil rpc_requetWithURL:delegate.rpcHost
-//                                                                    params:@{@"jsonrpc":@"2.0",
-//                                                                             @"method":self.selectedType == 1 ? @"eth_mortgageRawNet":@"eth_unMortgageRawNet",
-//                                                                             @"params":@[[signResult.signedTx add0xIfNeeded]],
-//                                                                             @"id":@(67),
-//                                                                             }
-//                                                                completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-//                                                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-//                                                                    NSLog(@"%@", responseObject);
-//                                                                    if (error) {
-//                                                                        return ;
-//                                                                    }
-//                                                                    dispatch_async(dispatch_get_main_queue(), ^{
-//                                                                        [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
-//                                                                    });
-//                                                                }];
-//                                        }];
-                    
-                    
 //                    [self mortgageAddr:self.address walletID:tmpSelf.walletID inbNumber:tmpSelf.inbNumberTF.text password:password];
 //                    [self lockAddr:self.address days:@"30" walletID:tmpSelf.walletID inbNumber:tmpSelf.inbNumberTF.text password:password];
                     
@@ -267,9 +226,7 @@
     dispatch_queue_t customQuue = dispatch_queue_create("mortgage.nerwork", DISPATCH_QUEUE_SERIAL);
     //创建信号量并初始化总量为1
     dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
-    
-    
-    
+ 
     //添加任务
     dispatch_async(customQuue, ^{
         //发送第一个请求

@@ -59,10 +59,10 @@
     [self.headerImage sd_setImageWithURL:[NSURL URLWithString:node.image] placeholderImage:[UIImage imageNamed:@"headerImgDefault"]];
     self.nameLabel.text = node.name;
     self.addresslabel.text = node.address;
-    self.introLabel.text = ([node.intro isEqualToString:@""] || node.intro == nil) ? @"无介绍" : node.intro;
+    self.introLabel.text = ([node.intro isEqualToString:@""] || node.intro == nil) ? NSLocalizedString(@"vote.intro.no", @"暂无节点介绍") : node.intro;
     self.correctRatioLable.text = [NSString stringWithFormat:@"%@%.2f%%", NSLocalizedString(@"vote.support", @"支持率"), node.voteRatio*100];
     self.voteBtn.selected = node.isVoted ? YES : NO;
-    self.locationLabel.text = node.city;
+    self.locationLabel.text = node.countryName;
     if (self.voteBtn.selected) {
         self.voteLabel.text = NSLocalizedString(@"vote.selected", @"已选");
         self.selectBox.image = [UIImage imageNamed:@"selectBox_yes"];

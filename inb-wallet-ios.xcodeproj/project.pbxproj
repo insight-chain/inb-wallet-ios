@@ -82,6 +82,8 @@
 		FE84CFB223407E3B00414411 /* LXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFAE23407E3A00414411 /* LXAlertView.m */; };
 		FE84CFB323407E3B00414411 /* UILabel+LXAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFB123407E3A00414411 /* UILabel+LXAdd.m */; };
 		FE84CFB62341E6B700414411 /* UIColor+Image.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFB52341E6B700414411 /* UIColor+Image.m */; };
+		FE84CFBA234ECB4600414411 /* TransferMessage_3Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE84CFB8234ECB4600414411 /* TransferMessage_3Cell.m */; };
+		FE84CFBB234ECB4600414411 /* TransferMessage_3Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE84CFB9234ECB4600414411 /* TransferMessage_3Cell.xib */; };
 		FE92C41C22A78ED40043DA9D /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE92C41B22A78ED40043DA9D /* test.swift */; };
 		FE92C49622A792580043DA9D /* libscrypt.podspec in Resources */ = {isa = PBXBuildFile; fileRef = FE92C41E22A792580043DA9D /* libscrypt.podspec */; };
 		FE92C49722A792580043DA9D /* BTCBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C42222A792580043DA9D /* BTCBlock.m */; };
@@ -438,6 +440,9 @@
 		FE84CFB123407E3A00414411 /* UILabel+LXAdd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LXAdd.m"; sourceTree = "<group>"; };
 		FE84CFB42341E6B700414411 /* UIColor+Image.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Image.h"; sourceTree = "<group>"; };
 		FE84CFB52341E6B700414411 /* UIColor+Image.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Image.m"; sourceTree = "<group>"; };
+		FE84CFB7234ECB4600414411 /* TransferMessage_3Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferMessage_3Cell.h; sourceTree = "<group>"; };
+		FE84CFB8234ECB4600414411 /* TransferMessage_3Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransferMessage_3Cell.m; sourceTree = "<group>"; };
+		FE84CFB9234ECB4600414411 /* TransferMessage_3Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransferMessage_3Cell.xib; sourceTree = "<group>"; };
 		FE92C41A22A78ED40043DA9D /* inb-wallet-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "inb-wallet-ios-Bridging-Header.h"; sourceTree = "<group>"; };
 		FE92C41B22A78ED40043DA9D /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		FE92C41E22A792580043DA9D /* libscrypt.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = libscrypt.podspec; sourceTree = "<group>"; };
@@ -1448,6 +1453,9 @@
 				FE92C52B22A792F40043DA9D /* TransferMessage_2Cell.h */,
 				FE92C52F22A792F40043DA9D /* TransferMessage_2Cell.m */,
 				FE92C52D22A792F40043DA9D /* TransferMessage_2Cell.xib */,
+				FE84CFB7234ECB4600414411 /* TransferMessage_3Cell.h */,
+				FE84CFB8234ECB4600414411 /* TransferMessage_3Cell.m */,
+				FE84CFB9234ECB4600414411 /* TransferMessage_3Cell.xib */,
 				FE92C53222A792F40043DA9D /* TransferFooterView.h */,
 				FE92C52C22A792F40043DA9D /* TransferFooterView.m */,
 				FE92C52E22A792F40043DA9D /* TransferHeaderView_vote.h */,
@@ -2111,6 +2119,7 @@
 				FE1FCE762327D4F900F89A18 /* RewardVC.xib in Resources */,
 				FE1FCE642327899C00F89A18 /* MortgageDetailVC.xib in Resources */,
 				FE92C63A22A792F50043DA9D /* SettingCell.xib in Resources */,
+				FE84CFBB234ECB4600414411 /* TransferMessage_3Cell.xib in Resources */,
 				FE92C61E22A792F50043DA9D /* WelcomBackupTipVC.xib in Resources */,
 				FE3FC30322B8D44700A41205 /* TZImagePickerController.bundle in Resources */,
 				FE6D8513231CC09800023321 /* RedeemCell_1.xib in Resources */,
@@ -2277,6 +2286,7 @@
 				FE92C65222A792F50043DA9D /* ETHKeystore.m in Sources */,
 				FE3FC30822B8D44700A41205 /* TZImagePickerController.m in Sources */,
 				FE92C4B722A792580043DA9D /* BTCData.m in Sources */,
+				FE84CFBA234ECB4600414411 /* TransferMessage_3Cell.m in Sources */,
 				FEE947DF2302BEB90004D696 /* FMListPlaceholder.m in Sources */,
 				FE92C4C522A792580043DA9D /* BTCKey.m in Sources */,
 				FEDD8EF322C5E2B700BBC74B /* BTCKeystore.m in Sources */,

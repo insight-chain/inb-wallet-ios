@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIButton (Layout)
 
 -(void)topImgbelowTitle:(CGFloat)offset; //上图下文
+-(void)leftImgRightTitle:(CGFloat)offset;//左图又文
 -(void)rightImgleftTitle:(CGFloat)offset; //左文右图
 @end
 

@@ -17,4 +17,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) PaddingLabel *valueLabel;   //转账金额
 @end
 
+#pragma mark ---- 节点投票的头
+@interface TransferHeaderVoteView : UIView
+@property(nonatomic, strong) UILabel *titleLabel; //节点投票
+@property(nonatomic, strong) UILabel *infoLabel;  //投票的节点地址
+@property (nonatomic, assign, readonly) double viewHeight;  //高度
+
+-(instancetype)initWithTitle:(NSString *)title info:(NSString *)info;
+
+@end
+
 NS_ASSUME_NONNULL_END

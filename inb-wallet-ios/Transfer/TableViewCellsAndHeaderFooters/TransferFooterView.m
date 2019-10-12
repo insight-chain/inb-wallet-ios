@@ -28,24 +28,24 @@
 }
 
 -(void)makeConstraints{
-    [self addSubview:self.labelBg];
-    [self addSubview:self.textLabel];
+//    [self addSubview:self.labelBg];
+//    [self addSubview:self.textLabel];
     [self addSubview:self.qrImg];
     
-    [self.labelBg mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(0);
-        make.left.mas_equalTo(AdaptedWidth(15));
-        make.right.mas_equalTo(AdaptedWidth(-15));
-        make.height.mas_equalTo(AdaptedWidth(75));
-    }];
-    [self.textLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.labelBg.mas_top).mas_offset(AdaptedWidth(15));
-        make.left.mas_equalTo(self.labelBg.mas_left).mas_offset(AdaptedWidth(10));
-        make.right.mas_equalTo(self.labelBg.mas_right).mas_offset(AdaptedWidth(-10));
-    }];
+//    [self.labelBg mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(0);
+//        make.left.mas_equalTo(AdaptedWidth(15));
+//        make.right.mas_equalTo(AdaptedWidth(-15));
+//        make.height.mas_equalTo(AdaptedWidth(75));
+//    }];
+//    [self.textLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.labelBg.mas_top).mas_offset(AdaptedWidth(15));
+//        make.left.mas_equalTo(self.labelBg.mas_left).mas_offset(AdaptedWidth(10));
+//        make.right.mas_equalTo(self.labelBg.mas_right).mas_offset(AdaptedWidth(-10));
+//    }];
     [self.qrImg mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.mas_centerX);
-        make.top.mas_equalTo(self.labelBg.mas_bottom).mas_offset(AdaptedWidth(20));
+        make.top.mas_equalTo(0).mas_offset(AdaptedWidth(20));
         make.height.width.mas_equalTo(AdaptedWidth(90));
     }];
 }

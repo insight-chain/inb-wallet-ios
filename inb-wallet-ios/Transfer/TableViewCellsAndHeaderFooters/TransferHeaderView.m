@@ -73,3 +73,80 @@
     return _valueLabel;
 }
 @end
+
+
+#pragma mark ----
+@interface TransferHeaderVoteView()
+@property (nonatomic, strong) UIImageView *bgImg;
+@end
+
+@implementation TransferHeaderVoteView
+
+-(instancetype)initWithTitle:(NSString *)title info:(NSString *)info{
+    if (self = [super init]) {
+        self.titleLabel.text = title;
+        self.infoLabel.text = info;
+        
+        self.frame = CGRectMake(0, 0, KWIDTH, 200);
+        
+        [self addSubview:self.titleLabel];
+        [self addSubview:self.bgImg];
+        [self addSubview:self.infoLabel];
+        
+        [self makeconstrains];
+        
+        [self layoutIfNeeded];
+    }
+    return self;
+}
+
+-(void)makeconstrains{
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self);
+        make.top.mas_equalTo(self).mas_offset(10);
+    }];
+    [self.bgImg mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.titleLabel.mas_bottom).mas_offset(20);
+        make.left.mas_equalTo(self.mas_left).mas_offset(15);
+        make.right.mas_equalTo(self.mas_right).mas_offset(-15);
+        make.bottom.mas_equalTo(self.infoLabel.mas_bottom).mas_offset(10);
+    }];
+    [self.infoLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.bgImg.mas_top).mas_offset(10);
+        make.left.mas_equalTo(self.bgImg.mas_left).mas_offset(10);
+        make.right.mas_equalTo(self.bgImg.mas_right).mas_offset(-10);
+    }];
+}
+
+-(double)viewHeight{
+//    [self.infoLabel sizeToFit];
+    [self layoutSubviews];
+    [self layoutIfNeeded];
+    return CGRectGetMaxY(self.bgImg.frame);
+}
+
+-(UILabel *)titleLabel{
+    if (_titleLabel == nil) {
+        _titleLabel = [[UILabel alloc] init];
+        _titleLabel.font = AdaptedFontSize(15);
+        _titleLabel.textColor = kColorTitle;
+    }
+    return _titleLabel;
+}
+-(UIImageView *)bgImg{
+    if (_bgImg == nil) {
+        _bgImg = [[UIImageView alloc] init];
+        _bgImg.image = [UIImage imageNamed:@"label_bg"];
+    }
+    return _bgImg;
+}
+-(UILabel *)infoLabel{
+    if (_infoLabel == nil) {
+        _infoLabel = [[UILabel alloc] init];
+        _infoLabel.font = [UIFont systemFontOfSize:15];
+        _infoLabel.textColor = kColorBlue;
+        _infoLabel.numberOfLines = 0;
+    }
+    return _infoLabel;
+}
+@end

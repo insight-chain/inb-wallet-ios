@@ -62,7 +62,9 @@
 #pragma mark ---- Action
 - (IBAction)copyBtnAction:(UIButton *)sender {
     if(self.rightBtnType == 1){ //复制
-        
+        UIPasteboard *board = [UIPasteboard generalPasteboard];
+        board.string = self.value.text;
+        [MBProgressHUD showMessage:@"复制到剪贴板" toView:App_Delegate.window afterDelay:1 animted:YES];
     }
 }
 

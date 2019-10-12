@@ -88,6 +88,12 @@ static NSString *cellId_2 = @"redeemCell_2";
 }
 
 -(void)makeNavigation{
+    self.navigationItem.title = NSLocalizedString(@"wallet.reward", @"收益奖励");
+    
+    /** 导航栏返回按钮文字 **/
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+    
     UIButton *rightBtn = [[UIButton alloc] init];
     [rightBtn setTitle:NSLocalizedString(@"reward.record.receive", @"领取记录") forState:UIControlStateNormal];
     [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -139,7 +145,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                 morM.amount = [NSString stringWithFormat:@"%f", mor];
                 morM.lockHeight = 0;
                 morM.address = App_Delegate.selectAddr;
-                [arr insertObject:morM atIndex:0];
+//                [arr insertObject:morM atIndex:0];
             }
             
             tmpSelf.stores = arr;
@@ -193,7 +199,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView.mj_header endRefreshing];
             NSLog(@"所有任务都完成了---wait----%.5f", self.allWaitToSendMorgage);
-            tmpSelf.allWaitToSendVoteReward.text = [NSString stringWithFormat:@"%.5f INB", tmpSelf.allWaitToSendVote];
+            tmpSelf.allWaitToSendVoteReward.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",tmpSelf.allWaitToSendVote]]];
             [tmpSelf.tableView reloadData];
         });
     });
@@ -299,7 +305,7 @@ static NSString *cellId_2 = @"redeemCell_2";
     valueL.textAlignment = NSTextAlignmentRight;
     valueL.textColor = [UIColor whiteColor];
     valueL.font = [UIFont systemFontOfSize:14];
-    valueL.text = [NSString stringWithFormat:@"%.5f INB", self.allWaitToSendMorgage];
+    valueL.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.allWaitToSendMorgage]]];
     
     [view addSubview:label];
     [view addSubview:imgV];
@@ -343,7 +349,7 @@ static NSString *cellId_2 = @"redeemCell_2";
     //创建穿行队列
     dispatch_queue_t customQuue = dispatch_queue_create("rewardLock.nerwork", DISPATCH_QUEUE_SERIAL);
     //创建信号量并初始化总量为1
-    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
+//    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
     
     //添加任务
     dispatch_async(customQuue, ^{
@@ -362,36 +368,48 @@ static NSString *cellId_2 = @"redeemCell_2";
                                 
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:@"0"];
                                 NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
-                                _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardLock gasPrice:@"200000" gasLimit:@"21000" to:App_Delegate.selectAddr value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"ReceiveLockedAward:%@", rewardNonce] hexString] add0xIfNeeded] password:password chainID:kChainID];
-                                
-                                //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-                                dispatch_semaphore_signal(semaphoreLock);
-                            }];
-        //相当于枷锁
-        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
-        
-        //发送第二个请求
-        [NetworkUtil rpc_requetWithURL:rpcHost
-                                params:@{@"jsonrpc":@"2.0",
-                                         @"method":sendTran_MethodName,
-                                         @"params":@[[_signResult.signedTx add0xIfNeeded]],
-                                         @"id":@(67),
-                                         }
-                            completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                
-                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                NSLog(@"%@", responseObject);
-                                if (error) {
-                                    return ;
+                                @try {
+                                    
+                                    _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardLock gasPrice:@"200000" gasLimit:@"21000" to:App_Delegate.selectAddr value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"ReceiveLockedAward:%@", rewardNonce] hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                    //发送第二个请求
+                                    [NetworkUtil rpc_requetWithURL:rpcHost
+                                                            params:@{@"jsonrpc":@"2.0",
+                                                                     @"method":sendTran_MethodName,
+                                                                     @"params":@[[_signResult.signedTx add0xIfNeeded]],
+                                                                     @"id":@(67),
+                                                                     }
+                                                        completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+                                                            
+                                                            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                                            NSLog(@"%@", responseObject);
+                                                            if (error) {
+                                                                return ;
+                                                            }
+                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
+                                                            });
+                                                            
+                                                            //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
+//                                                            dispatch_semaphore_signal(semaphoreLock);
+                                                        }];
+                                } @catch (NSException *exception) {
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                        [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.7 animted:YES];
+                                    });
+                                } @finally {
+                                    //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
+//                                    dispatch_semaphore_signal(semaphoreLock);
+                                    
                                 }
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
-                                });
                                 
-                                //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-                                dispatch_semaphore_signal(semaphoreLock);
                             }];
-        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
+       
+        //相当于枷锁
+//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
+//
+//
+//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"任务完成");
         });
@@ -408,7 +426,7 @@ static NSString *cellId_2 = @"redeemCell_2";
     //创建穿行队列
     dispatch_queue_t customQuue = dispatch_queue_create("rewardVote.nerwork", DISPATCH_QUEUE_SERIAL);
     //创建信号量并初始化总量为1
-    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
+//    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
     
     //添加任务
     dispatch_async(customQuue, ^{
@@ -427,40 +445,52 @@ static NSString *cellId_2 = @"redeemCell_2";
                                 
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:@"0"];
                                 NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
-                                _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardVote gasPrice:@"200000" gasLimit:@"21000" to:App_Delegate.selectAddr value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"ReceiveVoteAward"] hexString] add0xIfNeeded] password:password chainID:kChainID];
-                                
-                                //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-                                dispatch_semaphore_signal(semaphoreLock);
-                            }];
-        //相当于枷锁
-        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
-        
-        //发送第二个请求
-        [NetworkUtil rpc_requetWithURL:rpcHost
-                                params:@{@"jsonrpc":@"2.0",
-                                         @"method":sendTran_MethodName,
-                                         @"params":@[[_signResult.signedTx add0xIfNeeded]],
-                                         @"id":@(67),
-                                         }
-                            completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                
-                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                NSLog(@"%@", responseObject);
-                                if (error) {
-                                    return ;
+                                @try {
+                                    
+                                    _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardVote gasPrice:@"200000" gasLimit:@"21000" to:App_Delegate.selectAddr value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"ReceiveVoteAward"] hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                    //发送第二个请求
+                                    [NetworkUtil rpc_requetWithURL:rpcHost
+                                                            params:@{@"jsonrpc":@"2.0",
+                                                                     @"method":sendTran_MethodName,
+                                                                     @"params":@[[_signResult.signedTx add0xIfNeeded]],
+                                                                     @"id":@(67),
+                                                                     }
+                                                        completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+                                                            
+                                                            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                                            NSLog(@"%@", responseObject);
+                                                            if (error) {
+                                                                return ;
+                                                            }
+                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
+                                                                
+                                                                [self.voteRewardBtn setTitle:[NSString stringWithFormat:@"领取成功"] forState:UIControlStateNormal];
+                                                                
+                                                                [self.tableView.mj_header beginRefreshing];
+                                                            });
+                                                            
+                                                            //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
+//                                                            dispatch_semaphore_signal(semaphoreLock);
+                                                        }];
+                                } @catch (NSException *exception) {
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                        [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.7 animted:YES];
+                                    });
+                                } @finally {
+                                    //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
+//                                    dispatch_semaphore_signal(semaphoreLock);
+                                    
                                 }
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
-                                    
-                                    [self.voteRewardBtn setTitle:[NSString stringWithFormat:@"领取成功"] forState:UIControlStateNormal];
-                                    
-                                    [self.tableView.mj_header beginRefreshing];
-                                });
                                 
-                                //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-                                dispatch_semaphore_signal(semaphoreLock);
                             }];
-        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
+      
+        //相当于枷锁
+//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
+//
+//
+//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"任务完成");
         });
@@ -502,10 +532,6 @@ static NSString *cellId_2 = @"redeemCell_2";
 //查看领取记录
 -(void)toRecordAction:(UIButton *)sender{
     RewardRecordVC *recordVC = [[RewardRecordVC alloc] init];
-    
-    /** 导航栏返回按钮文字 **/
-    self.navigationController.navigationBar.topItem.title = @"";
-    
     recordVC.navigationItem.title = NSLocalizedString(@"reward.record.receive", @"领取记录");
     recordVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:recordVC animated:YES];
@@ -557,7 +583,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         
         NSDecimalNumber *baseDec = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",((lockedNumber*1.0/kDayNumbers) * 0.09 / 365)]];
         NSDecimalNumber *rewardDec = [baseDec decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f", voteNumber]]];
-        self.voteRewardValue.text = [NSString stringWithFormat:@"%@ INB", rewardDec.stringValue];
+        self.voteRewardValue.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:rewardDec.stringValue]];
         
     }else{
         
@@ -569,7 +595,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         
         NSDecimalNumber *baseDec = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f",((lockedNumber/kDayNumbers*1.0) * 0.09 / 365)]];
         NSDecimalNumber *rewardDec = [baseDec decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f", voteNumber]]];
-        self.voteRewardValue.text = [NSString stringWithFormat:@"%@ INB", rewardDec.stringValue];
+        self.voteRewardValue.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:rewardDec.stringValue]];
     }
     
 

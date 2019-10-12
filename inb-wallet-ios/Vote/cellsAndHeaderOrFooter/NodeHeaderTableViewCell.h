@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *name;//节点名称
 @property (weak, nonatomic) IBOutlet UILabel *address;//节点地址
 @property (weak, nonatomic) IBOutlet UILabel *country;//国家
-@property (weak, nonatomic) IBOutlet UILabel *city;//城市
 @property (weak, nonatomic) IBOutlet UILabel *website;//官方网址
 @property (weak, nonatomic) IBOutlet UIButton *voteBtn;//投票按钮
 

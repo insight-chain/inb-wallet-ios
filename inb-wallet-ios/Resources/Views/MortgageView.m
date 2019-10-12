@@ -108,7 +108,7 @@
             self.days_blockNumber_360.textColor = kColorAuxiliary2;
             self.days_time_360.textColor = kColorAuxiliary2;
             
-            self.rateL.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_30];
+            self.rateL.text = [NSString stringWithFormat:@"%.1f%%", kRateReturn7_30];
             self.selectDays = 30;
             break;
         }
@@ -133,7 +133,7 @@
             self.days_blockNumber_360.textColor = kColorAuxiliary2;
             self.days_time_360.textColor = kColorAuxiliary2;
             
-            self.rateL.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_90];
+            self.rateL.text = [NSString stringWithFormat:@"%.1f%%", kRateReturn7_90];
             self.selectDays = 90;
             break;
         }
@@ -158,7 +158,7 @@
             self.days_blockNumber_360.textColor = kColorAuxiliary2;
             self.days_time_360.textColor = kColorAuxiliary2;
             
-            self.rateL.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_180];
+            self.rateL.text = [NSString stringWithFormat:@"%.1f%%", kRateReturn7_180];
             self.selectDays = 180;
             break;
         }
@@ -183,7 +183,7 @@
             self.days_blockNumber_360.textColor = [UIColor whiteColor];
             self.days_time_360.textColor = [UIColor whiteColor];
             
-            self.rateL.text = [NSString stringWithFormat:@"%.2f%%", kRateReturn7_360];
+            self.rateL.text = [NSString stringWithFormat:@"%.1f%%", kRateReturn7_360];
             self.selectDays = 360;
             break;
         }

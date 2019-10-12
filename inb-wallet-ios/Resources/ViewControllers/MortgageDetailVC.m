@@ -9,12 +9,14 @@
 #import "MortgageDetailVC.h"
 
 #import "TransferMessageCell.h"
+#import "TransferMessage_3Cell.h"
 #import "TransferFooterView.h"
 
 #import "BasicWebViewController.h"
 #import "NetworkUtil.h"
 
 #define cellId_1 @"messageType_1"
+#define cellId_3 @"messageType_3"
 
 @interface MortgageDetailVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -49,8 +51,8 @@
     self.tableView.tableFooterView = self.tableFooter;
     self.tableFooter.info = self.lockModel.hashStr;
     
-    self.morgageValue.text = [NSString changeNumberFormatter:[NSString stringWithFormat:@"%.5f INB", [self.lockModel.amount doubleValue]]];
-    self.rewardValue.text = [NSString changeNumberFormatter:[NSString stringWithFormat:@"%.5f INB", self.lockModel.reward]];
+    self.morgageValue.text = [NSString stringWithFormat:@"%@ INB",[NSString changeNumberFormatter:self.lockModel.amount]];
+    self.rewardValue.text = [NSString stringWithFormat:@"%@ INB",[NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.lockModel.reward]]];
     
     if(self.lockModel.days == 0){
         [self.rewardBtn setTitle:NSLocalizedString(@"redemption", @"赎回") forState:UIControlStateNormal];
@@ -131,6 +133,13 @@
         [tableView registerNib:nib forCellReuseIdentifier:cellId_1];
         cell = [tableView dequeueReusableCellWithIdentifier:cellId_1];
     }
+    TransferMessage_3Cell *cell_3 = [tableView dequeueReusableCellWithIdentifier:cellId_3];
+    if(cell_3 == nil){
+        UINib *nib = [UINib nibWithNibName:NSStringFromClass([TransferMessage_3Cell class]) bundle:nil];
+        [tableView registerNib:nib forCellReuseIdentifier:cellId_3];
+        cell_3 = [tableView dequeueReusableCellWithIdentifier:cellId_3];
+    }
+    cell_3.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.showRightBtn = NO;
     cell.value.textColor = kColorTitle;
@@ -149,25 +158,23 @@
         cell.value.text = [NSString stringWithFormat:@"%ld块 ≈%ld天", (long)self.lockModel.lockHeight, (long)self.lockModel.days];
     }else if(indexPath.row == 3){
         cell.typeName.text = @"年化";
-        cell.value.text = [NSString stringWithFormat:@"%.2f%%", [self rateFor7day]];
+        cell.value.text = [NSString stringWithFormat:@"%.1f%%", [self rateFor7day]];
     }else if(indexPath.row == 4){
         cell.typeName.text = @"开始块高度"; //@"抵押日期";
         cell.value.text = [NSString stringWithFormat:@"%ld", self.lockModel.startHeight];//@"--";
     }else if(indexPath.row == 5){
+        cell.typeName.text = @"结束块高度"; //@"交易时间";
+        cell.value.text = [NSString stringWithFormat:@"%ld", self.lockModel.startHeight+self.lockModel.lockHeight];//@"--";
+       
+    }else if(indexPath.row == 6){
         cell.typeName.text = @"区块号";
         cell.value.text = [NSString stringWithFormat:@"%ld", (long)self.lockModel.startHeight];
         cell.showRightBtn = YES;
         cell.rightBtnType = 1;
-    }else if(indexPath.row == 6){
-        cell.typeName.text = @"结束块高度"; //@"交易时间";
-        cell.value.text = [NSString stringWithFormat:@"%ld", self.lockModel.startHeight+self.lockModel.lockHeight];//@"--";
     }else if(indexPath.row == 7){
-        cell.typeName.text = @"交易号";
-        cell.value.text = NSLocalizedString(@"transfer.query", @"交易查询");
-        cell.value.textColor = kColorBlue;
-        cell.showRightBtn = YES;
-        cell.rightBtnType = 2;
-        cell.showSeperatorView = NO;
+        cell_3.nameLabel.text = NSLocalizedString(@"transfer.tradeNo.", @"交易号");
+        cell_3.infoLabel.text = self.lockModel.hashStr;
+        return cell_3;
     }
     
     return cell;

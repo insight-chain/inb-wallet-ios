@@ -343,7 +343,7 @@
     }];
     [self.walletDetailBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(0);
-        make.top.mas_equalTo(kNavigationBarHeight +AdaptedHeight(10));
+        make.top.mas_equalTo(AdaptedHeight(10));
         make.width.mas_equalTo(AdaptedWidth(75));
         make.height.mas_equalTo(AdaptedWidth(28));
     }];
@@ -425,7 +425,7 @@
                             NSString *value = [d stringValue];
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 self.mortgageINB = [value doubleValue];
-                                self.CPUView.mortgageValue.text = [NSString stringWithFormat:@"%.2f INB",[value doubleValue]];
+                                self.CPUView.mortgageValue.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:value]];
                                 
                             });
                             
@@ -522,7 +522,7 @@
                                              
                                              self.CPUView.remainingValue.text = [NSString stringWithFormat:@"%@kb",canuseNET];
                                              self.CPUView.totalValue.text = [NSString stringWithFormat:@"%@kb",totalNET];
-                                             self.CPUView.mortgageValue.text = [NSString stringWithFormat:@"%.2f INB",[mortgagedINB doubleValue]];
+                                             self.CPUView.mortgageValue.text = [NSString stringWithFormat:@"%@ INB",[NSString changeNumberFormatter:[mortgagedINB stringValue]]];
                                              
                                              self.selectedWallet.mortgagedINB = [mortgagedINB doubleValue];
                                              self.selectedWallet.balanceINB = [balance doubleValue];
@@ -588,7 +588,7 @@
             
             self.CPUView.remainingValue.text = [NSString stringWithFormat:@"%@ RES",canuseNET];
             self.CPUView.totalValue.text = [NSString stringWithFormat:@"%@ RES",totalNET];
-            self.CPUView.mortgageValue.text = [NSString stringWithFormat:@"%.2f INB",[mortgagedINB doubleValue]];
+            self.CPUView.mortgageValue.text = [NSString stringWithFormat:@"%@ INB",[NSString changeNumberFormatter:[mortgagedINB stringValue]]];
             
             self.selectedWallet.mortgagedINB = [mortgagedINB doubleValue];
             self.selectedWallet.balanceINB = [balance doubleValue];
@@ -725,7 +725,7 @@
     }else{
         NSString *numberStr = [NSString changeNumberFormatter:[NSString stringWithFormat:@"%.4f", self.balance]];
         //显示资产数字
-        NSString *str = [NSString stringWithFormat:@"%@ INB", numberStr];
+        NSString *str = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:numberStr]];
         NSMutableAttributedString *mutStr = [[NSMutableAttributedString alloc] initWithString:str attributes:@{NSFontAttributeName:AdaptedFontSize(30),
                                                                                                                NSForegroundColorAttributeName:[UIColor whiteColor]
                                                                                                                }];
@@ -822,8 +822,8 @@
     if (_CPUView == nil) {
         _CPUView = [[WalletInfoCPUView alloc] initWithViewModel:self.viewModel];
         _CPUView.userInteractionEnabled = YES;
-//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cpuResource)];
-//        [_CPUView addGestureRecognizer:tap];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cpuResource)];
+        [_CPUView addGestureRecognizer:tap];
         __weak __block typeof(self) tmpSelf = self;
         _CPUView.addMortgageBlock = ^{
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -833,7 +833,7 @@
         _CPUView.toMortgageBlock = ^{
             dispatch_async(dispatch_get_main_queue(), ^{
                 redeemVC *vc2 = [[redeemVC alloc] init];
-                vc2.navigationItem.title = NSLocalizedString(@"mortgage", @"抵押");
+                vc2.navigationItem.title = NSLocalizedString(@"Resource.record", @"抵押记录");
                 vc2.hidesBottomBarWhenPushed = YES;
                 
                 [self.navigationController pushViewController:vc2 animated:YES];

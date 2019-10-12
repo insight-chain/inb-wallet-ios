@@ -63,7 +63,7 @@
     
     self.coinTF.text = @"INB";
     self.coinTF.enabled = NO; //不可编辑，不可相应其他点击事件
-    self.balanceLabel.text = [NSString stringWithFormat:@"可用余额 %.2f INB", self.balance];
+    self.balanceLabel.text = [NSString stringWithFormat:@"可用余额 %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.balance]]];
     
     [self.coinTF mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(20);
@@ -139,7 +139,10 @@
     SWQRCodeViewController *qrVC = [[SWQRCodeViewController alloc] init];
     qrVC.scanBlock = ^(BOOL success, NSString *value) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.accountTF.text = value;
+            if(success){
+                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.scan.success", @"扫码成功") toView:self.view afterDelay:1 animted:YES];
+                self.accountTF.text = value;
+            }
         });
     };
     qrVC.codeConfig = qrConfig;
@@ -169,7 +172,7 @@
     
     NSDecimalNumber *value = [NSDecimalNumber decimalNumberWithString:self.numberTF.text];
     if(self.wallet.balanceINB < value.doubleValue){
-        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.failed.noBalance", @"余额不足") toView:self.view afterDelay:1 animted:YES];
+        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.failed.noBalance", @"账户余额不足") toView:self.view afterDelay:1.5 animted:YES];
         return;
     }
     

@@ -32,7 +32,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     InlineTransfer *tr = self.model.transactionLog[0];
-    self.headerValueLabel.text = [NSString stringWithFormat:@"%.5f INB", tr.amount/100000.0];
+    self.headerValueLabel.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f", tr.amount/100000.0]]];
 }
 
 #pragma mark ---- UITableViewDelegate && Datasource
@@ -62,7 +62,7 @@
         cell.rightBtnType = 1;
     }else if(indexPath.row == 2){
         cell.typeName.text = @"年化";
-        cell.value.text = [NSString stringWithFormat:@"%.2f%%", kRateVote];
+        cell.value.text = [NSString stringWithFormat:@"%.1f%%", kRateVote];
     }else if(indexPath.row == 3){
         cell.typeName.text = @"领取日期";
         cell.value.text = [NSDate timestampSwitchTime:self.model.timestamp/1000 formatter:@"yyyy-MM-dd HH-mm"];

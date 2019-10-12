@@ -31,6 +31,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    /** 导航栏返回按钮文字 **/
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT-kNavigationBarHeight) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -99,14 +103,13 @@
     
     TransferModel *transfer = self.recordArr[indexPath.row];
     listCell.transferModel = transfer;
-  
-    
     return listCell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     TransferModel *model = (TransferModel *)self.recordArr[indexPath.row];
     TransactionDetailVC *detailVC = [[TransactionDetailVC alloc] init];
+    detailVC.navigationItem.title = NSLocalizedString(@"transfer.detail", @"交易详情");
     detailVC.tranferModel = model;
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];

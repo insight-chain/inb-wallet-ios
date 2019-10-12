@@ -31,7 +31,7 @@
 
 -(YNPageTableView *)tableView{
     if(_tableView == nil){
-        _tableView = [[YNPageTableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        _tableView = [[YNPageTableView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, KHEIGHT-kNavigationBarHeight) style:UITableViewStyleGrouped];
         
     }
     return _tableView;

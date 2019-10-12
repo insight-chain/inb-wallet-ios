@@ -40,8 +40,7 @@
         [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                MBProgressHUD *nn = [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
-                nn.bezelView.backgroundColor = kColorWithRGBA(0, 0, 0, 0.65);
+                MBProgressHUD *nn = [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
             });
             
             @try {
@@ -73,10 +72,11 @@
                 
             } @catch (NSException *exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                     [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.7 animted:YES];
                 });
             } @finally {
-                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
             }
             
             
@@ -107,7 +107,7 @@
     //创建穿行队列
     dispatch_queue_t customQuue = dispatch_queue_create("mortgage.nerwork", DISPATCH_QUEUE_SERIAL);
     //创建信号量并初始化总量为1
-    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
+//    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
     //添加任务
     dispatch_async(customQuue, ^{
         //发送第一个请求
@@ -117,7 +117,7 @@
                                          @"params":@[[addr add0xIfNeeded],@"latest"],@"id":@(1)}
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 if (error) {
-                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                    [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                     return ;
                                 }
                                 NSDictionary *dic = (NSDictionary *)responseObject;
@@ -125,36 +125,53 @@
                                 
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:inbNumber];
                                 NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
-                                _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_moetgage gasPrice:@"200000" gasLimit:@"21000" to:@"0x9518a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[@"mortgageNet" hexString] add0xIfNeeded] password:password chainID:kChainID];
-                                
-                                //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-                                dispatch_semaphore_signal(semaphoreLock);
-                            }];
-        //相当于枷锁
-        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
-        
-        //发送第二个请求
-        [NetworkUtil rpc_requetWithURL:rpcHost
-                                params:@{@"jsonrpc":@"2.0",
-                                         @"method":sendTran_MethodName,
-                                         @"params":@[[_signResult.signedTx add0xIfNeeded]],
-                                         @"id":@(67),
-                                         }
-                            completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                
-                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                NSLog(@"%@", responseObject);
-                                if (error) {
-                                    return ;
+                                @try {
+                                    _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_moetgage gasPrice:@"200000" gasLimit:@"21000" to:@"0x9518a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[@"mortgageNet" hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                    //发送第二个请求
+                                    [NetworkUtil rpc_requetWithURL:rpcHost
+                                                            params:@{@"jsonrpc":@"2.0",
+                                                                     @"method":sendTran_MethodName,
+                                                                     @"params":@[[_signResult.signedTx add0xIfNeeded]],
+                                                                     @"id":@(67),
+                                                                     }
+                                                        completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+                                                            
+                                                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                                            NSLog(@"%@", responseObject);
+                                                            if (error) {
+                                                                return ;
+                                                            }
+                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
+                                                            });
+                                                            
+//                                                            //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
+//                                                            dispatch_semaphore_signal(semaphoreLock);
+                                                        }];
+                                } @catch (NSException *exception) {
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                        [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.7 animted:YES];
+                                    });
+                                    return;
+                                } @finally {
+                                    if(!_signResult){
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            return ;
+                                        });
+                                    }
+                                    //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
+//                                    dispatch_semaphore_signal(semaphoreLock);
                                 }
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
-                                });
                                 
-                                //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-                                dispatch_semaphore_signal(semaphoreLock);
+                                
                             }];
-        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
+        
+        //相当于枷锁
+//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
+//
+//
+//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"任务完成");
         });
@@ -173,7 +190,8 @@
     //创建穿行队列
     dispatch_queue_t customQuue = dispatch_queue_create("lock.nerwork", DISPATCH_QUEUE_SERIAL);
     //创建信号量并初始化总量为1
-    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
+//    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
+    
     
     //添加任务
     dispatch_async(customQuue, ^{
@@ -184,7 +202,7 @@
                                          @"params":@[[addr add0xIfNeeded],@"latest"],@"id":@(1)}
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 if (error) {
-                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                    [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                     return ;
                                 }
                                 NSDictionary *dic = (NSDictionary *)responseObject;
@@ -192,39 +210,52 @@
                                 
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:inbNumber];
                                 NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
-                                _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_lock gasPrice:@"200000" gasLimit:@"21000" to:@"0x9518a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"days:%@",days] hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                @try {
+                                    _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_lock gasPrice:@"200000" gasLimit:@"21000" to:@"0x9518a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"days:%@",days] hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                    //发送第二个请求
+                                    [NetworkUtil rpc_requetWithURL:rpcHost
+                                                            params:@{@"jsonrpc":@"2.0",
+                                                                     @"method":sendTran_MethodName,
+                                                                     @"params":@[[_signResult.signedTx add0xIfNeeded]],
+                                                                     @"id":@(67),
+                                                                     }
+                                                        completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+                                                            
+                                                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                                            NSLog(@"%@", responseObject);
+                                                            if (error) {
+                                                                return ;
+                                                            }
+                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
+                                                            });
+                                                            //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
+//                                                            dispatch_semaphore_signal(semaphoreLock);
+                                                        }];
+                                    
+                                } @catch (NSException *exception) {
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                        [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.7 animted:YES];
+                                    });
+                                    
+                                } @finally {
+                                    //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
+//                                    dispatch_semaphore_signal(semaphoreLock);
+                                    if(!_signResult){
+                                        return ;
+                                    }
+                                }
                                 
-                                //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-                                dispatch_semaphore_signal(semaphoreLock);
                             }];
         //相当于枷锁
-        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
-        
-        //发送第二个请求
-        [NetworkUtil rpc_requetWithURL:rpcHost
-                                params:@{@"jsonrpc":@"2.0",
-                                         @"method":sendTran_MethodName,
-                                         @"params":@[[_signResult.signedTx add0xIfNeeded]],
-                                         @"id":@(67),
-                                         }
-                            completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                
-                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                NSLog(@"%@", responseObject);
-                                if (error) {
-                                    return ;
-                                }
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
-                                });
-                                
-                                //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-                                dispatch_semaphore_signal(semaphoreLock);
-                            }];
-        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
+//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
+       
+//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"任务完成");
         });
+        
     });
 }
 

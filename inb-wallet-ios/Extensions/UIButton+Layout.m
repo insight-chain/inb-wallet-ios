@@ -18,6 +18,14 @@
     
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
 }
+-(void)leftImgRightTitle:(CGFloat)offset{
+    [self layoutIfNeeded];
+    self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    self.titleEdgeInsets = UIEdgeInsetsMake(0, offset, 0, -offset);
+    self.imageEdgeInsets = UIEdgeInsetsMake(0, -offset, 0, offset);
+    
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+}
 -(void)rightImgleftTitle:(CGFloat)offset{
     [self layoutIfNeeded];
     self.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;

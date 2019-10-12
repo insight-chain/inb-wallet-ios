@@ -81,7 +81,7 @@
 +(NSString*)changeNumberFormatter:(NSString*)str{
     NSString *numString = [NSString stringWithFormat:@"%@",str];
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    [formatter setPositiveFormat:@"###,##0.00##"];
+    [formatter setPositiveFormat:@"###,##0.00###"];
     NSNumber *number = [formatter numberFromString:numString];
 //    formatter.numberStyle = kCFNumberFormatterDecimalStyle;
     NSString *string = [formatter stringFromNumber:number];

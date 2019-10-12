@@ -40,37 +40,22 @@
         self.typeLabel.text = @"收款";
         self.typeLabel.layer.borderColor = kColorBlue.CGColor;
         self.typeLabel.textColor = kColorBlue;
-        self.valueLabel.text = [NSString stringWithFormat:@"+ %.4f INB", tranderModel.amount];
+        self.valueLabel.text = [NSString stringWithFormat:@"+ %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",tranderModel.amount]]];
     }else if(tranderModel.type == TxType_transfer && tranderModel.direction == 1){
         //转出
         self.addressLabel.text = tranderModel.to;
         self.typeLabel.text = @"转账";
         self.typeLabel.layer.borderColor = kColorBlue.CGColor;
         self.typeLabel.textColor = kColorBlue;
-        self.valueLabel.text = [NSString stringWithFormat:@"- %.4f INB", tranderModel.amount];
+        self.valueLabel.text = [NSString stringWithFormat:@"- %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",tranderModel.amount]]];
         
-    }else if(tranderModel.type == TxType_vote){
-        //投票
-        self.addressLabel.text = NSLocalizedString(@"transfer.typeName.vote", @"节点投票");
-        self.typeLabel.text = @"其他";
-        self.typeLabel.layer.borderColor = kColorWithHexValue(0x03d0a2).CGColor;
-        self.typeLabel.textColor = kColorWithHexValue(0x03d0a2);
-        self.valueLabel.text = @"";
-        self.infoLabel.text = [tranderModel.input add0xIfNeeded];
-    }else if(tranderModel.type == TxType_rewardVote){
-        //领取投票奖励
-        self.addressLabel.text = NSLocalizedString(@"transfer.typeName.vote.reward", @"领取投票收益");;
-        self.typeLabel.text = @"其他";
-        self.typeLabel.layer.borderColor = kColorWithHexValue(0x03d0a2).CGColor;
-        self.typeLabel.textColor = kColorWithHexValue(0x03d0a2);
-        self.valueLabel.text = [NSString stringWithFormat:@"+ %.4f INB", tranderModel.amount];
     }else if(tranderModel.type == TxType_moetgage || tranderModel.type == TxType_lock){
         //抵押 | 锁仓
         self.addressLabel.text = NSLocalizedString(@"transfer.typeName.mortgage", @"抵押资源");
         self.typeLabel.text = @"资源";
         self.typeLabel.layer.borderColor = kColorWithHexValue(0xf5a623).CGColor;
         self.typeLabel.textColor = kColorWithHexValue(0xf5a623);
-        self.valueLabel.text = [NSString stringWithFormat:@"- %.4f INB", tranderModel.amount];
+        self.valueLabel.text = [NSString stringWithFormat:@"- %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",tranderModel.amount]]];
         if(tranderModel.type == TxType_lock){
             NSString *blockNumberStr = [tranderModel.input substringFromIndex:[tranderModel.input rangeOfString:@"days:"].length];
             NSDecimalNumber *blockDeci = [NSDecimalNumber decimalNumberWithString:blockNumberStr];
@@ -88,21 +73,52 @@
         self.typeLabel.text = @"资源";
         self.typeLabel.layer.borderColor = kColorWithHexValue(0xf5a623).CGColor;
         self.typeLabel.textColor = kColorWithHexValue(0xf5a623);
-        self.valueLabel.text = [NSString stringWithFormat:@"+ %.4f INB", tranderModel.amount];
+        self.valueLabel.text = [NSString stringWithFormat:@""];
+        self.infoLabel.text = [NSString stringWithFormat:@"申请赎回%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",tranderModel.amount]]];
     }else if(tranderModel.type == TxType_receive){
         //领取赎回
         self.addressLabel.text = NSLocalizedString(@"transfer.typeName.redemption.receive", @"领取赎回");
         self.typeLabel.text = @"资源";
         self.typeLabel.layer.borderColor = kColorWithHexValue(0xf5a623).CGColor;
         self.typeLabel.textColor = kColorWithHexValue(0xf5a623);
-        self.valueLabel.text = [NSString stringWithFormat:@"+ %.4f INB", tranderModel.amount];
+        self.valueLabel.text = [NSString stringWithFormat:@"+ %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",tranderModel.amount]]];
     }else if(tranderModel.type == TxType_rewardLock){
         //领取锁仓奖励
         self.addressLabel.text = NSLocalizedString(@"transfer.typeName.redemption.reward", @"领取抵押收益");
         self.typeLabel.text = @"资源";
         self.typeLabel.layer.borderColor = kColorWithHexValue(0xf5a623).CGColor;
         self.typeLabel.textColor = kColorWithHexValue(0xf5a623);
-        self.valueLabel.text = [NSString stringWithFormat:@"+ %.4f INB", tranderModel.amount];
+        self.valueLabel.text = [NSString stringWithFormat:@"+ %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",tranderModel.amount]]];
+    }else if(tranderModel.type == TxType_reResource){
+        //领取资源
+         self.addressLabel.text = NSLocalizedString(@"Resource.receive", @"领取资源");
+        self.typeLabel.text = @"资源";
+        self.typeLabel.layer.borderColor = kColorWithHexValue(0xf5a623).CGColor;
+        self.typeLabel.textColor = kColorWithHexValue(0xf5a623);
+         self.valueLabel.text = @"";
+    }else if(tranderModel.type == TxType_vote){
+        //投票
+        self.addressLabel.text = NSLocalizedString(@"transfer.typeName.vote", @"节点投票");
+        self.typeLabel.text = NSLocalizedString(@"transfer.type.other",@"其他");
+        self.typeLabel.layer.borderColor = kColorWithHexValue(0x03d0a2).CGColor;
+        self.typeLabel.textColor = kColorWithHexValue(0x03d0a2);
+        self.valueLabel.text = @"";
+        self.infoLabel.text = [tranderModel.input add0xIfNeeded];
+    }else if(tranderModel.type == TxType_rewardVote){
+        //领取投票奖励
+        self.addressLabel.text = NSLocalizedString(@"transfer.typeName.vote.reward", @"领取投票收益");;
+        self.typeLabel.text = NSLocalizedString(@"transfer.type.other",@"其他");
+        self.typeLabel.layer.borderColor = kColorWithHexValue(0x03d0a2).CGColor;
+        self.typeLabel.textColor = kColorWithHexValue(0x03d0a2);
+        self.valueLabel.text = [NSString stringWithFormat:@"+ %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",tranderModel.amount]]];
+    }else if(tranderModel.type == TxType_updateNodeInfo){ //更新节点信息
+        self.addressLabel.text = NSLocalizedString(@"transfer.typeName.node.update", @"更新节点");;
+        self.typeLabel.text = NSLocalizedString(@"transfer.type.other",@"其他");
+        self.typeLabel.layer.borderColor = kColorWithHexValue(0x03d0a2).CGColor;
+        self.typeLabel.textColor = kColorWithHexValue(0x03d0a2);
+        self.valueLabel.text = @"";
+    }else{
+        NSLog(@"%@", tranderModel.type);
     }
 }
 

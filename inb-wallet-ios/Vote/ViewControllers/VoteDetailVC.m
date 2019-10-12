@@ -37,7 +37,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.navigationItem.title = NSLocalizedString(@"transfer.typeName.vote", @"节点投票");
     /**
      *   表示本viewController中的ScrollView使用哪些新特性中提供的contentInsets.
      * 我们使用None.默认为All，也就是所有的方向都使用。
@@ -69,7 +69,7 @@
     self.selectedNodesList.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.headerView.balanceINB = self.wallet.balanceINB;
     self.headerView.mortgageINB = self.wallet.mortgagedINB;
-    self.headerView.voteTotalValue.text = [NSString stringWithFormat:@"%.2f", self.wallet.mortgagedINB*self.selectedNode.count];
+    self.headerView.voteTotalValue.text = [NSString stringWithFormat:@"%.0f", self.wallet.mortgagedINB*self.selectedNode.count];
     __block __weak typeof(self) tmpSelf = self;
     self.headerView.addMortgageBlock = ^(double inbNumber) {
         if (inbNumber != 0) {
@@ -179,7 +179,7 @@
 -(void)voteSubmitAction:(UIButton *)sender{
 //    [self registerToNode];
     if(self.selectedNode.count <= 0){
-        [MBProgressHUD showMessage:@"请先选择节点" toView:self.view afterDelay:1.5 animted:YES];
+        [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.noNodes", @"未选择节点，请选择后提交") toView:self.view afterDelay:1.5 animted:YES];
         return;
     }
     __block __weak typeof(self) tmpSelf = self;

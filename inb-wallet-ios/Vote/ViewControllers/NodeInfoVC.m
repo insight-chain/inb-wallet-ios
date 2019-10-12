@@ -49,8 +49,8 @@
     self.voteBarView.subVote = ^{
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            if(tmpSelf.selectedNodes.count == 0){
-                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.noNodes",@"未选择节点") toView:App_Delegate.window afterDelay:1 animted:YES];
+            if(tmpSelf.selectedNodes.count <= 0){
+                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.noNodes",@"未选择节点，请选择后提交") toView:App_Delegate.window afterDelay:1.5 animted:YES];
                 return ;
             }
             
@@ -116,12 +116,11 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell.headerImg sd_setImageWithURL:[NSURL URLWithString:self.node.image] placeholderImage:[UIImage imageNamed:@"headerImgDefault"]];
         cell.country.text = self.node.countryName;
-        cell.city.text = self.node.countryName;
         cell.website.text = self.node.webSite;
         cell.name.text = self.node.name;
         cell.address.text = self.node.address;
         if([self.selectedNodes containsObject:self.node]){
-            [cell.voteBtn setTitle:@"已投票" forState:UIControlStateNormal];
+            [cell.voteBtn setTitle:NSLocalizedString(@"vote.selected",@"已选") forState:UIControlStateNormal];
         }else{
             [cell.voteBtn setTitle:NSLocalizedString(@"vote", @"投票") forState:UIControlStateNormal];
         }

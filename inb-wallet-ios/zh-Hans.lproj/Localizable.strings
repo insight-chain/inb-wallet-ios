@@ -30,11 +30,13 @@
 "redemption"   = "赎回";
 
 "Resource" = "资源(RES)";
+"Resource.receive" = "领取资源";
 "Resource.hasMortgage" = "已抵押";
 "Resource.record" = "抵押记录";
 "Resource.redemptioning" = "正在赎回";
 "Resource.mortgageList" = "抵押列表";
 "Resource.mortgage.detail" = "抵押详情";
+"Resource.redemption.ing" = "赎回中";
 
 "confirm" = "确认";
 
@@ -88,8 +90,8 @@
 
 "collection.tip.scan" = "扫一扫，向我支付INB";
 
-"transfer.sendMoney" = "发款方";
-"transfer.collectionMoney" = "收款方";
+"transfer.sendMoney" = "付款账号";
+"transfer.collectionMoney" = "收款账号";
 "transfer.resource" = "资源消耗";
 "transfer.blockNo." = "区块号";
 "transfer.tradeTime"= "交易时间";
@@ -103,7 +105,7 @@
 "transfer.send" = "发送";
 "transfer.result.success" = "转账成功";
 "transfer.result.failed" = "转账失败";
-"transfer.failed.noBalance" = "余额不足";
+"transfer.failed.noBalance" = "账户余额不足";
 "transfer.failed.noAddress" = "地址格式不正确";
 "transfer.typeName.mortgage" = "抵押资源";
 "transfer.typeName.redemption.apply" = "抵押赎回";
@@ -111,12 +113,19 @@
 "transfer.typeName.redemption.reward" = "领取抵押收益";
 "transfer.typeName.vote" = "节点投票";
 "transfer.typeName.vote.reward" = "领取投票收益";
+"transfer.typeName.node.update" = "更新节点";
 "transfer.query" = "交易查询";
+"transfer.detail" = "交易详情";
+"transfer.note" = "备注";
+"transfer.type.res" = "资源";
+"transfer.type.other" = "其他";
 
 "vote.support" = "支持率";
 "vote.node.empty" = "暂无投票节点";
 "vote.selected" = "已选";
-
+"vote.to" = "发起方";
+"vote.detail.toStr" = "投票给";
+"vote.intro.no" = "暂无节点简介";
 
 "pledgedResources" = "已抵押资源";
 "addMortgageResources" = "新增抵押";
@@ -191,4 +200,7 @@
 
 "message.tip.saveCode.success" = "保存二维码成功";
 "message.tip.saveCode.failed" = "保存二维码失败";
-"message.tip.noNodes" = "未选择节点";
+"message.tip.noNodes" = "未选择节点，请选择后提交";
+"message.tip.scan.success" = "扫码成功";
+"message.tip.res.receive.success" = "领取资源成功";
+"message.tip.res.receive.failed" = "领取资源失败";
