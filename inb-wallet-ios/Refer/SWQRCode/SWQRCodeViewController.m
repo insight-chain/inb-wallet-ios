@@ -53,7 +53,7 @@
     
     //将颜色转换为图片
     UIImage *image = [self imageWithColor:[UIColor colorWithRed:48/255.0 green:48/255.0 blue:48/255.0 alpha:0.6]];
-    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
 
@@ -66,7 +66,7 @@
     //设置导航栏背景图片为一个空的image，这样就透明了
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     //去掉透明后导航栏下边的黑边
-//    [self.navigationController.navigationBar setShadowImage:nil];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 }
 - (UIImage *)imageWithColor:(UIColor *)color{
     //创建1像素区域并开始图片绘制

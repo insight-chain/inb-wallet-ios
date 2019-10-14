@@ -62,8 +62,6 @@
     //创建信号量并初始化总量为1
 //    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
     
-    
-    
     //添加任务
     dispatch_async(customQuue, ^{
         //发送第一个请求
@@ -94,13 +92,17 @@
                                                             
                                                             [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
                                                             NSLog(@"%@", responseObject);
-                                                            if (error) {
+                                                            if (error || responseObject[@"error"]) {
+                                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                                    [MBProgressHUD showMessage:@"赎回失败" toView:self.view afterDelay:1 animted:YES];
+                                                                });
                                                                 return ;
                                                             }
                                                             
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 [MBProgressHUD showMessage:@"赎回请求发送成功" toView:tmpSelf.view afterDelay:1.5 animted:YES];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
+                                                                [self.navigationController popViewControllerAnimated:YES];
                                                             });
                                                             
                                                             //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁

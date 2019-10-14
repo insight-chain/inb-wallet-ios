@@ -57,8 +57,7 @@ static NSString *kCellId = @"rewardRecordCell";
                         
                         [self.tableView.mj_header endRefreshing];
                         [self.tableView.mj_footer endRefreshing];
-                        
-                        
+   
                         NSInteger totalPage = [resonseObject[@"totalPages"] integerValue];
                         NSInteger totalCount = [resonseObject[@"totalCount"] integerValue];
                         NSArray *items = resonseObject[@"items"];

@@ -38,7 +38,7 @@
 -(void)setModel:(LockModel *)model{
     _model = model;
     
-    self.mortgageValueLabel.text = _model.amount;
+    self.mortgageValueLabel.text = [NSString changeNumberFormatter:_model.amount];
 
     if(_model.days == 0){
         self.rewardLable.text = @"0 INB";

@@ -8,8 +8,7 @@
 
 #import "TransferMessageCell.h"
 
-#define kRightBtnCopy 1
-#define kRightBtnMore 2
+
 
 @interface TransferMessageCell()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnCopyWidthConstraint;
@@ -45,7 +44,7 @@
 }
 -(void)setRightBtnType:(NSInteger)rightBtnType{
     _rightBtnType = rightBtnType;
-    if (_rightBtnType == kRightBtnCopy) {
+    if (_rightBtnType == btnType_copy) {
         [self.rightBtn setImage:[UIImage imageNamed:@"copy"] forState:UIControlStateNormal];
     }else{
         [self.rightBtn setImage:[UIImage imageNamed:@"more_arrow"] forState:UIControlStateNormal];
@@ -61,10 +60,10 @@
 }
 #pragma mark ---- Action
 - (IBAction)copyBtnAction:(UIButton *)sender {
-    if(self.rightBtnType == 1){ //复制
+    if(self.rightBtnType == btnType_copy){ //复制
         UIPasteboard *board = [UIPasteboard generalPasteboard];
         board.string = self.value.text;
-        [MBProgressHUD showMessage:@"复制到剪贴板" toView:App_Delegate.window afterDelay:1 animted:YES];
+        [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.copy.success", @"复制成功") toView:App_Delegate.window afterDelay:1 animted:YES];
     }
 }
 

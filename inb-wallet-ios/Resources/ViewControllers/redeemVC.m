@@ -442,7 +442,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         NSInteger days = lock.days;
         double value_double = [lock.amount doubleValue];
         
-        cell.mortgageValueLabel.text = [NSString stringWithFormat:@"%.4f", value_double];
+//        cell.mortgageValueLabel.text = [NSString stringWithFormat:@"%.4f", value_double];
         __weak __block typeof(self) tmpSelf = self;
         if(days == 0){
             cell.rewardBlock = ^{

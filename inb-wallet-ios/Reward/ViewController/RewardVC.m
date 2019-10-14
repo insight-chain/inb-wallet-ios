@@ -301,7 +301,7 @@ static NSString *cellId_2 = @"redeemCell_2";
     allStr.font = [UIFont systemFontOfSize:14];
     allStr.text = @"全网待领取抵押奖励";
     
-    UILabel *valueL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(allStr.frame), CGRectGetMinY(allStr.frame), CGRectGetWidth(imgV.frame)-CGRectGetMaxX(allStr.frame)-10-10, CGRectGetHeight(allStr.frame))];
+    UILabel *valueL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(allStr.frame)+10, CGRectGetMinY(allStr.frame), CGRectGetWidth(imgV.frame)-CGRectGetMaxX(allStr.frame)-10, CGRectGetHeight(allStr.frame))];
     valueL.textAlignment = NSTextAlignmentRight;
     valueL.textColor = [UIColor whiteColor];
     valueL.font = [UIFont systemFontOfSize:14];
@@ -560,7 +560,7 @@ static NSString *cellId_2 = @"redeemCell_2";
     }
     
     [self calulateReward:self.lastReceiveVoteAwardHeight lockedNumber:7*kDayNumbers voteNumber:_voteNumberValue/100000.0];
-    self.voteNumber.text = [NSString stringWithFormat:@"已投票数量 %.2f", _voteNumberValue/100000.0];
+    self.voteNumber.text = [NSString stringWithFormat:@"已投票数量 %.0f", _voteNumberValue/100000.0];
 }
 
 /**

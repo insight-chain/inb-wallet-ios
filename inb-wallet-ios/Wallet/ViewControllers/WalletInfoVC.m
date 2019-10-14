@@ -373,7 +373,7 @@
 }
 
 -(void)initNavi{
-    self.accountNameBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 70, 30)];
+    self.accountNameBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 170, 30)];
 //    [self.accountNameBtn setTitle:@"vadgvadfgvasfd" forState:UIControlStateNormal];
     [self.accountNameBtn setImage:[UIImage imageNamed:@"dropDown"] forState:UIControlStateNormal];
     [self.accountNameBtn addTarget:self action:@selector(showAccountsList:) forControlEvents:UIControlEventTouchUpInside];
@@ -610,7 +610,7 @@
     BasicWallet *wallet = noti.object;
     Identity *identi = [Identity currentIdentity];
     if(identi.wallets.count != 0){
-        self.selectedWallet = [identi.wallets firstObject];
+        self.selectedWallet = [identi.wallets lastObject];
         self.wallets = identi.wallets;
         return ;
     }

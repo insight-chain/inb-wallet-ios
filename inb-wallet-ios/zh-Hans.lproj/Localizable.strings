@@ -31,6 +31,7 @@
 
 "Resource" = "资源(RES)";
 "Resource.receive" = "领取资源";
+"Resource.noReceive" = "今日资源已领取";
 "Resource.hasMortgage" = "已抵押";
 "Resource.record" = "抵押记录";
 "Resource.redemptioning" = "正在赎回";
@@ -105,6 +106,7 @@
 "transfer.send" = "发送";
 "transfer.result.success" = "转账成功";
 "transfer.result.failed" = "转账失败";
+"transfer.collection.success" = "收款成功";
 "transfer.failed.noBalance" = "账户余额不足";
 "transfer.failed.noAddress" = "地址格式不正确";
 "transfer.typeName.mortgage" = "抵押资源";
@@ -191,16 +193,20 @@
 "tip.resource.redemption_1" = "1. 仅能赎回自己抵押的资源。";
 "tip.resource.redemption_2" = "2. 如果您当前已经消耗了一部分资源，则无法赎回全部的资源，请尝试减少赎回的数量。";
 "tip.resource.redemption_3" = "3. 所有赎回中的INB资源将在最后一次赎回操作的3天后退回。";
-
 "tip.importWallet.maxNumber" = "钱包数量已达到最大";
+"tip.addMortgage" = "每抵押1个INB可为每个节点投一票";
 
 "reward.receive" = "领取奖励";
 "reward.record.receive" = "领取记录";
 "tip.wallet.change" = "切换钱包成功";
 
+"message.tip.copy.success" = "复制成功";
 "message.tip.saveCode.success" = "保存二维码成功";
 "message.tip.saveCode.failed" = "保存二维码失败";
 "message.tip.noNodes" = "未选择节点，请选择后提交";
 "message.tip.scan.success" = "扫码成功";
 "message.tip.res.receive.success" = "领取资源成功";
 "message.tip.res.receive.failed" = "领取资源失败";
+"message.tip.mortgage.success" = "抵押成功";
+"message.tip.mortgage.error" = "抵押失败";
+"message.tip.mortgage.err.noNumber" = "锁仓抵押已满5次，无法继续抵押";

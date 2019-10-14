@@ -12,13 +12,20 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    UITapGestureRecognizer *tapGes = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestuer)];
+    [self.infoLabel addGestureRecognizer:tapGes];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+    
+}
+
+-(void)tapGestuer{
+    UIPasteboard *board = [UIPasteboard generalPasteboard];
+    board.string = self.infoLabel.text;
+    [MBProgressHUD showMessage:[NSString stringWithFormat:@"%@%@", NSLocalizedString(@"transfer.tradeNo.", @"交易号"),NSLocalizedString(@"message.tip.copy.success", @"复制成功")] toView:App_Delegate.window afterDelay:1.5 animted:YES];
 }
 
 @end

@@ -29,6 +29,8 @@
 @property(nonatomic, strong) UITableView *selectedNodesList; //以选节点
 @property(nonatomic, strong) UIButton *voteButton; //提交投票
 
+@property (nonatomic, assign) double addMortaga; //追加的抵押
+
 @end
 
 @implementation VoteDetailVC
@@ -72,9 +74,16 @@
     self.headerView.voteTotalValue.text = [NSString stringWithFormat:@"%.0f", self.wallet.mortgagedINB*self.selectedNode.count];
     __block __weak typeof(self) tmpSelf = self;
     self.headerView.addMortgageBlock = ^(double inbNumber) {
-        if (inbNumber != 0) {
+        if (inbNumber > 0) {
+            if(inbNumber > tmpSelf.wallet.balanceINB){
+                [MBProgressHUD showMessage:NSLocalizedString(@"transfer.failed.noBalance", @"账户余额不足") toView:tmpSelf.view afterDelay:1.5 animted:YES];
+                return ;
+            }
             //抵押
+            tmpSelf.addMortaga += inbNumber;
             [tmpSelf mortgage:inbNumber];
+        }else{
+            [MBProgressHUD showMessage:@"新增抵押不能小于0" toView:App_Delegate.window afterDelay:1 animted:YES];
         }
     };
     [self.view addSubview:self.selectedNodesList];
@@ -126,9 +135,9 @@
         [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            @try {
+            
                 [NetworkUtil rpc_requetWithURL:delegate.rpcHost params:@{@"jsonrpc":@"2.0",
-                                                                         @"method":@"eth_getTransactionCount",
+                                                                         @"method":nonce_MethodName,
                                                                          @"params":@[[self.wallet.address add0xIfNeeded],@"latest"],@"id":@(1)}
                                     completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                         if (error) {
@@ -140,36 +149,45 @@
                                        
                                         NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f", inbNumber]];
                                         NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
+                                    @try {
                                         TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_moetgage gasPrice:@"200000" gasLimit:@"21000" to:@"0xaa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[@"mortgageNet" hexString] add0xIfNeeded] password:password chainID:kChainID];
                                         
                                         [NetworkUtil rpc_requetWithURL:delegate.rpcHost
                                                                 params:@{@"jsonrpc":@"2.0",
-                                                                         @"method": @"eth_mortgageRawNet",
+                                                                         @"method":sendTran_MethodName,
                                                                          @"params":@[[signResult.signedTx add0xIfNeeded]],
                                                                          @"id":@(67),
                                                                          }
                                                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                                                 [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
                                                                 if (error) {
+                                                                    [MBProgressHUD showMessage:@"抵押失败" toView:tmpSelf.view afterDelay:1 animted:YES];
                                                                     return ;
                                                                 }
+                                            if(responseObject[@"error"]){
+                                                [MBProgressHUD showMessage:@"抵押失败" toView:tmpSelf.view afterDelay:1 animted:YES];
+                                                return;
+                                            }
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
+            
+                                                                    [MBProgressHUD showMessage:@"抵押成功" toView:tmpSelf.view afterDelay:1 animted:YES];
                                                                     [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                                 });
                                                             }];
+                                        } @catch (NSException *exception) {
+                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                                [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
+                                            });
+                                            
+                                        } @finally {
+                                            
+                                        }
                                     }];
                 
                 
                 
-            } @catch (NSException *exception) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                    [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
-                });
-                
-            } @finally {
-                
-            }
+            
             
         });
     }];

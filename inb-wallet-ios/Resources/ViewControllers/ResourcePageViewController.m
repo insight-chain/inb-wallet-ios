@@ -27,6 +27,8 @@
 @property (nonatomic, strong) NSDecimalNumber *startBlockNumber;
 @property (nonatomic, strong) NSDecimalNumber *currentBlockNumber;
 
+@property (nonatomic, assign) NSInteger lockingNumber; //正在锁仓的数量
+
 @end
 
 @implementation ResourcePageViewController
@@ -82,6 +84,11 @@
                 tmpSelf.startBlockNumber = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%d", startNumber]];
                 redeemValue = [resonseObject[@"redeemValue"] doubleValue];
             }
+            
+            NSArray *store = resonseObject[@"store"];
+            mortgageVC *mo = tmpSelf.controllersM[0];
+            mo.lockingNumber = store.count;
+            
             [tmpSelf reqestBlockHeight:^(id  _Nullable responseObject, NSError * _Nullable error) {
                 NSLog(@"%@", responseObject);
                 if (error) {
@@ -109,11 +116,11 @@
                     
                     if (result == NSOrderedDescending || result == NSOrderedSame) {
                         //大于等于,
-                        [self.cpuView.resetBtn setTitle:@"领取资源" forState:UIControlStateNormal];
+                        [self.cpuView.resetBtn setTitle:NSLocalizedString(@"Resource.receive", @"领取资源") forState:UIControlStateNormal];
                         [self.cpuView.resetBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
                         self.cpuView.resetBtn.userInteractionEnabled = YES;
                     }else{
-                        [self.cpuView.resetBtn setTitle:@"已领取资源" forState:UIControlStateNormal];
+                        [self.cpuView.resetBtn setTitle:NSLocalizedString(@"Resource.noReceive",@"今日资源已领取") forState:UIControlStateNormal];
                         [self.cpuView.resetBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_lightBlue"] forState:UIControlStateNormal];
                         self.cpuView.resetBtn.userInteractionEnabled = NO;
                     }

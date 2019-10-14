@@ -65,7 +65,7 @@
         cell.value.text = [NSString stringWithFormat:@"%.1f%%", kRateVote];
     }else if(indexPath.row == 3){
         cell.typeName.text = @"领取日期";
-        cell.value.text = [NSDate timestampSwitchTime:self.model.timestamp/1000 formatter:@"yyyy-MM-dd HH-mm"];
+        cell.value.text = [NSDate timestampSwitchTime:self.model.timestamp/1000 formatter:@"yyyy-MM-dd HH:mm:ss"];
     }else if(indexPath.row == 4){
         cell.typeName.text = @"区块号";
         cell.value.text = [NSString stringWithFormat:@"%ld", (long)self.model.blockId];

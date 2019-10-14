@@ -49,7 +49,7 @@
         make.top.right.bottom.left.mas_equalTo(0);
     }];
     
-    self.tableFooter.info = self.tranferModel.input;
+    self.tableFooter.info = self.tranferModel.tradingHash;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -93,11 +93,13 @@
         self.tableHeader = [[TransferHeaderView alloc] init];
         tableHeaderView.frame = CGRectMake(0, 0, KWIDTH, AdaptedWidth(183));
         if (self.tranferModel.type == TxType_transfer) {
-            ((TransferHeaderView *)self.tableHeader).resultLabel.text = NSLocalizedString(@"transfer.success", @"转账成功");
+            
             if (self.tranferModel.direction == 1) { //付款
+                ((TransferHeaderView *)self.tableHeader).resultLabel.text = NSLocalizedString(@"transfer.success", @"转账成功");
                 ((TransferHeaderView *)self.tableHeader).valueLabel.text = [NSString stringWithFormat:@"-%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.tranferModel.amount]]];
             }else{
                 //收款
+                ((TransferHeaderView *)self.tableHeader).resultLabel.text = NSLocalizedString(@"transfer.collection.success", @"收款成功");
                 ((TransferHeaderView *)self.tableHeader).valueLabel.text = [NSString stringWithFormat:@"+%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.tranferModel.amount]]];
             }
         }else if (self.tranferModel.type == TxType_lock || self.tranferModel.type == TxType_moetgage){
@@ -106,7 +108,7 @@
         }else if(self.tranferModel.type == TxType_unMortgage){
             ((TransferHeaderView *)self.tableHeader).resultLabel.text = [NSString stringWithFormat:@"%@", NSLocalizedString(@"transfer.typeName.redemption.apply", @"抵押赎回")];
             ((TransferHeaderView *)self.tableHeader).valueLabel.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.tranferModel.amount]]];
-        }else if(self.tranferModel.type == TxType_rewardVote){
+        }else if(self.tranferModel.type == TxType_rewardVote || self.tranferModel.type == TxType_rewardLock){
             ((TransferHeaderView *)self.tableHeader).resultLabel.text = [NSString stringWithFormat:@"%@", NSLocalizedString(@"transfer.typeName.vote.reward", @"领取投票收益")];
             ((TransferHeaderView *)self.tableHeader).valueLabel.text = [NSString stringWithFormat:@"-%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.tranferModel.amount]]];
 //            ((TransferHeaderView *)self.tableHeader).valueLabel.textColor = kColorAuxiliary2;
@@ -138,7 +140,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(self.tranferModel.type == TxType_vote){ //投票
         return 4;
-    }else if(self.tranferModel.type == TxType_rewardVote){ //领取投票收益
+    }else if(self.tranferModel.type == TxType_rewardVote || self.tranferModel.type == TxType_rewardLock){ //领取投票收益 || 领取抵押收益
         return 5;
     }else if(self.tranferModel.type == TxType_lock || self.tranferModel.type == TxType_moetgage){ //锁仓 //抵押
         return 6;
@@ -166,6 +168,7 @@
         cell_1 = [tableView dequeueReusableCellWithIdentifier:cellId_1];
     }
     cell_1.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell_1.rightBtnType = btnType_copy; //
     
     TransferMessage_2Cell *cell_2 = [tableView dequeueReusableCellWithIdentifier:cellId_2];
     if (cell_2 == nil) {
@@ -188,11 +191,13 @@
         if(indexPath.row == 0){
             cell_1.typeName.text = NSLocalizedString(@"transfer.sendMoney", @"发款账号");
             cell_1.value.text = self.tranferModel.from;
+            cell_1.rightBtnType = btnType_copy; //
             cell_1.showRightBtn = YES;
             return cell_1;
         }else if (indexPath.row == 1){
             cell_1.typeName.text = NSLocalizedString(@"transfer.collectionMoney", @"收款账号");
             cell_1.value.text = inlineTran.to;
+            cell_1.rightBtnType = btnType_copy;
             cell_1.showRightBtn = YES;
             return cell_1;
         }else if (indexPath.row == 2){
@@ -207,12 +212,13 @@
             return cell_2;
         }else if (indexPath.row == 3){
             cell_1.typeName.text = NSLocalizedString(@"transfer.blockNo.", @"区块号");
-            cell_1.value.text = self.tranferModel.blockHash;
+            cell_1.value.text = self.tranferModel.blockNumber;
+            cell_1.rightBtnType = btnType_copy;
             cell_1.showRightBtn = YES;
             return cell_1;
         }else if (indexPath.row == 4){
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
-            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm"];
+            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
             cell_1.showRightBtn = NO;
             return cell_1;
         }else if(indexPath.row == 5){
@@ -245,7 +251,7 @@
             return cell_1;
         }else if (indexPath.row == 3){
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
-            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm"];
+            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
             cell_1.showRightBtn = NO;
             return cell_1;
         }else if(indexPath.row == 4){
@@ -272,7 +278,7 @@
             return cell_1;
         }else if (indexPath.row == 2){
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
-            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm"];
+            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
             cell_1.showRightBtn = NO;
             return cell_1;
         }else if (indexPath.row == 3){
@@ -281,7 +287,7 @@
             cell_3.infoLabel.text = [self.tranferModel.tradingHash add0xIfNeeded];
             return cell_3;
         }
-    }else if(self.tranferModel.type == TxType_rewardVote){ //领取投票收益
+    }else if(self.tranferModel.type == TxType_rewardVote || self.tranferModel.type == TxType_rewardLock){ //领取投票收益
         if(indexPath.row == 0){
             cell_1.typeName.text = NSLocalizedString(@"transfer.sendMoney", @"发款账号");
             cell_1.value.text = self.tranferModel.from;
@@ -299,7 +305,7 @@
             return cell_1;
         }else if (indexPath.row == 3){
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
-            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm"];
+            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
             cell_1.showRightBtn = NO;
             return cell_1;
         }else if (indexPath.row == 5){
@@ -327,7 +333,7 @@
             return cell_1;
         }else if (indexPath.row == 2){
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
-            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm"];
+            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
             cell_1.showRightBtn = NO;
             return cell_1;
         }else if (indexPath.row == 3){
@@ -364,7 +370,7 @@
             return cell_1;
         }else if (indexPath.row == 4){
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
-            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm"];
+            cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
             cell_1.showRightBtn = NO;
             return cell_1;
         }else if (indexPath.row == 5){
@@ -389,7 +395,7 @@
         if(indexPath.row == 3){
             [self toDetail];
         }
-    }else if(self.tranferModel.type == TxType_rewardVote){ //领取投票收益
+    }else if(self.tranferModel.type == TxType_rewardVote || self.tranferModel.type == TxType_rewardLock){ //领取投票收益
         if(indexPath.row == 4){
             [self toDetail];
         }

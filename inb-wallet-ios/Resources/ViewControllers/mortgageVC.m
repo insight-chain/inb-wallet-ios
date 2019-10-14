@@ -40,7 +40,7 @@
         [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                MBProgressHUD *nn = [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
+                [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
             });
             
             @try {
@@ -181,6 +181,14 @@
 }
 //锁仓
 -(void)lockAddr:(NSString *)addr days:(NSString *)days walletID:(NSString *)walletID inbNumber:(NSString *)inbNumber password:(NSString *)password{
+    
+    if(self.lockingNumber >= 5){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+            [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.err.noNumber", @"锁仓抵押已满5次，无法继续抵押") toView:App_Delegate.window afterDelay:1.5 animted:YES];
+        });
+        return;
+    }
     __weak typeof(self) tmpSelf = self;
     __block __weak NSDecimalNumber *_nonce;
     
@@ -223,10 +231,13 @@
                                                             
                                                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
-                                                            if (error) {
+                                                            if (error || responseObject[@"error"]) {
+                                                                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.error", @"抵押失败") toView:App_Delegate.window afterDelay:1 animted:YES];
                                                                 return ;
                                                             }
+                                        
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.success", @"抵押成功") toView:App_Delegate.window afterDelay:1 animted:YES];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁

@@ -141,9 +141,20 @@
 }
 
 #pragma mark ---- Button Action
--(void)passwordHideAction:(UIButton *)sender{
+-(void)passwordHideAction1:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    self.password_1.secureTextEntry = !sender.selected;
     
 }
+-(void)passwordHideAction2:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    self.password_2.secureTextEntry = !sender.selected;
+}
+-(void)passwordHideAction3:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    self.password_3.secureTextEntry = !sender.selected;
+}
+
 
 -(void)doneAction:(UIButton *)sender{
     if (![self.password_2.text isEqualToString:self.password_3.text]) {
@@ -193,6 +204,7 @@
         _password_1 = [[UITextField alloc] init];
         _password_1.textColor = kColorTitle;
         _password_1.font = AdaptedFontSize(15);
+        _password_1.secureTextEntry = YES;
         _password_1.placeholder = NSLocalizedString(@"placeholder.originPassword", @"请输入当前密码");
     }
     return _password_1;
@@ -202,7 +214,7 @@
         _eyeBtn_1 = [[UIButton alloc] init];
         [_eyeBtn_1 setImage:[UIImage imageNamed:@"eye_close_blue"] forState:UIControlStateNormal];
         [_eyeBtn_1 setImage:[UIImage imageNamed:@"eye_open_blue"] forState:UIControlStateSelected];
-        [_eyeBtn_1 addTarget:self action:@selector(passwordHideAction:)
+        [_eyeBtn_1 addTarget:self action:@selector(passwordHideAction1:)
           forControlEvents:UIControlEventTouchUpInside];
     }
     return _eyeBtn_1;
@@ -231,6 +243,7 @@
         _password_2 = [[UITextField alloc] init];
         _password_2.textColor = kColorTitle;
         _password_2.font = AdaptedFontSize(15);
+        _password_2.secureTextEntry = YES;
         _password_2.placeholder = NSLocalizedString(@"placeholder.newPassword", @"请输入新密码");
     }
     return _password_2;
@@ -240,7 +253,7 @@
         _eyeBtn_2 = [[UIButton alloc] init];
         [_eyeBtn_2 setImage:[UIImage imageNamed:@"eye_close_blue"] forState:UIControlStateNormal];
         [_eyeBtn_2 setImage:[UIImage imageNamed:@"eye_open_blue"] forState:UIControlStateSelected];
-        [_eyeBtn_2 addTarget:self action:@selector(passwordHideAction:)
+        [_eyeBtn_2 addTarget:self action:@selector(passwordHideAction2:)
             forControlEvents:UIControlEventTouchUpInside];
     }
     return _eyeBtn_2;
@@ -269,6 +282,7 @@
         _password_3 = [[UITextField alloc] init];
         _password_3.textColor = kColorTitle;
         _password_3.font = AdaptedFontSize(15);
+        _password_3.secureTextEntry = YES;
         _password_3.placeholder = NSLocalizedString(@"placeholder.rePassword", @"再次输入新密码");
     }
     return _password_3;
@@ -278,7 +292,7 @@
         _eyeBtn_3 = [[UIButton alloc] init];
         [_eyeBtn_3 setImage:[UIImage imageNamed:@"eye_close_blue"] forState:UIControlStateNormal];
         [_eyeBtn_3 setImage:[UIImage imageNamed:@"eye_open_blue"] forState:UIControlStateSelected];
-        [_eyeBtn_3 addTarget:self action:@selector(passwordHideAction:)
+        [_eyeBtn_3 addTarget:self action:@selector(passwordHideAction3:)
             forControlEvents:UIControlEventTouchUpInside];
     }
     return _eyeBtn_3;

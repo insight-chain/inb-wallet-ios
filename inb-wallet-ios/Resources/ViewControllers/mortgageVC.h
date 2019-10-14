@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, copy) NSString *walletID;
 @property(nonatomic, copy) NSString *address;
-
+@property (nonatomic, assign) NSInteger lockingNumber; //正在锁仓的数量
 @end
 
 

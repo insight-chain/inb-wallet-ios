@@ -157,19 +157,29 @@
     }
     
     // 告诉self.view约束需要更新
-    [self setNeedsUpdateConstraints];
-    // 调用此方法告诉self.view检测是否需要更新约束，若需要则更新，下面添加动画效果才起作用
-    [self updateConstraintsIfNeeded];
+//    [self setNeedsUpdateConstraints];
+//    // 调用此方法告诉self.view检测是否需要更新约束，若需要则更新，下面添加动画效果才起作用
+//    [self updateConstraintsIfNeeded];
     
     [self layoutIfNeeded];
     double totalWidth = CGRectGetWidth(self.balaceImg.frame)+CGRectGetWidth(self.totalImg.frame);
     CGRect blueRect = self.balaceImg.frame;
-    blueRect.size = CGSizeMake((totalWidth*ratio >= totalWidth-12) ? totalWidth-12 : totalWidth*ratio , blueRect.size.height);
+    CGSize ss = CGSizeMake((totalWidth*ratio >= totalWidth) ? totalWidth : totalWidth*ratio , blueRect.size.height);
+    blueRect.size = ss;
     self.balaceImg.frame = blueRect;
     CGRect grayRect = self.totalImg.frame;
     grayRect.origin = CGPointMake(CGRectGetMaxX(self.balaceImg.frame), grayRect.origin.y);
     grayRect.size = CGSizeMake(totalWidth-CGRectGetWidth(self.balaceImg.frame), grayRect.size.height);
     self.totalImg.frame = grayRect;
+    
+    [self.balaceImg mas_remakeConstraints:^(MASConstraintMaker *make) {
+           make.top.mas_equalTo(self.balanceValue.mas_bottom).mas_offset(15);//AdaptedWidth
+           make.left.mas_equalTo(self.balanceValue.mas_left);
+           make.right.mas_equalTo(self.totalImg.mas_left);
+           make.width.mas_equalTo(ss.width).multipliedBy(0.5);
+           
+    }];
+       
 }
 
 -(void)resetResAction:(UIButton *)sender{

@@ -20,15 +20,14 @@
 @property(nonatomic, strong) UILabel *balanceValue; //"账户余额：1000.0000 INB"
 
 @property(nonatomic, strong) UIImageView *contentBgImg;
-@property(nonatomic, strong) UILabel *voteTotalLabel; //"投票"
 
-@property(nonatomic, strong) UILabel *INBLabel_1;
 @property(nonatomic, strong) UILabel *cpuLabel; //"+CPU"
 @property(nonatomic, strong) UITextField *cpuValue;
 @property(nonatomic, strong) UILabel *INBLabel_2; //"INB"
 
+@property (nonatomic, strong) UILabel *tipLabel;//"每抵押1个INB可为每个节点投一票"
+
 @property(nonatomic, strong) UIButton *addMortgageBtn; //新增抵押资源按钮
-@property(nonatomic, strong) UILabel *addMortgageLabel; //"新增抵押资源"
 
 @end
 
@@ -49,7 +48,6 @@
         self.balanceValue.text = [NSString stringWithFormat:@"%@: %@ INB", NSLocalizedString(@"accountBalance", @"账户余额"), [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.balanceINB]]];
         
         self.voteTotalValue.text = [NSString stringWithFormat:@"%.2f", 0.00];
-//        self.cpuValue.text = [NSString stringWithFormat:@"%d", 0]; 
     }
     return self;
 }
@@ -61,14 +59,11 @@
     [self addSubview:self.balanceValue];
     
     [self addSubview:self.contentBgImg];
-    [self addSubview:self.voteTotalLabel];
-    [self addSubview:self.voteTotalValue];
-//    [self addSubview:self.INBLabel_1];
     [self addSubview:self.cpuLabel];
     [self addSubview:self.cpuValue];
-//    [self addSubview:self.INBLabel_2];
     
     [self addSubview:self.addMortgageBtn];
+    [self addSubview:self.tipLabel];
     
     [self.bgImg mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(0);
@@ -93,41 +88,27 @@
     [self.contentBgImg mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.bgImg.mas_bottom).mas_offset(AdaptedWidth(-60));
         make.left.right.mas_equalTo(0);
-        make.bottom.mas_equalTo(self.addMortgageBtn.mas_bottom).mas_offset(AdaptedWidth(20+20));
+        make.bottom.mas_equalTo(self.tipLabel.mas_bottom).mas_offset(AdaptedWidth(20+20));
     }];
-    [self.voteTotalLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contentBgImg.mas_top).mas_offset(AdaptedWidth(30));
-        make.left.mas_equalTo(self.contentBgImg.mas_left).mas_offset(AdaptedWidth(15+20));
-    }];
-    [self.voteTotalValue mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.voteTotalLabel.mas_centerY);
-//        make.right.mas_equalTo(self.INBLabel_1.mas_left).mas_offset(AdaptedWidth(-10));
-        make.right.mas_equalTo(self.contentBgImg.mas_right).mas_offset(AdaptedWidth(-(15+20)));
-    }];
-//    [self.INBLabel_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.mas_equalTo(self.voteTotalValue.mas_centerY);
-//        make.right.mas_equalTo(self.contentBgImg.mas_right).mas_offset(AdaptedWidth(-(15+20)));
-//    }];
-    [self.cpuLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.voteTotalLabel.mas_left);
+
+    [self.cpuLabel mas_remakeConstraints:^(MASConstraintMaker *make) { make.left.mas_equalTo(self.contentBgImg.mas_left).mas_offset(AdaptedWidth(15+20));
         make.centerY.mas_equalTo(self.cpuValue);
     }];
     [self.cpuValue mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.voteTotalLabel.mas_bottom).mas_offset(AdaptedWidth(15));
-        make.right.mas_equalTo(self.voteTotalValue.mas_right);
+        make.top.mas_equalTo(self.contentBgImg.mas_top).mas_offset(AdaptedWidth(30));  make.right.mas_equalTo(self.contentBgImg.mas_right).mas_offset(AdaptedWidth(-(15+20)));
         make.height.mas_equalTo(AdaptedWidth(40));
         make.width.mas_equalTo(self.cpuValue.mas_height).multipliedBy(238.0/40.0);
     }];
-//    [self.INBLabel_2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.mas_equalTo(self.cpuValue);
-//        make.right.mas_equalTo(self.INBLabel_1);
-//    }];
     [self.addMortgageBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.cpuValue.mas_bottom).mas_offset(AdaptedWidth(20));
         make.centerX.mas_equalTo(self.contentBgImg);
         make.left.mas_equalTo(self.cpuLabel.mas_left);
         make.right.mas_equalTo(self.cpuValue.mas_right);
         make.height.mas_equalTo(AdaptedWidth(35));
+    }];
+    [self.tipLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.addMortgageBtn.mas_bottom).mas_offset(AdaptedWidth(10));
+        make.centerX.mas_equalTo(self.addMortgageBtn.mas_centerX);
     }];
     
     
@@ -209,34 +190,8 @@
     }
     return _contentBgImg;
 }
--(UILabel *)voteTotalLabel{
-    if (_voteTotalLabel == nil) {
-        _voteTotalLabel = [[UILabel alloc] init];
-        _voteTotalLabel.textColor = kColorTitle;
-        _voteTotalLabel.font = AdaptedFontSize(15);
-        _voteTotalLabel.text = NSLocalizedString(@"voteTotal", @"投票总数");
-    }
-    return _voteTotalLabel;
-}
--(UILabel *)voteTotalValue{
-    if (_voteTotalValue == nil) {
-        _voteTotalValue = [[UILabel alloc] init];
-        _voteTotalValue.font = AdaptedFontSize(15);
-        _voteTotalValue.textColor = kColorBlue;
-        
-    }
-    return _voteTotalValue;
-}
--(UILabel *)INBLabel_1{
-    if (_INBLabel_1 == nil) {
-        _INBLabel_1 = [[UILabel alloc] init];
-        _INBLabel_1.text = @"INB";
-        _INBLabel_1.textColor = kColorBlue;
-        _INBLabel_1.font = AdaptedFontSize(15);
-        _INBLabel_1.hidden = YES;
-    }
-    return _INBLabel_1;
-}
+
+
 -(UILabel *)cpuLabel{
     if (_cpuLabel == nil ) {
         _cpuLabel = [[UILabel alloc] init];
@@ -261,7 +216,7 @@
         _cpuValue.leftViewMode = UITextFieldViewModeAlways;
         _cpuValue.placeholder = @"请输入抵押数量";
         
-        self.INBLabel_2.frame = CGRectMake(0, 0, 35, 20);
+        self.INBLabel_2.frame = CGRectMake(0, 0, 40, 20);
         _cpuValue.rightView = self.INBLabel_2;
         _cpuValue.rightViewMode = UITextFieldViewModeAlways;
         
@@ -290,5 +245,14 @@
         [_addMortgageBtn addTarget:self action:@selector(addMortgageAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _addMortgageBtn;
+}
+-(UILabel *)tipLabel{
+    if (_tipLabel == nil) {
+        _tipLabel = [[UILabel alloc] init];
+        _tipLabel.text = NSLocalizedString(@"tip.addMortgage", @"每抵押1个INB可为每个节点投一票");
+        _tipLabel.textColor = kColorBlue;
+        _tipLabel.font = AdaptedFontSize(14);
+    }
+    return _tipLabel;
 }
 @end

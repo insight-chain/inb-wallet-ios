@@ -119,6 +119,7 @@
     UIButton *collecBtn = [[UIButton alloc] init];
     [collecBtn setTitle:NSLocalizedString(@"collection", @"收款") forState:UIControlStateNormal];
     [collecBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    collecBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [collecBtn addTarget:self action:@selector(collecAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:collecBtn];
 }
@@ -372,13 +373,10 @@
         [fullBtn setTitleColor:kColorAuxiliary2 forState:UIControlStateNormal];
         fullBtn.titleLabel.font = AdaptedFontSize(14);
         [fullBtn addTarget:self action:@selector(numberFullAction:) forControlEvents:UIControlEventTouchUpInside];
+        fullBtn.frame = CGRectMake(0, 0, AdaptedWidth(30), AdaptedWidth(30));
+        fullBtn.center = rightView.center;
         [rightView addSubview:fullBtn];
        
-        [fullBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.mas_equalTo(AdaptedWidth(30));
-            make.centerY.mas_equalTo(rightView);
-            make.centerX.mas_equalTo(rightView);
-        }];
         _numberTF.rightViewMode = UITextFieldViewModeAlways;
         _numberTF.rightView = rightView;
         _numberTF.keyboardType = UIKeyboardTypeDecimalPad; //数字键盘

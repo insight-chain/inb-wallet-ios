@@ -137,7 +137,7 @@ static double cellHeight = 70;
     BasicWallet *wallet = self.accounts[indexPath.row];
     [cell.imageHeaderView sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"headerImgDefault"]];
     cell.nameLabel.text = wallet.imTokenMeta.name;
-    cell.addressLabel.text = wallet.address;
+    cell.addressLabel.text = [wallet.address add0xIfNeeded];
     if (indexPath.row == self.selectedIndex) {
         cell.selectedImg.image = [UIImage imageNamed:@"selected_yes"];
     }else{
