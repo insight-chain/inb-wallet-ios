@@ -64,7 +64,8 @@
                     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 });
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    if(![tmpSelf.wallet verifyPassword:password]){
+                    BOOL verifyPass = [tmpSelf.wallet verifyPassword:password];
+                    if(!verifyPass){
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [MBProgressHUD hideHUDForView:self.view animated:YES];
                             [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];

@@ -43,15 +43,18 @@
 //    void *bytes = NULL;
     uint8_t bytes[self.dklen];
 //    NSMutableData *muta = [NSMutableData dataWithCapacity:self.dklen];
+    CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
     int result = libscrypt_scrypt(passwordData.bytes,
-                     passwordData.length,
-                     saltData.bytes,
-                     saltData.length,
-                     ((UInt64)self.n),
-                     ((UInt32)self.r),
-                     ((UInt32)self.p),
-                     bytes,
-                     self.dklen);
+                                  passwordData.length,
+                                  saltData.bytes,
+                                  saltData.length,
+                                  ((UInt64)self.n),
+                                  ((UInt32)self.r),
+                                  ((UInt32)self.p),
+                                  bytes,
+                                  self.dklen);
+    CFAbsoluteTime endTime = (CFAbsoluteTimeGetCurrent() - startTime);
+    NSLog(@"---- 方法耗时: %f ms", endTime * 1000.0);
     if(result == 0){
         NSData *da = [NSData dataWithBytes:bytes length:self.dklen];
         return [da dataToHexString];

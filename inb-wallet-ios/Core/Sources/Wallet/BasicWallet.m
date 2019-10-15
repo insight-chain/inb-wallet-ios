@@ -91,7 +91,10 @@
     }
     if([self.keystore isKindOfClass:[PrivateKeyCrypto class]]){
         PrivateKeyCrypto *pkKestore = (PrivateKeyCrypto *)self.keystore;
-        return [pkKestore decryptPrivateKey:password];
+        
+        NSString *ss = [pkKestore decryptPrivateKey:password];
+        
+        return ss;
     }else if([self.keystore conformsToProtocol:@protocol(WIFCrypto)]){
        BTCKeystore *wifKeystore = (BTCKeystore *)self.keystore;
         return [wifKeystore decryptWIF:password];

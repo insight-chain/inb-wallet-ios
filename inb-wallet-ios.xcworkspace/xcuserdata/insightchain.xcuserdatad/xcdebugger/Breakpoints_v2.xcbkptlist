@@ -163,7 +163,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "74"
                   endingLineNumber = "74"
-                  offsetFromSymbolStart = "3810">
+                  offsetFromSymbolStart = "2740">
                </Location>
                <Location
                   uuid = "F1327B7E-BDC0-4C3C-8824-11F4F462050B - 6369b339d956bd54"
@@ -178,7 +178,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "75"
                   endingLineNumber = "75"
-                  offsetFromSymbolStart = "19">
+                  offsetFromSymbolStart = "44">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -304,23 +304,39 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "621C6CD6-B46E-43C0-B63B-FBB018CB7836"
-            shouldBeEnabled = "Yes"
+            uuid = "1280CE79-E765-4D2C-830C-F63680C52D0D"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "inb-wallet-ios/Core/Sources/Wallet/WalletManager.m"
+            filePath = "inb-wallet-ios/Core/Sources/Encryptor/Scrypt.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "+ethSignTransactionWithWalletID:nonce:txType:gasPrice:gasLimit:to:value:data:password:chainID:"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "-encrypt"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4236D22F-1333-452E-B77F-1AD9A0047DBE"
+            uuid = "B587AD7F-87AD-42F3-84E1-0713239D7F04"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "inb-wallet-ios/Core/Sources/Keystore/Crypto.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "-initWithJSON:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0504B5F6-EABE-46D7-839F-8F3A4DA90514"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -336,15 +352,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A5BFFC5B-A3F8-4789-8DA1-B8FB3BAD2DA2"
+            uuid = "31B6CA36-FC26-42EB-BAA6-0AB98FB9484F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "inb-wallet-ios/Core/Sources/Keystore/Crypto.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "-cachedDerivedKey:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5DEB4C6E-774A-431E-8373-3985B6FFAA4C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "inb-wallet-ios/Core/Sources/Keystore/Crypto.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "-macForDerivedKey:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7EF4B9A7-923C-450D-BD56-2204810D30F8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "inb-wallet-ios/Core/Sources/Keystore/Crypto.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "-macFrom:"
             landmarkType = "7">
          </BreakpointContent>
@@ -352,16 +400,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1280CE79-E765-4D2C-830C-F63680C52D0D"
+            uuid = "5A3B7E22-00C0-4B63-B017-20E60AAA1C7D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "inb-wallet-ios/Core/Sources/Encryptor/Scrypt.m"
+            filePath = "inb-wallet-ios/Core/Sources/Keystore/Crypto.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "-encrypt"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "-macFrom:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "575E72E7-B18E-405D-8B8B-FDC53A1140D2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "inb-wallet-ios/Core/Sources/Keystore/Crypto.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "-initWithJSON:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

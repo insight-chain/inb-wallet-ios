@@ -54,6 +54,7 @@
         self.kdf = [kdfStr lowercaseString];
         self.kdfparams = [[ScryptKdfparams alloc] initWithJSON:kdfparamsJson];
         self.mac = mac;
+        self.cachedDerivedKey = [[CachedDerivedKey alloc] init];
     }
     return self;
 }
@@ -96,6 +97,7 @@
         return str;
     }else{
         str = [self.kdfparams derivedKey:password];
+        [self.cachedDerivedKey cache:password derivedKey:str];
         return str;
     }
 }
@@ -132,7 +134,8 @@
     return private;
 }
 -(NSString *)macFrom:(NSString *)password{
-    return [self macForDerivedKey:[self derivedKey:password]];
+    NSString *derivKey = [self cachedDerivedKey:password];
+    return [self macForDerivedKey:derivKey]; //[self derivedKey:password]
 }
 -(NSString *)macForDerivedKey:(NSString *)key{
     NSString *cipherKey = [key substringToIndex:32];
@@ -261,7 +264,7 @@ static int defalutN = 262144;
 }
 -(NSString *)hash:(NSString *)password{
     CocoaSecurityResult *result_sha256 = [CocoaSecurity sha256:password];
-   CocoaSecurityResult *result2_sha256 = [CocoaSecurity sha256:result_sha256.hex];
+    CocoaSecurityResult *result2_sha256 = [CocoaSecurity sha256:result_sha256.hex];
     return result2_sha256.hex;
 }
 
