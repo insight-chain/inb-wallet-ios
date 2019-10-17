@@ -10,11 +10,14 @@
 
 #import "MortgageView.h"
 #import "PasswordInputView.h"
-
 #import "LXAlertView.h"
 
 #import "WalletManager.h"
 #import "TransactionSignedResult.h"
+
+#import "UIViewController+YNPageExtend.h"
+#import "YNPageTableView.h"
+
 #import "NetworkUtil.h"
 
 #define kFooterViewHeight 750
@@ -29,6 +32,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.view addSubview:self.tableView];
     
     __block __weak typeof(self) tmpSelf = self;
     
@@ -95,7 +100,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             UIButton *sender = [[UIButton alloc] init];
             LXAlertView * alertView = [[LXAlertView alloc] initTipsLongMessageAlert:sender titleContent:@"年化率" messageContent:attr certainButtonTitle:@"我知道了" certainFun:@"cancelAction"];
-            alertView.delegateId = self;
+            alertView.delegateId = tmpSelf;
             [alertView showLXAlertViewWithFlag:0];
         });
     };
@@ -104,10 +109,26 @@
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, kFooterViewHeight)];
     [footerView addSubview:self.mortgageView];
     self.tableView.tableFooterView = footerView;
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"--%@--%@", [self class], NSStringFromSelector(_cmd));
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSLog(@"--%@--%@", [self class], NSStringFromSelector(_cmd));
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    NSLog(@"--%@--%@", [self class], NSStringFromSelector(_cmd));
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSLog(@"--%@--%@", [self class], NSStringFromSelector(_cmd));
+}
 #pragma Mark ---- FTranstion Type
 //抵押
 -(void)mortgageAddr:(NSString *)addr walletID:(NSString *)walletID inbNumber:(NSString *)inbNumber password:(NSString *)password{
@@ -290,19 +311,19 @@
 
 #pragma mark ---- UITableViewDatasource && Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0;
+    return 0.00001;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     return nil;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    return nil;
+    return [UIView new];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.00001;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    return nil;
+    return [UIView new];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.0001;
@@ -316,5 +337,12 @@
     }
     return _mortgageView;
 }
-
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[YNPageTableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+    }
+    return _tableView;
+}
 @end

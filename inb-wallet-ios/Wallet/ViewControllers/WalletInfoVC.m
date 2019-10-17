@@ -22,7 +22,7 @@
 #import "NodeRegisterVC.h"
 #import "WelcomVC.h"
 
-#import "ResourcePageViewController.h"
+#import "SuspendTopPausePageVC.h"
 
 #import "WalletInfoViewModel.h"
 
@@ -694,7 +694,7 @@
 //    resourceVC.navigationItem.title = NSLocalizedString(@"resource", @"资源");
 //    resourceVC.hidesBottomBarWhenPushed = YES;
     
-    ResourcePageViewController *resourceVC = [ResourcePageViewController suspendTopPausePageVC];
+    SuspendTopPausePageVC *resourceVC = [SuspendTopPausePageVC suspendTopPausePageVC];
     resourceVC.address = self.selectedWallet.address;
     resourceVC.canUseNet  = self.canUseNet;
     resourceVC.totalNet = self.totalNet;

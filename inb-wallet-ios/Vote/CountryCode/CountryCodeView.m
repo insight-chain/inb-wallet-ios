@@ -99,7 +99,7 @@
         pickerLabel.adjustsFontSizeToFitWidth = YES;
         [pickerLabel setTextAlignment:NSTextAlignmentCenter];
         [pickerLabel setBackgroundColor:[UIColor clearColor]];
-        pickerLabel.font = [UIFont systemFontOfSize:15];
+        pickerLabel.font = [UIFont systemFontOfSize:20];
     }
     pickerLabel.text = [self pickerView:pickerView titleForRow:row forComponent:component];
     return pickerLabel;

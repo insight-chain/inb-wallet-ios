@@ -49,9 +49,9 @@
 }
 
 #pragma mark ---- 跳转至safari下载
--(void)showSafari{
+-(void)showSafari:(NSString *)downUrl{
     //    @"http://insightchain.io/app/introduction"
-    NSString * urlStr = [NSString stringWithFormat:@"%@", @"http://insightchain.io/app/introduction"]; //[LocalData instance].config.appVersion.downloadUrl
+    NSString * urlStr = [NSString stringWithFormat:downUrl]; //[LocalData instance].config.appVersion.downloadUrl
     NSURL *url = [NSURL URLWithString:urlStr];
     if([[UIDevice currentDevice].systemVersion floatValue] >= 10.0){
         if ([[UIApplication sharedApplication] respondsToSelector:@selector(openURL:options:completionHandler:)]) {
@@ -125,12 +125,20 @@
     return cell;
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, AdaptedWidth(8))];
-    view.backgroundColor = kColorBackground;
-    return view;
+    if(section == 1 || section == 0){
+        return nil;
+    }else{
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, AdaptedWidth(8))];
+        view.backgroundColor = kColorBackground;
+        return view;
+    }
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return AdaptedWidth(8);
+    if(section == 1 || section == 0){
+        return 0.0001;
+    }else{
+        return AdaptedWidth(8);
+    }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     return nil;
@@ -152,12 +160,24 @@
             [self.navigationController pushViewController:systemSettingVC animated:YES];
         }
     }else if (indexPath.section == 1){
-        AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        __block __weak typeof(self) tmpSelf = self;
+        NSString *ho = App_Delegate.apiHost;
         [NetworkUtil getRequest:HTTP(hostUrl_211, @"wallet/version") params:@{@"appType":@(3)}success:^(id  _Nonnull resonseObject) {
             NSLog(@"检查更新---%@", resonseObject);
-            [UpdateView showUpadate:@"2.3.5" intro:@"1.全新挖矿奖励机制上线\n2.新增INB红包收发功能\n3.新增INB钱包功能\n4.优化个人认证流程" updateBlock:^{
-                
-            }];
+            NSDictionary *dic = resonseObject[@"data"];
+            if(APP_VERSION != dic[@"versionName"] || APP_BUILD != dic[@"versionCode"]){
+                [UpdateView showUpadate:dic[@"versionName"] intro:dic[@"releaseNote"] updateBlock:^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [tmpSelf showSafari:dic[@"downloadUrl"]];
+                    });
+                }];
+            }else{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD showMessage:@"当前已是最新版本" toView:App_Delegate.window afterDelay:1 animted:YES];
+                });
+            }
+            
         } failed:^(NSError * _Nonnull error) {
             NSLog(@"检查更新失败---%@",error);
         }];

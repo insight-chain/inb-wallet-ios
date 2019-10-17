@@ -1,44 +1,38 @@
 //
-//  ResourcePageViewController.m
+//  SuspendTopPausePageVC.m
 //  inb-wallet-ios
 //
-//  Created by insightChain_iOS开发 on 2019/9/3.
+//  Created by insightChain_iOS开发 on 2019/10/17.
 //  Copyright © 2019 insightChain_iOS开发. All rights reserved.
 //
 
-#import "ResourcePageViewController.h"
+#import "SuspendTopPausePageVC.h"
+#import "SuspendTopPauseBaseTableViewVC.h"
 #import "mortgageVC.h"
 #import "redeemVC.h"
-#import "BaseTableViewVC.h"
 
-#import "PasswordInputView.h"
 #import "ResourceCPUView.h"
+#import "PasswordInputView.h"
 
 #import "TransactionSignedResult.h"
 #import "WalletManager.h"
-#import "MJRefresh.h"
+
 #import "NetworkUtil.h"
-#define daysBlockNumber ((5*60)/2)   //预估一天产生的块
 
-@interface ResourcePageViewController ()<YNPageViewControllerDelegate, YNPageViewControllerDataSource>
-
+@interface SuspendTopPausePageVC ()<YNPageViewControllerDelegate, YNPageViewControllerDataSource>
 @property (nonatomic, strong) ResourceCPUView *cpuView;
 
 @property (nonatomic, strong) NSDecimalNumber *startBlockNumber;
 @property (nonatomic, strong) NSDecimalNumber *currentBlockNumber;
-
 @property (nonatomic, assign) NSInteger lockingNumber; //正在锁仓的数量
-
 @end
 
-@implementation ResourcePageViewController
+@implementation SuspendTopPausePageVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self request];
+    [self requestAccountInfo];
 }
-
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
@@ -58,19 +52,15 @@
         }];
     };
     [self.cpuView updataProgress]; //更新进度条图片
-}
-
-
--(void)request{
     
+}
+//请求账户信息
+-(void)requestAccountInfo{
     __block __weak typeof(self) tmpSelf = self;
         //请求账户信息任务
         NSString *url = [NSString stringWithFormat:@"%@account/search?address=%@", App_Delegate.explorerHost, [App_Delegate.selectAddr add0xIfNeeded]];
         [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
-            NSLog(@"%@", resonseObject);
-            
             NSInteger startNumber;
-            
             NSString *address = resonseObject[@"address"];
             double redeemValue; //赎回中的值
             if(address == nil || [address isKindOfClass:[NSNull class]]){
@@ -86,8 +76,8 @@
             }
             
             NSArray *store = resonseObject[@"store"];
-            mortgageVC *mo = tmpSelf.controllersM[0];
-            mo.lockingNumber = store.count;
+//            mortgageVC *mo = tmpSelf.controllersM[0];
+//            mo.lockingNumber = store.count;
             
             [tmpSelf reqestBlockHeight:^(id  _Nullable responseObject, NSError * _Nullable error) {
                 NSLog(@"%@", responseObject);
@@ -111,7 +101,7 @@
                         return;
                     }
                     
-                    NSDecimalNumber *canResetNumber = [self.startBlockNumber decimalNumberByAdding:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%d", daysBlockNumber]]];
+                    NSDecimalNumber *canResetNumber = [self.startBlockNumber decimalNumberByAdding:[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%d", kDayNumbers]]];
                     NSComparisonResult result = [self.currentBlockNumber compare:canResetNumber];
                     
                     if (result == NSOrderedDescending || result == NSOrderedSame) {
@@ -135,9 +125,10 @@
         }];
     
 }
+//获取最新快高度
 -(void)reqestBlockHeight:(void(^)(id  _Nullable responseObject, NSError * _Nullable error))completion{
-    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [NetworkUtil rpc_requetWithURL:delegate.rpcHost
+    
+    [NetworkUtil rpc_requetWithURL:App_Delegate.rpcHost
                             params:@{@"jsonrpc":@"2.0",
                                      @"method":blockNumber_MethodName,
                                      @"params":@[[App_Delegate.selectAddr add0xIfNeeded]],
@@ -146,7 +137,6 @@
                                          completion(responseObject, error);
                                      }];
 }
-
 //领取资源
 -(void)reqestResetResWithAddr:(NSString *)addr walletID:(NSString *)walletID password:(NSString *)password{
     __weak typeof(self) tmpSelf = self;
@@ -199,8 +189,6 @@
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             
-                                                            //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-//                                                            dispatch_semaphore_signal(semaphoreLock);
                                                         }];
                                 } @catch (NSException *exception) {
                                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -209,75 +197,48 @@
                                     });
                                     return;
                                 } @finally {
-                                    
-                                    //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-//                                    dispatch_semaphore_signal(semaphoreLock);
-                                    
+
                                     if(!_signResult){
                                         return ;
                                     }
                                 }
                             }];
         
-        
-        //相当于枷锁
-//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
-//
-//
-//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"任务完成");
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 3*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                [self request];
+                [self requestAccountInfo];
             });
         });
     });
 }
 
-+(NSArray *)getArrayVCs{
-    mortgageVC *vc1 = [[mortgageVC alloc] init];
-    redeemVC *vc2 = [[redeemVC alloc] init];
-
-    vc1.tableView.backgroundColor = kColorBackground;
-    vc1.address = App_Delegate.selectAddr;
-    vc1.walletID = App_Delegate.selectWalletID;
-    
-
-    vc2.tableView.backgroundColor = kColorBackground;
-    return @[vc1, vc2];
-}
-+(NSArray *)getArrayTitles{
-    return @[@"抵押", @"已抵押"];
-}
-
-#pragma mark ---- PageViewControllerDelegate
-
-
+#pragma mark ---- Publick Func
 +(instancetype)suspendTopPausePageVC{
+    
     YNPageConfigration *configration = [YNPageConfigration defaultConfig];
+    configration.pageStyle = YNPageStyleSuspensionTopPause;
+    configration.headerViewCouldScale = YES;
+    configration.showTabbar = NO;
+    configration.showNavigation = YES;
+    configration.scrollMenu = NO;
+    configration.aligmentModeCenter = YES;
+    configration.lineWidthEqualFontWidth = YES;
+    configration.showBottomLine = NO;
+    
     configration.itemFont = [UIFont systemFontOfSize:16];
     configration.selectedItemFont = [UIFont systemFontOfSize:16];
     configration.menuHeight = 40;
     configration.scrollViewBackgroundColor = kColorBackground;
-    configration.pageStyle = YNPageStyleSuspensionTopPause;
-    configration.headerViewCouldScale = NO;
-    configration.showTabbar = NO;
-    configration.showNavigation = YES;
-    configration.scrollMenu = NO;
     configration.itemMargin = 50;
-    configration.aligmentModeCenter = YES;
-    configration.lineWidthEqualFontWidth = YES;
-    configration.showBottomLine = NO;
     configration.selectedItemColor = kColorBlue;
     configration.normalItemColor = kColorAuxiliary;
     configration.lineColor = kColorBlue;
     
-    ResourcePageViewController *vc = [ResourcePageViewController pageViewControllerWithControllers:[self getArrayVCs] titles:[self getArrayTitles] config:configration];
-    /** 导航栏返回按钮文字 **/
-    vc.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    vc.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
-    vc.dataSource = vc;
+    SuspendTopPausePageVC *vc = [SuspendTopPausePageVC pageViewControllerWithControllers:[self getArrayVCs] titles:[self getArrayTitles] config:configration];
     vc.delegate = vc;
+    vc.dataSource = vc;
+    vc.pageIndex = 0;
     
     ResourceCPUView *cpuView = [[ResourceCPUView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 290)];
     cpuView.backgroundColor = kColorBackground;
@@ -287,38 +248,30 @@
     vc.cpuView = cpuView;
     vc.headerView = cpuView;
     
-    vc.pageIndex = 0;
-    
-    __weak typeof(ResourcePageViewController *) weakVC = vc;
-    vc.bgScrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        
-        NSInteger refreshPage = weakVC.pageIndex;
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (refreshPage == 1) {
-                /// 取到之前的页面进行刷新 pageIndex 是当前页面
-                redeemVC *vc2 = weakVC.controllersM[refreshPage];
-                [vc2 request];
-                [vc2.tableView reloadData];
-            }
-            [weakVC.bgScrollView.mj_header endRefreshing];
-            
-        });
-    }];
     return vc;
 }
-#pragma mark - YNPageViewControllerDataSource
-- (UIScrollView *)pageViewController:(YNPageViewController *)pageViewController pageForIndex:(NSInteger)index {
++ (NSArray *)getArrayVCs {
+    
+    mortgageVC *firstVC = [[mortgageVC alloc] init];
+    redeemVC *secondVC = [[redeemVC alloc] init];
+    
+    return @[firstVC, secondVC];
+}
++ (NSArray *)getArrayTitles {
+    return @[@"抵押", @"已抵押"];
+}
+
+#pragma mark ---- YNPageViewControllerDataSource
+-(UIScrollView *)pageViewController:(YNPageViewController *)pageViewController pageForIndex:(NSInteger)index{
     UIViewController *vc = pageViewController.controllersM[index];
-    return [(BaseTableViewVC *)vc tableView];
+    if(index == 0){
+        return [(mortgageVC *)vc tableView];
+    }else{
+        return [(SuspendTopPauseBaseTableViewVC *)vc tableView];
+    }
 }
-
-#pragma mark - YNPageViewControllerDelegate
-- (void)pageViewController:(YNPageViewController *)pageViewController
-            contentOffsetY:(CGFloat)contentOffset
-                  progress:(CGFloat)progress {
-    NSLog(@"--- contentOffset = %f,    progress = %f", contentOffset, progress);
+#pragma mark ---- YNPageViewControllerDelegate
+-(void)pageViewController:(YNPageViewController *)pageViewController contentOffsetY:(CGFloat)contentOffsetY progress:(CGFloat)progress{
+    
 }
-
-
 @end

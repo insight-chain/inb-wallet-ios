@@ -286,6 +286,10 @@
         [MBProgressHUD showMessage:NSLocalizedString(@"password.setting.error.toolong", @"设置密码长度大于16") toView:self.view afterDelay:1.5 animted:YES];
         return;
     }
+    if(!self.isAgreePolicy){
+        [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.protocal.toAgree", @"请同意隐私条款") toView:self.view afterDelay:1.5 animted:YES];
+        return;
+    }
     
     
     __block BasicWallet *wallet;
@@ -574,7 +578,8 @@
     if ([[URL scheme] isEqualToString:@"policy"]) {
         NSLog(@"同意阅读");
         BasicWebViewController *webVC = [[BasicWebViewController alloc] init];
-        webVC.urlStr = @"http://www.baidu.com";
+        webVC.navigationItem.title = NSLocalizedString(@"setting.protocal", @"隐私条款");
+        webVC.urlStr = @"http://www.insightchain.io/wallet_intro";
         [self.navigationController pushViewController:webVC animated:YES];
         return NO;
     }else if ([[URL scheme] isEqualToString:@"checkbox"]){

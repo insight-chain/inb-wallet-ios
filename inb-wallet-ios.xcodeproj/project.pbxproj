@@ -10,6 +10,8 @@
 		FC5DD2865770DB080B131ED3 /* Pods_inb_wallet_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFA2CE734299E1C35667DA2 /* Pods_inb_wallet_ios.framework */; };
 		FE05CC942356C712005801C0 /* CPPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CC902356C712005801C0 /* CPPageControl.m */; };
 		FE05CC952356C712005801C0 /* WelcomeIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CC932356C712005801C0 /* WelcomeIndexVC.m */; };
+		FE05CD9523588733005801C0 /* SuspendTopPausePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CD9423588733005801C0 /* SuspendTopPausePageVC.m */; };
+		FE05CD9823588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CD9723588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m */; };
 		FE1FCE632327899C00F89A18 /* MortgageDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1FCE612327899C00F89A18 /* MortgageDetailVC.m */; };
 		FE1FCE642327899C00F89A18 /* MortgageDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE1FCE622327899C00F89A18 /* MortgageDetailVC.xib */; };
 		FE1FCE6D2327C25300F89A18 /* RedeemINBVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE1FCE6A2327C25300F89A18 /* RedeemINBVC.xib */; };
@@ -55,10 +57,7 @@
 		FE6D8513231CC09800023321 /* RedeemCell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE6D8511231CC09800023321 /* RedeemCell_1.xib */; };
 		FE6D8517231CC0B600023321 /* RedeemCell_2.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D8515231CC0B600023321 /* RedeemCell_2.m */; };
 		FE6D8518231CC0B600023321 /* RedeemCell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE6D8516231CC0B600023321 /* RedeemCell_2.xib */; };
-		FE6D851E231E123600023321 /* ResourcePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D851D231E123600023321 /* ResourcePageViewController.m */; };
-		FE6D8521231E6D1F00023321 /* BaseTableViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D8520231E6D1F00023321 /* BaseTableViewVC.m */; };
 		FE6D8525231F602500023321 /* PageScrollMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D8524231F602500023321 /* PageScrollMenuView.m */; };
-		FE6D85292320ECF600023321 /* UIScrollView+PageExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D85282320ECF600023321 /* UIScrollView+PageExtend.m */; };
 		FE6D852C2321030000023321 /* PageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D852B2321030000023321 /* PageScrollView.m */; };
 		FE6D852F2321140400023321 /* UIView+YNPageExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D852D2321140300023321 /* UIView+YNPageExtend.m */; };
 		FE6D854723220AB800023321 /* UIViewController+YNPageExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6D853223220AB700023321 /* UIViewController+YNPageExtend.m */; };
@@ -309,6 +308,10 @@
 		FE05CC912356C712005801C0 /* WelcomeIndexVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeIndexVC.h; sourceTree = "<group>"; };
 		FE05CC922356C712005801C0 /* CPPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPageControl.h; sourceTree = "<group>"; };
 		FE05CC932356C712005801C0 /* WelcomeIndexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeIndexVC.m; sourceTree = "<group>"; };
+		FE05CD9323588733005801C0 /* SuspendTopPausePageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuspendTopPausePageVC.h; sourceTree = "<group>"; };
+		FE05CD9423588733005801C0 /* SuspendTopPausePageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuspendTopPausePageVC.m; sourceTree = "<group>"; };
+		FE05CD9623588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuspendTopPauseBaseTableViewVC.h; sourceTree = "<group>"; };
+		FE05CD9723588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuspendTopPauseBaseTableViewVC.m; sourceTree = "<group>"; };
 		FE1FCE602327899C00F89A18 /* MortgageDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MortgageDetailVC.h; sourceTree = "<group>"; };
 		FE1FCE612327899C00F89A18 /* MortgageDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MortgageDetailVC.m; sourceTree = "<group>"; };
 		FE1FCE622327899C00F89A18 /* MortgageDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MortgageDetailVC.xib; sourceTree = "<group>"; };
@@ -390,14 +393,8 @@
 		FE6D8514231CC0B600023321 /* RedeemCell_2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RedeemCell_2.h; sourceTree = "<group>"; };
 		FE6D8515231CC0B600023321 /* RedeemCell_2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RedeemCell_2.m; sourceTree = "<group>"; };
 		FE6D8516231CC0B600023321 /* RedeemCell_2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RedeemCell_2.xib; sourceTree = "<group>"; };
-		FE6D851C231E123600023321 /* ResourcePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResourcePageViewController.h; sourceTree = "<group>"; };
-		FE6D851D231E123600023321 /* ResourcePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResourcePageViewController.m; sourceTree = "<group>"; };
-		FE6D851F231E6D1F00023321 /* BaseTableViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTableViewVC.h; sourceTree = "<group>"; };
-		FE6D8520231E6D1F00023321 /* BaseTableViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewVC.m; sourceTree = "<group>"; };
 		FE6D8523231F602500023321 /* PageScrollMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageScrollMenuView.h; sourceTree = "<group>"; };
 		FE6D8524231F602500023321 /* PageScrollMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageScrollMenuView.m; sourceTree = "<group>"; };
-		FE6D85272320ECF600023321 /* UIScrollView+PageExtend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+PageExtend.h"; sourceTree = "<group>"; };
-		FE6D85282320ECF600023321 /* UIScrollView+PageExtend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+PageExtend.m"; sourceTree = "<group>"; };
 		FE6D852A2321030000023321 /* PageScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PageScrollView.h; sourceTree = "<group>"; };
 		FE6D852B2321030000023321 /* PageScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PageScrollView.m; sourceTree = "<group>"; };
 		FE6D852D2321140300023321 /* UIView+YNPageExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YNPageExtend.m"; sourceTree = "<group>"; };
@@ -1006,8 +1003,6 @@
 		FE6D85262320EC7100023321 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				FE6D85272320ECF600023321 /* UIScrollView+PageExtend.h */,
-				FE6D85282320ECF600023321 /* UIScrollView+PageExtend.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1689,10 +1684,10 @@
 			children = (
 				FE92C57F22A792F40043DA9D /* ResourceVC.h */,
 				FE92C58022A792F40043DA9D /* ResourceVC.m */,
-				FE6D851C231E123600023321 /* ResourcePageViewController.h */,
-				FE6D851D231E123600023321 /* ResourcePageViewController.m */,
-				FE6D851F231E6D1F00023321 /* BaseTableViewVC.h */,
-				FE6D8520231E6D1F00023321 /* BaseTableViewVC.m */,
+				FE05CD9323588733005801C0 /* SuspendTopPausePageVC.h */,
+				FE05CD9423588733005801C0 /* SuspendTopPausePageVC.m */,
+				FE05CD9623588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.h */,
+				FE05CD9723588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m */,
 				FE6D8505231CBEE200023321 /* mortgageVC.h */,
 				FE6D8506231CBEE200023321 /* mortgageVC.m */,
 				FE6D850A231CBF4E00023321 /* redeemVC.h */,
@@ -2314,7 +2309,9 @@
 				FE3FC2FF22B8D44700A41205 /* TZAssetModel.m in Sources */,
 				FE92C4AA22A792580043DA9D /* BTCSecretSharing.m in Sources */,
 				FE92C69022A7AA4A0043DA9D /* AES128.m in Sources */,
+				FE05CD9823588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m in Sources */,
 				FEE947CA2302A4C80004D696 /* UITableView+PlaceHolder.m in Sources */,
+				FE05CD9523588733005801C0 /* SuspendTopPausePageVC.m in Sources */,
 				FE3FC30522B8D44700A41205 /* TZImageManager.m in Sources */,
 				FE92C5F122A792F40043DA9D /* BasicWebViewController.m in Sources */,
 				FE92C62D22A792F50043DA9D /* SWQRCodeManager.m in Sources */,
@@ -2329,7 +2326,6 @@
 				FE92C5FC22A792F50043DA9D /* VoteListVC.m in Sources */,
 				FE1FCE6E2327C25300F89A18 /* RedeemINBVC.m in Sources */,
 				FE84CFA8233A08D900414411 /* LYEmptyBaseView.m in Sources */,
-				FE6D851E231E123600023321 /* ResourcePageViewController.m in Sources */,
 				FE4FFF4622C61B1A0024CB4D /* BIP44.m in Sources */,
 				FE92C4AC22A792580043DA9D /* BTCFancyEncryptedMessage.m in Sources */,
 				FE92C61222A792F50043DA9D /* TransferMessageCell.m in Sources */,
@@ -2339,7 +2335,6 @@
 				FE92C4A622A792580043DA9D /* BTCMnemonic.m in Sources */,
 				FE92C60122A792F50043DA9D /* WalletInfoViewModel.m in Sources */,
 				FE84CFB62341E6B700414411 /* UIColor+Image.m in Sources */,
-				FE6D85292320ECF600023321 /* UIScrollView+PageExtend.m in Sources */,
 				FE1FCE7A2328951500F89A18 /* LockModel.m in Sources */,
 				FED3FF8C22BCB1FF005918B3 /* Keccak256_bridge.swift in Sources */,
 				FE92C5F322A792F40043DA9D /* VoteListCell.m in Sources */,
@@ -2385,7 +2380,6 @@
 				FEE0F65322C737FF00CFBAEA /* BTCTransaction+Transaction.m in Sources */,
 				FE92C4B122A792580043DA9D /* BTCTransactionInput.m in Sources */,
 				FE92C4B522A792580043DA9D /* BTCOutpoint.m in Sources */,
-				FE6D8521231E6D1F00023321 /* BaseTableViewVC.m in Sources */,
 				FE92C64E22A792F50043DA9D /* IdentityKeystore.m in Sources */,
 				FE92C62B22A792F50043DA9D /* MnemonicWordHeaderView.m in Sources */,
 				FE92C4AB22A792580043DA9D /* BTCOpcode.m in Sources */,

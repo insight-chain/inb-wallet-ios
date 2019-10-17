@@ -1,15 +1,16 @@
 //
-//  ResourcePageViewController.h
+//  SuspendTopPausePageVC.h
 //  inb-wallet-ios
 //
-//  Created by insightChain_iOS开发 on 2019/9/3.
+//  Created by insightChain_iOS开发 on 2019/10/17.
 //  Copyright © 2019 insightChain_iOS开发. All rights reserved.
 //
 
 #import "YNPageViewController.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ResourcePageViewController : YNPageViewController //BaseResourcePageViewController
+@interface SuspendTopPausePageVC : YNPageViewController
 
 @property(nonatomic, copy) NSString *walletID;
 @property(nonatomic, strong) NSString *address;
@@ -18,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) double totalNet; // net的总量
 @property(nonatomic, assign) double mortgageINB;//抵押的INB量
 
-//+(instancetype)reourcePageVC;
 + (instancetype)suspendTopPausePageVC;
 @end
 

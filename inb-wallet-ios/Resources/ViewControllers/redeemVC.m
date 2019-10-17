@@ -20,6 +20,8 @@
 #import "WalletManager.h"
 #import "NetworkUtil.h"
 
+#import "UIViewController+YNPageExtend.h"
+#import "YNPageTableView.h"
 #import "NSDate+DateString.h"
 
 static NSString *cellId_1 = @"redeemCell_1";
@@ -41,11 +43,11 @@ static NSString *cellId_2 = @"redeemCell_2";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    [self.view addSubview:self.tableView];
+    
     [NotificationCenter addObserver:self selector:@selector(redeemNoti:) name:NOTI_MORTGAGE_CHANGE object:nil];
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = kColorBackground;
 
@@ -58,8 +60,6 @@ static NSString *cellId_2 = @"redeemCell_2";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    
 }
 
 -(void)request{
@@ -534,6 +534,16 @@ static NSString *cellId_2 = @"redeemCell_2";
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 10.0;
+}
+
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[YNPageTableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.bounces = NO;
+    }
+    return _tableView;
 }
 @end
 

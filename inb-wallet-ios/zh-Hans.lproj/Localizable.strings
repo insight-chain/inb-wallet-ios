@@ -194,6 +194,7 @@
 "setting.aboutUs.protocal" = "使用协议与隐私条款";
 "setting.aboutUs.website" = "官方网站";
 "setting.aboutUs.weChat" = "微信公众号";
+"setting.protocal" = "隐私条款";
 
 "tip.resource.mortgage_1" = "1.在INB网络上的任何交易都会消耗资源（RES）";
 "tip.resource.mortgage_2" = "2.您所消耗的资源在一定时间之后会返还。";
@@ -223,3 +224,4 @@
 "message.tip.mortgage.success" = "抵押成功";
 "message.tip.mortgage.error" = "抵押失败";
 "message.tip.mortgage.err.noNumber" = "锁仓抵押已满5次，无法继续抵押";
+"message.tip.protocal.toAgree" = "请同意隐私条款";
