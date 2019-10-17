@@ -40,7 +40,7 @@
     self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
     
     self.tableFooter = [[TransferFooterView alloc] init];
-    self.tableFooter.frame = CGRectMake(0, 0, KWIDTH, AdaptedWidth(202));
+    self.tableFooter.frame = CGRectMake(0, 0, KWIDTH, AdaptedWidth(130));
     self.tableView.tableFooterView = self.tableFooter;
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -308,12 +308,12 @@
             cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
             cell_1.showRightBtn = NO;
             return cell_1;
-        }else if (indexPath.row == 5){
+        }else if (indexPath.row == 4){
             cell_3.nameLabel.text = NSLocalizedString(@"transfer.tradeNo.", @"交易号");
             cell_3.rightView.hidden = NO;
             cell_3.infoLabel.text = [self.tranferModel.tradingHash add0xIfNeeded];
             return cell_3;
-        }else if (indexPath.row == 6){
+        }else if (indexPath.row == 5){
             cell_3.nameLabel.text = NSLocalizedString(@"transfer.note", @"备注");
             cell_3.rightView.hidden = YES;
             cell_3.infoLabel.text = self.tranferModel.input;
@@ -424,7 +424,7 @@
 
 -(void)toDetail{
     BasicWebViewController *webView = [[BasicWebViewController alloc] init];
-    webView.urlStr = [NSString stringWithFormat:@"%@TransactionHash?transactionHash=%@",App_Delegate.webHost, [self.tranferModel.tradingHash add0xIfNeeded]];
+    webView.urlStr = [NSString stringWithFormat:@"%@transactionHashMobile?transactionHash=%@",App_Delegate.webHost, [self.tranferModel.tradingHash add0xIfNeeded]];
     webView.navigationItem.title = NSLocalizedString(@"transfer.detail", @"交易详情");
     webView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webView animated:YES];

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		FC5DD2865770DB080B131ED3 /* Pods_inb_wallet_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFA2CE734299E1C35667DA2 /* Pods_inb_wallet_ios.framework */; };
+		FE05CC942356C712005801C0 /* CPPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CC902356C712005801C0 /* CPPageControl.m */; };
+		FE05CC952356C712005801C0 /* WelcomeIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CC932356C712005801C0 /* WelcomeIndexVC.m */; };
 		FE1FCE632327899C00F89A18 /* MortgageDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1FCE612327899C00F89A18 /* MortgageDetailVC.m */; };
 		FE1FCE642327899C00F89A18 /* MortgageDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE1FCE622327899C00F89A18 /* MortgageDetailVC.xib */; };
 		FE1FCE6D2327C25300F89A18 /* RedeemINBVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE1FCE6A2327C25300F89A18 /* RedeemINBVC.xib */; };
@@ -303,6 +305,10 @@
 		6F3A6CB6E0335195F75C4B93 /* Pods_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		838E3AABC8B99CAE7E3B598F /* Pods-inb-wallet-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-inb-wallet-ios.debug.xcconfig"; path = "Target Support Files/Pods-inb-wallet-ios/Pods-inb-wallet-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		EAFA2CE734299E1C35667DA2 /* Pods_inb_wallet_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_inb_wallet_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE05CC902356C712005801C0 /* CPPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPageControl.m; sourceTree = "<group>"; };
+		FE05CC912356C712005801C0 /* WelcomeIndexVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeIndexVC.h; sourceTree = "<group>"; };
+		FE05CC922356C712005801C0 /* CPPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPageControl.h; sourceTree = "<group>"; };
+		FE05CC932356C712005801C0 /* WelcomeIndexVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeIndexVC.m; sourceTree = "<group>"; };
 		FE1FCE602327899C00F89A18 /* MortgageDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MortgageDetailVC.h; sourceTree = "<group>"; };
 		FE1FCE612327899C00F89A18 /* MortgageDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MortgageDetailVC.m; sourceTree = "<group>"; };
 		FE1FCE622327899C00F89A18 /* MortgageDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MortgageDetailVC.xib; sourceTree = "<group>"; };
@@ -873,6 +879,17 @@
 				EAFA2CE734299E1C35667DA2 /* Pods_inb_wallet_ios.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FE05CC8F2356C712005801C0 /* welcomeVC */ = {
+			isa = PBXGroup;
+			children = (
+				FE05CC922356C712005801C0 /* CPPageControl.h */,
+				FE05CC902356C712005801C0 /* CPPageControl.m */,
+				FE05CC912356C712005801C0 /* WelcomeIndexVC.h */,
+				FE05CC932356C712005801C0 /* WelcomeIndexVC.m */,
+			);
+			path = welcomeVC;
 			sourceTree = "<group>";
 		};
 		FE1FCE702327D48100F89A18 /* Reward */ = {
@@ -1492,6 +1509,7 @@
 		FE92C53C22A792F40043DA9D /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
+				FE05CC8F2356C712005801C0 /* welcomeVC */,
 				FE92C53D22A792F40043DA9D /* Layout */,
 				FE92C54422A792F40043DA9D /* ViewControllers */,
 				FE92C54E22A792F40043DA9D /* Views */,
@@ -2278,6 +2296,7 @@
 				FE92C4B322A792580043DA9D /* BTCAddress.m in Sources */,
 				FE92C4BC22A792580043DA9D /* BTCPaymentRequest.m in Sources */,
 				FE92C4BA22A792580043DA9D /* BTCPaymentMethodDetails.m in Sources */,
+				FE05CC952356C712005801C0 /* WelcomeIndexVC.m in Sources */,
 				FE92C63022A792F50043DA9D /* SWScannerView.m in Sources */,
 				FE92C63122A792F50043DA9D /* CCSlideAnimatedTransitioning.m in Sources */,
 				FE6D850D231CBF4E00023321 /* redeemVC.m in Sources */,
@@ -2343,6 +2362,7 @@
 				FE92C62C22A792F50043DA9D /* SWQRCodeConfig.m in Sources */,
 				FEE947D92302BEB90004D696 /* NSObject+FMSwizzling.m in Sources */,
 				FE92C64622A792F50043DA9D /* NSString+Extension.m in Sources */,
+				FE05CC942356C712005801C0 /* CPPageControl.m in Sources */,
 				FE6D8508231CBEE200023321 /* mortgageVC.m in Sources */,
 				FE92C63E22A792F50043DA9D /* SettingAboutUsHeaderView.m in Sources */,
 				FE6D854723220AB800023321 /* UIViewController+YNPageExtend.m in Sources */,

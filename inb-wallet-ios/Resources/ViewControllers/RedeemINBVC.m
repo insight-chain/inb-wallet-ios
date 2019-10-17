@@ -70,8 +70,8 @@
                                          @"method":nonce_MethodName,
                                          @"params":@[[addr add0xIfNeeded],@"latest"],@"id":@(1)}
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                if (error) {
-                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                if (error || responseObject[@"error"]) {
+                                    [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                     return ;
                                 }
                                 NSDictionary *dic = (NSDictionary *)responseObject;
@@ -89,9 +89,10 @@
                                                                      @"id":@(67),
                                                                      }
                                                         completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                        });
                                                             
-                                                            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                                            NSLog(@"%@", responseObject);
                                                             if (error || responseObject[@"error"]) {
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                                     [MBProgressHUD showMessage:@"赎回失败" toView:self.view afterDelay:1 animted:YES];
@@ -102,11 +103,10 @@
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 [MBProgressHUD showMessage:@"赎回请求发送成功" toView:tmpSelf.view afterDelay:1.5 animted:YES];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
+                                                                [NSThread sleepForTimeInterval:1.5*1000]; //延迟执行
                                                                 [self.navigationController popViewControllerAnimated:YES];
                                                             });
                                                             
-                                                            //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-//                                                            dispatch_semaphore_signal(semaphoreLock);
                                                         }];
                                 } @catch (NSException *exception) {
                                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -114,20 +114,10 @@
                                         [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.7 animted:YES];
                                     });
                                 } @finally {
-                                    //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁
-//                                    dispatch_semaphore_signal(semaphoreLock);
-                                    if(!_signResult){
-                                        return ;
-                                    }
+                                    
                                 }
                                 
                             }];
-        
-        //相当于枷锁
-//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
-//
-//
-//        dispatch_semaphore_wait(semaphoreLock, DISPATCH_TIME_FOREVER);
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"任务完成");
         });
@@ -151,17 +141,17 @@
     [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
         });
         
         @try {
             [tmpSelf unMortgageAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID inbNumber:self.inbTF.text password:password];
         } @catch (NSException *exception) {
             dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                 [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.7 animted:YES];
             });
         } @finally {
-            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
         }
         
     }];

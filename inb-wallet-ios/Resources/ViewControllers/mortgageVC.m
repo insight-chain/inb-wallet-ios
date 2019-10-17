@@ -11,11 +11,13 @@
 #import "MortgageView.h"
 #import "PasswordInputView.h"
 
+#import "LXAlertView.h"
+
 #import "WalletManager.h"
 #import "TransactionSignedResult.h"
 #import "NetworkUtil.h"
 
-#define kFooterViewHeight 722
+#define kFooterViewHeight 750
 
 @interface mortgageVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -83,8 +85,19 @@
         }];
         
     };
+
     self.mortgageView.doubtBlock = ^{
+        NSString *str = @"年化收益率是INB锁仓抵押按照365天计算的收益水平，是对抵押资产365天盈利水平的反映。\n\n举例:\n在抵押锁仓时选择129.6万≈30天抵押期限，年化收益率为0.5%，则表示从锁仓抵押成功开始算起，七天后的收益=抵押金额X年化率X（7/365），即锁仓抵押10000 INB，7天后获利0.9589 INB。\n\n温馨提示\n年化收益率并不固定，INB公链会根据情况做出改动。";
+        NSMutableAttributedString *attr = [[NSMutableAttributedString alloc] initWithString:str attributes: @{NSFontAttributeName:[UIFont systemFontOfSize:15],NSForegroundColorAttributeName:kColorWithHexValue(0x333333)}];
+        [attr setAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:15]} range:[str rangeOfString:@"举例:"]];
+        [attr setAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:15]} range:[str rangeOfString:@"温馨提示"]];
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIButton *sender = [[UIButton alloc] init];
+            LXAlertView * alertView = [[LXAlertView alloc] initTipsLongMessageAlert:sender titleContent:@"年化率" messageContent:attr certainButtonTitle:@"我知道了" certainFun:@"cancelAction"];
+            alertView.delegateId = self;
+            [alertView showLXAlertViewWithFlag:0];
+        });
     };
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];//消除group类型的空白
@@ -138,10 +151,15 @@
                                                             
                                                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
-                                                            if (error) {
+                                                            if (error || responseObject[@"error"]) {
+                                                                dispatch_async(dispatch_get_main_queue(), ^{
+                                                                    [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.error", @"抵押失败") toView:App_Delegate.window afterDelay:1 animted:YES];
+                                                                    return ;
+                                                                });
                                                                 return ;
                                                             }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.success", @"抵押成功") toView:App_Delegate.window afterDelay:1 animted:YES];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             

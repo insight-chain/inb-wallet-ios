@@ -544,22 +544,26 @@ static NSString *cellId_2 = @"redeemCell_2";
 @property (nonatomic, strong) UILabel *tipLabel_1;
 @property (nonatomic, strong) UILabel *tipLabel_2;
 @property (nonatomic, strong) UILabel *tipLabel_3;
+@property (nonatomic, strong) UILabel *tipLabel_4;
 @end
 
 @implementation TableFooterView
 
 -(instancetype)init{
     if (self = [super init]) {
-        self.tipLabel_1.text = NSLocalizedString(@"tip.resource.mortgage_1", @"抵押提示文字");
-        self.tipLabel_2.text = NSLocalizedString(@"tip.resource.mortgage_2", @"抵押提示文字");
-        self.tipLabel_3.text = NSLocalizedString(@"tip.resource.mortgage_3", @"抵押提示文字");
+        self.tipLabel_1.text = NSLocalizedString(@"tip.resource.redemption_1", @"抵押提示文字");
+        self.tipLabel_2.text = NSLocalizedString(@"tip.resource.redemption_2", @"抵押提示文字");
+        self.tipLabel_3.text = NSLocalizedString(@"tip.resource.redemption_3", @"抵押提示文字");
+        self.tipLabel_4.text = NSLocalizedString(@"tip.resource.redemption_4", @"抵押提示文字");
+        
         [self addSubview:self.tipLabel_1];
         [self addSubview:self.tipLabel_2];
         [self addSubview:self.tipLabel_3];
+        [self addSubview:self.tipLabel_4];
         [self makeConstrants];
         
         [self layoutIfNeeded];
-        CGFloat height = CGRectGetMaxY(self.tipLabel_3.frame)+15;
+        CGFloat height = CGRectGetMaxY(self.tipLabel_4.frame)+30;
         self.frame = CGRectMake(0, 0, KWIDTH, height);
     }
     return self;
@@ -572,12 +576,17 @@ static NSString *cellId_2 = @"redeemCell_2";
         make.right.mas_equalTo(self).mas_offset(-15);
     }];
     [self.tipLabel_2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.tipLabel_1.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.tipLabel_1.mas_bottom).mas_offset(5);
         make.left.right.mas_equalTo(self.tipLabel_1);
     }];
     [self.tipLabel_3 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.tipLabel_2.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.tipLabel_2.mas_bottom).mas_offset(5);
         make.left.right.mas_equalTo(self.tipLabel_2);
+    }];
+    [self.tipLabel_4 mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.tipLabel_3.mas_bottom).mas_offset(5
+                                                                    );
+        make.left.right.mas_equalTo(self.tipLabel_3);
     }];
 }
 
@@ -610,5 +619,15 @@ static NSString *cellId_2 = @"redeemCell_2";
         _tipLabel_3.numberOfLines = 0;
     }
     return _tipLabel_3;
+}
+-(UILabel *)tipLabel_4{
+    if (_tipLabel_4 == nil) {
+        _tipLabel_4 = [[UILabel alloc] init];
+        _tipLabel_4.font = [UIFont systemFontOfSize:13];
+        _tipLabel_4.textColor = kColorAuxiliary2;
+        _tipLabel_4.lineBreakMode = NSLineBreakByCharWrapping;
+        _tipLabel_4.numberOfLines = 0;
+    }
+    return _tipLabel_4;
 }
 @end

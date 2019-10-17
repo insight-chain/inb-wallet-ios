@@ -21,6 +21,13 @@
 "welcom.importTip" = "通过私钥、助记词导入钱包";
 "welcom.createTip" = "创建一个INB钱包";
 
+"welcome.title1" = "多重交易类型支撑";
+"welcome.title2" = "INB公链官方出品";
+"welcome.title3" = "多重安全保障";
+"welcome.content1" = "锁仓抵押、节点投票、转账收款、奖励领取...\n支撑多达实际中交易类型，实时同步公链数据";
+"welcome.content2" = "Insight Chain(INB)公链官方出品，安卓、\niOS双平台下载，权威指定，放心使用";
+"welcome.content3" = "使用增强的安全技术来保护您的资产，私钥储\n存在本地，多层算法处理，敏感信息永不泄露";
+
 "myAssets" = "我的资产";
 "cpuResources" = "CPU资源";
 "netResources" = "NET资源";
@@ -38,6 +45,7 @@
 "Resource.mortgageList" = "抵押列表";
 "Resource.mortgage.detail" = "抵押详情";
 "Resource.redemption.ing" = "赎回中";
+"Resource.reward.detail" = "收益详情";
 
 "confirm" = "确认";
 
@@ -187,12 +195,17 @@
 "setting.aboutUs.website" = "官方网站";
 "setting.aboutUs.weChat" = "微信公众号";
 
-"tip.resource.mortgage_1" = "1.注意在INB网络上面的任何交易都会占用NET资源。";
-"tip.resource.mortgage_2" = "2.所占用的资源在一定时间后悔返还。";
-"tip.resource.mortgage_3" = "3.您可以在任何时候赎回资源，但是会有3天的等待期。";
-"tip.resource.redemption_1" = "1. 仅能赎回自己抵押的资源。";
-"tip.resource.redemption_2" = "2. 如果您当前已经消耗了一部分资源，则无法赎回全部的资源，请尝试减少赎回的数量。";
-"tip.resource.redemption_3" = "3. 所有赎回中的INB资源将在最后一次赎回操作的3天后退回。";
+"tip.resource.mortgage_1" = "1.在INB网络上的任何交易都会消耗资源（RES）";
+"tip.resource.mortgage_2" = "2.您所消耗的资源在一定时间之后会返还。";
+"tip.resource.mortgage_3" = "3.您可以在任何时候赎回抵押的资源，但是会有三天的等待期。";
+"tip.resource.mortgage_4" = "4.锁仓抵押次数不能超过5次。请谨慎选择抵押金额与期限。";
+"tip.resource.redemption_1" = "1.仅能赎回自己抵押的资源。";
+"tip.resource.redemption_2" = "2.如果您当前已经消耗了一部分资源(RES),则无法赎回全部资源，请尝试减少赎回的数量。";
+"tip.resource.redemption_3" = "3.所有正在赎回的INB资源将在最后一次赎回操作的三天后返还。";
+"tip.resource.redemption_4" = "4.赎回的资源与抵押奖励收益需要您手动领取。";
+"tip.resource.reward_1" = "1.只有参与投票的用户才能领取投票收益";
+"tip.resource.reward_2" = "2.所有收益奖励产生后需要手动领取，若不领取，则当前收益保留且新的收益不再生成。";
+
 "tip.importWallet.maxNumber" = "钱包数量已达到最大";
 "tip.addMortgage" = "每抵押1个INB可为每个节点投一票";
 

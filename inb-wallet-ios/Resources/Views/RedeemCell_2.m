@@ -134,7 +134,8 @@
         [self.stateBtn setTitleColor:kColorWithHexValue(0xf5a623) forState:UIControlStateNormal];
         self.receiveTimeLabel.text = @"";
         [self.receiveBtn setTitle:@"赎回" forState:UIControlStateNormal];
-        
+        self.receiveBtn.userInteractionEnabled = YES;
+        [self.receiveBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
         self.model.reward = 0;
         
         return;

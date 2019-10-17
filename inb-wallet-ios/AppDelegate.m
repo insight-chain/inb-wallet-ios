@@ -14,6 +14,7 @@
 #import "FindVC.h"
 #import "SettingVC.h"
 #import "WelcomVC.h"
+#import "WelcomeIndexVC.h"
 
 #import "CommonTransaction.h"
 
@@ -138,10 +139,20 @@
     settingVC.title = @"设置";
     settingVC.view.backgroundColor = [UIColor whiteColor];
     [tab addChildViewController:settingVC norImage:[UIImage imageNamed:@"tab_setting_no"] selImage:[UIImage imageNamed:@"tab_setting_yes"] title:@"设置" tabTitle:@"设置"];
-    
-    self.window.rootViewController = tab;
-    [self.window makeKeyAndVisible];
-    
+    /** 引导页 */
+    if([WelcomeIndexVC welcomeNeedsDisplay:APP_VERSION]){
+        self.window.rootViewController = tab;
+        [self.window makeKeyAndVisible];
+    }else{
+        //添加欢迎页面
+        WelcomeIndexVC *welcome = [[WelcomeIndexVC alloc] init];
+        welcome.guideFinishBlock = ^{
+            self.window.rootViewController = tab;
+            [self.window makeKeyAndVisible];
+        };
+        self.window.rootViewController = welcome;
+        [self.window makeKeyAndVisible];
+    }
 //    InstallUncaughtExceptionHandler(); //捕获异常
     
     return YES;

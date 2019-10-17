@@ -130,11 +130,12 @@
         NSLog(@"%@", tranderModel.type);
     }
     
-    if([self.infoLabel.text isEqualToString:@""]){
-        self.valueLabel.font = [UIFont systemFontOfSize:17];
+    NSString *str = [self.infoLabel.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if([str isEqualToString:@""] || !str){
+//        self.valueLabel.font = [UIFont systemFontOfSize:17];
         self.bottomConstrain.constant = 0;
     }else{
-        self.valueLabel.font = [UIFont systemFontOfSize:15];
+//        self.valueLabel.font = [UIFont systemFontOfSize:15];
         self.bottomConstrain.constant = 17;
     }
 }

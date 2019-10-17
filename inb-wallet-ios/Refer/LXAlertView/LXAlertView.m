@@ -17,7 +17,7 @@
 #define SFQRedColor         [UIColor colorWithRed:255/255.0 green:92/255.0 blue:79/255.0 alpha:1]
 #define SFQLightGrayColor   [UIColor colorWithRed:200/255.0 green:200/255.0 blue:200/255.0 alpha:1]
 
-#define LXADTitleFont       [UIFont boldSystemFontOfSize:17];
+#define LXADTitleFont       [UIFont boldSystemFontOfSize:16];
 #define LXADMessageFont     [UIFont boldSystemFontOfSize:12];
 #define LXADBtnTitleFont    [UIFont systemFontOfSize:15];
 
@@ -612,7 +612,7 @@
 }
 
 
--(instancetype)initTipsLongMessageAlert:(id)delegate titleContent:(NSString *)titleContent messageContent:(NSString *)messageContent  certainButtonTitle:(NSString *)certainButtonTitle certainFun:(NSString *)certain{
+-(instancetype)initTipsLongMessageAlert:(id)delegate titleContent:(NSString *)titleContent messageContent:(NSAttributedString *)messageContent  certainButtonTitle:(NSString *)certainButtonTitle certainFun:(NSString *)certain{
     if(self=[super init]){
         self.frame=MainScreenRect;
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
@@ -626,7 +626,7 @@
         _alertView.userInteractionEnabled=YES;
         
         if (titleContent) {
-            _titleLab=[[UILabel alloc] initWithFrame:CGRectMake(0, 15, longMsgAlertView_W, LXATitle_H)];
+            _titleLab=[[UILabel alloc] initWithFrame:CGRectMake(0, 25, longMsgAlertView_W, LXATitle_H)];
             _titleLab.text=titleContent;
             _titleLab.textAlignment=NSTextAlignmentCenter;
             _titleLab.textColor=kColorWithHexValue(0x333333);
@@ -636,9 +636,9 @@
         CGFloat messageLabSpace = 25;
         _messageLab = [[UILabel alloc] init];
         _messageLab.backgroundColor = [UIColor whiteColor];
-        _messageLab.text = messageContent;
-        _messageLab.textColor=[UIColor lightGrayColor];
-        _messageLab.font=LXADBtnTitleFont;
+        _messageLab.attributedText = messageContent;
+//        _messageLab.textColor = kColorWithHexValue(0x333333);
+//        _messageLab.font=LXADBtnTitleFont;
         _messageLab.numberOfLines= 0;
         _messageLab.textAlignment = NSTextAlignmentLeft;
         _messageLab.lineBreakMode=NSLineBreakByTruncatingTail;
@@ -648,7 +648,7 @@
 
         CGFloat messageLabAotuH = labSize.height < MessageMin_H?MessageMin_H:labSize.height;
         CGFloat endMessageLabH = messageLabAotuH; // messageLabAotuH > 120?230:90;
-        _messageLab.frame=CGRectMake(messageLabSpace, _titleLab.frame.size.height+_titleLab.frame.origin.y+15, longMsgAlertView_W-messageLabSpace*2, endMessageLabH);
+        _messageLab.frame=CGRectMake(messageLabSpace, _titleLab.frame.size.height+_titleLab.frame.origin.y+20, longMsgAlertView_W-messageLabSpace*2, endMessageLabH);
         
         //计算_alertView的高度
         _conteView.frame = CGRectMake(0, 0, longMsgAlertView_W, labSize.height+CGRectGetMaxY(_titleLab.frame)+LXABtn_H+40+22.5);
@@ -660,20 +660,10 @@
         [_alertView addSubview:_titleLab];
         [_alertView addSubview:_messageLab];
         
-        //设置logo
-//        _logoImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo_black"]];
-        //        _logoImage.frame = CGRectMake(self.frame.size.width/2.0-22.5, _alertView.origin.y-22.5, 55, 55);
-        //        [self addSubview:_logoImage];
-//        _logoImage.frame = CGRectMake(longMsgAlertView_W/2.0-22.5, 0, 55, 55);
-//        [_conteView addSubview:_logoImage];
-        
-        
-        //        _logoImage.frame = CGRectMake(_alertView.frame.size.width/2.0-22.5, -22.5, 55, 55);
-        //        [_alertView addSubview:_logoImage];
         CGSize titleSize = [_titleLab getLableRectWithMaxWidth:_titleLab.frame.size.width];
-        UIView *underLine = [[UIView alloc] initWithFrame:CGRectMake(15, 15+10+titleSize.height, _alertView.frame.size.width-15*2, 1.0f)];
-        underLine.backgroundColor = [UIColor lightGrayColor];
-        [_alertView addSubview:underLine];
+//        UIView *underLine = [[UIView alloc] initWithFrame:CGRectMake(15, 15+10+titleSize.height, _alertView.frame.size.width-15*2, 1.0f)];
+//        underLine.backgroundColor = [UIColor lightGrayColor];
+//        [_alertView addSubview:underLine];
         
         
         if (certainButtonTitle) {
@@ -681,19 +671,12 @@
             [_otherBtn setTitle:certainButtonTitle forState:UIControlStateNormal];
             [_otherBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             _otherBtn.titleLabel.font=LXADBtnTitleFont;
-            //            _otherBtn.layer.cornerRadius=3;
             _otherBtn.tag = 1;
-            _otherBtn.layer.masksToBounds=YES;
-            _otherBtn.layer.borderWidth = 1;
-            _otherBtn.layer.borderColor = kColorWithHexValue(0xf1f1f1).CGColor;
-            _otherBtn.backgroundColor = kColorWithHexValue(0x333333);
-            _otherBtn.layer.cornerRadius = 4;
-            
+            [_otherBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
             [_otherBtn addTarget:self action:@selector(updateVersion) forControlEvents:UIControlEventTouchUpInside];
             [_alertView addSubview:_otherBtn];
         }else{
-            [_otherBtn setImage:[UIImage imageNamed:@"alert_view_x"] forState:UIControlStateNormal];
-            
+            [_otherBtn setImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
         }
         
         CGFloat btnLeftSpace = 15;//btn到左边距

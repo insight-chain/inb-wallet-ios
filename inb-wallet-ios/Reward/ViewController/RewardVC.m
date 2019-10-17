@@ -46,6 +46,8 @@ static NSString *cellId_2 = @"redeemCell_2";
 @property (nonatomic, assign) double allWaitToSendVote; //全网待发放投票奖励
 @property (nonatomic, assign) double allWaitToSendMorgage; //全网待发放抵押奖励
 
+@property (nonatomic, strong) UIView *tableFooterView;
+
 @end
 
 @implementation RewardVC
@@ -316,13 +318,19 @@ static NSString *cellId_2 = @"redeemCell_2";
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 95.0;
 }
+//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 10)];
+//    view.backgroundColor = kColorBackground;
+//    return view;
+//}
+//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+//    return 10;
+//}
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 10)];
-    view.backgroundColor = kColorBackground;
-    return view;
+    return self.tableFooterView;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 10;
+    return self.tableFooterView.frame.size.height+10;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -599,6 +607,27 @@ static NSString *cellId_2 = @"redeemCell_2";
     }
     
 
+}
+
+-(UIView *)tableFooterView{
+    if (_tableFooterView == nil) {
+        _tableFooterView = [[UIView alloc] init];
+        NSString *tipStr = [NSString stringWithFormat:@"%@\n%@",NSLocalizedString(@"tip.resource.reward_1", @"只有参与投票的用户才能领取投票收益"), NSLocalizedString(@"tip.resource.reward_2", @"所有收益奖励产生后需要手动领取，若不领取，则当前收益保留且新的收益不再生成。")];
+        UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, KWIDTH-15*2, 60)];
+        tipLabel.numberOfLines = 0;
+        tipLabel.textColor = kColorAuxiliary2;
+        tipLabel.font = [UIFont systemFontOfSize:13];
+        tipLabel.text = tipStr;
+//        CGRect bound = [tipStr boundingRectWithSize:CGSizeMake(KWIDTH-15*2, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName:tipLabel.font} context:nil];
+        CGSize labelSize = [tipLabel sizeThatFits:CGSizeMake(KWIDTH-15*2, MAXFLOAT)];
+        CGFloat height = ceil(labelSize.height) +1;
+        
+        CGRect fr = tipLabel.frame;
+        fr.size.height = height;
+        [_tableFooterView addSubview:tipLabel];
+        _tableFooterView.frame = CGRectMake(0, 0, KWIDTH, height+5);
+    }
+    return _tableFooterView;
 }
 
 @end

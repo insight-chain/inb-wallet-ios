@@ -23,13 +23,10 @@
                         <rect key="frame" x="105" y="20" width="200" height="18"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="more_arrow_blue" translatesAutoresizingMaskIntoConstraints="NO" id="GKP-aQ-9V8">
-                                <rect key="frame" x="182" y="0.0" width="18" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="GKP-aQ-9V8" secondAttribute="height" multiplier="1:1" id="UUB-hI-6xf"/>
-                                </constraints>
+                                <rect key="frame" x="188" y="0.0" width="12" height="18"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交易查询" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hMd-V8-3a1">
-                                <rect key="frame" x="120.5" y="0.0" width="61.5" height="18"/>
+                                <rect key="frame" x="126.5" y="0.0" width="61.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.20784313725490194" green="0.45490196078431372" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>

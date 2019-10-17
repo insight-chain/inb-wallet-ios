@@ -11,6 +11,7 @@
 #import "RewardRecordCell.h"
 
 #import "RewardDetailVC.h"
+#import "TransactionDetailVC.h"
 
 #import "NetworkUtil.h"
 
@@ -36,6 +37,10 @@ static NSString *kCellId = @"rewardRecordCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self requestRecord];
+    
+    /** 导航栏返回按钮文字 **/
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -101,7 +106,8 @@ static NSString *kCellId = @"rewardRecordCell";
     
     TransferModel *model = self.recordsData[indexPath.row];
     RewardDetailVC *rewardVC = [[RewardDetailVC alloc] init];
-    rewardVC.model = model;
+    rewardVC.navigationItem.title = NSLocalizedString(@"Resource.reward.detail", @"收益详情");
+    rewardVC.tranferModel = model;
     rewardVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:rewardVC animated:YES];
 }

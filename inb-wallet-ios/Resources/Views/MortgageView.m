@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *tipL_1;
 @property (weak, nonatomic) IBOutlet UILabel *tipL_2;
 @property (weak, nonatomic) IBOutlet UILabel *tipL_3;
+@property (weak, nonatomic) IBOutlet UILabel *tipL_4;
 
 @property (nonatomic, assign) NSInteger selectDays;
 @end
@@ -51,6 +52,12 @@
     
     self.days_blockNumber_0.text = [NSString stringWithFormat:@"不选择抵押期限"];
     self.days_time_0.text = @"";
+    
+    self.tipL_1.text = NSLocalizedString(@"tip.resource.mortgage_1", @"抵押提示文字");
+    self.tipL_2.text = NSLocalizedString(@"tip.resource.mortgage_2", @"抵押提示文字");
+    self.tipL_3.text = NSLocalizedString(@"tip.resource.mortgage_3", @"抵押提示文字");
+    self.tipL_4.text = NSLocalizedString(@"tip.resource.mortgage_4", @"抵押提示文字");
+    
 }
 
 #pragma mark ---- Button Action

@@ -71,7 +71,7 @@ typedef void(^LXAlertClickIndexBlock)(NSInteger clickIndex);
 -(instancetype)initTipsAlert:(id)delegate titleContent:(NSString *)titleContent messageContent:(NSString *)messageContent  certainButtonTitle:(NSString *)certainButtonTitle certainFun:(NSString *)certain;
 
 /**  用于提示的信息提示框*/
--(instancetype)initTipsLongMessageAlert:(id)delegate titleContent:(NSString *)titleContent messageContent:(NSString *)messageContent  certainButtonTitle:(NSString *)certainButtonTitle certainFun:(NSString *)certain;
+-(instancetype)initTipsLongMessageAlert:(id)delegate titleContent:(NSString *)titleContent messageContent:(NSAttributedString *)messageContent  certainButtonTitle:(NSString *)certainButtonTitle certainFun:(NSString *)certain;
 /**  答题的倒计时*/
 -(instancetype)initWithOtherImageView:(NSString *)imageNameStr;
 /**

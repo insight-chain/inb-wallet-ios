@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RewardDetailVC : UIViewController
 
-@property (nonatomic, strong) TransferModel *model;
+@property (nonatomic, strong) TransferModel *tranferModel;
 
 @end
 

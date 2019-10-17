@@ -9,8 +9,12 @@
 #import "RewardDetailVC.h"
 
 #import "TransferMessageCell.h"
+#import "TransferMessage_2Cell.h"
+#import "TransferMessage_3Cell.h"
 
 #define cellId_1 @"messageType_1"
+#define cellId_2 @"messageType_2"
+#define cellId_3 @"messageType_3"
 
 @interface RewardDetailVC ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -31,58 +35,72 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    InlineTransfer *tr = self.model.transactionLog[0];
-    self.headerValueLabel.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f", tr.amount/100000.0]]];
+//    InlineTransfer *tr = self.tranferModel.transactionLog[0];
+    self.headerValueLabel.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f", self.tranferModel.amount/100000.0]]];
 }
 
 #pragma mark ---- UITableViewDelegate && Datasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 7;
+    return 5;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    TransferMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId_1];
-    if (cell == nil) {
-        UINib *nib = [UINib nibWithNibName:@"TransferMessageCell" bundle:nil];
+    TransferMessageCell *cell_1 = [tableView dequeueReusableCellWithIdentifier:cellId_1];
+    if (cell_1 == nil) {
+        UINib *nib = [UINib nibWithNibName:NSStringFromClass([TransferMessageCell class]) bundle:nil];
         [tableView registerNib:nib forCellReuseIdentifier:cellId_1];
-        cell = [tableView dequeueReusableCellWithIdentifier:cellId_1];
+        cell_1 = [tableView dequeueReusableCellWithIdentifier:cellId_1];
     }
+    cell_1.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell_1.rightBtnType = btnType_copy; //
     
-    cell.showRightBtn = NO;
+    TransferMessage_2Cell *cell_2 = [tableView dequeueReusableCellWithIdentifier:cellId_2];
+    if (cell_2 == nil) {
+        UINib *nib = [UINib nibWithNibName:NSStringFromClass([TransferMessage_2Cell class]) bundle:nil];
+        [tableView registerNib:nib forCellReuseIdentifier:cellId_2];
+        cell_2 = [tableView dequeueReusableCellWithIdentifier:cellId_2];
+    }
+    cell_2.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    if (indexPath.row == 0) {
-        cell.typeName.text = @"付款地址";
-        InlineTransfer *tr = self.model.transactionLog[0];
-        cell.value.text = tr.from;
-        cell.showRightBtn = YES;
-        cell.rightBtnType = 1;
+    TransferMessage_3Cell *cell_3 = [tableView dequeueReusableCellWithIdentifier:cellId_3];
+    if(cell_3 == nil){
+        UINib *nib = [UINib nibWithNibName:NSStringFromClass([TransferMessage_3Cell class]) bundle:nil];
+        [tableView registerNib:nib forCellReuseIdentifier:cellId_3];
+        cell_3 = [tableView dequeueReusableCellWithIdentifier:cellId_3];
+    }
+    cell_3.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+  if(indexPath.row == 0){
+        cell_1.typeName.text = NSLocalizedString(@"transfer.sendMoney", @"发款账号");
+        cell_1.value.text = self.tranferModel.from;
+        cell_1.showRightBtn = YES;
+        return cell_1;
     }else if (indexPath.row == 1){
-        cell.typeName.text = @"收款地址";
-        cell.value.text = self.model.to;
-        cell.showRightBtn = YES;
-        cell.rightBtnType = 1;
-    }else if(indexPath.row == 2){
-        cell.typeName.text = @"年化";
-        cell.value.text = [NSString stringWithFormat:@"%.1f%%", kRateVote];
-    }else if(indexPath.row == 3){
-        cell.typeName.text = @"领取日期";
-        cell.value.text = [NSDate timestampSwitchTime:self.model.timestamp/1000 formatter:@"yyyy-MM-dd HH:mm:ss"];
-    }else if(indexPath.row == 4){
-        cell.typeName.text = @"区块号";
-        cell.value.text = [NSString stringWithFormat:@"%ld", (long)self.model.blockId];
-        cell.showRightBtn = YES;
-        cell.rightBtnType = 1;
-    }else if(indexPath.row == 5){
-        cell.typeName.text = @"交易时间";
-        cell.value.text = [NSDate timestampSwitchTime:self.model.timestamp/1000 formatter:@"yyyy-MM-dd HH-mm"];
-    }else if(indexPath.row == 6){
-        cell.typeName.text = @"交易哈希";
-        cell.value.text = self.model.tradingHash;
-        cell.showRightBtn = YES;
-        cell.rightBtnType = 2;
-        cell.showSeperatorView = NO;
+        cell_1.typeName.text = NSLocalizedString(@"transfer.collectionMoney", @"收款账号");
+        cell_1.value.text = self.tranferModel.to;
+        cell_1.showRightBtn = YES;
+        return cell_1;
+    }else if (indexPath.row == 2){
+        cell_1.typeName.text = NSLocalizedString(@"transfer.blockNo.", @"区块号");
+        cell_1.value.text = self.tranferModel.blockNumber;
+        cell_1.showRightBtn = YES;
+        return cell_1;
+    }else if (indexPath.row == 3){
+        cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
+        cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
+        cell_1.showRightBtn = NO;
+        return cell_1;
+    }else if (indexPath.row == 4){
+        cell_3.nameLabel.text = NSLocalizedString(@"transfer.tradeNo.", @"交易号");
+        cell_3.rightView.hidden = NO;
+        cell_3.infoLabel.text = [self.tranferModel.tradingHash add0xIfNeeded];
+        return cell_3;
+    }else if (indexPath.row == 5){
+        cell_3.nameLabel.text = NSLocalizedString(@"transfer.note", @"备注");
+        cell_3.rightView.hidden = YES;
+        cell_3.infoLabel.text = self.tranferModel.input;
+        return cell_3;
     }
-    
-    return cell;
+    return nil;
 }
 
 @end
