@@ -14,15 +14,25 @@ static NSString *cdnUrl_local = @"http://cdn.imalljoy.com/insight/config/local.j
 static NSString *cdnUrl_test = @"http://file.inbhome.com/insight/config/test.json";
 static NSString *cdnUrl_production = @"http://cdn.imalljoy.com/insight/config/production.json";
 
+//local,本地联调地址
+static NSString *hostUrl_local = @"http://test.insightchain.io/api-test/";
+static NSString *rpcUrl_local = @"http://192.168.1.184:6001";
+static NSString *webUrl_local = @"http://explorertestapi.insightchain.io/#/";
+static NSString *explorUrl_local = @"http://192.168.1.181:8383/v1/";
 
+//正式服务器
+static NSString *hostUrl_production_default = @"http://test.insightchain.io/api-test/";
+static NSString *rpcUrl_production_default = @"http://192.168.1.185:6001";
+static NSString *webUrl_production_default = @"http://explorer.insightchain.io/#/";
+static NSString *explorUrl_production_default = @"http://explorer.insightchain.io/v1/";
 
-static NSString *hostUrl_211 = @"http://192.168.1.211:8080/inb-api-version/";    //211
-static NSString *hostUrl_production = @"http://api.insightchain.io/";    //正式服务器
-static NSString *hostUrl_test = @"http://test.insightchain.io/api-test/";//测试服务器
+//测试服务器
+static NSString *hostUrl_test_default = @"http://test.insightchain.io/api-test/";//测试服务器
+static NSString *rpcUrl_test_default = @"http://192.168.1.185:6001";
+static NSString *webUrl_test_default = @"http://explorertestapi.insightchain.io/#/";
+static NSString *explorUrl_test_default = @"http://explorertestapi.insightchain.io/v1/";
 
 static NSString *inbPriceUrl = @"coin/inb"; //INB最新价格
-
-static NSString *rpcHost = @"http://192.168.1.183:6001"; //@"http://192.168.1.183:6001";
 
 #define HTTP(host, path) [NSString stringWithFormat:@"%@%@", host, path]
 

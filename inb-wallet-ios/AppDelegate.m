@@ -39,23 +39,7 @@
     NSLog(@"App file path: %@", NSHomeDirectory());
     
     [self getRootUrl:rootNet_]; //服务器跟地址
-    
-//    SharedMigrationInitializer *sharedMigration = [[SharedMigrationInitializer alloc] init]; //数据迁移
-    //    [sharedMigration perform];
-    //    RLMRealm *realm = [RLMRealm realmWithConfiguration:sharedMigration.config error:nil];
-    //    WalletStorage *walletStorage = [[WalletStorage alloc] init:realm];
-    //    InsightKeystore *keystore = [[InsightKeystore alloc] init:walletStorage];
-    
-    //    if (!keystore.hasWallets) {
-    //        //去创建账户
-    //        NSString *password = [PasswordGenerator generateRandom]; //随机生成密码
-    //        [keystore createAccount:password completion:^(BOOL success, Wallet * _Nonnull account) {
-    //            NSLog(@"....");
-    //        }];
-    //    }else{
-    //        WalletInfo *wallet  = keystore.wallets.firstObject;
-    //    }
-    
+
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
@@ -175,12 +159,11 @@
             break;
         }
         case rootNet_:{
-            self.apiHost = @"http://apia61.insightchain.io/";// hostUrl_211;
-            self.webHost = @"http://explorer.insightchain.io/#/";
-            self.explorerHost = @"http://192.168.1.181:8383/v1/";//@"http://explorerapi.insightchain.io/v1/";
-            self.rpcHost = @"http://192.168.1.184:6001";//rpcHost;
+            self.apiHost = [self getDefaultUrl:2 netType:rootNet_local];
+            self.webHost = [self getDefaultUrl:4 netType:rootNet_local];
+            self.explorerHost = [self getDefaultUrl:3 netType:rootNet_local];
+            self.rpcHost = [self getDefaultUrl:1 netType:rootNet_local];
             return;
-            break;
         }
         default:
             break;
@@ -203,48 +186,33 @@
             int apiIndex = [self getRandomNumber:1 to:apiUrls.count];
             self.apiHost = apiUrls[apiIndex-1];
         }else{
-            switch (type) {
-                case rootNet_production:{
-                    self.apiHost = hostUrl_production;
-                    break;
-                }
-                case rootNet_test:{
-                    self.apiHost = hostUrl_test;
-                    break;
-                }
-                case rootNet_local:{
-                    self.apiHost = hostUrl_211;
-                }
-                default:
-                    break;
-            }
+            self.apiHost = [self getDefaultUrl:2 netType:type];
         }
         /* web的根地址 */
         if (webUrls.count > 0) {
             int webIndex = [self getRandomNumber:1 to:webUrls.count];
             self.webHost = webUrls[webIndex-1];
         }else{
-            
+            self.webHost = [self getDefaultUrl:4 netType:type];
         }
         /* 区块链浏览器根地址 */
         if (explorerUrls.count > 0) {
             int expIndex = [self getRandomNumber:1 to:explorerUrls.count];
             self.explorerHost = explorerUrls[expIndex-1];
         }else{
-            
+            self.explorerHost = [self getDefaultUrl:3 netType:type];
         }
         /* rpc根地址 */
         if(rpcUrls.count > 0){
             int rpcIndex = [self getRandomNumber:1 to:rpcUrls.count];
             self.rpcHost = rpcUrls[rpcIndex-1];
         }else{
-            
+            self.rpcHost = [self getDefaultUrl:1 netType:type];
         }
         
         
     }else{
-        self.apiHost =  hostUrl_211;
-        self.rpcHost = rpcHost;
+        
         
     }
 }
@@ -252,6 +220,59 @@
 -(int)getRandomNumber:(int)from to:(int)to
 {
     return (int)(from + (arc4random() % (to - from + 1)));
+}
+-(NSString *)getDefaultUrl:(NSInteger)type netType:(RootNetType)netType{
+    switch (netType) {
+        case rootNet_production:{
+            if (type == 1) {
+                //rpc
+                return rpcUrl_production_default;
+            }else if(type == 2){
+                //api
+                return hostUrl_production_default;
+            }else if (type == 3){
+                //explor
+                return explorUrl_production_default;
+            }else{
+                //web
+                return webUrl_production_default;
+            }
+        }
+        case rootNet_test:{
+            if (type == 1) {
+                //rpc
+                return rpcUrl_test_default;
+            }else if(type == 2){
+                //api
+                return hostUrl_test_default;
+            }else if (type == 3){
+                //explor
+                return explorUrl_test_default;
+            }else{
+                //web
+                return webUrl_test_default;
+            }
+        }
+        case rootNet_local:{
+            if (type == 1) {
+                //rpc
+                return rpcUrl_local;
+            }else if(type == 2){
+                //api
+                return hostUrl_local;
+            }else if (type == 3){
+                //explor
+                return explorUrl_local;
+            }else{
+                //web
+                return webUrl_local;
+            }
+        }
+        default:
+            break;
+    }
+    
+    return @"";
 }
 void HandleException(NSException *exception){
     //异常的对战信息

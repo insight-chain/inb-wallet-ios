@@ -65,12 +65,12 @@ static NSString *cellId_2 = @"redeemCell_2";
 -(void)request{
     __block __weak typeof(self) tmpSelf = self;
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
     
     NSString *url = [NSString stringWithFormat:@"%@account/search?address=%@", App_Delegate.explorerHost, [App_Delegate.selectAddr add0xIfNeeded]];
     [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
         });
         NSLog(@"%@", resonseObject);
         NSDictionary *res;
@@ -128,7 +128,7 @@ static NSString *cellId_2 = @"redeemCell_2";
     } failed:^(NSError * _Nonnull error) {
         NSLog(@"%@", error);
         dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
         });
     }];
 }

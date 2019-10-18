@@ -169,6 +169,7 @@
     }
     cell_1.selectionStyle = UITableViewCellSelectionStyleNone;
     cell_1.rightBtnType = btnType_copy; //
+    cell_1.canCopy = YES;
     
     TransferMessage_2Cell *cell_2 = [tableView dequeueReusableCellWithIdentifier:cellId_2];
     if (cell_2 == nil) {
@@ -219,6 +220,7 @@
         }else if (indexPath.row == 4){
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
             cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
+            cell_1.canCopy = NO;
             cell_1.showRightBtn = NO;
             return cell_1;
         }else if(indexPath.row == 5){
@@ -252,6 +254,7 @@
         }else if (indexPath.row == 3){
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
             cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
+            cell_1.canCopy = NO;
             cell_1.showRightBtn = NO;
             return cell_1;
         }else if(indexPath.row == 4){
@@ -279,6 +282,7 @@
         }else if (indexPath.row == 2){
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
             cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
+            cell_1.canCopy = NO;
             cell_1.showRightBtn = NO;
             return cell_1;
         }else if (indexPath.row == 3){
@@ -306,6 +310,7 @@
         }else if (indexPath.row == 3){
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
             cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
+            cell_1.canCopy = NO;
             cell_1.showRightBtn = NO;
             return cell_1;
         }else if (indexPath.row == 4){
@@ -334,6 +339,7 @@
         }else if (indexPath.row == 2){
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
             cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
+            cell_1.canCopy = NO;
             cell_1.showRightBtn = NO;
             return cell_1;
         }else if (indexPath.row == 3){
@@ -371,6 +377,7 @@
         }else if (indexPath.row == 4){
             cell_1.typeName.text = NSLocalizedString(@"transfer.tradeTime", @"交易时间");
             cell_1.value.text = [NSDate timestampSwitchTime:self.tranferModel.timestamp/1000.0 formatter:@"yyyy-MM-dd HH:mm:ss"];
+            cell_1.canCopy = NO;
             cell_1.showRightBtn = NO;
             return cell_1;
         }else if (indexPath.row == 5){

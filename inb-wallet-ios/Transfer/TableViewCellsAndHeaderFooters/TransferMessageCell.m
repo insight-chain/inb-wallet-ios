@@ -24,6 +24,8 @@
     self.btnCopyWidthConstraint.constant = 0;
     self.rightMarginConstraint.constant = 0;
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(copyAction)];
+    [self.value addGestureRecognizer:tap];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -66,5 +68,11 @@
         [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.copy.success", @"复制成功") toView:App_Delegate.window afterDelay:1 animted:YES];
     }
 }
-
+-(void)copyAction{
+    if(self.canCopy){
+        UIPasteboard *board = [UIPasteboard generalPasteboard];
+               board.string = self.value.text;
+        [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.copy.success", @"复制成功") toView:App_Delegate.window afterDelay:1 animted:YES];
+    }
+}
 @end

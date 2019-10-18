@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, RightBtnType){
 @property (nonatomic, assign) BOOL showRightBtn; //是否显示复制按钮
 @property (nonatomic, assign) RightBtnType rightBtnType; //右侧按钮类型，1-复制，2-箭头
 @property (nonatomic, assign) BOOL showSeperatorView; //显示分割线
-
+@property (nonatomic, assign) BOOL canCopy; //是否可以复制
 @end
 
 NS_ASSUME_NONNULL_END

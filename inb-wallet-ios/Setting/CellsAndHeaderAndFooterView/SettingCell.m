@@ -22,12 +22,19 @@
     [super awakeFromNib];
     
     self.subTitle.hidden = YES;
-    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(copyAction)];
+    [self.subTitle addGestureRecognizer:tap];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
+}
+
+-(void)copyAction{
+    UIPasteboard *board = [UIPasteboard generalPasteboard];
+    board.string = self.subTitle.text;
+    [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.copy.success", @"复制成功") toView:App_Delegate.window afterDelay:1 animted:YES];
 }
 
 -(void)setHideSubTitle:(BOOL)hideSubTitle{

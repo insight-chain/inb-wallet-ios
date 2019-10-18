@@ -7,6 +7,8 @@
 //
 
 #import "SettingAboutUsVC.h"
+#import "BasicWebViewController.h"
+
 #import "SettingCell.h"
 
 #import "SettingAboutUsHeaderView.h"
@@ -21,6 +23,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    /** 导航栏返回按钮文字 **/
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+    
     SettingAboutUsHeaderView *headerView = [[SettingAboutUsHeaderView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 0)];
     self.tableView.tableHeaderView = headerView;
     
@@ -45,14 +52,18 @@
     }
     
     cell.hideSubTitle = YES;
+    cell.hideRightImg = NO;
     cell.hideAuxiliaryImg = YES;
     cell.hideSeperator = NO;
     if (indexPath.row == 0) {
-        cell.title.text = NSLocalizedString(@"setting.aboutUs.protocal", @"使用协议与隐私条款");
+        cell.title.text = NSLocalizedString(@"setting.aboutUs.protocal", @"协议与隐私条款");
     }else if(indexPath.row == 1){
         cell.title.text = NSLocalizedString(@"setting.aboutUs.website", @"官方网站");
     }else{
         cell.title.text = NSLocalizedString(@"setting.aboutUs.weChat", @"微信公众号");
+        cell.subTitle.text = @"Insight Chain";
+        cell.hideSubTitle = NO;
+        cell.hideRightImg = YES;
         cell.hideSeperator = YES;
     }
     return cell;
@@ -73,6 +84,19 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if(indexPath.row == 0){
+        BasicWebViewController *webVC = [[BasicWebViewController alloc] init];
+        webVC.urlStr = @"http://www.insightchain.io/wallet_intro";
+        webVC.navigationItem.title = NSLocalizedString(@"setting.aboutUs.protocal", @"协议与隐私条款");
+        webVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webVC animated:YES];
+    }else if(indexPath.row == 1){
+        BasicWebViewController *webVC = [[BasicWebViewController alloc] init];
+        webVC.urlStr = @"http://insightchain.io";
+        webVC.navigationItem.title = NSLocalizedString(@"setting.aboutUs.website", @"官方网站");
+        webVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webVC animated:YES];
+    }
 }
 #pragma mark ----
 -(UITableView *)tableView{

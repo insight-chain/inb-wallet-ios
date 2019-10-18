@@ -160,27 +160,34 @@
             [self.navigationController pushViewController:systemSettingVC animated:YES];
         }
     }else if (indexPath.section == 1){
-        
-        __block __weak typeof(self) tmpSelf = self;
-        NSString *ho = App_Delegate.apiHost;
-        [NetworkUtil getRequest:HTTP(hostUrl_211, @"wallet/version") params:@{@"appType":@(3)}success:^(id  _Nonnull resonseObject) {
-            NSLog(@"检查更新---%@", resonseObject);
-            NSDictionary *dic = resonseObject[@"data"];
-            if(APP_VERSION != dic[@"versionName"] || APP_BUILD != dic[@"versionCode"]){
-                [UpdateView showUpadate:dic[@"versionName"] intro:dic[@"releaseNote"] updateBlock:^{
+        if(indexPath.row == 0){
+            __block __weak typeof(self) tmpSelf = self;
+            NSString *ho = App_Delegate.apiHost;
+            [NetworkUtil getRequest:HTTP(ho, @"wallet/version") params:@{@"appType":@(3)}success:^(id  _Nonnull resonseObject) {
+                NSLog(@"检查更新---%@", resonseObject);
+                NSDictionary *dic = resonseObject[@"data"];
+                if(APP_VERSION != dic[@"versionName"] || APP_BUILD != dic[@"versionCode"]){
+                    [UpdateView showUpadate:dic[@"versionName"] intro:dic[@"releaseNote"] updateBlock:^{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [tmpSelf showSafari:dic[@"downloadUrl"]];
+                        });
+                    }];
+                }else{
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [tmpSelf showSafari:dic[@"downloadUrl"]];
+                        [MBProgressHUD showMessage:@"当前已是最新版本" toView:App_Delegate.window afterDelay:1 animted:YES];
                     });
-                }];
-            }else{
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD showMessage:@"当前已是最新版本" toView:App_Delegate.window afterDelay:1 animted:YES];
-                });
-            }
-            
-        } failed:^(NSError * _Nonnull error) {
-            NSLog(@"检查更新失败---%@",error);
-        }];
+                }
+                
+            } failed:^(NSError * _Nonnull error) {
+                NSLog(@"检查更新失败---%@",error);
+            }];
+        }else if (indexPath.row == 1){
+            BasicWebViewController *webVC = [[BasicWebViewController alloc] init];
+            webVC.urlStr = @"http://www.insightchain.io/help_center";
+            webVC.navigationItem.title = NSLocalizedString(@"setting.help", @"帮助中心");
+            webVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:webVC animated:YES];
+        }
         
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {

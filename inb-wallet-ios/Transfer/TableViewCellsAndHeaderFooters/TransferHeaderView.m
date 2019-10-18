@@ -136,6 +136,7 @@
 -(UIImageView *)bgImg{
     if (_bgImg == nil) {
         _bgImg = [[UIImageView alloc] init];
+        _bgImg.contentMode = UIViewContentModeScaleToFill;
         _bgImg.image = [UIImage imageNamed:@"label_bg"];
     }
     return _bgImg;
