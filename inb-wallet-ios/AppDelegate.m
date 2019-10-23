@@ -39,7 +39,8 @@
     NSLog(@"App file path: %@", NSHomeDirectory());
     
     [self getRootUrl:rootNet_]; //服务器跟地址
-
+    self.isTest = YES;
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     

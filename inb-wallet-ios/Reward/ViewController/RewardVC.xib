@@ -149,7 +149,7 @@
                 <constraint firstItem="N4n-83-6TB" firstAttribute="top" secondItem="wot-p0-o4z" secondAttribute="bottom" constant="15" id="zwV-VA-ztZ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="868" y="-101.64917541229386"/>
+            <point key="canvasLocation" x="1431" y="-75"/>
         </view>
     </objects>
     <resources>

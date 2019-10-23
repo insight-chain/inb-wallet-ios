@@ -150,7 +150,7 @@
                                         NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%f", inbNumber]];
                                         NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                                     @try {
-                                        TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_moetgage gasPrice:@"200000" gasLimit:@"21000" to:@"0xaa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[@"mortgageNet" hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                        TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_moetgage gasPrice:@"200000" gasLimit:@"21000" to:@"0xaa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:@"" password:password chainID:kChainID];
                                         
                                         [NetworkUtil rpc_requetWithURL:delegate.rpcHost
                                                                 params:@{@"jsonrpc":@"2.0",
@@ -242,7 +242,7 @@
                                                              completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                                                  [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
                                                                  
-                                                                 if (error) {
+                                                                 if (error || responseObject[@"error"]) {
                                                                      [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.failed", @"投票失败") toView:tmpSelf.view afterDelay:1 animted:NO];
                                                                      return ;
                                                                  }

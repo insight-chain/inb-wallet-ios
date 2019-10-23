@@ -268,6 +268,8 @@
 		FE92C69022A7AA4A0043DA9D /* AES128.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C68722A7AA4A0043DA9D /* AES128.m */; };
 		FE92C69622A7BE940043DA9D /* TabBarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C69422A7BE940043DA9D /* TabBarVC.m */; };
 		FE92C69B22A7C1660043DA9D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE92C69D22A7C1660043DA9D /* Localizable.strings */; };
+		FE93BB11235D971800BA8B09 /* MyNodeInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE93BB10235D971800BA8B09 /* MyNodeInfoVC.m */; };
+		FE93BB14235DB29C00BA8B09 /* NSDictionary+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = FE93BB13235DB29C00BA8B09 /* NSDictionary+JSON.m */; };
 		FECC977922D31B4B007BE8F5 /* TransferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC977822D31B4B007BE8F5 /* TransferModel.m */; };
 		FECC978422D46FCF007BE8F5 /* AppVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC978322D46FCF007BE8F5 /* AppVersion.m */; };
 		FECC978822DEFB78007BE8F5 /* NodeRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC978722DEFB78007BE8F5 /* NodeRegisterVC.m */; };
@@ -796,6 +798,10 @@
 		FE92C69822A7C0DA0043DA9D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		FE92C69C22A7C1660043DA9D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		FE92C69E22A7C16D0043DA9D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FE93BB0F235D971800BA8B09 /* MyNodeInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyNodeInfoVC.h; sourceTree = "<group>"; };
+		FE93BB10235D971800BA8B09 /* MyNodeInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNodeInfoVC.m; sourceTree = "<group>"; };
+		FE93BB12235DB29C00BA8B09 /* NSDictionary+JSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JSON.h"; sourceTree = "<group>"; };
+		FE93BB13235DB29C00BA8B09 /* NSDictionary+JSON.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JSON.m"; sourceTree = "<group>"; };
 		FECC977722D31B4B007BE8F5 /* TransferModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferModel.h; sourceTree = "<group>"; };
 		FECC977822D31B4B007BE8F5 /* TransferModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransferModel.m; sourceTree = "<group>"; };
 		FECC978222D46FCF007BE8F5 /* AppVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppVersion.h; sourceTree = "<group>"; };
@@ -1253,6 +1259,8 @@
 				FE6D852D2321140300023321 /* UIView+YNPageExtend.m */,
 				FE84CFB42341E6B700414411 /* UIColor+Image.h */,
 				FE84CFB52341E6B700414411 /* UIColor+Image.m */,
+				FE93BB12235DB29C00BA8B09 /* NSDictionary+JSON.h */,
+				FE93BB13235DB29C00BA8B09 /* NSDictionary+JSON.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1326,6 +1334,8 @@
 				FE92C4F822A792F30043DA9D /* VoteDetailVC.m */,
 				FECC978622DEFB78007BE8F5 /* NodeRegisterVC.h */,
 				FECC978722DEFB78007BE8F5 /* NodeRegisterVC.m */,
+				FE93BB0F235D971800BA8B09 /* MyNodeInfoVC.h */,
+				FE93BB10235D971800BA8B09 /* MyNodeInfoVC.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -2341,6 +2351,7 @@
 				FED3FFC522C35EC3005918B3 /* NSString+Category.m in Sources */,
 				FE92C5F422A792F40043DA9D /* VoteDetailHeaderView.m in Sources */,
 				FE92C64C22A792F50043DA9D /* Keystore.m in Sources */,
+				FE93BB11235D971800BA8B09 /* MyNodeInfoVC.m in Sources */,
 				FE92C63222A792F50043DA9D /* CCNavigationController.m in Sources */,
 				FE92C64A22A792F50043DA9D /* PrivateKeyValidator.m in Sources */,
 				FE92C63822A792F50043DA9D /* ResourceCPUView.m in Sources */,
@@ -2407,6 +2418,7 @@
 				FE92C60822A792F50043DA9D /* WalletCreatedVC.m in Sources */,
 				FE84CFB323407E3B00414411 /* UILabel+LXAdd.m in Sources */,
 				FE1FCE842328F57700F89A18 /* RewardRecordCell.m in Sources */,
+				FE93BB14235DB29C00BA8B09 /* NSDictionary+JSON.m in Sources */,
 				FE92C61A22A792F50043DA9D /* TransactionDetailVC.m in Sources */,
 				FE92C63B22A792F50043DA9D /* SettingCell_2.m in Sources */,
 				FE92C49F22A792580043DA9D /* BTCQRCode.m in Sources */,

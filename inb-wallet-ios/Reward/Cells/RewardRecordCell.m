@@ -29,9 +29,9 @@
         self.amountLabel.text = [NSString stringWithFormat:@"+%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f", inlineTransfer.amount/100000.0]]];
     }
     if (_model.type == TxType_rewardLock) {
-        self.typeLabel.text = @"锁仓收益";
+        self.typeLabel.text = NSLocalizedString(@"transfer.reward.lock", @"锁仓收益");
     }else if(TxType_rewardVote == _model.type){
-        self.typeLabel.text = @"投票收益";
+        self.typeLabel.text = NSLocalizedString(@"transfer.reward.vote", @"投票收益");
     }
 }
 

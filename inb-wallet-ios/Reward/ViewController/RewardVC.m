@@ -378,7 +378,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                 NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                                 @try {
                                     
-                                    _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardLock gasPrice:@"200000" gasLimit:@"21000" to:App_Delegate.selectAddr value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"ReceiveLockedAward:%@", rewardNonce] hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                    _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardLock gasPrice:@"200000" gasLimit:@"21000" to:App_Delegate.selectAddr value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"%@", rewardNonce] hexString] add0xIfNeeded] password:password chainID:kChainID];
                                     //发送第二个请求
                                     [NetworkUtil rpc_requetWithURL:rpcHost
                                                             params:@{@"jsonrpc":@"2.0",
@@ -455,7 +455,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                 NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                                 @try {
                                     
-                                    _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardVote gasPrice:@"200000" gasLimit:@"21000" to:App_Delegate.selectAddr value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"ReceiveVoteAward"] hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                    _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardVote gasPrice:@"200000" gasLimit:@"21000" to:App_Delegate.selectAddr value:[bitVal stringValue] data:@"" password:password chainID:kChainID];
                                     //发送第二个请求
                                     [NetworkUtil rpc_requetWithURL:rpcHost
                                                             params:@{@"jsonrpc":@"2.0",
@@ -567,7 +567,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         self.voteRewardBtn.hidden = YES;
     }
     
-    [self calulateReward:self.lastReceiveVoteAwardHeight lockedNumber:7*kDayNumbers voteNumber:_voteNumberValue/100000.0];
+    [self calulateReward:self.lastReceiveVoteAwardHeight lockedNumber:200 voteNumber:_voteNumberValue/100000.0];
     self.voteNumber.text = [NSString stringWithFormat:@"已投票数量 %.0f", _voteNumberValue/100000.0];
 }
 

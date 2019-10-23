@@ -10,12 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString *cdnUrl_local = @"http://cdn.imalljoy.com/insight/config/local.json";
+static NSString *cdnUrl_local = @"http://file.inbhome.com/insight/config/local.json";
 static NSString *cdnUrl_test = @"http://file.inbhome.com/insight/config/test.json";
-static NSString *cdnUrl_production = @"http://cdn.imalljoy.com/insight/config/production.json";
+static NSString *cdnUrl_production = @"http://file.inbhome.com/insight/config/production.json";
 
 //local,本地联调地址
-static NSString *hostUrl_local = @"http://test.insightchain.io/api-test/";
+static NSString *hostUrl_local = @"http://api.insightchain.io/";
 static NSString *rpcUrl_local = @"http://192.168.1.184:6001";
 static NSString *webUrl_local = @"http://explorertestapi.insightchain.io/#/";
 static NSString *explorUrl_local = @"http://192.168.1.181:8383/v1/";

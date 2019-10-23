@@ -18,6 +18,6 @@
 
 @property (copy, nonatomic) NSString *selectAddr;  //选择的钱包地址
 @property (copy, nonatomic) NSString *selectWalletID; //选择的钱包ID
-
+@property (nonatomic, assign) BOOL isTest; //YES-测试网络，NO-正式网络
 @end
 

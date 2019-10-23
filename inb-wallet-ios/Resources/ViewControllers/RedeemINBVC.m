@@ -80,7 +80,7 @@
                                 NSDecimalNumber *val = [NSDecimalNumber decimalNumberWithString:inbNumber];
                                 NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                                 @try {
-                                    _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_unMortgage gasPrice:@"200000" gasLimit:@"21000" to:@"0x9518a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:[[@"unmortgageNet" hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                    _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_unMortgage gasPrice:@"200000" gasLimit:@"21000" to:@"0x9518a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:@"" password:password chainID:kChainID];
                                     //发送第二个请求
                                     [NetworkUtil rpc_requetWithURL:rpcHost
                                                             params:@{@"jsonrpc":@"2.0",

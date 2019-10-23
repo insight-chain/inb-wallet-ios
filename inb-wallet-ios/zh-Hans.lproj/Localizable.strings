@@ -129,6 +129,8 @@
 "transfer.note" = "备注";
 "transfer.type.res" = "资源";
 "transfer.type.other" = "其他";
+"transfer.reward.lock" = "锁仓收益";
+"transfer.reward.vote" = "投票收益";
 
 "vote.support" = "支持率";
 "vote.node.empty" = "暂无投票节点";

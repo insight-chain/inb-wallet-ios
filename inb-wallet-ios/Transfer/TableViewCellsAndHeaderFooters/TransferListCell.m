@@ -93,7 +93,8 @@
         self.typeLabel.text = @"资源";
         self.typeLabel.layer.borderColor = kColorWithHexValue(0xf5a623).CGColor;
         self.typeLabel.textColor = kColorWithHexValue(0xf5a623);
-        self.valueLabel.text = [NSString stringWithFormat:@"+ %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",tranderModel.amount]]];
+        InlineTransfer *inerTranfer = tranderModel.transactionLog[0];
+        self.valueLabel.text = [NSString stringWithFormat:@"+ %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",inerTranfer.amount]]];
         self.infoLabel.text = @"";
     }else if(tranderModel.type == TxType_reResource){
         //领取资源
@@ -117,7 +118,8 @@
         self.typeLabel.text = NSLocalizedString(@"transfer.type.other",@"其他");
         self.typeLabel.layer.borderColor = kColorWithHexValue(0x03d0a2).CGColor;
         self.typeLabel.textColor = kColorWithHexValue(0x03d0a2);
-        self.valueLabel.text = [NSString stringWithFormat:@"+ %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",tranderModel.amount]]];
+        InlineTransfer *inerTra = tranderModel.transactionLog[0];
+        self.valueLabel.text = [NSString stringWithFormat:@"+ %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",inerTra.amount]]];
         self.infoLabel.text = tranderModel.input;
     }else if(tranderModel.type == TxType_updateNodeInfo){ //更新节点信息
         self.addressLabel.text = NSLocalizedString(@"transfer.typeName.node.update", @"更新节点");;

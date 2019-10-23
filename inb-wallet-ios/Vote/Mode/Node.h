@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, readonly) NSString *countryName; //国家
 @property(nonatomic, strong) NSString *countryCode;
 @property(nonatomic, strong) NSString *email; //邮箱
-@property(nonatomic, strong) NSString *data;
+@property(nonatomic, strong) NSString *data; //信息字段。。json格式字符串
 @property(nonatomic, strong) NSString *ID; // id
 @property(nonatomic, strong) NSString *image;
 @property(nonatomic, strong) NSString *host; //ip地址
@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign) NSInteger up;
 
 @property(nonatomic, strong) NSString *dateCreated; //创建时间
-
+@property (nonatomic, strong) NSString *rewardAccount; //领取地址
 
 @property(nonatomic, strong) NSString *serverIntro; //服务器描述
 @property(nonatomic, strong) NSString *twitter; //

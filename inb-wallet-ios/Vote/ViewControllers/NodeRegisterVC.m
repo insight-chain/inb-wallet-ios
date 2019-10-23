@@ -298,12 +298,36 @@
     NSString *headerImgStr = self.headImg.text ? : @"";
     NSString *homepageUrl = self.websiteInfo.info.text?:@""; //主页
     NSString *email = self.emailInfo.info.text ? : @"";
-    NSString *attributeData = [NSString stringWithFormat:@"name/%@-intro/%@-wechat/%@-telegraph/%@-facebook/%@-twitter/%@-github/%@",self.name.text,self.intro.text,self.wechatInfo.info.text, self.telegraphInfo.info.text,self.facebookInfo.info.text,self.twitterInfo.info.text,self.githubInfo.info.text];
+    NSDictionary *attributeDic = @{@"name":name,
+                                   @"intro":self.intro.text,
+                                   @"wechat":self.wechatInfo.info.text,
+                                   @"telegraph":self.telegraphInfo.info.text,
+                                   @"facebook":self.facebookInfo.info.text,
+                                   @"twitter":self.twitterInfo.info.text,
+                                   @"github":self.githubInfo.info.text
+    };
+    NSString *attributeData = [attributeDic toJSONString];
     
     NSString *nodeID = self.nodeID.text ? : @"";// @"8aa5fc69c92bb3e8acb71b0b42f2e0bfaf4b642a4a38b0efaf2d1270880ea4a187ea16d3811436833f05a08a512cddce920f0a988b75527548bb75d9628fa503";
     // nodeID~ip~port~name~country(nation)~receiveAccount~imageURL~website~email~data(key1/value1-key2/value2....)
     NSString *receiveAccount = self.receiveAccountInfo.info.text?:@""; //接收账号
-    NSString *dataStr = [NSString stringWithFormat:@"%@~%@~%@~%@~%@~%@~%@~%@~%@~%@", nodeID, ip, port, receiveAccount, name, country, headerImgStr, homepageUrl, email, attributeData];
+    NSDictionary *dataDic = @{@"id":nodeID,
+                              @"ip":ip,
+                              @"port":port,
+                              @"rewardAccount":receiveAccount,
+                              @"name":name,
+                              @"nation":country,
+                              @"image":headerImgStr,
+                              @"website":homepageUrl,
+                              @"email":email,
+                              @"extraData":attributeData};
+   
+    
+    NSString *dataStr = [dataDic toJSONString];
+    if (dataStr == nil) {
+        [MBProgressHUD showMessage:@"数据有误" toView:App_Delegate.window afterDelay:0.7 animted:YES];
+        return;
+    }
     
     [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         __block __weak typeof(self) tmpSelf = self;
@@ -330,7 +354,7 @@
                                                         completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                                             [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
                                                             
-                                                            if (error) {
+                                                            if (error || responseObject[@"error"]) {
                                                                 [MBProgressHUD showMessage:NSLocalizedString(@"修改节点失败", @"修改节点失败") toView:tmpSelf.view afterDelay:1.5 animted:NO];
                                                                 return ;
                                                             }
@@ -368,16 +392,17 @@
     self.ipTF.text = _node.host;
     self.portTF.text = _node.port;
     [self.countryBtn setTitle:_node.countryName forState:UIControlStateNormal];
+    self.countryCode = _node.countryCode;
     self.nodeID.text = _node.nodeId;
     
     self.receiveAccountInfo.info.text = @"";
     self.websiteInfo.info.text = _node.webSite;
-    self.websiteInfo.info.text = _node.telegraph;
     self.wechatInfo.info.text = _node.wechat;
     self.facebookInfo.info.text = _node.facebook;
     self.twitterInfo.info.text = _node.twitter;
 //    self.githubInfo.info.text = _node.git
     self.emailInfo.info.text = _node.email;
+    self.receiveAccountInfo.info.text = _node.rewardAccount;
     
     NSString *dataStr = _node.data;
     if(!dataStr){
@@ -389,6 +414,12 @@
                                                             options:NSJSONReadingMutableContainers
                                                               error:&err];
         self.intro.text = dataDic[@"intro"];
+        self.facebookInfo.info.text = dataDic[@"facebook"];
+        self.githubInfo.info.text = dataDic[@"github"];
+        self.telegraphInfo.info.text = dataDic[@"telegraph"];
+        self.twitterInfo.info.text = dataDic[@"twitter"];
+        self.wechatInfo.info.text = dataDic[@"wechat"];
+        
     }
 }
 

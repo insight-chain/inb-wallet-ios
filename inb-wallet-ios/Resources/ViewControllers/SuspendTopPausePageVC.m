@@ -40,6 +40,10 @@
     self.cpuView.totalValue.text = [NSString stringWithFormat:@"%d RES", (int)self.totalNet];
     self.cpuView.mortgageValue.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f", self.mortgageINB]]];
     
+    mortgageVC *morVC = self.controllersM[0];
+    morVC.address = self.address;
+    morVC.walletID = self.walletID;
+    
     __weak __block typeof(self) tmpSelf = self;
     self.cpuView.resetRes = ^{
         [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {

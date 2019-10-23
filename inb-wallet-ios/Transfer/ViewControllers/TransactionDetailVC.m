@@ -17,6 +17,8 @@
 #import "TransferMessage_2Cell.h"
 #import "TransferMessage_3Cell.h"
 
+#import "Node.h"
+
 #import "NSDate+DateString.h"
 
 #define cellId_1 @"messageType_1"
@@ -75,7 +77,7 @@
             infoStr = [NSString stringWithFormat:@"%@\n%@", NSLocalizedString(@"vote.detail.toStr", @"投票给"), mutS];
         }else if (self.tranferModel.type == TxType_updateNodeInfo){
             titleStr = NSLocalizedString(@"transfer.typeName.node.update", @"修改节点");
-            infoStr = [NSString stringWithFormat:@"修改 %@ 节点", self.tranferModel.input];
+            infoStr = [NSString stringWithFormat:@"修改节点信息为\n %@", self.tranferModel.input];
         }
         self.tableHeader = [[TransferHeaderVoteView alloc] initWithTitle:titleStr info:infoStr];
         self.tableHeader.frame = CGRectMake(0, 0, KWIDTH, ((TransferHeaderVoteView *)self.tableHeader).viewHeight);
