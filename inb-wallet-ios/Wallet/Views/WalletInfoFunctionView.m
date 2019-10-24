@@ -41,7 +41,7 @@
         make.centerX.mas_equalTo(self);
         make.top.mas_equalTo(2);
         make.width.mas_equalTo(AdaptedWidth(70));
-        make.height.mas_equalTo(AdaptedHeight(65));
+        make.height.mas_equalTo(AdaptedHeight(60));
     }];
     [self.transferBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.gatheringBtn.mas_top);
@@ -55,7 +55,7 @@
     }];
     [self.backupBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.transferBtn);
-        make.top.mas_equalTo(self.transferBtn.mas_bottom).mas_offset(AdaptedHeight(15));
+        make.top.mas_equalTo(self.transferBtn.mas_bottom).mas_offset(AdaptedHeight(2));
         make.bottom.mas_equalTo(0);
         make.width.height.mas_equalTo(self.gatheringBtn);
     }];
@@ -123,7 +123,7 @@
         [_transferBtn setImage:[UIImage imageNamed:@"wallet_transfer"] forState:UIControlStateNormal];
 
         [_transferBtn setTitleColor:kColorTitle forState:UIControlStateNormal];
-        _transferBtn.titleLabel.font = AdaptedFontSize(14);
+        _transferBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_transferBtn addTarget:self action:@selector(transferAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _transferBtn;
@@ -134,7 +134,7 @@
         [_gatheringBtn setTitle:NSLocalizedString(@"collection", @"收款") forState:UIControlStateNormal];
         [_gatheringBtn setImage:[UIImage imageNamed:@"wallet_gathering"] forState:UIControlStateNormal];
         [_gatheringBtn setTitleColor:kColorTitle forState:UIControlStateNormal];
-        _gatheringBtn.titleLabel.font = AdaptedFontSize(14);
+        _gatheringBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_gatheringBtn addTarget:self action:@selector(gatherAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _gatheringBtn;
@@ -145,7 +145,7 @@
         [_nodeBtn setTitle:NSLocalizedString(@"wallet.node", @"节点申请") forState:UIControlStateNormal];
         [_nodeBtn setImage:[UIImage imageNamed:@"wallet_node"] forState:UIControlStateNormal];
         [_nodeBtn setTitleColor:kColorTitle forState:UIControlStateNormal];
-        _nodeBtn.titleLabel.font = AdaptedFontSize(14);
+        _nodeBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_nodeBtn addTarget:self action:@selector(nodeAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _nodeBtn;
@@ -156,7 +156,7 @@
         [_voteBtn setTitle:NSLocalizedString(@"transfer.vote", @"节点投票") forState:UIControlStateNormal];
         [_voteBtn setImage:[UIImage imageNamed:@"wallet_vote"] forState:UIControlStateNormal];
         [_voteBtn setTitleColor:kColorTitle forState:UIControlStateNormal];
-        _voteBtn.titleLabel.font = AdaptedFontSize(14);
+        _voteBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_voteBtn addTarget:self action:@selector(voteAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _voteBtn;
@@ -167,7 +167,7 @@
         [_recordTransactionBtn setTitle:NSLocalizedString(@"transactionRecords", @"交易记录") forState:UIControlStateNormal];
         [_recordTransactionBtn setImage:[UIImage imageNamed:@"wallet_transaction_record"] forState:UIControlStateNormal];
         [_recordTransactionBtn setTitleColor:kColorTitle forState:UIControlStateNormal];
-        _recordTransactionBtn.titleLabel.font = AdaptedFontSize(14);
+        _recordTransactionBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_recordTransactionBtn addTarget:self action:@selector(recordAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _recordTransactionBtn;
@@ -178,7 +178,7 @@
         [_backupBtn setTitle:NSLocalizedString(@"wallet.reward", @"收益奖励") forState:UIControlStateNormal];
         [_backupBtn setImage:[UIImage imageNamed:@"wallet_reward"] forState:UIControlStateNormal];
         [_backupBtn setTitleColor:kColorTitle forState:UIControlStateNormal];
-        _backupBtn.titleLabel.font = AdaptedFontSize(14);
+        _backupBtn.titleLabel.font = [UIFont systemFontOfSize:14];
         [_backupBtn addTarget:self action:@selector(backupAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backupBtn;

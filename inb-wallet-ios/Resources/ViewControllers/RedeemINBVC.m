@@ -131,10 +131,13 @@
 }
 //完成
 -(void)doneAction{
-    
+    if ([self.inbTF.text isEqualToString:@""] || !self.inbTF.text) {
+        [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.redemption.value.no", @"请输入赎回数量") toView:self.view afterDelay:1.5 animted:YES];
+        return;
+    }
     __block double inbV = [self.inbTF.text doubleValue];
     if (inbV > self.canTotal) {
-        [MBProgressHUD showMessage:@"输入INB数量超出可用值" toView:self.view afterDelay:1.5 animted:YES];
+        [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.redemption.value.overMax", @"输入INB数量超出可用值") toView:self.view afterDelay:1.5 animted:YES];
         return;
     } 
     __block __weak typeof(self) tmpSelf = self;

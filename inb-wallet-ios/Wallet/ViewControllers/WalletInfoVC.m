@@ -357,11 +357,11 @@
     }];
     [self.functionView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.topBgImageView.mas_bottom).mas_offset(AdaptedHeight(30));
+        make.top.mas_equalTo(self.topBgImageView.mas_bottom).mas_offset(AdaptedHeight(15));
     }];
     [self.CPUView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view.mas_centerX);
-        make.top.mas_equalTo(self.functionView.mas_bottom).mas_offset(AdaptedHeight(5));
+        make.top.mas_equalTo(self.functionView.mas_bottom).mas_offset(AdaptedHeight(0));
         make.left.mas_equalTo(AdaptedWidth(16));
         make.right.mas_equalTo(-AdaptedWidth(16));
         make.height.mas_equalTo(self.CPUView.mas_width).multipliedBy((253.5)/359);

@@ -21,12 +21,12 @@
 "welcom.importTip" = "通过私钥、助记词导入钱包";
 "welcom.createTip" = "创建一个INB钱包";
 
-"welcome.title1" = "多重交易类型支撑";
-"welcome.title2" = "INB公链官方出品";
-"welcome.title3" = "多重安全保障";
-"welcome.content1" = "锁仓抵押、节点投票、转账收款、奖励领取...\n支撑多达实际中交易类型，实时同步公链数据";
-"welcome.content2" = "Insight Chain(INB)公链官方出品，安卓、\niOS双平台下载，权威指定，放心使用";
-"welcome.content3" = "使用增强的安全技术来保护您的资产，私钥储\n存在本地，多层算法处理，敏感信息永不泄露";
+"welcome.title1" = "INB公链官方出品";
+"welcome.title2" = "多重安全保障";
+"welcome.title3" = "多重交易类型支撑";
+"welcome.content1" = "Insight Chain(INB)公链官方出品，安卓、\niOS双平台下载，权威指定，放心使用";
+"welcome.content2" = "使用增强的安全技术来保护您的资产，私钥储\n存在本地，多层算法处理，敏感信息永不泄露";
+"welcome.content3" = "锁仓抵押、节点投票、转账收款、奖励领取...\n支撑多达实际中交易类型，实时同步公链数据";
 
 "myAssets" = "我的资产";
 "cpuResources" = "CPU资源";
@@ -46,6 +46,9 @@
 "Resource.mortgage.detail" = "抵押详情";
 "Resource.redemption.ing" = "赎回中";
 "Resource.reward.detail" = "收益详情";
+"Resource.mortgage.block" = "%@万区块高度";
+"Resource.mortgage.day" = "锁仓期 ≈ %d天";
+"Resource.mortgage.noDay" = "无抵押期限";
 
 "confirm" = "确认";
 
@@ -138,6 +141,7 @@
 "vote.to" = "发起方";
 "vote.detail.toStr" = "投票给";
 "vote.intro.no" = "暂无节点简介";
+"vote.node.register.submit" = "提 交";
 
 "pledgedResources" = "已抵押资源";
 "addMortgageResources" = "新增抵押";
@@ -227,3 +231,5 @@
 "message.tip.mortgage.error" = "抵押失败";
 "message.tip.mortgage.err.noNumber" = "锁仓抵押已满5次，无法继续抵押";
 "message.tip.protocal.toAgree" = "请同意隐私条款";
+"message.tip.redemption.value.no" = "请输入赎回数量";
+"message.tip.redemption.value.overMax" = "输入INB数量超出可用值";

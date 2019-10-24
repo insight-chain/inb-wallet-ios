@@ -687,7 +687,7 @@
 -(UIButton *)submitBtn{
     if(_submitBtn == nil){
         _submitBtn = [[UIButton alloc] init];
-        [_submitBtn setTitle:@"保 存" forState:UIControlStateNormal];
+        [_submitBtn setTitle:NSLocalizedString(@"vote.node.register.submit", @"提 交") forState:UIControlStateNormal];
         [_submitBtn setBackgroundColor:kColorBlue];
         [_submitBtn addTarget:self action:@selector(submitAction:) forControlEvents:UIControlEventTouchUpInside];
     }
