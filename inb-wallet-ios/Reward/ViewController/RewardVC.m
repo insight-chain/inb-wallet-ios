@@ -43,6 +43,7 @@ static NSString *cellId_2 = @"redeemCell_2";
 @property (nonatomic, assign) NSInteger currentBlockNumber;//当前最新块高度
 
 @property (weak, nonatomic) IBOutlet UILabel *allWaitToSendVoteReward;//全网待发放投票奖励的值
+@property (weak, nonatomic) IBOutlet UILabel *rewardVoteStr;
 @property (nonatomic, assign) double allWaitToSendVote; //全网待发放投票奖励
 @property (nonatomic, assign) double allWaitToSendMorgage; //全网待发放抵押奖励
 
@@ -56,7 +57,7 @@ static NSString *cellId_2 = @"redeemCell_2";
     [super viewDidLoad];
     
     [self makeNavigation];
-     
+    self.rewardVoteStr.text = NSLocalizedString(@"Resource.rewardType.vote", @"投票奖励");
     self.tableView.tableHeaderView = self.tableHeaderView;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -291,9 +292,9 @@ static NSString *cellId_2 = @"redeemCell_2";
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 95)];
     view.backgroundColor = kColorBackground;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 20, 100, 15)];
-    label.text = @"抵押奖励";
+    label.text = NSLocalizedString(@"Resource.rewardType.mortgage",@"抵押奖励");
     label.textColor = kColorTitle;
-    label.font = [UIFont systemFontOfSize:15];
+    label.font = [UIFont boldSystemFontOfSize:17];
     
     UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(label.frame)+15, KWIDTH-(15*2), 45)];
     imgV.image = [UIImage imageNamed:@"all_wait_bg"];
@@ -567,7 +568,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         self.voteRewardBtn.hidden = YES;
     }
     
-    [self calulateReward:self.lastReceiveVoteAwardHeight lockedNumber:200 voteNumber:_voteNumberValue/100000.0];
+    [self calulateReward:self.lastReceiveVoteAwardHeight lockedNumber:App_Delegate.isTest?200:(7*kDayNumbers) voteNumber:_voteNumberValue/100000.0];
     self.voteNumber.text = [NSString stringWithFormat:@"已投票数量 %.0f", _voteNumberValue/100000.0];
 }
 

@@ -57,8 +57,8 @@
             filePath = "inb-wallet-ios/Wallet/ViewControllers/WalletInfoVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "698"
-            endingLineNumber = "698"
+            startingLineNumber = "706"
+            endingLineNumber = "706"
             landmarkName = "-cpuResource"
             landmarkType = "7">
          </BreakpointContent>

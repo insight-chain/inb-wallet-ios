@@ -49,7 +49,8 @@
 "Resource.mortgage.block" = "%@万区块高度";
 "Resource.mortgage.day" = "锁仓期 ≈ %d天";
 "Resource.mortgage.noDay" = "无抵押期限";
-
+"Resource.rewardType.vote" = "投票奖励";
+"Resource.rewardType.mortgage"="抵押奖励";
 "confirm" = "确认";
 
 "walletDetail" = "钱包详情";

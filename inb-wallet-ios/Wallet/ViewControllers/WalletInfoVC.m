@@ -72,6 +72,8 @@
 @property(nonatomic, assign) double canUseNet; //net的可用量
 @property(nonatomic, assign) double totalNet; // net的总量
 @property(nonatomic, assign) double mortgageINB;//抵押的INB量
+
+@property (nonatomic, assign) BOOL walletChangeing; //是否切换钱包
 @end
 
 @implementation WalletInfoVC
@@ -539,8 +541,13 @@
     NSString *url = [NSString stringWithFormat:@"%@account/search?address=%@", App_Delegate.explorerHost, [App_Delegate.selectAddr add0xIfNeeded]];
     [NetworkUtil getRequest:url params:@{} success:^(id  _Nonnull resonseObject) {
         NSLog(@"%@", resonseObject);
+        [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
         [self.scrollView.mj_header endRefreshing];
         
+        if(tmpSelf.walletChangeing){
+            [MBProgressHUD showMessage:NSLocalizedString(@"tip.wallet.change", @"切换钱包成功") toView:App_Delegate.window afterDelay:1.5 animted:YES];
+            tmpSelf.walletChangeing = NO;
+        }
         NSString *address = resonseObject[@"address"];
         
         NSDecimalNumber *balance; //余额
@@ -599,6 +606,7 @@
  
         
     } failed:^(NSError * _Nonnull error) {
+        [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
         [self.scrollView.mj_header endRefreshing];
         [MBProgressHUD showMessage:@"网络请求失败" toView:App_Delegate.window afterDelay:1.5 animted:YES];
         NSLog(@"%@", error);
@@ -752,10 +760,11 @@
 -(void)showAccountsList:(UIButton *)sender{
     __weak __block typeof(self) tmpSelf = self;
     WalletAccountsListView *listView = [WalletAccountsListView showAccountList:self.wallets selectAccount:self.selectedWallet clickBlock:^(int index) {
-        tmpSelf.selectedWallet = tmpSelf.wallets[index];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD showMessage:NSLocalizedString(@"tip.wallet.change", @"切换钱包成功") toView:self.view afterDelay:1 animted:YES];
+            [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
+            tmpSelf.selectedWallet = tmpSelf.wallets[index];
+            tmpSelf.walletChangeing = YES;
             [[NSUserDefaults standardUserDefaults] setObject:_selectedWallet.walletID forKey:kUserDefaltKey_LastSelectedWalletID]; //记录上次选中的钱包
         });
     }];
