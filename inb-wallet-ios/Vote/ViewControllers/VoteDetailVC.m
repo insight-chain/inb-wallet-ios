@@ -30,7 +30,7 @@
 @property(nonatomic, strong) UIButton *voteButton; //提交投票
 
 @property (nonatomic, assign) double addMortaga; //追加的抵押
-
+@property (nonatomic, strong) PasswordInputView *passwordInput;
 @end
 
 @implementation VoteDetailVC
@@ -130,7 +130,7 @@
 //抵押
 -(void)mortgage:(double)inbNumber{
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+    self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         __block __weak typeof(self) tmpSelf = self;
         [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
         
@@ -169,6 +169,7 @@
                                                 return;
                                             }
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                                    [self.passwordInput hidePasswordInput];
             
                                                                     [MBProgressHUD showMessage:@"抵押成功" toView:tmpSelf.view afterDelay:1 animted:YES];
                                                                     [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
@@ -207,7 +208,7 @@
 -(void)voteNodes{
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
-     [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+     self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
          __block __weak typeof(self) tmpSelf = self;
          [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
          
@@ -253,6 +254,7 @@
                                                                  NSLog(@"%@---%@",[responseObject  class], responseObject);
                                                                  
                                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                                     [self.passwordInput hidePasswordInput];
                                                                      [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.success", @"投票成功") toView:tmpSelf.view afterDelay:1 animted:NO];
                                                                      [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];
                                                                  });

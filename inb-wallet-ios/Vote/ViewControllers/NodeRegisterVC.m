@@ -58,7 +58,7 @@
 @property(nonatomic, strong) CountryCodeView *countryView; //国家选择列表
 
 @property(nonatomic, strong) UIButton *submitBtn;
-
+@property (nonatomic, strong) PasswordInputView *passwordInput;
 @end
 
 @implementation NodeRegisterVC
@@ -329,7 +329,7 @@
         return;
     }
     
-    [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+    self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         __block __weak typeof(self) tmpSelf = self;
         [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
         
@@ -361,6 +361,7 @@
                                                             NSLog(@"%@---%@",[responseObject  class], responseObject);
                                                             
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self.passwordInput hidePasswordInput];
                                                                 [MBProgressHUD showMessage:NSLocalizedString(@"修改节点成功", @"修改节点成功") toView:tmpSelf.view afterDelay:1.5 animted:NO];
                                                                 [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];
                                                             });

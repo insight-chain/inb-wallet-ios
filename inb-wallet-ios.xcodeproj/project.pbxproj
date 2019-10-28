@@ -219,7 +219,6 @@
 		FE92C63422A792F50043DA9D /* NSObject+CCAssociative.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C57522A792F40043DA9D /* NSObject+CCAssociative.m */; };
 		FE92C63522A792F50043DA9D /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C57922A792F40043DA9D /* Base64.m */; };
 		FE92C63622A792F50043DA9D /* CocoaSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C57C22A792F40043DA9D /* CocoaSecurity.m */; };
-		FE92C63722A792F50043DA9D /* ResourceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C58022A792F40043DA9D /* ResourceVC.m */; };
 		FE92C63822A792F50043DA9D /* ResourceCPUView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C58322A792F40043DA9D /* ResourceCPUView.m */; };
 		FE92C63922A792F50043DA9D /* Config.m in Sources */ = {isa = PBXBuildFile; fileRef = FE92C58722A792F40043DA9D /* Config.m */; };
 		FE92C63A22A792F50043DA9D /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE92C58922A792F40043DA9D /* SettingCell.xib */; };
@@ -703,8 +702,6 @@
 		FE92C57922A792F40043DA9D /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
 		FE92C57B22A792F40043DA9D /* CocoaSecurity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaSecurity.h; sourceTree = "<group>"; };
 		FE92C57C22A792F40043DA9D /* CocoaSecurity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocoaSecurity.m; sourceTree = "<group>"; };
-		FE92C57F22A792F40043DA9D /* ResourceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceVC.h; sourceTree = "<group>"; };
-		FE92C58022A792F40043DA9D /* ResourceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceVC.m; sourceTree = "<group>"; };
 		FE92C58222A792F40043DA9D /* ResourceCPUView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceCPUView.h; sourceTree = "<group>"; };
 		FE92C58322A792F40043DA9D /* ResourceCPUView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceCPUView.m; sourceTree = "<group>"; };
 		FE92C58622A792F40043DA9D /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
@@ -1692,8 +1689,6 @@
 		FE92C57E22A792F40043DA9D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				FE92C57F22A792F40043DA9D /* ResourceVC.h */,
-				FE92C58022A792F40043DA9D /* ResourceVC.m */,
 				FE05CD9323588733005801C0 /* SuspendTopPausePageVC.h */,
 				FE05CD9423588733005801C0 /* SuspendTopPausePageVC.m */,
 				FE05CD9623588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.h */,
@@ -2381,7 +2376,6 @@
 				FE4FFF3D22C5F1340024CB4D /* BTCKey+Category.m in Sources */,
 				FE92C66F22A79BB20043DA9D /* Data+Extension.swift in Sources */,
 				FE84CFB223407E3B00414411 /* LXAlertView.m in Sources */,
-				FE92C63722A792F50043DA9D /* ResourceVC.m in Sources */,
 				FE92C69622A7BE940043DA9D /* TabBarVC.m in Sources */,
 				FE92C61F22A792F50043DA9D /* WelcomBackupTipVC.m in Sources */,
 				FE92C64F22A792F50043DA9D /* BTCMnemonicKeystore.m in Sources */,

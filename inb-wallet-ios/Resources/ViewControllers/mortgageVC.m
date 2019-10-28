@@ -25,7 +25,7 @@
 @interface mortgageVC ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) MortgageView *mortgageView;
-
+@property (nonatomic, strong) PasswordInputView *passwordInput;
 @end
 
 @implementation mortgageVC
@@ -38,13 +38,16 @@
     __block __weak typeof(self) tmpSelf = self;
     
     self.mortgageView.confirmBlcok = ^(NSInteger type, NSString *netValue) {
-        
+        if([netValue isEqualToString:@""] || !netValue || [netValue isEqualToString:@"0"]){
+            [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.inputValue", @"请选择抵押日期") toView:App_Delegate.window afterDelay:1.5 animted:YES];
+            return ;
+        }
         if (type < 0) {
-            [MBProgressHUD showMessage:@"请选择抵押日期" toView:App_Delegate.window afterDelay:1.5 animted:YES];
+            [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.choseDay",@"请选择抵押日期") toView:App_Delegate.window afterDelay:1.5 animted:YES];
             return ;
         }
         
-        [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+        tmpSelf.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
@@ -180,6 +183,7 @@
                                                                 return ;
                                                             }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [tmpSelf.passwordInput hidePasswordInput];
                                                                 [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.success", @"抵押成功") toView:App_Delegate.window afterDelay:1 animted:YES];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
@@ -276,6 +280,7 @@
                                                             }
                                         
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [tmpSelf.passwordInput hidePasswordInput];
                                                                 [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.success", @"抵押成功") toView:App_Delegate.window afterDelay:1 animted:YES];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });

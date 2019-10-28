@@ -34,6 +34,7 @@
 
 @property(nonatomic, strong) MoreView *exportView; //导出私钥
 @property(nonatomic, strong) MoreView *changePasswordView; //修改密码
+@property (nonatomic, strong) PasswordInputView *passwordInput;
 @end
 
 @implementation WalletDetailVC
@@ -59,7 +60,7 @@
     self.exportView = [[MoreView alloc] initWithTitle:NSLocalizedString(@"backupWallet", @"备份钱包") click:^{
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+            tmpSelf.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
                 });
@@ -81,6 +82,7 @@
                                         NSString *private = [tmpSelf.wallet privateKey:password];
                                         NSString *menmonry = [tmpSelf.wallet exportMnemonic:password];
                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                            [self.passwordInput hidePasswordInput];
                                             [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
                                             WalletBackupVC *backupVC = [[WalletBackupVC alloc] init];
                                             backupVC.navigationItem.title = NSLocalizedString(@"backupWallet", @"备份钱包");
@@ -236,7 +238,7 @@
 #pragma mark ---- Button Action
 //删除账户
 -(void)deleteWalletAction:(UIButton *)sender{
-    [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+    self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         });
@@ -248,6 +250,7 @@
                 if (!passwordVer) {
                     [MBProgressHUD showMessage:@"密码错误" toView:self.view afterDelay:1 animted:YES];
                 }else{
+                    [self.passwordInput hidePasswordInput];
                     [self.wallet deleteWallet];
                     [self.navigationController popViewControllerAnimated:YES];
                     [NotificationCenter postNotificationName:NOTI_DELETE_WALLET object:self.wallet];

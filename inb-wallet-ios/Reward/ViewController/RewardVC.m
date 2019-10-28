@@ -48,7 +48,7 @@ static NSString *cellId_2 = @"redeemCell_2";
 @property (nonatomic, assign) double allWaitToSendMorgage; //全网待发放抵押奖励
 
 @property (nonatomic, strong) UIView *tableFooterView;
-
+@property (nonatomic, strong) PasswordInputView *passwordInput;
 @end
 
 @implementation RewardVC
@@ -268,7 +268,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         cell.rewardBlock = ^{
             //领取奖励
             LockModel *model = self.stores[indexPath.row];
-            [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+            self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
                 __block __weak typeof(self) tmpSelf = self;
                 [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -395,6 +395,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                                                 return ;
                                                             }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self.passwordInput hidePasswordInput];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             
@@ -472,6 +473,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                                                 return ;
                                                             }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self.passwordInput hidePasswordInput];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                                 
                                                                 [self.voteRewardBtn setTitle:[NSString stringWithFormat:@"领取成功"] forState:UIControlStateNormal];
@@ -508,7 +510,7 @@ static NSString *cellId_2 = @"redeemCell_2";
 #pragma mark ---- Button Action
 //领取奖励
 - (IBAction)rewardAction:(UIButton *)sender {
-    [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+    self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         __block __weak typeof(self) tmpSelf = self;
         [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

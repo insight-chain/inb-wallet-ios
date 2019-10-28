@@ -12,8 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PasswordInputView : UIView
 
-+(void)showPasswordInputWithConfirmClock:(void(^)(NSString *password))confirmBlock;
++(instancetype)showPasswordInputWithConfirmClock:(void(^)(NSString *password))confirmBlock;
 
+-(void)hidePasswordInput;
 @end
 
 NS_ASSUME_NONNULL_END

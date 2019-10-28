@@ -234,3 +234,5 @@
 "message.tip.protocal.toAgree" = "请同意隐私条款";
 "message.tip.redemption.value.no" = "请输入赎回数量";
 "message.tip.redemption.value.overMax" = "输入INB数量超出可用值";
+"message.tip.mortgage.inputValue" = "请输入抵押数量";
+"message.tip.mortgage.choseDay" = "请选择抵押期限";

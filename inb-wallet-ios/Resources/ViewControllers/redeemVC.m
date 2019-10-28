@@ -37,6 +37,7 @@ static NSString *cellId_2 = @"redeemCell_2";
 
 @property (nonatomic, assign) NSInteger currentBlockNumber;
 
+@property (nonatomic, strong) PasswordInputView *passwordInput;
 @end
 
 @implementation redeemVC
@@ -248,9 +249,15 @@ static NSString *cellId_2 = @"redeemCell_2";
                                                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
                                                             if (error) {
+                                                                [MBProgressHUD showMessage:@"领取锁仓奖励失败" toView:App_Delegate.window afterDelay:1.5 animted:YES];
                                                                 return ;
                                                             }
+                                        if(responseObject[@"error"]){
+                                            [MBProgressHUD showMessage:responseObject[@"error"] toView:App_Delegate.window afterDelay:1.5 animted:YES];
+                                                                                                           return ;
+                                        }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [tmpSelf.passwordInput hidePasswordInput];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             
@@ -326,10 +333,17 @@ static NSString *cellId_2 = @"redeemCell_2";
                                                             
                                                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
-                                                            if (error) {
+                                                            if (error ) {
+                                                                [MBProgressHUD showMessage:@"领取赎回失败" toView:App_Delegate.window afterDelay:1.5 animted:YES];
                                                                 return ;
                                                             }
+                                        if(responseObject[@"error"]){
+                                            [MBProgressHUD showMessage:responseObject[@"error"] toView:App_Delegate.window afterDelay:1.5 animted:YES];
+                                            return ;
+                                        }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                
+                                                                [tmpSelf.passwordInput hidePasswordInput];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             
@@ -405,7 +419,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         [cell makeCurreentBlockNumber:self.currentBlockNumber startNumber:redeemBlock];
         __block __weak typeof(self) tmpSelf = self;
         cell.receiveBlock = ^{
-            [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+            tmpSelf.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
                 __block __weak typeof(self) tmpSelf = self;
                 [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -457,7 +471,7 @@ static NSString *cellId_2 = @"redeemCell_2";
             cell.rewardBlock = ^{
                 //领取奖励
                 LockModel *model = self.stores[indexPath.row];
-                [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+                tmpSelf.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
                     __block __weak typeof(self) tmpSelf = self;
                     [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

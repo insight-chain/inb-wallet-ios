@@ -35,6 +35,7 @@
 
 @property(nonatomic, strong) UIButton *senderBtn; //发送按钮
 
+@property (nonatomic, strong) PasswordInputView *passwordInput;
 @end
 
 @implementation TransferVC
@@ -179,7 +180,7 @@
     
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
-    [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+    self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         __block __weak typeof(self) tmpSelf = self;
         [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
         
@@ -224,6 +225,7 @@
                                                                 NSLog(@"%@---%@",[responseObject  class], responseObject);
                                                                 
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                                    [self.passwordInput hidePasswordInput];
                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.success", @"转账成功") toView:tmpSelf.view afterDelay:1 animted:NO];
                                                                     [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];
                                                                 });

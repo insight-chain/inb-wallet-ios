@@ -17,7 +17,6 @@
 
 #import "redeemVC.h"
 #import "TransferVC.h"
-#import "ResourceVC.h"
 #import "TransferListVC.h"
 #import "NodeRegisterVC.h"
 #import "WelcomVC.h"
@@ -694,13 +693,6 @@
 #pragma mark ----
 //点击资源信息
 -(void)cpuResource{
-//    ResourceVC *resourceVC = [[ResourceVC alloc] init];
-//    resourceVC.address = self.selectedWallet.address;
-//    resourceVC.canUseNet  = self.canUseNet;
-//    resourceVC.totalNet = self.totalNet;
-//    resourceVC.mortgageINB = self.mortgageINB;
-//    resourceVC.navigationItem.title = NSLocalizedString(@"resource", @"资源");
-//    resourceVC.hidesBottomBarWhenPushed = YES;
     
     SuspendTopPausePageVC *resourceVC = [SuspendTopPausePageVC suspendTopPausePageVC];
     resourceVC.address = self.selectedWallet.address;

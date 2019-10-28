@@ -14,7 +14,7 @@
 #import "NetworkUtil.h"
 
 @interface RedeemINBVC ()
-
+@property (nonatomic, strong) PasswordInputView *passwordInput;
 @end
 
 @implementation RedeemINBVC
@@ -57,15 +57,9 @@
     __block TransactionSignedResult *_signResult;
     
     NSString *rpcHost = App_Delegate.rpcHost;
-    //创建穿行队列
-    dispatch_queue_t customQuue = dispatch_queue_create("unMortgage.nerwork", DISPATCH_QUEUE_SERIAL);
-    //创建信号量并初始化总量为1
-//    dispatch_semaphore_t semaphoreLock = dispatch_semaphore_create(0);
-    
-    //添加任务
-    dispatch_async(customQuue, ^{
-        //发送第一个请求
-        [NetworkUtil rpc_requetWithURL:rpcHost
+
+    //发送第一个请求
+    [NetworkUtil rpc_requetWithURL:rpcHost
                                 params:@{@"jsonrpc":@"2.0",
                                          @"method":nonce_MethodName,
                                          @"params":@[[addr add0xIfNeeded],@"latest"],@"id":@(1)}
@@ -95,16 +89,21 @@
                                                             
                                                             if (error || responseObject[@"error"]) {
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                                                    [MBProgressHUD showMessage:@"赎回失败" toView:self.view afterDelay:1 animted:YES];
+                                                                    [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                                                    [MBProgressHUD showMessage:@"赎回失败" toView:App_Delegate.window afterDelay:1 animted:YES];
                                                                 });
                                                                 return ;
                                                             }
                                                             
                                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                                [MBProgressHUD showMessage:@"赎回请求发送成功" toView:tmpSelf.view afterDelay:1.5 animted:YES];
+                                                                [self.passwordInput hidePasswordInput];
+                                                                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                                                [MBProgressHUD showMessage:@"赎回请求发送成功" toView:App_Delegate.window afterDelay:1.5 animted:YES];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
-                                                                [NSThread sleepForTimeInterval:1.5*1000]; //延迟执行
-                                                                [self.navigationController popViewControllerAnimated:YES];
+//                                                               //延迟执行
+                                                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                                    [self.navigationController popViewControllerAnimated:YES];
+                                                                });
                                                             });
                                                             
                                                         }];
@@ -118,10 +117,6 @@
                                 }
                                 
                             }];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"任务完成");
-        });
-    });
 }
 
 #pragma mark ---- Button Action
@@ -132,36 +127,26 @@
 //完成
 -(void)doneAction{
     if ([self.inbTF.text isEqualToString:@""] || !self.inbTF.text) {
-        [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.redemption.value.no", @"请输入赎回数量") toView:self.view afterDelay:1.5 animted:YES];
+        [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.redemption.value.no", @"请输入赎回数量") toView:App_Delegate.window afterDelay:1.5 animted:YES];
         return;
     }
     __block double inbV = [self.inbTF.text doubleValue];
     if (inbV > self.canTotal) {
-        [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.redemption.value.overMax", @"输入INB数量超出可用值") toView:self.view afterDelay:1.5 animted:YES];
+        [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.redemption.value.overMax", @"输入INB数量超出可用值") toView:App_Delegate.window afterDelay:1.5 animted:YES];
         return;
     } 
     __block __weak typeof(self) tmpSelf = self;
-    [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
-        });
-        
-        @try {
+    
+    
+    tmpSelf.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+        [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             [tmpSelf unMortgageAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID inbNumber:self.inbTF.text password:password];
-        } @catch (NSException *exception) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
-                [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:0.7 animted:YES];
-            });
-        } @finally {
-        }
-        
+            
+        });
+           
+       
     }];
-    
-    
-    
-//    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

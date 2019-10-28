@@ -82,11 +82,12 @@
     }];
 }
 
-+(void)showPasswordInputWithConfirmClock:(void (^)(NSString * _Nonnull))confirmBlock{
++(instancetype)showPasswordInputWithConfirmClock:(void (^)(NSString * _Nonnull))confirmBlock{
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     PasswordInputView *passwordView = [[PasswordInputView alloc] initWithFrame:window.bounds];
     passwordView.confirmBlock = confirmBlock;
     [window addSubview:passwordView];
+    return passwordView;
 }
 
 
@@ -96,7 +97,6 @@
     [self removeFromSuperview];
 }
 -(void)confirmAction:(UIButton *)sender{
-    [self removeFromSuperview];
     if(![self.passwordTF.text isEqualToString:@""]){
         if (self.confirmBlock) {
             self.confirmBlock(self.passwordTF.text);
@@ -104,6 +104,9 @@
     }else{
         
     }
+}
+-(void)hidePasswordInput{
+    [self removeFromSuperview];
 }
 
 #pragma mark ----

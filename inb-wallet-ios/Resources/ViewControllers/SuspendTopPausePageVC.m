@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSDecimalNumber *startBlockNumber;
 @property (nonatomic, strong) NSDecimalNumber *currentBlockNumber;
 @property (nonatomic, assign) NSInteger lockingNumber; //正在锁仓的数量
+@property (nonatomic, strong) PasswordInputView *passwordInput;
 @end
 
 @implementation SuspendTopPausePageVC
@@ -46,7 +47,7 @@
     
     __weak __block typeof(self) tmpSelf = self;
     self.cpuView.resetRes = ^{
-        [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+        tmpSelf.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
             });
@@ -189,6 +190,7 @@
                                                                 return ;
                                                             }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [tmpSelf.passwordInput hidePasswordInput];
                                                                 [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.res.receive.success", @"领取资源成功") toView:App_Delegate.window afterDelay:1 animted:YES];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
@@ -262,7 +264,7 @@
     return @[firstVC, secondVC];
 }
 + (NSArray *)getArrayTitles {
-    return @[@"抵押", @"已抵押"];
+    return @[NSLocalizedString(@"mortgage",@"抵押"), NSLocalizedString(@"Resource.hasMortgage",@"已抵押")];
 }
 
 #pragma mark ---- YNPageViewControllerDataSource
