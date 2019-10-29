@@ -269,6 +269,7 @@
 		FE92C69B22A7C1660043DA9D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE92C69D22A7C1660043DA9D /* Localizable.strings */; };
 		FE93BB11235D971800BA8B09 /* MyNodeInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE93BB10235D971800BA8B09 /* MyNodeInfoVC.m */; };
 		FE93BB14235DB29C00BA8B09 /* NSDictionary+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = FE93BB13235DB29C00BA8B09 /* NSDictionary+JSON.m */; };
+		FE93BB532366905B00BA8B09 /* ConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE93BB522366905B00BA8B09 /* ConfirmView.m */; };
 		FECC977922D31B4B007BE8F5 /* TransferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC977822D31B4B007BE8F5 /* TransferModel.m */; };
 		FECC978422D46FCF007BE8F5 /* AppVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC978322D46FCF007BE8F5 /* AppVersion.m */; };
 		FECC978822DEFB78007BE8F5 /* NodeRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC978722DEFB78007BE8F5 /* NodeRegisterVC.m */; };
@@ -799,6 +800,8 @@
 		FE93BB10235D971800BA8B09 /* MyNodeInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNodeInfoVC.m; sourceTree = "<group>"; };
 		FE93BB12235DB29C00BA8B09 /* NSDictionary+JSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+JSON.h"; sourceTree = "<group>"; };
 		FE93BB13235DB29C00BA8B09 /* NSDictionary+JSON.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JSON.m"; sourceTree = "<group>"; };
+		FE93BB512366905B00BA8B09 /* ConfirmView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfirmView.h; sourceTree = "<group>"; };
+		FE93BB522366905B00BA8B09 /* ConfirmView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfirmView.m; sourceTree = "<group>"; };
 		FECC977722D31B4B007BE8F5 /* TransferModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferModel.h; sourceTree = "<group>"; };
 		FECC977822D31B4B007BE8F5 /* TransferModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransferModel.m; sourceTree = "<group>"; };
 		FECC978222D46FCF007BE8F5 /* AppVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppVersion.h; sourceTree = "<group>"; };
@@ -984,6 +987,7 @@
 		FE3FC31222BB275600A41205 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FE93BB502366904000BA8B09 /* Views */,
 				FE3FC31322BB278F00A41205 /* FAGlobal.h */,
 				FE3FC31422BB278F00A41205 /* FAGlobal.m */,
 			);
@@ -1967,6 +1971,15 @@
 			path = Encryptor;
 			sourceTree = "<group>";
 		};
+		FE93BB502366904000BA8B09 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FE93BB512366905B00BA8B09 /* ConfirmView.h */,
+				FE93BB522366905B00BA8B09 /* ConfirmView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		FECC977622D31B30007BE8F5 /* models */ = {
 			isa = PBXGroup;
 			children = (
@@ -2404,6 +2417,7 @@
 				FE92C4AE22A792580043DA9D /* BTCAssetAddress.m in Sources */,
 				FE92C5F522A792F40043DA9D /* NodeInfoCell.m in Sources */,
 				FE92C49D22A792580043DA9D /* BTCAssetID.m in Sources */,
+				FE93BB532366905B00BA8B09 /* ConfirmView.m in Sources */,
 				FE84CF9423331D1200414411 /* RewardDetailVC.m in Sources */,
 				FE92C66122A792F50043DA9D /* LocalFileStorage.m in Sources */,
 				FE92C63322A792F50043DA9D /* UIView+CCAddition.m in Sources */,

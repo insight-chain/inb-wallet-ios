@@ -8,6 +8,7 @@
 
 #import "mortgageVC.h"
 
+#import "ConfirmView.h"
 #import "MortgageView.h"
 #import "PasswordInputView.h"
 #import "LXAlertView.h"
@@ -46,51 +47,59 @@
             [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.choseDay",@"请选择抵押日期") toView:App_Delegate.window afterDelay:1.5 animted:YES];
             return ;
         }
-        
-        tmpSelf.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
-            });
-            
-            @try {
-                if(type == 0){ //普通抵押
-                    [tmpSelf mortgageAddr:tmpSelf.address walletID:tmpSelf.walletID inbNumber:netValue password:password];
-                }else if(type == 30){ //锁仓30天
-                    NSInteger block = App_Delegate.isTest ? 30*kDayNumbers/1000 : 30*kDayNumbers;
-                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                    [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
-                }else if (type == 90){
-                    NSInteger block = App_Delegate.isTest ? 90*kDayNumbers/1000 : 90*kDayNumbers;
-                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                    [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
-                }else if (type == 180){
-                    NSInteger block = App_Delegate.isTest ? 180*kDayNumbers/1000 : 180*kDayNumbers;
-                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                    [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
-                }else if (type == 360){
-                    NSInteger block = App_Delegate.isTest ? 360*kDayNumbers/1000 : 360*kDayNumbers;
-                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                    [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
-                }else if(type == 1000){
-                    //测试
-                    NSInteger block = 1000;
-                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                    [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
-                }
+        [tmpSelf.view endEditing:YES];
+       
+        [ConfirmView lockConfirmWithTitle:@"订单详情" value:[netValue doubleValue] lockNumber:type*kDayNumbers confirm:^{
+                tmpSelf.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+                           
+                           dispatch_async(dispatch_get_main_queue(), ^{
+                               [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
+                           });
+                           
+                           @try {
+                               if(type == 0){ //普通抵押
+                                   [tmpSelf mortgageAddr:tmpSelf.address walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                               }else if(type == 30){ //锁仓30天
+                                   NSInteger block = App_Delegate.isTest ? 30*kDayNumbers/1000 : 30*kDayNumbers;
+                                   NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
+                                   [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                               }else if (type == 90){
+                                   NSInteger block = App_Delegate.isTest ? 90*kDayNumbers/1000 : 90*kDayNumbers;
+                                   NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
+                                   [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                               }else if (type == 180){
+                                   NSInteger block = App_Delegate.isTest ? 180*kDayNumbers/1000 : 180*kDayNumbers;
+                                   NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
+                                   [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                               }else if (type == 360){
+                                   NSInteger block = App_Delegate.isTest ? 360*kDayNumbers/1000 : 360*kDayNumbers;
+                                   NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
+                                   [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                               }else if(type == 1000){
+                                   //测试
+                                   NSInteger block = 1000;
+                                   NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
+                                   [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                               }
+                               
+                               
+                           } @catch (NSException *exception) {
+                               dispatch_async(dispatch_get_main_queue(), ^{
+                                   [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                   [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.7 animted:YES];
+                               });
+                           } @finally {
+                               [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                           }
+                           
+                           
+                       }];
+        } cancel:^{
                 
-                
-            } @catch (NSException *exception) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
-                    [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:0.7 animted:YES];
-                });
-            } @finally {
-                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
-            }
-            
-            
         }];
+       
+        
+       
         
     };
 

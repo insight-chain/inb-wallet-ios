@@ -16,6 +16,7 @@
 #import "WalletManager.h"
 #import "Node.h"
 
+#import "ConfirmView.h"
 #import "PasswordInputView.h"
 
 #define cellId @"VoteDetailCell"
@@ -185,11 +186,6 @@
                                             
                                         }
                                     }];
-                
-                
-                
-            
-            
         });
     }];
 }
@@ -202,7 +198,17 @@
         return;
     }
     __block __weak typeof(self) tmpSelf = self;
-    [self voteNodes];
+    
+    [self.view endEditing:YES];
+    NSMutableArray *nodeNames = @[].mutableCopy;
+    for (Node *node in self.selectedNode) {
+        [nodeNames addObject:node.name];
+    }
+    [ConfirmView voteConfirmWithTitle:@"订单详情" nodeName:nodeNames value:(NSInteger)self.wallet.mortgagedINB confirm:^{
+        [self voteNodes];
+    } cancel:^{
+        
+    }];
 }
 
 -(void)voteNodes{

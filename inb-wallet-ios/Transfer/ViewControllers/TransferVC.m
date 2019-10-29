@@ -12,6 +12,7 @@
 
 #import "WalletManager.h"
 
+#import "ConfirmView.h"
 #import "PasswordInputView.h"
 #import "SWQRCode.h"
 #import "NetworkUtil.h"
@@ -178,72 +179,79 @@
         return;
     }
     
-    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
-        __block __weak typeof(self) tmpSelf = self;
-        [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
-        
-        [NetworkUtil rpc_requetWithURL:delegate.rpcHost params:@{@"jsonrpc":@"2.0",
-                                                        @"method":nonce_MethodName,
-                                                        @"params":@[[self.wallet.address add0xIfNeeded],@"latest"],@"id":@(1)}
-                            completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                if (error) {
-                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                    [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
-                                    return ;
-                                }
-                                NSDictionary *dic = (NSDictionary *)responseObject;
-                                NSDecimalNumber *nonce = [dic[@"result"] decimalNumberFromHexString];
-                                
-                                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                                    @try {
-                                        NSDecimalNumber *value = [NSDecimalNumber decimalNumberWithString:tmpSelf.numberTF.text];
-                                        NSDecimalNumber *bitValue = [value decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
-                                        TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_transfer gasPrice:@"200000" gasLimit:@"21000" to:tmpSelf.accountTF.text value:[bitValue stringValue] data:tmpSelf.noteTF.text password:password chainID:kChainID]; //41，3
-                                        NSString *requestUrl = [NSString stringWithFormat:@"https://api-ropsten.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex=%@",signResult.signedTx]; //&apikey=SJMGV3C6S3CSUQQXC7CTQ72UCM966KD2XZ
-                                        //https://api-kovan.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex=%@
-                                        
-                                        
-                                        [NetworkUtil rpc_requetWithURL:delegate.rpcHost
-                                                                params:@{@"jsonrpc":@"2.0",
-                                                                         @"method":sendTran_MethodName,
-                                                                         @"params":@[[signResult.signedTx add0xIfNeeded]],
-                                                                         @"id":@(1)}
-                                                            completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                                                
-                                                                if (error) {
-                                                                    [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
-                                                                    return ;
-                                                                }
-                                                                NSString *errorStr = responseObject[@"error"];
-                                                                if(errorStr){
-                                                                    [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
-                                                                    return ;
-                                                                }
-                                                                NSLog(@"%@---%@",[responseObject  class], responseObject);
-                                                                
-                                                                dispatch_async(dispatch_get_main_queue(), ^{
-                                                                    [self.passwordInput hidePasswordInput];
-                                                                    [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.success", @"转账成功") toView:tmpSelf.view afterDelay:1 animted:NO];
-                                                                    [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];
-                                                                });
-                                                            }];
-                                        
-                                    } @catch (NSException *exception) {
-                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                            [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
-                                        });
-                                        
-                                    } @finally {
-                                        
+    [self.view endEditing:YES]; //结束编辑
+    [ConfirmView transferConfirmWithTitle:@"订单详情" toAddr:self.accountTF.text value:value.doubleValue note:self.noteTF.text confirm:^{
+        AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+        self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+            __block __weak typeof(self) tmpSelf = self;
+            [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
+
+            [NetworkUtil rpc_requetWithURL:delegate.rpcHost params:@{@"jsonrpc":@"2.0",
+                                                            @"method":nonce_MethodName,
+                                                            @"params":@[[self.wallet.address add0xIfNeeded],@"latest"],@"id":@(1)}
+                                completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+                                    if (error) {
+                                        [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
+                                        return ;
                                     }
-                                });
-                                
-                            }];
+                                    NSDictionary *dic = (NSDictionary *)responseObject;
+                                    NSDecimalNumber *nonce = [dic[@"result"] decimalNumberFromHexString];
+
+                                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                        @try {
+                                            NSDecimalNumber *value = [NSDecimalNumber decimalNumberWithString:tmpSelf.numberTF.text];
+                                            NSDecimalNumber *bitValue = [value decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
+                                            TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_transfer gasPrice:@"200000" gasLimit:@"21000" to:tmpSelf.accountTF.text value:[bitValue stringValue] data:tmpSelf.noteTF.text password:password chainID:kChainID]; //41，3
+                                            NSString *requestUrl = [NSString stringWithFormat:@"https://api-ropsten.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex=%@",signResult.signedTx]; //&apikey=SJMGV3C6S3CSUQQXC7CTQ72UCM966KD2XZ
+                                            //https://api-kovan.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex=%@
+
+
+                                            [NetworkUtil rpc_requetWithURL:delegate.rpcHost
+                                                                    params:@{@"jsonrpc":@"2.0",
+                                                                             @"method":sendTran_MethodName,
+                                                                             @"params":@[[signResult.signedTx add0xIfNeeded]],
+                                                                             @"id":@(1)}
+                                                                completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
+                                                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+
+                                                                    if (error) {
+                                                                        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
+                                                                        return ;
+                                                                    }
+                                                                    NSString *errorStr = responseObject[@"error"];
+                                                                    if(errorStr){
+                                                                        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
+                                                                        return ;
+                                                                    }
+                                                                    NSLog(@"%@---%@",[responseObject  class], responseObject);
+
+                                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                                        [self.passwordInput hidePasswordInput];
+                                                                        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.success", @"转账成功") toView:tmpSelf.view afterDelay:1 animted:NO];
+                                                                        [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];
+                                                                    });
+                                                                }];
+
+                                        } @catch (NSException *exception) {
+                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                                [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
+                                            });
+
+                                        } @finally {
+
+                                        }
+                                    });
+
+                                }];
+        }];
+    } cancel:^{
+        
     }];
+    
+    
     
 }
 

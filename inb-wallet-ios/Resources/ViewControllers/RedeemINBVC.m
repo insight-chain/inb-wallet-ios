@@ -8,6 +8,7 @@
 
 #import "RedeemINBVC.h"
 
+#import "ConfirmView.h"
 #import "PasswordInputView.h"
 #import "TransactionSignedResult.h"
 #import "WalletManager.h"
@@ -136,17 +137,20 @@
         return;
     } 
     __block __weak typeof(self) tmpSelf = self;
-    
-    
-    tmpSelf.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
-        [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [tmpSelf unMortgageAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID inbNumber:self.inbTF.text password:password];
-            
-        });
-           
-       
+    [self.view endEditing:YES];
+    [ConfirmView redeemConfirmWithTitle:@"订单详情" addr:App_Delegate.selectAddr value:inbV confirm:^{
+        tmpSelf.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+               [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                   [tmpSelf unMortgageAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID inbNumber:self.inbTF.text password:password];
+                   
+               });
+           }];
+    } cancel:^{
+        
     }];
+    
+   
 }
 
 
