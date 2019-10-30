@@ -253,7 +253,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                                                 return ;
                                                             }
                                         if(responseObject[@"error"]){
-                                            [MBProgressHUD showMessage:responseObject[@"error"] toView:App_Delegate.window afterDelay:1.5 animted:YES];
+                                            [MBProgressHUD showMessage:responseObject[@"error"][@"message"] toView:App_Delegate.window afterDelay:1.5 animted:YES];
                                                                                                            return ;
                                         }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
@@ -338,7 +338,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                                                 return ;
                                                             }
                                         if(responseObject[@"error"]){
-                                            [MBProgressHUD showMessage:responseObject[@"error"] toView:App_Delegate.window afterDelay:1.5 animted:YES];
+                                            [MBProgressHUD showMessage:responseObject[@"error"][@"message"] toView:App_Delegate.window afterDelay:1.5 animted:YES];
                                             return ;
                                         }
                                                             dispatch_async(dispatch_get_main_queue(), ^{

@@ -51,6 +51,10 @@
 "Resource.mortgage.noDay" = "无抵押期限";
 "Resource.rewardType.vote" = "投票奖励";
 "Resource.rewardType.mortgage"="抵押奖励";
+
+"Resource.mortgage.success" = "资源抵押成功";
+"Resource.mortgage.failed" = "资源抵押失败";
+
 "confirm" = "确认";
 
 "walletDetail" = "钱包详情";

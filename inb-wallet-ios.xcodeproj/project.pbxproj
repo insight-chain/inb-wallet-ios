@@ -270,6 +270,7 @@
 		FE93BB11235D971800BA8B09 /* MyNodeInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE93BB10235D971800BA8B09 /* MyNodeInfoVC.m */; };
 		FE93BB14235DB29C00BA8B09 /* NSDictionary+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = FE93BB13235DB29C00BA8B09 /* NSDictionary+JSON.m */; };
 		FE93BB532366905B00BA8B09 /* ConfirmView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE93BB522366905B00BA8B09 /* ConfirmView.m */; };
+		FE93BB56236846EC00BA8B09 /* TransferResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE93BB55236846EC00BA8B09 /* TransferResultView.m */; };
 		FECC977922D31B4B007BE8F5 /* TransferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC977822D31B4B007BE8F5 /* TransferModel.m */; };
 		FECC978422D46FCF007BE8F5 /* AppVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC978322D46FCF007BE8F5 /* AppVersion.m */; };
 		FECC978822DEFB78007BE8F5 /* NodeRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC978722DEFB78007BE8F5 /* NodeRegisterVC.m */; };
@@ -802,6 +803,8 @@
 		FE93BB13235DB29C00BA8B09 /* NSDictionary+JSON.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+JSON.m"; sourceTree = "<group>"; };
 		FE93BB512366905B00BA8B09 /* ConfirmView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConfirmView.h; sourceTree = "<group>"; };
 		FE93BB522366905B00BA8B09 /* ConfirmView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConfirmView.m; sourceTree = "<group>"; };
+		FE93BB54236846EC00BA8B09 /* TransferResultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferResultView.h; sourceTree = "<group>"; };
+		FE93BB55236846EC00BA8B09 /* TransferResultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransferResultView.m; sourceTree = "<group>"; };
 		FECC977722D31B4B007BE8F5 /* TransferModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferModel.h; sourceTree = "<group>"; };
 		FECC977822D31B4B007BE8F5 /* TransferModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransferModel.m; sourceTree = "<group>"; };
 		FECC978222D46FCF007BE8F5 /* AppVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppVersion.h; sourceTree = "<group>"; };
@@ -1976,6 +1979,8 @@
 			children = (
 				FE93BB512366905B00BA8B09 /* ConfirmView.h */,
 				FE93BB522366905B00BA8B09 /* ConfirmView.m */,
+				FE93BB54236846EC00BA8B09 /* TransferResultView.h */,
+				FE93BB55236846EC00BA8B09 /* TransferResultView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2487,6 +2492,7 @@
 				FE92C65122A792F50043DA9D /* Crypto.m in Sources */,
 				FEE3B27B22A641D2003B5244 /* AppDelegate.m in Sources */,
 				FE92C62E22A792F50043DA9D /* SWQRCodeViewController.m in Sources */,
+				FE93BB56236846EC00BA8B09 /* TransferResultView.m in Sources */,
 				FE92C4C622A792580043DA9D /* BTCErrors.m in Sources */,
 				FE92C61C22A792F50043DA9D /* LZCollectionViewLayoutAttributes.m in Sources */,
 				FE92C61722A792F50043DA9D /* TransferHeaderView_vote.m in Sources */,

@@ -17,6 +17,7 @@
 #import "Node.h"
 
 #import "ConfirmView.h"
+#import "TransferResultView.h"
 #import "PasswordInputView.h"
 
 #define cellId @"VoteDetailCell"
@@ -143,8 +144,14 @@
                                     completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                         if (error) {
                                             [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                            [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"抵押") message:@"网络请求出错"];
                                             return ;
                                         }
+                    if(responseObject[@"error"]){
+                        [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                        [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"抵押") message:responseObject[@"error"][@"message"][@"message"]];
+                        return ;
+                    }
                                         NSDictionary *dic = (NSDictionary *)responseObject;
                                         NSDecimalNumber *nonce = [dic[@"result"] decimalNumberFromHexString];
                                        
@@ -162,17 +169,20 @@
                                                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                                                 [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
                                                                 if (error) {
-                                                                    [MBProgressHUD showMessage:@"抵押失败" toView:tmpSelf.view afterDelay:1 animted:YES];
+//                                                                    [MBProgressHUD showMessage:@"抵押失败" toView:tmpSelf.view afterDelay:1 animted:YES];
+                                                                    [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"抵押") message:@"网络请求出错"];
                                                                     return ;
                                                                 }
                                             if(responseObject[@"error"]){
-                                                [MBProgressHUD showMessage:@"抵押失败" toView:tmpSelf.view afterDelay:1 animted:YES];
+//                                                [MBProgressHUD showMessage:@"抵押失败" toView:tmpSelf.view afterDelay:1 animted:YES];
+                                                [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"抵押失败") message:responseObject[@"error"][@"message"]];
                                                 return;
                                             }
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                                     [self.passwordInput hidePasswordInput];
             
-                                                                    [MBProgressHUD showMessage:@"抵押成功" toView:tmpSelf.view afterDelay:1 animted:YES];
+//                                                                    [MBProgressHUD showMessage:@"抵押成功" toView:tmpSelf.view afterDelay:1 animted:YES];
+                                                                    [TransferResultView resultSuccessLockWithTitle:NSLocalizedString(@"Resource.mortgage.success", @"抵押成功") value:inbNumber lcokNumber:0];
                                                                     [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                                 });
                                                             }];
@@ -224,9 +234,17 @@
                              completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                  if (error) {
                                      [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
+//                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
+                                     
+                                     [TransferResultView resultFailedWithTitle:NSLocalizedString(@"transfer.vote.failed", @"投票失败") message:@"网络错误"];
                                      return ;
                                  }
+             if(responseObject[@"error"]){
+                 [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                 
+                 [TransferResultView resultFailedWithTitle:NSLocalizedString(@"transfer.vote.failed", @"投票失败") message:responseObject[@"error"][@"message"]];
+                 return;
+             }
                                  NSDictionary *dic = (NSDictionary *)responseObject;
                                  NSDecimalNumber *nonce = [dic[@"result"] decimalNumberFromHexString];
                                  
@@ -250,18 +268,27 @@
                                                                  [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
                                                                  
                                                                  if (error || responseObject[@"error"]) {
-                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.failed", @"投票失败") toView:tmpSelf.view afterDelay:1 animted:NO];
+//                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.failed", @"投票失败") toView:tmpSelf.view afterDelay:1 animted:NO];
+                                                                     [TransferResultView resultFailedWithTitle:NSLocalizedString(@"transfer.vote.failed", @"投票失败") message:error?[error description]:responseObject[@"error"][@"message"]];
                                                                      return ;
                                                                  }
                                                                  
                                                                  if(responseObject[@"error"]){
-                                                                     [MBProgressHUD showMessage:responseObject[@"error"][@"message"] toView:tmpSelf.view afterDelay:1.5 animted:NO];
+//                                                                     [MBProgressHUD showMessage:responseObject[@"error"][@"message"] toView:tmpSelf.view afterDelay:1.5 animted:NO];
+                                                                     [TransferResultView resultFailedWithTitle:NSLocalizedString(@"transfer.vote.failed", @"投票失败") message:responseObject[@"error"][@"message"]];
+                                                                     return ;
                                                                  }
                                                                  NSLog(@"%@---%@",[responseObject  class], responseObject);
                                                                  
                                                                  dispatch_async(dispatch_get_main_queue(), ^{
                                                                      [self.passwordInput hidePasswordInput];
                                                                      [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.success", @"投票成功") toView:tmpSelf.view afterDelay:1 animted:NO];
+                                                                     NSMutableArray *nodeNames = @[].mutableCopy;
+                                                                     for (Node *node in self.selectedNode) {
+                                                                         [nodeNames addObject:node.name];
+                                                                     }
+                                                                     [TransferResultView resultSuccessVoteWithTitle:NSLocalizedString(@"transfer.vote.success", @"投票成功") voteNumber:self.wallet.mortgagedINB voteNames:nodeNames];
+                                                                     
                                                                      [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];
                                                                  });
                                                              }];

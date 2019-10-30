@@ -8,6 +8,7 @@
 
 #import "mortgageVC.h"
 
+#import "TransferResultView.h"
 #import "ConfirmView.h"
 #import "MortgageView.h"
 #import "PasswordInputView.h"
@@ -164,8 +165,16 @@
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 if (error) {
                                     [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                    
+                                    [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"资源抵押失败") message:@"网络错误"];
                                     return ;
                                 }
+            if(responseObject[@"error"]){
+                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                
+                [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"资源抵押失败") message:responseObject[@"error"][@"message"]];
+                return;
+            }
                                 NSDictionary *dic = (NSDictionary *)responseObject;
                                 _nonce = [dic[@"result"] decimalNumberFromHexString];
                                 
@@ -187,13 +196,17 @@
                                                             if (error || responseObject[@"error"]) {
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.error", @"抵押失败") toView:App_Delegate.window afterDelay:1 animted:YES];
+                                                                    
+                                                                    [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"资源抵押失败") message:error?[error description]:responseObject[@"error"][@"message"]];
                                                                     return ;
                                                                 });
                                                                 return ;
                                                             }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 [tmpSelf.passwordInput hidePasswordInput];
-                                                                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.success", @"抵押成功") toView:App_Delegate.window afterDelay:1 animted:YES];
+//                                                                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.success", @"抵押成功") toView:App_Delegate.window afterDelay:1 animted:YES];
+                                                                [TransferResultView resultSuccessLockWithTitle:NSLocalizedString(@"Resource.mortgage.success",@"资源抵押成功") value:[inbNumber doubleValue] lcokNumber:0];
+                                                                
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             
@@ -263,8 +276,15 @@
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 if (error) {
                                     [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                    [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"资源抵押失败") message:@"网络错误"];
                                     return ;
                                 }
+            if(responseObject[@"error"]){
+                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                
+                [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"资源抵押失败") message:responseObject[@"error"][@"message"]];
+                return;
+            }
                                 NSDictionary *dic = (NSDictionary *)responseObject;
                                 _nonce = [dic[@"result"] decimalNumberFromHexString];
                                 
@@ -284,13 +304,17 @@
                                                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
                                                             if (error || responseObject[@"error"]) {
+                                                                
                                                                 [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.error", @"抵押失败") toView:App_Delegate.window afterDelay:1 animted:YES];
+                                                                [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"资源抵押失败") message:error?[error description] : responseObject[@"error"][@"message"]];
                                                                 return ;
                                                             }
                                         
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 [tmpSelf.passwordInput hidePasswordInput];
-                                                                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.success", @"抵押成功") toView:App_Delegate.window afterDelay:1 animted:YES];
+//                                                                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.success", @"抵押成功") toView:App_Delegate.window afterDelay:1 animted:YES];
+                                                                [TransferResultView resultSuccessLockWithTitle:NSLocalizedString(@"Resource.mortgage.success",@"资源抵押成功") value:[inbNumber doubleValue] lcokNumber:[days integerValue]];
+                                                                
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             //dispatch_semaphore_signal发送一个信号，让信号总量加1,相当于解锁

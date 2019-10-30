@@ -220,7 +220,7 @@
                                                                         [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
                                                                         return ;
                                                                     }
-                                                                    NSString *errorStr = responseObject[@"error"];
+                                                                    NSString *errorStr = responseObject[@"error"][@"message"];
                                                                     if(errorStr){
                                                                         [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
                                                                         return ;
