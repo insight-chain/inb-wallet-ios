@@ -62,21 +62,22 @@
             
             tmpSelf.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
                 });
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     BOOL verifyPass = [tmpSelf.wallet verifyPassword:password];
                     if(!verifyPass){
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [MBProgressHUD hideHUDForView:self.view animated:YES];
-                            [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
+                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                            [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:1 animted:YES];
                         });
                     }else{
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [MBProgressHUD hideHUDForView:self.view animated:YES];
+                            [tmpSelf.passwordInput hidePasswordInput];
+                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                             [SavePrivatekeyWaringView showSaveWaringWith:^{
                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                                    [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
                                 }); dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                                     @try {
                                         NSString *private = [tmpSelf.wallet privateKey:password];
@@ -95,8 +96,8 @@
                                     } @catch (NSException *exception) {
                                         if([exception.name isEqualToString:@"PasswordError"]){
                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                                [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
+                                                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                                [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:1 animted:YES];
                                             });
                                         }
                                     } @finally {
@@ -160,10 +161,6 @@
     [self.view addSubview:self.address];
     [self.view addSubview:self.addressCopyBtn];
     
-//    [self.view addSubview:self.createTimeStr];
-//    [self.view addSubview:self.createTimeBg];
-//    [self.view addSubview:self.createTime];
-    
     
     UIView *sepView = [[UIView alloc] init];
     sepView.backgroundColor = kColorBackground;
@@ -205,19 +202,6 @@
         make.right.mas_equalTo(self.addressBg.mas_right).mas_offset(AdaptedWidth(-5));
         make.width.height.mas_equalTo(AdaptedWidth(30));
     }];
-//    [self.createTimeStr mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.mas_equalTo(self.addressBg.mas_bottom).mas_offset(AdaptedHeight(topMargin));
-//        make.left.mas_equalTo(self.accountStr);
-//    }];
-//    [self.createTimeBg mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.top.mas_equalTo(self.createTimeStr.mas_bottom).mas_offset(AdaptedWidth(midMargin));
-//        make.left.right.mas_equalTo(self.accountBg);
-//        make.height.mas_equalTo(self.accountBg);
-//    }];
-//    [self.createTime mas_remakeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.mas_equalTo(self.createTimeBg.mas_centerY);
-//        make.left.mas_equalTo(self.createTimeBg.mas_left).mas_offset(AdaptedWidth(midMargin));
-//    }];
     
     [sepView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
@@ -240,13 +224,13 @@
 -(void)deleteWalletAction:(UIButton *)sender{
     self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
         });
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             __block BOOL passwordVer = NO;
             passwordVer = [self.wallet verifyPassword:password];
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                 if (!passwordVer) {
                     [MBProgressHUD showMessage:@"密码错误" toView:self.view afterDelay:1 animted:YES];
                 }else{

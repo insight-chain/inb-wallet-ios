@@ -190,7 +190,7 @@
                                                                      @"id":@(67),
                                                                      }
                                                         completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                                            
+                                        [tmpSelf.passwordInput hidePasswordInput];
                                                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
                                                             if (error || responseObject[@"error"]) {
@@ -300,7 +300,7 @@
                                                                      @"id":@(67),
                                                                      }
                                                         completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                                            
+                                        [tmpSelf.passwordInput hidePasswordInput];
                                                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
                                                             if (error || responseObject[@"error"]) {
@@ -377,7 +377,7 @@
 }
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[YNPageTableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView = [[YNPageTableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-kNavigationBarHeight) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
     }

@@ -14,6 +14,7 @@
 "resource" = "资源";
 "determine" = "确定";
 "wallet" = "钱包";
+"balance" = "余额";
 
 "welcom" = "你好，\n欢迎来到Insight Chain";
 "welcom.hasINBWallet" = "我有INB钱包";
@@ -54,6 +55,8 @@
 
 "Resource.mortgage.success" = "资源抵押成功";
 "Resource.mortgage.failed" = "资源抵押失败";
+
+"reward.noMortgage" = "您未参与节点投票，暂无奖励";
 
 "confirm" = "确认";
 

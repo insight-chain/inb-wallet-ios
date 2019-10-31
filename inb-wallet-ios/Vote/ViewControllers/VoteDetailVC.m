@@ -78,7 +78,7 @@
     self.headerView.addMortgageBlock = ^(double inbNumber) {
         if (inbNumber > 0) {
             if(inbNumber > tmpSelf.wallet.balanceINB){
-                [MBProgressHUD showMessage:NSLocalizedString(@"transfer.failed.noBalance", @"账户余额不足") toView:tmpSelf.view afterDelay:1.5 animted:YES];
+                [MBProgressHUD showMessage:NSLocalizedString(@"transfer.failed.noBalance", @"账户余额不足") toView:App_Delegate.window afterDelay:1.5 animted:YES];
                 return ;
             }
             //抵押
@@ -134,7 +134,7 @@
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         __block __weak typeof(self) tmpSelf = self;
-        [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
+        [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
@@ -143,12 +143,12 @@
                                                                          @"params":@[[self.wallet.address add0xIfNeeded],@"latest"],@"id":@(1)}
                                     completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                         if (error) {
-                                            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                             [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"抵押") message:@"网络请求出错"];
                                             return ;
                                         }
                     if(responseObject[@"error"]){
-                        [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                        [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                         [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"抵押") message:responseObject[@"error"][@"message"][@"message"]];
                         return ;
                     }
@@ -159,7 +159,9 @@
                                         NSDecimalNumber *bitVal = [val decimalNumberByMultiplyingBy:[NSDecimalNumber decimalNumberWithString:kWei]];
                                     @try {
                                         TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_moetgage gasPrice:@"200000" gasLimit:@"21000" to:@"0xaa18a055AB2017a0Cd3fB7D70f269C9B80092206" value:[bitVal stringValue] data:@"" password:password chainID:kChainID];
-                                        
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            [tmpSelf.passwordInput hidePasswordInput];
+                                        });
                                         [NetworkUtil rpc_requetWithURL:delegate.rpcHost
                                                                 params:@{@"jsonrpc":@"2.0",
                                                                          @"method":sendTran_MethodName,
@@ -167,7 +169,7 @@
                                                                          @"id":@(67),
                                                                          }
                                                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                                                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                                 if (error) {
 //                                                                    [MBProgressHUD showMessage:@"抵押失败" toView:tmpSelf.view afterDelay:1 animted:YES];
                                                                     [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"抵押") message:@"网络请求出错"];
@@ -188,8 +190,8 @@
                                                             }];
                                         } @catch (NSException *exception) {
                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                                [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
+                                                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                                [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:1 animted:YES];
                                             });
                                             
                                         } @finally {
@@ -204,7 +206,7 @@
 -(void)voteSubmitAction:(UIButton *)sender{
 //    [self registerToNode];
     if(self.selectedNode.count <= 0){
-        [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.noNodes", @"未选择节点，请选择后提交") toView:self.view afterDelay:1.5 animted:YES];
+        [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.noNodes", @"未选择节点，请选择后提交") toView:App_Delegate.window afterDelay:1.5 animted:YES];
         return;
     }
     __block __weak typeof(self) tmpSelf = self;
@@ -226,21 +228,21 @@
     
      self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
          __block __weak typeof(self) tmpSelf = self;
-         [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
+         [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
          
          [NetworkUtil rpc_requetWithURL:delegate.rpcHost params:@{@"jsonrpc":@"2.0",
                                                                   @"method":nonce_MethodName,
                                                                   @"params":@[[self.wallet.address add0xIfNeeded],@"latest"],@"id":@(1)}
                              completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                  if (error) {
-                                     [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                     [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
 //                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:tmpSelf.view afterDelay:1 animted:NO];
                                      
                                      [TransferResultView resultFailedWithTitle:NSLocalizedString(@"transfer.vote.failed", @"投票失败") message:@"网络错误"];
                                      return ;
                                  }
              if(responseObject[@"error"]){
-                 [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                 [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                  
                  [TransferResultView resultFailedWithTitle:NSLocalizedString(@"transfer.vote.failed", @"投票失败") message:responseObject[@"error"][@"message"]];
                  return;
@@ -259,13 +261,16 @@
                                          NSString *nodeDataStr = [NSString stringWithFormat:@"%@",nodeStr];
                                     
                                          TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:tmpSelf.wallet.walletID nonce:[nonce stringValue] txType:TxType_vote gasPrice:@"200000" gasLimit:@"21000" to:[tmpSelf.wallet.address add0xIfNeeded] value:[value stringValue] data:[[nodeDataStr hexString] add0xIfNeeded] password:password chainID:kChainID]; //41，3
+                                         dispatch_async(dispatch_get_main_queue(), ^{
+                                             [tmpSelf.passwordInput hidePasswordInput];
+                                         });
                                          [NetworkUtil rpc_requetWithURL:delegate.rpcHost
                                                                  params:@{@"jsonrpc":@"2.0",
                                                                           @"method":sendTran_MethodName,
                                                                           @"params":@[[signResult.signedTx add0xIfNeeded]],
                                                                           @"id":@(1)}
                                                              completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                                                 [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                                                 [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                                  
                                                                  if (error || responseObject[@"error"]) {
 //                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.failed", @"投票失败") toView:tmpSelf.view afterDelay:1 animted:NO];
@@ -282,7 +287,7 @@
                                                                  
                                                                  dispatch_async(dispatch_get_main_queue(), ^{
                                                                      [self.passwordInput hidePasswordInput];
-                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.success", @"投票成功") toView:tmpSelf.view afterDelay:1 animted:NO];
+                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.success", @"投票成功") toView:App_Delegate.window afterDelay:1 animted:NO];
                                                                      NSMutableArray *nodeNames = @[].mutableCopy;
                                                                      for (Node *node in self.selectedNode) {
                                                                          [nodeNames addObject:node.name];
@@ -295,8 +300,8 @@
                                          
                                      } @catch (NSException *exception) {
                                          dispatch_async(dispatch_get_main_queue(), ^{
-                                             [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                             [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
+                                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                             [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:1 animted:YES];
                                          });
                                          
                                      } @finally {

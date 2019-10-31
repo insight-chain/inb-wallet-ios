@@ -182,8 +182,10 @@
                                                                      @"id":@(67),
                                                                      }
                                                         completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                                            
-                                                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [tmpSelf.passwordInput hidePasswordInput];
+                                                                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                                            });
                                                             NSLog(@"%@", responseObject);
                                                             if (error) {
                                                                 [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.res.receive.failed", @"领取资源失败") toView:App_Delegate.window afterDelay:1 animted:YES];

@@ -8,12 +8,14 @@
 
 #import "RewardVC.h"
 
+#import "mortgageVC.h"
 #import "VoteListVC.h"
 #import "RewardRecordVC.h"
 #import "MortgageDetailVC.h"
 #import "RedeemINBVC.h"
 
 #import "RedeemCell_2.h"
+#import "RewardNoMortgageCell.h"
 
 #import "PasswordInputView.h"
 
@@ -24,6 +26,7 @@
 #import "MJRefresh.h"
 
 static NSString *cellId_2 = @"redeemCell_2";
+static NSString *cellId_3 = @"noMortgageCell";
 
 @interface RewardVC ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -60,6 +63,7 @@ static NSString *cellId_2 = @"redeemCell_2";
     self.rewardVoteStr.text = NSLocalizedString(@"Resource.rewardType.vote", @"投票奖励");
     self.tableView.tableHeaderView = self.tableHeaderView;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = kColorBackground;
     
     
     [self requestBlockHeight];
@@ -233,12 +237,38 @@ static NSString *cellId_2 = @"redeemCell_2";
                                      }];
 }
 
+//点击资源信息
+-(void)cpuResource{
+    
+    mortgageVC *firstVC = [[mortgageVC alloc] init];
+    firstVC.navigationItem.title = NSLocalizedString(@"mortgage", @"抵押");
+    firstVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:firstVC animated:YES];
+}
 
 #pragma mark ---- UITableViewDelegate && Datasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.stores.count;
+    if(self.stores.count == 0){
+        return 1;
+    }else{
+        return self.stores.count;
+    }
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if(self.stores.count == 0){
+        RewardNoMortgageCell *norCell = [tableView dequeueReusableCellWithIdentifier:cellId_3];
+        if (norCell == nil) {
+            UINib *nib = [UINib nibWithNibName:NSStringFromClass([RewardNoMortgageCell class]) bundle:nil];
+            [tableView registerNib:nib forCellReuseIdentifier:cellId_3];
+            norCell = [tableView dequeueReusableCellWithIdentifier:cellId_3];
+        }
+        __block __weak typeof(self) tmpSelf = self;
+        norCell.goMortgage = ^{
+            [tmpSelf cpuResource];
+        };
+        return norCell;
+    }else{
     RedeemCell_2 *cell = [tableView dequeueReusableCellWithIdentifier:cellId_2];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (cell == nil) {
@@ -270,14 +300,14 @@ static NSString *cellId_2 = @"redeemCell_2";
             LockModel *model = self.stores[indexPath.row];
             self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
                 __block __weak typeof(self) tmpSelf = self;
-                [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
+                [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     @try {
                         [self rewardLockWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID nonce:model.hashStr password:password];
                     } @catch (NSException *exception) {
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                            [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
+                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                            [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:1 animted:YES];
                         });
                     } @finally {
                         
@@ -287,27 +317,28 @@ static NSString *cellId_2 = @"redeemCell_2";
         };
     }
     return cell;
+    }
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 95)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 110)];
     view.backgroundColor = kColorBackground;
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 20, 100, 15)];
     label.text = NSLocalizedString(@"Resource.rewardType.mortgage",@"抵押奖励");
     label.textColor = kColorTitle;
     label.font = [UIFont boldSystemFontOfSize:17];
     
-    UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(label.frame)+15, KWIDTH-(15*2), 45)];
-    imgV.image = [UIImage imageNamed:@"all_wait_bg"];
+    UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(label.frame)+15, KWIDTH-(15*2), 60)];
+    imgV.image = [UIImage imageNamed:@"all_mortgage_wait_bg"];
     
-    UILabel *allStr = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(imgV.frame)+10, CGRectGetMinY(imgV.frame), 150, CGRectGetHeight(imgV.frame))];
-    allStr.textColor = [UIColor whiteColor];
+    UILabel *allStr = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(imgV.frame)+100, CGRectGetMinY(imgV.frame)+12, 150, 15)];
+    allStr.textColor = kColorTitle;
     allStr.font = [UIFont systemFontOfSize:14];
     allStr.text = @"全网待领取抵押奖励";
     
-    UILabel *valueL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(allStr.frame)+10, CGRectGetMinY(allStr.frame), CGRectGetWidth(imgV.frame)-CGRectGetMaxX(allStr.frame)-10, CGRectGetHeight(allStr.frame))];
-    valueL.textAlignment = NSTextAlignmentRight;
-    valueL.textColor = [UIColor whiteColor];
-    valueL.font = [UIFont systemFontOfSize:14];
+    UILabel *valueL = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMinX(allStr.frame), CGRectGetMaxY(allStr.frame)+10, 200, 20)];
+    valueL.textAlignment = NSTextAlignmentLeft;
+    valueL.textColor = kColorBlue;
+    valueL.font = [UIFont boldSystemFontOfSize:15];
     valueL.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.allWaitToSendMorgage]]];
     
     [view addSubview:label];
@@ -317,7 +348,7 @@ static NSString *cellId_2 = @"redeemCell_2";
     return view;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 95.0;
+    return 110.0;
 }
 //-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
 //    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 10)];
@@ -369,7 +400,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                          @"params":@[[addr add0xIfNeeded],@"latest"],@"id":@(1)}
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 if (error) {
-                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                    [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                     return ;
                                 }
                                 NSDictionary *dic = (NSDictionary *)responseObject;
@@ -380,6 +411,9 @@ static NSString *cellId_2 = @"redeemCell_2";
                                 @try {
                                     
                                     _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardLock gasPrice:@"200000" gasLimit:@"21000" to:App_Delegate.selectAddr value:[bitVal stringValue] data:[[[NSString stringWithFormat:@"%@", rewardNonce] hexString] add0xIfNeeded] password:password chainID:kChainID];
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [tmpSelf.passwordInput hidePasswordInput];
+                                    });
                                     //发送第二个请求
                                     [NetworkUtil rpc_requetWithURL:rpcHost
                                                             params:@{@"jsonrpc":@"2.0",
@@ -389,7 +423,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                                                      }
                                                         completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                                             
-                                                            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
                                                             if (error) {
                                                                 return ;
@@ -447,7 +481,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                          @"params":@[[addr add0xIfNeeded],@"latest"],@"id":@(1)}
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 if (error) {
-                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                    [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                     return ;
                                 }
                                 NSDictionary *dic = (NSDictionary *)responseObject;
@@ -458,6 +492,9 @@ static NSString *cellId_2 = @"redeemCell_2";
                                 @try {
                                     
                                     _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardVote gasPrice:@"200000" gasLimit:@"21000" to:App_Delegate.selectAddr value:[bitVal stringValue] data:@"" password:password chainID:kChainID];
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [tmpSelf.passwordInput hidePasswordInput];
+                                    });
                                     //发送第二个请求
                                     [NetworkUtil rpc_requetWithURL:rpcHost
                                                             params:@{@"jsonrpc":@"2.0",
@@ -467,7 +504,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                                                      }
                                                         completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                                             
-                                                            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
                                                             if (error) {
                                                                 return ;
@@ -512,15 +549,15 @@ static NSString *cellId_2 = @"redeemCell_2";
 - (IBAction)rewardAction:(UIButton *)sender {
     self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         __block __weak typeof(self) tmpSelf = self;
-        [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
+        [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             @try {
                 //                            [self rewardRedemptionWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID password:password];
                 [self rewardVoteWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID password:password];
             } @catch (NSException *exception) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                    [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
+                    [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                    [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:1 animted:YES];
                 });
             } @finally {
                 
@@ -628,6 +665,7 @@ static NSString *cellId_2 = @"redeemCell_2";
         CGRect fr = tipLabel.frame;
         fr.size.height = height;
         [_tableFooterView addSubview:tipLabel];
+        _tableFooterView.backgroundColor = kColorBackground;
         _tableFooterView.frame = CGRectMake(0, 0, KWIDTH, height+5);
     }
     return _tableFooterView;

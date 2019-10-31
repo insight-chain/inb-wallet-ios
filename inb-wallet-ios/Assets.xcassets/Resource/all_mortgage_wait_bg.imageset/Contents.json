@@ -8,38 +8,38 @@
       "resizing" : {
         "mode" : "9-part",
         "center" : {
-          "mode" : "tile",
+          "mode" : "stretch",
           "width" : 1,
           "height" : 1
         },
         "cap-insets" : {
-          "bottom" : 242,
-          "top" : 37,
-          "right" : 361,
-          "left" : 306
+          "bottom" : 60,
+          "top" : 59,
+          "right" : 10,
+          "left" : 207
         }
       },
       "idiom" : "universal",
-      "filename" : "reward_vote_no_bg@2x.png",
+      "filename" : "all_mortgage_wait_bg@2x.png",
       "scale" : "2x"
     },
     {
       "resizing" : {
         "mode" : "9-part",
         "center" : {
-          "mode" : "tile",
+          "mode" : "stretch",
           "width" : 1,
           "height" : 1
         },
         "cap-insets" : {
-          "bottom" : 351,
-          "top" : 41,
-          "right" : 558,
-          "left" : 443
+          "bottom" : 90,
+          "top" : 89,
+          "right" : 15,
+          "left" : 291
         }
       },
       "idiom" : "universal",
-      "filename" : "reward_vote_no_bg@3x.png",
+      "filename" : "all_mortgage_wait_bg@3x.png",
       "scale" : "3x"
     }
   ],

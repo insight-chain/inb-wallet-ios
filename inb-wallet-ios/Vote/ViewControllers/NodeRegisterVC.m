@@ -331,45 +331,48 @@
     
     self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         __block __weak typeof(self) tmpSelf = self;
-        [MBProgressHUD showHUDAddedTo:tmpSelf.view animated:YES];
+        [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
         
         [NetworkUtil rpc_requetWithURL:delegate.rpcHost params:@{@"jsonrpc":@"2.0",
                                                                  @"method":nonce_MethodName,
                                                                  @"params":@[[self.wallet.address add0xIfNeeded],@"latest"],@"id":@(1)}
                             completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                 if (error) {
-                                    [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                    [MBProgressHUD showMessage:NSLocalizedString(@"修改节点失败", @"修改节点失败") toView:tmpSelf.view afterDelay:1.5 animted:NO];
+                                    [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                    [MBProgressHUD showMessage:NSLocalizedString(@"修改节点失败", @"修改节点失败") toView:App_Delegate.window afterDelay:1.5 animted:NO];
                                     return ;
                                 }
                                 NSDictionary *dic = (NSDictionary *)responseObject;
                                 NSDecimalNumber *nonce = [dic[@"result"] decimalNumberFromHexString];
                                 @try{
                                     TransactionSignedResult *signResult = [WalletManager ethSignTransactionWithWalletID:self.wallet.walletID nonce:[nonce stringValue] txType:TxType_updateNodeInfo gasPrice:@"200000" gasLimit:@"21000" to:[self.wallet.address add0xIfNeeded] value:@"0" data:[dataStr hexString] password:password chainID:kChainID];
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [tmpSelf.passwordInput hidePasswordInput];
+                                    });
                                     [NetworkUtil rpc_requetWithURL:delegate.rpcHost
                                                             params:@{@"jsonrpc":@"2.0",
                                                                      @"method":sendTran_MethodName,
                                                                      @"params":@[[signResult.signedTx add0xIfNeeded]],
                                                                      @"id":@(1)}
                                                         completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                                            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             
                                                             if (error || responseObject[@"error"]) {
-                                                                [MBProgressHUD showMessage:NSLocalizedString(@"修改节点失败", @"修改节点失败") toView:tmpSelf.view afterDelay:1.5 animted:NO];
+                                                                [MBProgressHUD showMessage:NSLocalizedString(@"修改节点失败", @"修改节点失败") toView:App_Delegate.window afterDelay:1.5 animted:NO];
                                                                 return ;
                                                             }
                                                             NSLog(@"%@---%@",[responseObject  class], responseObject);
                                                             
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 [self.passwordInput hidePasswordInput];
-                                                                [MBProgressHUD showMessage:NSLocalizedString(@"修改节点成功", @"修改节点成功") toView:tmpSelf.view afterDelay:1.5 animted:NO];
+                                                                [MBProgressHUD showMessage:NSLocalizedString(@"修改节点成功", @"修改节点成功") toView:App_Delegate.window afterDelay:1.5 animted:NO];
                                                                 [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];
                                                             });
                                                         }];
                                 }@catch (NSException *exception) {
                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                        [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
-                                        [MBProgressHUD showMessage:@"密码错误" toView:tmpSelf.view afterDelay:1 animted:YES];
+                                        [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                        [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:1 animted:YES];
                                     });
                                     
                                 } @finally {

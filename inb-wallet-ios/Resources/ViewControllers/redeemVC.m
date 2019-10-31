@@ -237,6 +237,9 @@ static NSString *cellId_2 = @"redeemCell_2";
                                 @try {
                                     
                                     _signResult = [WalletManager ethSignTransactionWithWalletID:walletID nonce:[_nonce stringValue] txType:TxType_rewardLock gasPrice:@"200000" gasLimit:@"21000" to:App_Delegate.selectAddr value:[bitVal stringValue] data:[[NSString stringWithFormat:@"%@", rewardNonce] add0xIfNeeded] password:password chainID:kChainID];
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        [tmpSelf.passwordInput hidePasswordInput];
+                                    });
                                     //发送第二个请求
                                     [NetworkUtil rpc_requetWithURL:rpcHost
                                                             params:@{@"jsonrpc":@"2.0",
@@ -330,7 +333,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                                                                      @"id":@(67),
                                                                      }
                                                         completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
-                                                            
+                                        [tmpSelf.passwordInput hidePasswordInput];
                                                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
                                                             if (error ) {
