@@ -12,6 +12,7 @@
 
 #import "WalletManager.h"
 
+#import "TransferResultView.h"
 #import "ConfirmView.h"
 #import "PasswordInputView.h"
 #import "SWQRCode.h"
@@ -220,12 +221,14 @@
                                                                     [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
 
                                                                     if (error) {
-                                                                        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:App_Delegate.window afterDelay:1 animted:NO];
+//                                                                        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:App_Delegate.window afterDelay:1 animted:NO];
+                                                                        [TransferResultView resultFailedWithTitle:NSLocalizedString(@"transfer.result.failed", @"转账失败") message:@"网络请求错误"];
                                                                         return ;
                                                                     }
                                                                     NSString *errorStr = responseObject[@"error"][@"message"];
                                                                     if(errorStr){
-                                                                        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:App_Delegate.window afterDelay:1 animted:NO];
+//                                                                        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:App_Delegate.window afterDelay:1 animted:NO];
+                                                                        [TransferResultView resultFailedWithTitle:NSLocalizedString(@"transfer.result.failed", @"转账失败") message:errorStr];
                                                                         return ;
                                                                     }
                                                                     NSLog(@"%@---%@",[responseObject  class], responseObject);

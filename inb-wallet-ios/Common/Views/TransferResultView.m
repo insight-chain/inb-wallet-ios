@@ -37,6 +37,9 @@
     TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
     resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
     [resultView makeFiledViewWithError:(NSString *)message];
+    [resultView layoutIfNeeded];
+    resultView.contenView.layer.cornerRadius = 4;
+    resultView.contenView.layer.masksToBounds = YES;
     [App_Delegate.window addSubview:resultView];
     return resultView;
 }
@@ -44,13 +47,18 @@
     TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
     resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
     [resultView makeLockViewWithLockNumber:lockNumber value:value];
-    
+    [resultView layoutIfNeeded];
+    resultView.contenView.layer.cornerRadius = 4;
+    resultView.contenView.layer.masksToBounds = YES;
     [App_Delegate.window addSubview:resultView];
     return resultView;
 }
 +(instancetype)resultSuccessVoteWithTitle:(NSString *)title voteNumber:(NSInteger)voteNumber voteNames:(NSArray *)names{
     TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
     resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
+    [resultView layoutIfNeeded];
+    resultView.contenView.layer.cornerRadius = 4;
+    resultView.contenView.layer.masksToBounds = YES;
     [App_Delegate.window addSubview:resultView];
     return resultView;
 }
@@ -338,6 +346,7 @@
         _voteValue = [[UILabel alloc] init];
         _voteValue.textColor = kColorTitle;
         _voteValue.font = [UIFont systemFontOfSize:12];
+        _voteValue.numberOfLines = 0;
     }
     return _voteValue;
 }

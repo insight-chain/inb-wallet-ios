@@ -347,6 +347,12 @@
     });
 }
 
+#pragma mark ---- Button
+//我知道了
+-(void)cancelAction{
+    
+}
+
 #pragma mark ---- UITableViewDatasource && Delegate
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 0.00001;

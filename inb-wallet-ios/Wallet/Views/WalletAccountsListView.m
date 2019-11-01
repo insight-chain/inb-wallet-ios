@@ -93,12 +93,12 @@ static double cellHeight = 70;
     }];
     [self.addAccountView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
+        make.bottom.mas_equalTo(0);
         if (iPhoneX) {
-            make.bottom.mas_equalTo(0+20);
+            make.height.mas_equalTo(65+20);
         }else{
-            make.bottom.mas_equalTo(0);
+            make.height.mas_equalTo(65);
         }
-        make.height.mas_equalTo(65);
     }];
     
     [self.packUpImg mas_remakeConstraints:^(MASConstraintMaker *make) {

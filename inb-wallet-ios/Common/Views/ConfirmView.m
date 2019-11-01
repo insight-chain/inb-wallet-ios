@@ -358,7 +358,7 @@
     }];
     [self.toAddrStr mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.numberStr);
-        make.top.mas_equalTo(self.numberStr.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.numberStr.mas_bottom).mas_offset(18);
     }];
     [self.toAddrValue mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.toAddrStr);
@@ -366,7 +366,7 @@
     }];
     [self.noteStr mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.toAddrStr);
-        make.top.mas_equalTo(self.toAddrValue.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.toAddrValue.mas_bottom).mas_offset(18);
     }];
     [self.noteValue mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.toAddrValue);
@@ -508,7 +508,7 @@
     if(self.isLock){
         [self.lockNumberStr mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self.moneyNumberStr);
-            make.top.mas_equalTo(self.moneyNumberStr.mas_bottom).mas_offset(15);
+            make.top.mas_equalTo(self.moneyNumberStr.mas_bottom).mas_offset(18);
         }];
         [self.lockNumberValue mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self.moneyNumberValue);
@@ -516,7 +516,7 @@
         }];
         [self.rateStr mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self.lockNumberStr);
-            make.top.mas_equalTo(self.lockNumberStr.mas_bottom).mas_offset(15);
+            make.top.mas_equalTo(self.lockNumberStr.mas_bottom).mas_offset(18);
         }];
         [self.rateValue mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self.lockNumberValue);
@@ -525,7 +525,7 @@
         [self.tipImg_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.rateStr);
             make.width.height.mas_equalTo(15);
-            make.top.mas_equalTo(self.rateStr.mas_bottom).mas_offset(15);
+            make.top.mas_equalTo(self.rateStr.mas_bottom).mas_offset(18);
         }];
         [self.tipLabel_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.tipImg_1);
@@ -534,7 +534,7 @@
         }];
         [self.tipImg_2 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.tipImg_1);
-            make.top.mas_equalTo(self.tipLabel_1.mas_bottom).mas_offset(15);
+            make.top.mas_equalTo(self.tipLabel_1.mas_bottom).mas_offset(13);
         }];
         [self.tipLabel_2 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self.tipLabel_1);
@@ -543,7 +543,7 @@
     }else{
         [self.tipImg_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.moneyNumberStr);
-            make.top.mas_equalTo(self.moneyNumberStr.mas_bottom).mas_offset(15);
+            make.top.mas_equalTo(self.moneyNumberStr.mas_bottom).mas_offset(18);
         }];
         [self.tipLabel_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.tipImg_1);
@@ -552,7 +552,7 @@
         }];
         [self.tipImg_2 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.tipImg_1);
-            make.top.mas_equalTo(self.tipLabel_1.mas_bottom).mas_offset(15);
+            make.top.mas_equalTo(self.tipLabel_1.mas_bottom).mas_offset(13);
         }];
         [self.tipLabel_2 mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self.tipLabel_1);
@@ -700,7 +700,7 @@
     }];
     [self.moneyNumberStr mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.addrStr);
-        make.top.mas_equalTo(self.addrValue.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.addrValue.mas_bottom).mas_offset(18);
     }];
     [self.moneyNumberValue mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.addrValue);
@@ -710,7 +710,7 @@
     [self.tipImg_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.width.height.mas_equalTo(15);
         make.left.mas_equalTo(self.moneyNumberStr);
-        make.top.mas_equalTo(self.moneyNumberValue.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.moneyNumberValue.mas_bottom).mas_offset(18);
     }];
     [self.tipLabel_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.tipImg_1.mas_right).mas_offset(10);
@@ -719,7 +719,7 @@
     }];
     [self.tipImg_2 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.tipImg_1);
-        make.top.mas_equalTo(self.tipLabel_1.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.tipLabel_1.mas_bottom).mas_offset(13);
     }];
     [self.tipLabel_2 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.tipLabel_1);
@@ -844,7 +844,7 @@
         make.left.top.mas_equalTo(0);
     }];
     [self.nodeImg mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.nodeStr.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.nodeStr.mas_bottom).mas_offset(18);
         make.left.right.mas_equalTo(0);
         make.bottom.mas_equalTo(self.nodeValue.mas_bottom).mas_offset(10);
     }];
@@ -855,7 +855,7 @@
     }];
     [self.voteStr mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.nodeStr);
-        make.top.mas_equalTo(self.nodeImg.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.nodeImg.mas_bottom).mas_offset(18);
     }];
     [self.voteValue mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.voteStr.mas_right).mas_offset(5);
@@ -864,7 +864,7 @@
     [self.tipImg_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.voteStr);
         make.width.height.mas_equalTo(15);
-        make.top.mas_equalTo(self.voteValue.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.voteValue.mas_bottom).mas_offset(18);
     }];
     [self.tipLabel_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.tipImg_1);
@@ -872,7 +872,7 @@
         make.right.mas_equalTo(0);
     }];
     [self.tipImg_2 mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.tipLabel_1.mas_bottom).mas_offset(15);
+        make.top.mas_equalTo(self.tipLabel_1.mas_bottom).mas_offset(13);
         make.left.mas_equalTo(self.tipImg_1);
     }];
     [self.tipLabel_2 mas_remakeConstraints:^(MASConstraintMaker *make) {

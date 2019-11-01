@@ -84,7 +84,7 @@
                                         NSString *menmonry = [tmpSelf.wallet exportMnemonic:password];
                                         dispatch_async(dispatch_get_main_queue(), ^{
                                             [self.passwordInput hidePasswordInput];
-                                            [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
+                                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                             WalletBackupVC *backupVC = [[WalletBackupVC alloc] init];
                                             backupVC.navigationItem.title = NSLocalizedString(@"backupWallet", @"备份钱包");
                                             backupVC.privateKey = private;

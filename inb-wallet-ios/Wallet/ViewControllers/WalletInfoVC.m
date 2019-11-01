@@ -92,7 +92,7 @@
     [self initNavi];
     
     [NotificationCenter addObserver:self selector:@selector(addWalletNoti:) name:NOTI_ADD_WALLET object:nil];
-    [NotificationCenter addObserver:self selector:@selector(addWalletNoti:) name:NOTI_DELETE_WALLET object:nil];
+    [NotificationCenter addObserver:self selector:@selector(deleteWalletNoti:) name:NOTI_DELETE_WALLET object:nil];
     [NotificationCenter addObserver:self selector:@selector(mortgageChangeNoti:) name:NOTI_MORTGAGE_CHANGE object:nil];
     [NotificationCenter addObserver:self selector:@selector(mortgageChangeNoti:) name:NOTI_BALANCE_CHANGE object:nil];
     
@@ -617,13 +617,21 @@
     BasicWallet *wallet = noti.object;
     Identity *identi = [Identity currentIdentity];
     if(identi.wallets.count != 0){
+        self.selectedWallet = wallet ? wallet : [identi.wallets lastObject];
+        self.wallets = identi.wallets;
+        return ;
+    }
+    [self changeToCreate];
+}
+-(void)deleteWalletNoti:(NSNotification *)noti{
+    Identity *identi = [Identity currentIdentity];
+    if(identi.wallets.count != 0){
         self.selectedWallet = [identi.wallets lastObject];
         self.wallets = identi.wallets;
         return ;
     }
     [self changeToCreate];
 }
-
 -(void)changeToCreate{
     WelcomVC *welcomVC = [[WelcomVC alloc] init];
     /** 导航栏背景色 **/
