@@ -13,6 +13,7 @@
 
 #import "RedeemCell_1.h"
 #import "RedeemCell_2.h"
+#import "TransferResultView.h"
 #import "PasswordInputView.h"
 
 #import "LockModel.h"
@@ -205,7 +206,7 @@ static NSString *cellId_2 = @"redeemCell_2";
 
 #pragma mark ----
 //领取锁仓奖励
--(void)rewardLockWithAddr:(NSString *)addr walletID:(NSString *)walletID nonce:(NSString *)rewardNonce password:(NSString *)password{
+-(void)rewardLockWithAddr:(NSString *)addr value:(double)value walletID:(NSString *)walletID nonce:(NSString *)rewardNonce password:(NSString *)password{
     __weak typeof(self) tmpSelf = self;
     __block __weak NSDecimalNumber *_nonce;
     
@@ -252,15 +253,18 @@ static NSString *cellId_2 = @"redeemCell_2";
                                                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
                                                             if (error) {
-                                                                [MBProgressHUD showMessage:@"领取锁仓奖励失败" toView:App_Delegate.window afterDelay:1.5 animted:YES];
+//                                                                [MBProgressHUD showMessage:@"领取锁仓奖励失败" toView:App_Delegate.window afterDelay:1.5 animted:YES];
+                                                                [TransferResultView resultFailedWithTitle:NSLocalizedString(@"receive.reward.lock.failed", @"锁仓抵押奖励领取失败") message:[error description]];
                                                                 return ;
                                                             }
                                         if(responseObject[@"error"]){
-                                            [MBProgressHUD showMessage:responseObject[@"error"][@"message"] toView:App_Delegate.window afterDelay:1.5 animted:YES];
-                                                                                                           return ;
+//                                            [MBProgressHUD showMessage:responseObject[@"error"][@"message"] toView:App_Delegate.window afterDelay:1.5 animted:YES];
+                                            [TransferResultView resultFailedWithTitle:NSLocalizedString(@"receive.reward.lock.failed", @"锁仓抵押奖励领取失败") message:responseObject[@"error"][@"message"]];
+                                            return ;
                                         }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 [tmpSelf.passwordInput hidePasswordInput];
+                                                                [TransferResultView resultSuccessRewardWithTitle:NSLocalizedString(@"receive.reward.lock.success", @"抵押锁仓奖励领取成功") value:0];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             
@@ -294,7 +298,7 @@ static NSString *cellId_2 = @"redeemCell_2";
 }
 
 //领取赎回
--(void)rewardRedemptionWithAddr:(NSString *)addr walletID:(NSString *)walletID password:(NSString *)password{
+-(void)rewardRedemptionWithAddr:(NSString *)addr value:(double)value walletID:(NSString *)walletID password:(NSString *)password{
     __weak typeof(self) tmpSelf = self;
     __block __weak NSDecimalNumber *_nonce;
     
@@ -337,16 +341,18 @@ static NSString *cellId_2 = @"redeemCell_2";
                                                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
                                                             if (error ) {
-                                                                [MBProgressHUD showMessage:@"领取赎回失败" toView:App_Delegate.window afterDelay:1.5 animted:YES];
+//                                                                [MBProgressHUD showMessage:@"领取赎回失败" toView:App_Delegate.window afterDelay:1.5 animted:YES];
+                                                                [TransferResultView resultFailedWithTitle:NSLocalizedString(@"receive.redemption.failed", @"领取赎回失败") message:[error description]];
                                                                 return ;
                                                             }
                                         if(responseObject[@"error"]){
                                             [MBProgressHUD showMessage:responseObject[@"error"][@"message"] toView:App_Delegate.window afterDelay:1.5 animted:YES];
+                                            [TransferResultView resultFailedWithTitle:NSLocalizedString(@"receive.redemption.failed", @"领取赎回失败") message:responseObject[@"error"][@"message"]];
                                             return ;
                                         }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                                
                                                                 [tmpSelf.passwordInput hidePasswordInput];
+                                                                [TransferResultView resultSuccessRewardWithTitle:NSLocalizedString(@"receive.redemption.success", @"领取赎回成功") value:value];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             
@@ -427,7 +433,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                 [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     @try {
-                        [self rewardRedemptionWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID password:password];
+                        [self rewardRedemptionWithAddr:App_Delegate.selectAddr value:redeemValue walletID:App_Delegate.selectWalletID password:password];
                     } @catch (NSException *exception) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
@@ -480,7 +486,7 @@ static NSString *cellId_2 = @"redeemCell_2";
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                         @try {
 //                            [self rewardRedemptionWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID password:password];
-                            [self rewardLockWithAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID nonce:model.hashStr password:password];
+                            [self rewardLockWithAddr:App_Delegate.selectAddr value:0 walletID:App_Delegate.selectWalletID nonce:model.hashStr password:password];
                         } @catch (NSException *exception) {
                             dispatch_async(dispatch_get_main_queue(), ^{
                                 [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];

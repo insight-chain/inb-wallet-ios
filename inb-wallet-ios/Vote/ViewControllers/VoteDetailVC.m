@@ -287,7 +287,7 @@
                                                                  
                                                                  dispatch_async(dispatch_get_main_queue(), ^{
                                                                      [self.passwordInput hidePasswordInput];
-                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.success", @"投票成功") toView:App_Delegate.window afterDelay:1 animted:NO];
+//                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.success", @"投票成功") toView:App_Delegate.window afterDelay:1 animted:NO];
                                                                      NSMutableArray *nodeNames = @[].mutableCopy;
                                                                      for (Node *node in self.selectedNode) {
                                                                          [nodeNames addObject:node.name];

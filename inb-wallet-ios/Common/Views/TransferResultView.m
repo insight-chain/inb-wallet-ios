@@ -7,6 +7,9 @@
 //
 
 #import "TransferResultView.h"
+
+#import "UIImage+QRImage.h"
+
 @interface TransferResultView()
 @property (nonatomic, strong) UIView *maskView;
 @property (nonatomic, strong) UIView *contenView;
@@ -25,6 +28,9 @@
 @property (nonatomic, strong) UILabel *voteStr;
 @property (nonatomic, strong) UILabel *voteValue;
 @property (nonatomic, strong) UIImageView *voteImg;
+
+@property (nonatomic, strong) UIImageView *qrImgView;
+@property (nonatomic, strong) UILabel *qrTipLabel;
 
 @property (nonatomic, strong) UIButton *knownBtn;
 
@@ -56,13 +62,43 @@
 +(instancetype)resultSuccessVoteWithTitle:(NSString *)title voteNumber:(NSInteger)voteNumber voteNames:(NSArray *)names{
     TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
     resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
+    [resultView makeVoteViewWithValue:voteNumber voteName:names];
     [resultView layoutIfNeeded];
     resultView.contenView.layer.cornerRadius = 4;
     resultView.contenView.layer.masksToBounds = YES;
     [App_Delegate.window addSubview:resultView];
     return resultView;
 }
-
++(instancetype)resultSuccessRedeemWithTitle:(NSString *)title value:(double)value{
+    TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
+    resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
+    [resultView makeRedeemViewWithValue:value];
+    [resultView layoutIfNeeded];
+    resultView.contenView.layer.cornerRadius = 4;
+    resultView.contenView.layer.masksToBounds = YES;
+    [App_Delegate.window addSubview:resultView];
+    return resultView;
+}
++(instancetype)resultSuccessRewardWithTitle:(NSString *)title value:(double)value{
+    TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
+    resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
+    [resultView makeRewardViewWithValue:value];
+    [resultView layoutIfNeeded];
+    resultView.contenView.layer.cornerRadius = 4;
+    resultView.contenView.layer.masksToBounds = YES;
+    [App_Delegate.window addSubview:resultView];
+    return resultView;
+}
++(instancetype)QRViewWithTitle:(NSString *)title value:(NSString *)value{
+TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
+   resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
+   [resultView makeQRViewWithValue:value];
+   [resultView layoutIfNeeded];
+   resultView.contenView.layer.cornerRadius = 4;
+   resultView.contenView.layer.masksToBounds = YES;
+   [App_Delegate.window addSubview:resultView];
+   return resultView;
+}
 -(instancetype)initWithTitle:(NSString *)title{
     if(self = [super init]){
         [self addSubview:self.maskView];
@@ -82,9 +118,9 @@
         make.edges.mas_equalTo(0);
     }];
     [self.contenView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self).mas_offset(145);
         make.width.mas_equalTo(275);
         make.centerX.mas_equalTo(self);
+        make.centerY.mas_equalTo(self);
         make.bottom.mas_equalTo(self.knownBtn.mas_bottom).mas_offset(25);
     }];
     [self.titleStr mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -172,7 +208,7 @@
 }
 
 -(void)makeVoteViewWithValue:(double)value voteName:(NSArray *)voteNames{
-    self.itemStr_1.text = NSLocalizedString(@"", @"可用票数");
+    self.itemStr_1.text = NSLocalizedString(@"confirm.vote.canuse", @"可用票数");
     self.itemValue_1.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",value]]];
     self.voteStr.text = NSLocalizedString(@"confirm.vote.node", @"投票节点");
     self.voteValue.text = [voteNames componentsJoinedByString:@"、"];
@@ -216,6 +252,54 @@
         make.width.mas_equalTo(200);
     }];
    
+}
+
+-(void)makeRedeemViewWithValue:(double)value{
+    self.itemStr_1.text = NSLocalizedString(@"confirm.redeem.valur", @"赎回数量");
+    self.itemValue_1.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",value]]];
+    [self.contenView addSubview:self.itemStr_1];
+    [self.contenView addSubview:self.itemValue_1];
+   
+    [self makeRedeemViewConstraints];
+}
+-(void)makeRedeemViewConstraints{
+    [self.knownBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.titleStr.mas_centerX);
+        make.top.mas_equalTo(self.titleStr.mas_bottom).mas_offset(30);
+        make.height.mas_equalTo(40);
+        make.width.mas_equalTo(200);
+    }];
+}
+
+-(void)makeRewardViewWithValue:(double)value{
+     [self makeRedeemViewConstraints];
+}
+
+-(void)makeQRViewWithValue:(NSString *)value{
+    [self.contenView addSubview:self.qrImgView];
+    [self.contenView addSubview:self.qrTipLabel];
+    self.qrImgView.image = [UIImage createQRImgae:value size:122 centerImg:nil centerImgSize:0];
+    [self makeQRViewConstraints];
+}
+-(void)makeQRViewConstraints{
+    [self.qrImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.titleStr.mas_bottom).mas_offset(30);
+        make.centerX.mas_equalTo(self.titleStr);
+        make.width.height.mas_equalTo(122);
+    }];
+    [self.qrTipLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.qrImgView.mas_bottom).mas_offset(15);
+        make.centerX.mas_equalTo(self.qrImgView.mas_centerX);
+        make.left.mas_equalTo(self.contenView.mas_left).mas_offset(20);
+        make.right.mas_equalTo(self.contenView.mas_right).mas_offset(-20);
+    }];
+    
+    [self.knownBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.titleStr.mas_centerX);
+        make.top.mas_equalTo(self.qrTipLabel.mas_bottom).mas_offset(15);
+        make.height.mas_equalTo(40);
+        make.width.mas_equalTo(200);
+    }];
 }
 
 -(void)makeFiledViewWithError:(NSString *)message{
@@ -356,6 +440,23 @@
     }
     return _voteImg;
 }
+
+-(UIImageView *)qrImgView{
+    if (_qrImgView == nil) {
+        _qrImgView = [[UIImageView alloc] init];
+    }
+    return _qrImgView;
+}
+-(UILabel *)qrTipLabel{
+    if (_qrTipLabel == nil) {
+        _qrTipLabel = [[UILabel alloc] init];
+        _qrTipLabel.textColor = kColorBlue;
+        _qrTipLabel.font = [UIFont systemFontOfSize:13];
+        _qrTipLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _qrTipLabel;
+}
+
 -(UIButton *)knownBtn{
     if (_knownBtn == nil) {
         _knownBtn = [[UIButton alloc] init];

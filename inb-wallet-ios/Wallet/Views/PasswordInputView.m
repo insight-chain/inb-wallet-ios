@@ -38,9 +38,20 @@
         [self makeConstraints];
        
         [self.passwordTF becomeFirstResponder];
+        #pragma mark -键盘弹出添加监听事件
+        // 键盘出现的通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+        // 键盘消失的通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHiden:) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
 }
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
 -(void)makeConstraints{
     [self addSubview:self.maskView];
     [self addSubview:self.bgImgView];
@@ -90,6 +101,15 @@
     return passwordView;
 }
 
+#pragma mark ---- 通知action
+-(void)keyboardWasShown:(NSNotification *)noti{
+    CGRect rect = self.frame;
+    rect.origin.y -= 50;
+    self.frame = rect;
+}
+-(void)keyboardWillBeHiden:(NSNotification *)noti{
+    self.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
+}
 
 #pragma mark ---- Action
 //取消

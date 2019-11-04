@@ -273,10 +273,10 @@
 		FE93BB56236846EC00BA8B09 /* TransferResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE93BB55236846EC00BA8B09 /* TransferResultView.m */; };
 		FE93BB5D2369B4E400BA8B09 /* RewardNoMortgageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FE93BB5B2369B4E400BA8B09 /* RewardNoMortgageCell.m */; };
 		FE93BB5E2369B4E400BA8B09 /* RewardNoMortgageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE93BB5C2369B4E400BA8B09 /* RewardNoMortgageCell.xib */; };
-		FE93BB66236A7BD200BA8B09 /* lanch_bg_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE93BB64236A7BD200BA8B09 /* lanch_bg_new@2x.png */; };
-		FE93BB67236A7BD200BA8B09 /* lanch_bg_new@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE93BB65236A7BD200BA8B09 /* lanch_bg_new@3x.png */; };
 		FE93BB6A236A7CB600BA8B09 /* lanch_trademark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE93BB68236A7CB600BA8B09 /* lanch_trademark@3x.png */; };
 		FE93BB6B236A7CB600BA8B09 /* lanch_trademark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE93BB69236A7CB600BA8B09 /* lanch_trademark@2x.png */; };
+		FE93BB6E236C13C200BA8B09 /* lanch_bg_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE93BB6C236C13C100BA8B09 /* lanch_bg_new@2x.png */; };
+		FE93BB6F236C13C200BA8B09 /* lanch_bg_new@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE93BB6D236C13C100BA8B09 /* lanch_bg_new@3x.png */; };
 		FECC977922D31B4B007BE8F5 /* TransferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC977822D31B4B007BE8F5 /* TransferModel.m */; };
 		FECC978422D46FCF007BE8F5 /* AppVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC978322D46FCF007BE8F5 /* AppVersion.m */; };
 		FECC978822DEFB78007BE8F5 /* NodeRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC978722DEFB78007BE8F5 /* NodeRegisterVC.m */; };
@@ -814,10 +814,10 @@
 		FE93BB5A2369B4E400BA8B09 /* RewardNoMortgageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardNoMortgageCell.h; sourceTree = "<group>"; };
 		FE93BB5B2369B4E400BA8B09 /* RewardNoMortgageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RewardNoMortgageCell.m; sourceTree = "<group>"; };
 		FE93BB5C2369B4E400BA8B09 /* RewardNoMortgageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RewardNoMortgageCell.xib; sourceTree = "<group>"; };
-		FE93BB64236A7BD200BA8B09 /* lanch_bg_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lanch_bg_new@2x.png"; sourceTree = "<group>"; };
-		FE93BB65236A7BD200BA8B09 /* lanch_bg_new@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lanch_bg_new@3x.png"; sourceTree = "<group>"; };
 		FE93BB68236A7CB600BA8B09 /* lanch_trademark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lanch_trademark@3x.png"; sourceTree = "<group>"; };
 		FE93BB69236A7CB600BA8B09 /* lanch_trademark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lanch_trademark@2x.png"; sourceTree = "<group>"; };
+		FE93BB6C236C13C100BA8B09 /* lanch_bg_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lanch_bg_new@2x.png"; sourceTree = "<group>"; };
+		FE93BB6D236C13C100BA8B09 /* lanch_bg_new@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lanch_bg_new@3x.png"; sourceTree = "<group>"; };
 		FECC977722D31B4B007BE8F5 /* TransferModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferModel.h; sourceTree = "<group>"; };
 		FECC977822D31B4B007BE8F5 /* TransferModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransferModel.m; sourceTree = "<group>"; };
 		FECC978222D46FCF007BE8F5 /* AppVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppVersion.h; sourceTree = "<group>"; };
@@ -2004,8 +2004,8 @@
 		FE93BB5F236A7A2F00BA8B09 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				FE93BB64236A7BD200BA8B09 /* lanch_bg_new@2x.png */,
-				FE93BB65236A7BD200BA8B09 /* lanch_bg_new@3x.png */,
+				FE93BB6C236C13C100BA8B09 /* lanch_bg_new@2x.png */,
+				FE93BB6D236C13C100BA8B09 /* lanch_bg_new@3x.png */,
 				FE93BB69236A7CB600BA8B09 /* lanch_trademark@2x.png */,
 				FE93BB68236A7CB600BA8B09 /* lanch_trademark@3x.png */,
 			);
@@ -2170,17 +2170,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE1FCE7F2328F52E00F89A18 /* RewardRecordVC.xib in Resources */,
+				FE93BB6F236C13C200BA8B09 /* lanch_bg_new@3x.png in Resources */,
 				FE92C5FF22A792F50043DA9D /* VoteBarView.xib in Resources */,
 				FE92C62822A792F50043DA9D /* MnemonicWordHeaderView.xib in Resources */,
 				FE6D855523228AC800023321 /* MortgageView.xib in Resources */,
 				FE92C62922A792F50043DA9D /* MnemonicWordCell.xib in Resources */,
-				FE93BB66236A7BD200BA8B09 /* lanch_bg_new@2x.png in Resources */,
 				FEE3B28622A641D3003B5244 /* LaunchScreen.storyboard in Resources */,
 				FE6D8518231CC0B600023321 /* RedeemCell_2.xib in Resources */,
+				FE93BB6E236C13C200BA8B09 /* lanch_bg_new@2x.png in Resources */,
 				FE92C62522A792F50043DA9D /* MnemonicWordCell2.xib in Resources */,
 				FE3FC2CD22B0E84500A41205 /* TransferListCell.xib in Resources */,
 				FE92C61122A792F50043DA9D /* TransferMessageCell.xib in Resources */,
-				FE93BB67236A7BD200BA8B09 /* lanch_bg_new@3x.png in Resources */,
 				FEE947DA2302BEB90004D696 /* FMListPlaceholderResources.bundle in Resources */,
 				FE1FCE762327D4F900F89A18 /* RewardVC.xib in Resources */,
 				FE1FCE642327899C00F89A18 /* MortgageDetailVC.xib in Resources */,

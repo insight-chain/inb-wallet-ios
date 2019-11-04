@@ -33,7 +33,7 @@
     confirmView.confirm = confirm;
     confirmView.cancel = cancel;
     confirmView.title= title;
-    [confirmView.confirmBtn setTitle:NSLocalizedString(@"confirm.transter", @"确认支付") forState:UIControlStateNormal];
+    [confirmView.confirmBtn setTitle:NSLocalizedString(@"confirm.transter", @"确定") forState:UIControlStateNormal];
     
     confirmView.transferView = [[TransferView alloc] initWithNumber:value toAddr:toAddr note:note];
     [confirmView makeTransferView];
@@ -47,7 +47,7 @@
        confirmView.confirm = confirm;
        confirmView.cancel = cancel;
        confirmView.title= title;
-       [confirmView.confirmBtn setTitle:NSLocalizedString(@"confirm.transter", @"确认支付") forState:UIControlStateNormal];
+       [confirmView.confirmBtn setTitle:NSLocalizedString(@"confirm.transter", @"确定") forState:UIControlStateNormal];
        
        confirmView.lockView = [[LockView alloc] initWithNumber:value lockNumber:lockNumber];
        [confirmView makeLockView];
@@ -61,7 +61,7 @@
     confirmView.confirm = confirm;
     confirmView.cancel = cancel;
     confirmView.title= title;
-    [confirmView.confirmBtn setTitle:NSLocalizedString(@"confirm.transter", @"确认支付") forState:UIControlStateNormal];
+    [confirmView.confirmBtn setTitle:NSLocalizedString(@"confirm.transter", @"确定") forState:UIControlStateNormal];
     
     confirmView.redeemView = [[RedeemView alloc] initWithNumber:value addr:addr];
     [confirmView makeRedeemView];
@@ -75,7 +75,7 @@
     confirmView.confirm = confirm;
     confirmView.cancel = cancel;
     confirmView.title= title;
-    [confirmView.confirmBtn setTitle:NSLocalizedString(@"confirm.transter", @"确认支付") forState:UIControlStateNormal];
+    [confirmView.confirmBtn setTitle:NSLocalizedString(@"confirm.transter", @"确定") forState:UIControlStateNormal];
     
     confirmView.voteView = [[VoteView alloc] initWithNodeNames:names voteNumber:value];
     [confirmView makeVoteView];

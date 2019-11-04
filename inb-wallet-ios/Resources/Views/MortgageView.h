@@ -37,6 +37,8 @@ typedef void(^DoubtBlock)(void);
 @property (nonatomic, copy) MortgageConfirmBlock confirmBlcok;
 @property (nonatomic, copy) DoubtBlock doubtBlock;
 
+@property (nonatomic, readonly, assign) NSInteger selectDays;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,6 +8,7 @@
 
 #import "RedeemINBVC.h"
 
+#import "TransferResultView.h"
 #import "ConfirmView.h"
 #import "PasswordInputView.h"
 #import "TransactionSignedResult.h"
@@ -95,6 +96,7 @@
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                                     [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                                     [MBProgressHUD showMessage:@"赎回失败" toView:App_Delegate.window afterDelay:1 animted:YES];
+                                                                    [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.redeem.failed", @"申请赎回失败") message:error?[error description]:responseObject[@"error"][@"message"]];
                                                                 });
                                                                 return ;
                                                             }
@@ -102,12 +104,14 @@
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 [self.passwordInput hidePasswordInput];
                                                                 [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
-                                                                [MBProgressHUD showMessage:@"赎回请求发送成功" toView:App_Delegate.window afterDelay:1.5 animted:YES];
+//                                                                [MBProgressHUD showMessage:@"赎回请求发送成功" toView:App_Delegate.window afterDelay:1.5 animted:YES];
+                                                                
+                                                                [TransferResultView resultSuccessRedeemWithTitle:NSLocalizedString(@"Resource.redeem.success", @"申请赎回成功") value:[inbNumber doubleValue]];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
 //                                                               //延迟执行
-                                                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                                                    [self.navigationController popViewControllerAnimated:YES];
-                                                                });
+//                                                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                                                                    [self.navigationController popViewControllerAnimated:YES];
+//                                                                });
                                                             });
                                                             
                                                         }];

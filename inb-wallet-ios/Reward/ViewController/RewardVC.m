@@ -17,6 +17,7 @@
 #import "RedeemCell_2.h"
 #import "RewardNoMortgageCell.h"
 
+#import "TransferResultView.h"
 #import "PasswordInputView.h"
 
 #import "LockModel.h"
@@ -426,10 +427,16 @@ static NSString *cellId_3 = @"noMortgageCell";
                                                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
                                                             if (error) {
+                                                                [TransferResultView resultFailedWithTitle:NSLocalizedString(@"receive.reward.lock.failed", @"锁仓抵押奖励领取失败") message:[error description]];
                                                                 return ;
                                                             }
+                                        if(responseObject[@"error"]){
+                                                                                    [TransferResultView resultFailedWithTitle:NSLocalizedString(@"receive.reward.lock.failed", @"锁仓抵押奖励领取失败") message:responseObject[@"error"][@"message"]];
+                                                                                    return ;
+                                                                                }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 [self.passwordInput hidePasswordInput];
+                                                                [TransferResultView resultSuccessRewardWithTitle:NSLocalizedString(@"receive.reward.lock.success", @"抵押锁仓奖励领取成功") value:0];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             
@@ -506,11 +513,13 @@ static NSString *cellId_3 = @"noMortgageCell";
                                                             
                                                             [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                             NSLog(@"%@", responseObject);
-                                                            if (error) {
+                                                            if (error || responseObject[@"error"]) {
+                                                                [TransferResultView resultFailedWithTitle:NSLocalizedString(@"receive.reward.vote.failed", @"投票奖励领取失败") message:error?[error description]:responseObject[@"error"][@"message"]];
                                                                 return ;
                                                             }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 [self.passwordInput hidePasswordInput];
+                                                                [TransferResultView resultSuccessRewardWithTitle:NSLocalizedString(@"receive.reward.vote.success", @"投票奖励领取成功") value:0];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                                 
                                                                 [self.voteRewardBtn setTitle:[NSString stringWithFormat:@"领取成功"] forState:UIControlStateNormal];

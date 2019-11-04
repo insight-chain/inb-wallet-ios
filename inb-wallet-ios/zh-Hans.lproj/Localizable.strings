@@ -15,6 +15,7 @@
 "determine" = "确定";
 "wallet" = "钱包";
 "balance" = "余额";
+"reward.amount" = "奖励金额";
 
 "welcom" = "你好，\n欢迎来到Insight Chain";
 "welcom.hasINBWallet" = "我有INB钱包";
@@ -55,6 +56,20 @@
 
 "Resource.mortgage.success" = "资源抵押成功";
 "Resource.mortgage.failed" = "资源抵押失败";
+"Resource.redeem.success" = "申请赎回成功";
+"Resource.redeem.failed" = "申请赎回失败";
+"receive.redemption" = "领取赎回";
+"receive.redemption.success" = "赎回领取成功";
+"receive.redemption.failed" = "赎回领取失败";
+"receive.reward" = "领取奖励";
+"receive.reward.success" = "领取奖励成功";
+"receive.reward.failed" = "领取奖励失败";
+"receive.reward.vote" = "领取投票奖励";
+"receive.reward.vote.success" = "投票奖励领取成功";
+"receive.reward.vote.failed" = "投票奖励领取失败";
+"receive.reward.lock" = "领取锁仓抵押奖励";
+"receive.reward.lock.success" = "锁仓抵押奖励领取成功";
+"receive.reward.lock.failed" = "锁仓抵押奖励领取失败";
 
 "reward.noMortgage" = "您未参与节点投票，暂无奖励";
 
@@ -86,6 +101,7 @@
 "wallet.reward" = "收益奖励";
 "wallet.create.successed" = "钱包创建成功";
 
+"QRCode" = "二维码";
 "copyAddress" = "复制地址";
 "saveQRCode" = "保存二维码";
 
@@ -251,7 +267,7 @@
 "message.tip.mortgage.choseDay" = "请选择抵押期限";
 
 "confirm.cancel" = "取消";
-"confirm.transter" = "确认支付";
+"confirm.transter" = "确定";
 "confirm.mortgage.value" = "抵押金额";
 "confirm.mortgage.day" = "抵押期限";
 "confirm.mortgage.rate" = "年化率";

@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger lockingNumber; //正在锁仓的数量
 
 @property (nonatomic, strong) UITableView *tableView;
+
+-(void)confirmMortgage;
+
 @end
 
 

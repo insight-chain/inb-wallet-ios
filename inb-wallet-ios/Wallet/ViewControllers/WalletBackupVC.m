@@ -7,7 +7,7 @@
 //
 
 #import "WalletBackupVC.h"
-
+#import "TransferResultView.h"
 #define kFontSize 15
 
 #define kBigMargin 20
@@ -32,6 +32,7 @@
 @property(nonatomic, strong) UILabel *menmonry;
 @property(nonatomic, strong) UIImageView *menmonryBg;
 @property(nonatomic, strong) UIButton *menmonryCopy;
+@property(nonatomic, strong) UIButton *menmonryQRBtn; //私钥二维码
 
 @property(nonatomic, strong) UIImageView *tipImg_1;
 @property(nonatomic, strong) UILabel *tipLabel_1;
@@ -39,6 +40,8 @@
 @property(nonatomic, strong) UILabel *tipLabel_2;
 
 @property(nonatomic, strong) UIButton *addressCopyBtn;
+@property(nonatomic, strong) UIButton *privateKeyQRBtn; //私钥二维码
+
 
 @end
 
@@ -62,6 +65,13 @@
     self.accountName.text = self.name;
     self.address.text = self.privateKey;
     self.menmonry.text = self.menmonryKey;
+    if ([self.menmonry.text isEqualToString:@""]) {
+        self.menmonryCopy.hidden = YES;
+        self.menmonryQRBtn.hidden = YES;
+    }else{
+        self.menmonryCopy.hidden = NO;
+        self.menmonryQRBtn.hidden = NO;
+    }
 }
 
 -(void)makeConstraints{
@@ -73,11 +83,13 @@
     [self.view addSubview:self.addressBg];
     [self.view addSubview:self.address];
     [self.view addSubview:self.addressCopyBtn];
+    [self.view addSubview:self.privateKeyQRBtn];
     
     [self.view addSubview:self.menmonryLabel];
     [self.view addSubview:self.menmonryBg];
     [self.view addSubview:self.menmonry];
     [self.view addSubview:self.menmonryCopy];
+    [self.view addSubview:self.menmonryQRBtn];
     
     UIView *sepView = [[UIView alloc] init];
     sepView.backgroundColor = kColorBackground;
@@ -118,9 +130,14 @@
     }];
     
     [self.addressCopyBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.addressBg.mas_bottom).mas_offset(AdaptedHeight(-kMidMargin-5));
+        make.bottom.mas_equalTo(self.addressBg.mas_bottom).mas_offset(AdaptedHeight(-5));
         make.right.mas_equalTo(self.addressBg.mas_right).mas_offset(AdaptedWidth(-kLittleMargin-5));
         make.width.height.mas_equalTo(AdaptedWidth(kBigMargin+10));
+    }];
+    [self.privateKeyQRBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.addressCopyBtn);
+        make.width.height.mas_equalTo(self.addressCopyBtn);
+        make.right.mas_equalTo(self.addressCopyBtn.mas_left);
     }];
     
     [self.menmonryLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -138,9 +155,14 @@
         make.right.mas_equalTo(self.menmonryBg.mas_right).mas_offset(AdaptedWidth(-kLittleMargin));
     }];
     [self.menmonryCopy mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.menmonryBg.mas_bottom).mas_offset(AdaptedHeight(-kMidMargin-5));
+        make.bottom.mas_equalTo(self.menmonryBg.mas_bottom).mas_offset(AdaptedHeight(-5));
         make.right.mas_equalTo(self.menmonryBg.mas_right).mas_offset(AdaptedWidth(-kLittleMargin-5));
         make.width.height.mas_equalTo(AdaptedWidth(kBigMargin+10));
+    }];
+    [self.menmonryQRBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.menmonryCopy);
+        make.width.height.mas_equalTo(self.menmonryCopy);
+        make.right.mas_equalTo(self.menmonryCopy.mas_left);
     }];
     
     [sepView mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -182,6 +204,14 @@
     UIPasteboard *board = [UIPasteboard generalPasteboard];
     board.string = self.menmonryKey;
     [MBProgressHUD showMessage:NSLocalizedString(@"wallet.copy.memonry.success", @"助记词已复制到剪贴板") toView:self.view afterDelay:1.5 animted:YES];
+}
+//显示私钥二维码
+-(void)privateQR:(UIButton *)sender{
+    [TransferResultView QRViewWithTitle:NSLocalizedString(@"QRCode", @"二维码") value:self.address.text];
+}
+//显示助记词二维码
+-(void)menmonryQR:(UIButton *)sender{
+    [TransferResultView QRViewWithTitle:NSLocalizedString(@"QRCode", @"二维码") value:self.menmonry.text];
 }
 #pragma mark ----
 -(UILabel *)accountNameLabel{
@@ -247,7 +277,14 @@
     }
     return _addressCopyBtn;
 }
-
+-(UIButton *)privateKeyQRBtn{
+    if (_privateKeyQRBtn == nil) {
+        _privateKeyQRBtn = [[UIButton alloc] init];
+        [_privateKeyQRBtn setImage:[UIImage imageNamed:@"qr"] forState:UIControlStateNormal];
+        [_privateKeyQRBtn addTarget:self action:@selector(privateQR:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _privateKeyQRBtn;
+}
 -(UILabel *)menmonryLabel{
     if (_menmonryLabel == nil) {
         _menmonryLabel = [[UILabel alloc] init];
@@ -283,6 +320,14 @@
         [_menmonryCopy addTarget:self action:@selector(mnemonicCopy:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _menmonryCopy;
+}
+-(UIButton *)menmonryQRBtn{
+    if (_menmonryQRBtn == nil) {
+        _menmonryQRBtn = [[UIButton alloc] init];
+        [_menmonryQRBtn setImage:[UIImage imageNamed:@"qr"] forState:UIControlStateNormal];
+        [_menmonryQRBtn addTarget:self action:@selector(menmonryQR:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _menmonryQRBtn;
 }
 
 -(UIImageView *)tipImg_1{

@@ -22,6 +22,8 @@
 @interface SuspendTopPausePageVC ()<YNPageViewControllerDelegate, YNPageViewControllerDataSource>
 @property (nonatomic, strong) ResourceCPUView *cpuView;
 
+@property (nonatomic, strong) UIButton *mortgageConfirmBtn; //确认抵押
+
 @property (nonatomic, strong) NSDecimalNumber *startBlockNumber;
 @property (nonatomic, strong) NSDecimalNumber *currentBlockNumber;
 @property (nonatomic, assign) NSInteger lockingNumber; //正在锁仓的数量
@@ -256,6 +258,10 @@
     vc.cpuView = cpuView;
     vc.headerView = cpuView;
     
+    [vc.view addSubview:vc.mortgageConfirmBtn];
+    [vc.view bringSubviewToFront:vc.mortgageConfirmBtn];
+    vc.mortgageConfirmBtn.hidden = NO;
+    
     return vc;
 }
 + (NSArray *)getArrayVCs {
@@ -269,6 +275,20 @@
     return @[NSLocalizedString(@"mortgage",@"抵押"), NSLocalizedString(@"Resource.hasMortgage",@"已抵押")];
 }
 
+-(void)setSelectedPageIndex:(NSInteger)pageIndex{
+    [super setSelectedPageIndex:pageIndex];
+    
+    if(pageIndex == 0){
+        self.mortgageConfirmBtn.hidden = NO;
+    }else{
+        self.mortgageConfirmBtn.hidden = YES;
+    }
+}
+#pragma mark ---- BtnAction
+-(void)confirmMortgage:(UIButton *)sender{
+    mortgageVC *morVC = self.controllersM[0];
+    [morVC confirmMortgage];
+}
 #pragma mark ---- YNPageViewControllerDataSource
 -(UIScrollView *)pageViewController:(YNPageViewController *)pageViewController pageForIndex:(NSInteger)index{
     UIViewController *vc = pageViewController.controllersM[index];
@@ -281,5 +301,18 @@
 #pragma mark ---- YNPageViewControllerDelegate
 -(void)pageViewController:(YNPageViewController *)pageViewController contentOffsetY:(CGFloat)contentOffsetY progress:(CGFloat)progress{
     
+}
+#pragma mark ---- setter && getter
+-(UIButton *)mortgageConfirmBtn{
+    if (_mortgageConfirmBtn == nil) {
+        double btnHeight = iPhoneX ? 50+20 : 50;
+        _mortgageConfirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, KHEIGHT-kNavigationBarHeight-btnHeight, KWIDTH, btnHeight)];
+        _mortgageConfirmBtn.backgroundColor = kColorBlue;
+        [_mortgageConfirmBtn setTitle:NSLocalizedString(@"confirm",@"确认") forState:UIControlStateNormal];
+        [_mortgageConfirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_mortgageConfirmBtn addTarget:self action:@selector(confirmMortgage:) forControlEvents:UIControlEventTouchUpInside];
+        _mortgageConfirmBtn.titleLabel.font = AdaptedFontSize(15);
+    }
+    return _mortgageConfirmBtn;
 }
 @end
