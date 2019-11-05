@@ -28,6 +28,7 @@
 
 @property(nonatomic, strong) NSArray *words; //助记词
 @property(nonatomic, strong) NSArray *shuffledWords; //乱序的助记词
+@property (nonatomic, strong) NSMutableArray *canChoiceWords; //可以选择的单词
 @end
 
 @implementation WelcomConfirmMnemonicVC
@@ -69,17 +70,27 @@
     
     self.contentView.contentView.words = @[];
     self.proposalView.words = [self randamArry:self.menmonryWords];
+    self.canChoiceWords = [NSMutableArray arrayWithArray:self.proposalView.words];
     
     __block __weak typeof(self) tmpSelf = self;
     self.proposalView.didDeleteItem = ^(NSString * _Nonnull item) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSMutableArray *mutArr = [NSMutableArray arrayWithArray:tmpSelf.contentView.contentView.words] ;
-            if ([mutArr containsObject:item]) {
+//            if ([mutArr containsObject:item]) {
+//                return;
+//            }
+            if (![tmpSelf.canChoiceWords containsObject:item]) {
                 return;
             }
             mutArr[tmpSelf.contentView.contentView.lastNumber] = item;
             tmpSelf.contentView.contentView.words = (NSArray *)mutArr;
             tmpSelf.contentView.contentView.lastNumber++;
+            for (int i=0; i<tmpSelf.canChoiceWords.count; i++) {
+                if (tmpSelf.canChoiceWords[i] == item) {
+                    [tmpSelf.canChoiceWords removeObjectAtIndex:i];
+                    break;
+                }
+            }
             if (mutArr.count == self.menmonryWords.count) {
                 tmpSelf.doneBtn.enabled = YES;
             }else{
@@ -94,13 +105,30 @@
             }
             NSMutableArray *mutArr = [NSMutableArray arrayWithArray:tmpSelf.contentView.contentView.words] ;
             NSInteger oldIndex = [tmpSelf.contentView.contentView.words indexOfObject:item];
-            if([mutArr containsObject:item]){
-                [mutArr removeObject:item];
+            for (int i = mutArr.count-1; i>=0; i--) {
+                if ([mutArr[i] isEqualToString:item]) {
+                    [mutArr removeObjectAtIndex:i];
+                    [tmpSelf.canChoiceWords addObject:item];
+                    break;
+                }
             }
+
             tmpSelf.contentView.contentView.words = (NSArray *)mutArr;
             tmpSelf.contentView.contentView.lastNumber--;
             
-            NSInteger index = [tmpSelf.proposalView.words indexOfObject:item];
+            NSInteger index;
+            int times = 0;
+            for (int i = tmpSelf.proposalView.words.count-1; i>=0; i--) {
+                if ([tmpSelf.proposalView.words[i] isEqualToString:item]) {
+                    times++;
+                    NSInteger number = [tmpSelf numberOfItem:item inArr:tmpSelf.canChoiceWords];
+                    if(times < number){
+                        continue;
+                    }
+                    index = i;
+                    break;
+                }
+            }
             [tmpSelf.proposalView deleteItem:index];
             
             if (mutArr.count == self.menmonryWords.count) {
@@ -126,6 +154,26 @@
     }];
     
     return arry;
+}
+//获取数组中某个元素的个数
+-(NSInteger)numberOfItem:(NSString *)item inArr:(NSMutableArray *)array{
+    //统计数组相同元素的个数
+        
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    //需要统计的数组
+    NSSet *set = [NSSet setWithArray:array];
+    for (NSString *setstring in set) {
+        //需要去掉的元素数组
+        NSMutableArray *filteredArray = [[NSMutableArray alloc]initWithObjects:setstring, nil];
+        NSMutableArray *dataArray = array;
+        NSPredicate * filterPredicate = [NSPredicate predicateWithFormat:@"NOT (SELF IN %@)",filteredArray];
+        //过滤数组
+        NSArray * reslutFilteredArray = [dataArray filteredArrayUsingPredicate:filterPredicate];
+        int number = (int)(dataArray.count-reslutFilteredArray.count);
+        [dic setObject:[NSString stringWithFormat:@"%d",number] forKey:setstring];
+    }
+    NSLog(@"dic :%@",dic);
+    return [dic[item] integerValue];
 }
 
 #pragma mark ---- Button Action
