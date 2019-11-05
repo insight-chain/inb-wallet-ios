@@ -85,7 +85,8 @@
         self.typeLabel.text = @"资源";
         self.typeLabel.layer.borderColor = kColorWithHexValue(0xf5a623).CGColor;
         self.typeLabel.textColor = kColorWithHexValue(0xf5a623);
-        self.valueLabel.text = [NSString stringWithFormat:@"+ %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",tranderModel.amount]]];
+        InlineTransfer *inlineTransfer = tranderModel.transactionLog[0];
+        self.valueLabel.text = [NSString stringWithFormat:@"+ %@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",inlineTransfer.amount]]];
         self.infoLabel.text = tranderModel.input;
     }else if(tranderModel.type == TxType_rewardLock){
         //领取锁仓奖励

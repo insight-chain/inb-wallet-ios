@@ -111,13 +111,13 @@
             ((TransferHeaderView *)self.tableHeader).resultLabel.text = [NSString stringWithFormat:@"%@", NSLocalizedString(@"transfer.typeName.redemption.apply", @"抵押赎回")];
             ((TransferHeaderView *)self.tableHeader).valueLabel.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.tranferModel.amount]]];
         }else if(self.tranferModel.type == TxType_rewardVote || self.tranferModel.type == TxType_rewardLock){
-            ((TransferHeaderView *)self.tableHeader).resultLabel.text = [NSString stringWithFormat:@"%@", NSLocalizedString(@"transfer.typeName.vote.reward", @"领取投票收益")];
-            ((TransferHeaderView *)self.tableHeader).valueLabel.text = [NSString stringWithFormat:@"-%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",self.tranferModel.amount]]];
-//            ((TransferHeaderView *)self.tableHeader).valueLabel.textColor = kColorAuxiliary2;
-//            ((TransferHeaderView *)self.tableHeader).valueLabel.backgroundColor = kColorBackground;
-//            ((TransferHeaderView *)self.tableHeader).valueLabel.layer.borderWidth = 1;
-//            ((TransferHeaderView *)self.tableHeader).valueLabel.layer.borderColor = kColorSeparate.CGColor;
-//            ((TransferHeaderView *)self.tableHeader).valueLabel.numberOfLines = 0;
+            ((TransferHeaderView *)self.tableHeader).resultLabel.text = [NSString stringWithFormat:@"%@", self.tranferModel.type == TxType_rewardVote ? NSLocalizedString(@"transfer.typeName.vote.reward", @"领取投票收益"):NSLocalizedString(@"transfer.typeName.redemption.reward", @"领取抵押收益")];
+            InlineTransfer *inlineTransfer = self.tranferModel.transactionLog[0];
+            ((TransferHeaderView *)self.tableHeader).valueLabel.text = [NSString stringWithFormat:@"+%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",inlineTransfer.amount]]];
+        }else if(self.tranferModel.type == TxType_receive){ //领取赎回
+            ((TransferHeaderView *)self.tableHeader).resultLabel.text = [NSString stringWithFormat:@"%@", NSLocalizedString(@"receive.redemption", @"领取赎回")];
+            InlineTransfer *inlineTransfer = self.tranferModel.transactionLog[0];
+            ((TransferHeaderView *)self.tableHeader).valueLabel.text = [NSString stringWithFormat:@"+%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",inlineTransfer.amount]]];
         }else if(self.tranferModel.type == TxType_reResource){
             ((TransferHeaderView *)self.tableHeader).resultLabel.text = [NSString stringWithFormat:@"%@", NSLocalizedString(@"Resource.receive", @"领取资源")];
             ((TransferHeaderView *)self.tableHeader).valueLabel.text = @"";
@@ -142,11 +142,11 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(self.tranferModel.type == TxType_vote){ //投票
         return 4;
-    }else if(self.tranferModel.type == TxType_rewardVote || self.tranferModel.type == TxType_rewardLock){ //领取投票收益 || 领取抵押收益
+    }else if(self.tranferModel.type == TxType_rewardVote || self.tranferModel.type == TxType_rewardLock || self.tranferModel.type == TxType_receive){ //领取投票收益 || 领取抵押收益 || 领取赎回
         return 5;
     }else if(self.tranferModel.type == TxType_lock || self.tranferModel.type == TxType_moetgage){ //锁仓 //抵押
         return 6;
-    }else if(self.tranferModel.type == TxType_reResource){ //领取资源
+    }else if(self.tranferModel.type == TxType_reResource){ //资源重置
         return 4;
     }else if(self.tranferModel.type == TxType_transfer){ //交易
         if(self.tranferModel.input && ![self.tranferModel.input isEqualToString:@""]){
@@ -293,7 +293,7 @@
             cell_3.infoLabel.text = [self.tranferModel.tradingHash add0xIfNeeded];
             return cell_3;
         }
-    }else if(self.tranferModel.type == TxType_rewardVote || self.tranferModel.type == TxType_rewardLock){ //领取投票收益
+    }else if(self.tranferModel.type == TxType_rewardVote || self.tranferModel.type == TxType_rewardLock || self.tranferModel.type == TxType_receive){ //领取投票收益
         if(indexPath.row == 0){
             cell_1.typeName.text = NSLocalizedString(@"transfer.sendMoney", @"发款账号");
             cell_1.value.text = self.tranferModel.from;
