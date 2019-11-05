@@ -704,6 +704,7 @@
     
     SuspendTopPausePageVC *resourceVC = [SuspendTopPausePageVC suspendTopPausePageVC];
     resourceVC.address = self.selectedWallet.address;
+    resourceVC.walletID = self.selectedWallet.walletID;
     resourceVC.canUseNet  = self.canUseNet;
     resourceVC.totalNet = self.totalNet;
     resourceVC.mortgageINB = self.mortgageINB;
