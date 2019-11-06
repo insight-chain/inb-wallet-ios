@@ -36,7 +36,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 //    InlineTransfer *tr = self.tranferModel.transactionLog[0];
-    self.headerValueLabel.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f", ((InlineTransfer *)self.tranferModel.transactionLog[0]).amount/100000.0]]];
+    self.headerValueLabel.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f", ((InlineTransfer *)self.tranferModel.transactionLog[0]).amount]]];
     
     if (self.tranferModel.type == TxType_rewardLock) {
         self.headerTitleLabel.text = NSLocalizedString(@"transfer.reward.lock", @"锁仓收益");
@@ -46,7 +46,7 @@
 }
 -(void)setTranferModel:(TransferModel *)tranferModel{
     _tranferModel = tranferModel;
-    self.headerValueLabel.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f", self.tranferModel.amount/100000.0]]];
+    self.headerValueLabel.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f", self.tranferModel.amount]]];
     
     if (tranferModel.type == TxType_rewardLock) {
         self.headerTitleLabel.text = NSLocalizedString(@"transfer.reward.lock", @"锁仓收益");

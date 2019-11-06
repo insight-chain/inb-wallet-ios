@@ -18,7 +18,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    self.noTipLabel.text = NSLocalizedString(@"reward.noMortgage", @"您未参与节点投票，暂无奖励");
+    self.noTipLabel.text = NSLocalizedString(@"reward.noMortgage", @"您还没有锁仓抵押资源，暂无奖励");
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

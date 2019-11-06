@@ -59,7 +59,7 @@
 }
 -(UIImageView *)logoTitleImg{
     if(_logoTitleImg == nil){
-        _logoTitleImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"InsightChain"]];
+        _logoTitleImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"inb_wallet"]];
     }
     return _logoTitleImg;
 }

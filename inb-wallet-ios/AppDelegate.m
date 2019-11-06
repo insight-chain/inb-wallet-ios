@@ -77,7 +77,7 @@
     if(!identi || identi.wallets.count == 0){
         /** 创建导入 **/
         WelcomVC *welcomVC = [[WelcomVC alloc] init];
-        [tab addChildViewController:welcomVC norImage:[UIImage imageNamed:@"tab_wallet_no"] selImage:[UIImage imageNamed:@"tab_wallet_yes"] title:@"" tabTitle:@"钱包"];
+        [tab addChildViewController:welcomVC norImage:[UIImage imageNamed:@"tab_wallet_no"] selImage:[UIImage imageNamed:@"tab_wallet_yes"] title:@"" tabTitle:NSLocalizedString(@"tabBar.wallet", @"钱包")];
     }else{
         NSArray *wallets = identi.wallets;
         
@@ -103,13 +103,13 @@
         
         /** 钱包 **/
         WalletInfoVC *walletInfoVC = [[WalletInfoVC alloc] init];
-        walletInfoVC.title = @"钱包";
+        walletInfoVC.title = NSLocalizedString(@"tabBar.wallet", @"钱包");
         walletInfoVC.view.backgroundColor = [UIColor whiteColor];
         
         walletInfoVC.selectedWallet = firstWallet;
         walletInfoVC.wallets = wallets;
         
-        [tab addChildViewController:walletInfoVC norImage:[UIImage imageNamed:@"tab_wallet_no"] selImage:[UIImage imageNamed:@"tab_wallet_yes"] title:@"Insight钱包" tabTitle:@"钱包"];
+        [tab addChildViewController:walletInfoVC norImage:[UIImage imageNamed:@"tab_wallet_no"] selImage:[UIImage imageNamed:@"tab_wallet_yes"] title:@"Insight钱包" tabTitle:NSLocalizedString(@"tabBar.wallet", @"钱包")];
     }
    
     
@@ -121,9 +121,9 @@
     
     /** 我的 **/
     SettingVC *settingVC = [[SettingVC alloc] init];
-    settingVC.title = @"设置";
+    settingVC.title = NSLocalizedString(@"tabBar.setting", @"设置");
     settingVC.view.backgroundColor = [UIColor whiteColor];
-    [tab addChildViewController:settingVC norImage:[UIImage imageNamed:@"tab_setting_no"] selImage:[UIImage imageNamed:@"tab_setting_yes"] title:@"设置" tabTitle:@"设置"];
+    [tab addChildViewController:settingVC norImage:[UIImage imageNamed:@"tab_setting_no"] selImage:[UIImage imageNamed:@"tab_setting_yes"] title:NSLocalizedString(@"tabBar.setting", @"设置") tabTitle:NSLocalizedString(@"tabBar.setting", @"设置")];
     /** 引导页 */
     if([WelcomeIndexVC welcomeNeedsDisplay:APP_VERSION]){
         self.window.rootViewController = tab;

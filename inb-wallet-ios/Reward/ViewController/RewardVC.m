@@ -94,7 +94,11 @@ static NSString *cellId_3 = @"noMortgageCell";
     
     
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    self.navigationItem.title = NSLocalizedString(@"wallet.reward", @"收益奖励");
+}
 -(void)makeNavigation{
     self.navigationItem.title = NSLocalizedString(@"wallet.reward", @"收益奖励");
     
@@ -244,6 +248,7 @@ static NSString *cellId_3 = @"noMortgageCell";
     mortgageVC *firstVC = [[mortgageVC alloc] init];
     firstVC.navigationItem.title = NSLocalizedString(@"mortgage", @"抵押");
     firstVC.hidesBottomBarWhenPushed = YES;
+    firstVC.mortgageConfirmBtn.hidden = NO;
     [self.navigationController pushViewController:firstVC animated:YES];
 }
 
@@ -616,8 +621,8 @@ static NSString *cellId_3 = @"noMortgageCell";
         self.voteRewardBtn.hidden = YES;
     }
     
-    [self calulateReward:self.lastReceiveVoteAwardHeight lockedNumber:App_Delegate.isTest?200:(7*kDayNumbers) voteNumber:_voteNumberValue/100000.0];
-    self.voteNumber.text = [NSString stringWithFormat:@"已投票数量 %.0f", _voteNumberValue/100000.0];
+    [self calulateReward:self.lastReceiveVoteAwardHeight lockedNumber:App_Delegate.isTest?200:(7*kDayNumbers) voteNumber:_voteNumberValue];
+    self.voteNumber.text = [NSString stringWithFormat:@"已投票数量 %.0f", _voteNumberValue];
 }
 
 /**

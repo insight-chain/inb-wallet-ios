@@ -12,7 +12,7 @@
 
 +(void)showMessage:(NSString *)message toView:(UIView *)view afterDelay:(double)delay animted:(BOOL)animated{
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:view animated:animated];
-    hud.bezelView.backgroundColor = kColorWithRGBA(0, 0, 0, 0.75);
+    hud.bezelView.backgroundColor = kColorWithRGBA(0, 0, 0, 1);
     hud.mode = MBProgressHUDModeText;
     hud.label.text = message;
     hud.label.textColor = [UIColor whiteColor];

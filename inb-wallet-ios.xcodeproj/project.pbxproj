@@ -12,6 +12,7 @@
 		FE05CC952356C712005801C0 /* WelcomeIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CC932356C712005801C0 /* WelcomeIndexVC.m */; };
 		FE05CD9523588733005801C0 /* SuspendTopPausePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CD9423588733005801C0 /* SuspendTopPausePageVC.m */; };
 		FE05CD9823588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CD9723588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m */; };
+		FE1CA86B237279B00009A658 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1CA86A237279B00009A658 /* UIViewController+BackButtonHandler.m */; };
 		FE1FCE632327899C00F89A18 /* MortgageDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1FCE612327899C00F89A18 /* MortgageDetailVC.m */; };
 		FE1FCE642327899C00F89A18 /* MortgageDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE1FCE622327899C00F89A18 /* MortgageDetailVC.xib */; };
 		FE1FCE6D2327C25300F89A18 /* RedeemINBVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE1FCE6A2327C25300F89A18 /* RedeemINBVC.xib */; };
@@ -277,6 +278,7 @@
 		FE93BB6B236A7CB600BA8B09 /* lanch_trademark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE93BB69236A7CB600BA8B09 /* lanch_trademark@2x.png */; };
 		FE93BB6E236C13C200BA8B09 /* lanch_bg_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE93BB6C236C13C100BA8B09 /* lanch_bg_new@2x.png */; };
 		FE93BB6F236C13C200BA8B09 /* lanch_bg_new@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FE93BB6D236C13C100BA8B09 /* lanch_bg_new@3x.png */; };
+		FE93BB7323704EB700BA8B09 /* countryNameEH.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE93BB7223704EB700BA8B09 /* countryNameEH.plist */; };
 		FECC977922D31B4B007BE8F5 /* TransferModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC977822D31B4B007BE8F5 /* TransferModel.m */; };
 		FECC978422D46FCF007BE8F5 /* AppVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC978322D46FCF007BE8F5 /* AppVersion.m */; };
 		FECC978822DEFB78007BE8F5 /* NodeRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FECC978722DEFB78007BE8F5 /* NodeRegisterVC.m */; };
@@ -321,6 +323,8 @@
 		FE05CD9423588733005801C0 /* SuspendTopPausePageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuspendTopPausePageVC.m; sourceTree = "<group>"; };
 		FE05CD9623588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuspendTopPauseBaseTableViewVC.h; sourceTree = "<group>"; };
 		FE05CD9723588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuspendTopPauseBaseTableViewVC.m; sourceTree = "<group>"; };
+		FE1CA869237279B00009A658 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
+		FE1CA86A237279B00009A658 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
 		FE1FCE602327899C00F89A18 /* MortgageDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MortgageDetailVC.h; sourceTree = "<group>"; };
 		FE1FCE612327899C00F89A18 /* MortgageDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MortgageDetailVC.m; sourceTree = "<group>"; };
 		FE1FCE622327899C00F89A18 /* MortgageDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MortgageDetailVC.xib; sourceTree = "<group>"; };
@@ -818,6 +822,7 @@
 		FE93BB69236A7CB600BA8B09 /* lanch_trademark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lanch_trademark@2x.png"; sourceTree = "<group>"; };
 		FE93BB6C236C13C100BA8B09 /* lanch_bg_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lanch_bg_new@2x.png"; sourceTree = "<group>"; };
 		FE93BB6D236C13C100BA8B09 /* lanch_bg_new@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lanch_bg_new@3x.png"; sourceTree = "<group>"; };
+		FE93BB7223704EB700BA8B09 /* countryNameEH.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countryNameEH.plist; sourceTree = "<group>"; };
 		FECC977722D31B4B007BE8F5 /* TransferModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TransferModel.h; sourceTree = "<group>"; };
 		FECC977822D31B4B007BE8F5 /* TransferModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TransferModel.m; sourceTree = "<group>"; };
 		FECC978222D46FCF007BE8F5 /* AppVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppVersion.h; sourceTree = "<group>"; };
@@ -1080,6 +1085,7 @@
 			isa = PBXGroup;
 			children = (
 				FE84CF972333A9CA00414411 /* countryNameCH.plist */,
+				FE93BB7223704EB700BA8B09 /* countryNameEH.plist */,
 				FE84CF992333B36200414411 /* CountryCodeView.h */,
 				FE84CF9A2333B36200414411 /* CountryCodeView.m */,
 			);
@@ -1281,6 +1287,8 @@
 				FE84CFB52341E6B700414411 /* UIColor+Image.m */,
 				FE93BB12235DB29C00BA8B09 /* NSDictionary+JSON.h */,
 				FE93BB13235DB29C00BA8B09 /* NSDictionary+JSON.m */,
+				FE1CA869237279B00009A658 /* UIViewController+BackButtonHandler.h */,
+				FE1CA86A237279B00009A658 /* UIViewController+BackButtonHandler.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2178,6 +2186,7 @@
 				FEE3B28622A641D3003B5244 /* LaunchScreen.storyboard in Resources */,
 				FE6D8518231CC0B600023321 /* RedeemCell_2.xib in Resources */,
 				FE93BB6E236C13C200BA8B09 /* lanch_bg_new@2x.png in Resources */,
+				FE93BB7323704EB700BA8B09 /* countryNameEH.plist in Resources */,
 				FE92C62522A792F50043DA9D /* MnemonicWordCell2.xib in Resources */,
 				FE3FC2CD22B0E84500A41205 /* TransferListCell.xib in Resources */,
 				FE92C61122A792F50043DA9D /* TransferMessageCell.xib in Resources */,
@@ -2445,6 +2454,7 @@
 				FE92C66222A792F50043DA9D /* Identity.m in Sources */,
 				FE92C65022A792F50043DA9D /* WalletMeta.m in Sources */,
 				FE92C60622A792F50043DA9D /* WalletInfoVC.m in Sources */,
+				FE1CA86B237279B00009A658 /* UIViewController+BackButtonHandler.m in Sources */,
 				FE3FC2CC22B0E84500A41205 /* TransferListCell.m in Sources */,
 				FE92C4CB22A792580043DA9D /* crypto-mcf.c in Sources */,
 				FE92C4B922A792580043DA9D /* BTCCurvePoint.m in Sources */,

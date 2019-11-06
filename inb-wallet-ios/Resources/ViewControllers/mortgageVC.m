@@ -32,6 +32,14 @@
 
 @implementation mortgageVC
 
+-(instancetype)init{
+    if (self = [super init]) {
+        [self.view addSubview:self.mortgageConfirmBtn];
+        [self.view bringSubviewToFront:self.mortgageConfirmBtn];
+        self.mortgageConfirmBtn.hidden = YES;
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -435,7 +443,7 @@
 }
 
 
-#pragma makr ----
+#pragma mark ----  setter && getter
 -(MortgageView *)mortgageView{
     if (_mortgageView == nil) {
         _mortgageView = [[MortgageView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, kFooterViewHeight)];
@@ -449,5 +457,17 @@
         _tableView.dataSource = self;
     }
     return _tableView;
+}
+-(UIButton *)mortgageConfirmBtn{
+    if (_mortgageConfirmBtn == nil) {
+        double btnHeight = 50;
+        _mortgageConfirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, iPhoneX ? KHEIGHT-kNavigationBarHeight-btnHeight - 20: KHEIGHT-kNavigationBarHeight-btnHeight, KWIDTH, btnHeight)];
+        _mortgageConfirmBtn.backgroundColor = kColorBlue;
+        [_mortgageConfirmBtn setTitle:NSLocalizedString(@"confirm",@"确认") forState:UIControlStateNormal];
+        [_mortgageConfirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_mortgageConfirmBtn addTarget:self action:@selector(confirmMortgage) forControlEvents:UIControlEventTouchUpInside];
+        _mortgageConfirmBtn.titleLabel.font = AdaptedFontSize(15);
+    }
+    return _mortgageConfirmBtn;
 }
 @end

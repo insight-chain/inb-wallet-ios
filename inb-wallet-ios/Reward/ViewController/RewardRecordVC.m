@@ -115,8 +115,7 @@ static NSString *kCellId = @"rewardRecordCell";
 
 -(LYEmptyView *)noDataView{
     if (_noDataView == nil) {
-        _noDataView = [LYEmptyView emptyActionViewWithImage:[UIImage imageNamed:@""] titleStr:@"暂无数据" detailStr:@"" btnTitleStr:@"重新加载" btnClickBlock:^{
-            
+        _noDataView = [LYEmptyView emptyActionViewWithImage:[UIImage imageNamed:@"record_trading_empty"] titleStr:NSLocalizedString(@"record.receive.empty", @"暂无领取记录") detailStr:@"" btnTitleStr:@"" btnClickBlock:^{
         }];
     }
     return _noDataView;

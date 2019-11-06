@@ -432,15 +432,10 @@
         
         UIView *rightView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5+25+5, 45)];
         UIButton *cancelBtn = [[UIButton alloc] init]; //取消
+        cancelBtn.frame = CGRectMake(5, 10, 25, 25);
         [cancelBtn setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
         [cancelBtn addTarget:self action:@selector(cancelNoteAction:) forControlEvents:UIControlEventTouchUpInside];
         [rightView addSubview:cancelBtn];
-        
-        [cancelBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.width.height.mas_equalTo(25);
-            make.centerY.mas_equalTo(rightView);
-            make.centerX.mas_equalTo(rightView);
-        }];
         _noteTF.rightViewMode = UITextFieldViewModeWhileEditing;
         _noteTF.rightView = rightView;
         

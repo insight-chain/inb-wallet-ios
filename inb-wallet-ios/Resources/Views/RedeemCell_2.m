@@ -8,6 +8,8 @@
 
 #import "RedeemCell_2.h"
 @interface RedeemCell_2()
+@property (weak, nonatomic) IBOutlet UILabel *detailStr;//抵押详情
+@property (weak, nonatomic) IBOutlet UIImageView *detailRawImg;
 
 @end
 
@@ -50,7 +52,14 @@
         self.receiveTimeLabel.text = @"";
         [self.receiveBtn setTitle:@"赎回" forState:UIControlStateNormal];
         
+        self.detailStr.hidden = YES;
+        self.detailRawImg.hidden = YES;
+        
     }else{
+        
+        self.detailStr.hidden = NO;
+        self.detailRawImg.hidden = NO;
+        
         [self.stateBtn setBackgroundImage:[UIImage imageNamed:@"days_bg"] forState:UIControlStateNormal];
         [self.stateBtn setTitleColor:kColorBlue forState:UIControlStateNormal];
         if (_model.days == 30){

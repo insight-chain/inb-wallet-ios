@@ -174,7 +174,7 @@
                     }];
                 }else{
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [MBProgressHUD showMessage:@"当前已是最新版本" toView:App_Delegate.window afterDelay:1 animted:YES];
+                        [MBProgressHUD showMessage:@"已是最新版本" toView:App_Delegate.window afterDelay:1 animted:YES];
                     });
                 }
                 

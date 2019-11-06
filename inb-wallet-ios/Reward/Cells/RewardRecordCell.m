@@ -26,7 +26,7 @@
     self.timeLabel.text = [NSDate timestampSwitchTime:_model.timestamp/1000 formatter:@"yyyy-MM-dd HH:mm:ss"];
     if(_model.transactionLog.count > 0){
         InlineTransfer *inlineTransfer = _model.transactionLog[0];
-        self.amountLabel.text = [NSString stringWithFormat:@"+%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f", inlineTransfer.amount/100000.0]]];
+        self.amountLabel.text = [NSString stringWithFormat:@"+%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f", inlineTransfer.amount]]];
     }
     if (_model.type == TxType_rewardLock) {
         self.typeLabel.text = NSLocalizedString(@"transfer.reward.lock", @"锁仓收益");

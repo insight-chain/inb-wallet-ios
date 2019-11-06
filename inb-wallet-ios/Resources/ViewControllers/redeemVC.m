@@ -13,6 +13,7 @@
 
 #import "RedeemCell_1.h"
 #import "RedeemCell_2.h"
+#import "RewardNoMortgageCell.h"
 #import "TransferResultView.h"
 #import "PasswordInputView.h"
 
@@ -27,6 +28,7 @@
 
 static NSString *cellId_1 = @"redeemCell_1";
 static NSString *cellId_2 = @"redeemCell_2";
+static NSString *cellId_3 = @"noMortgageCell";
 
 @interface redeemVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -406,6 +408,9 @@ static NSString *cellId_2 = @"redeemCell_2";
     if (section == 0) {
         return self.redeems.count; //赎回中的
     }else{
+        if (self.stores.count == 0) {
+            return 1;
+        }
         return self.stores.count; //锁仓数据
     }
 }
@@ -456,6 +461,20 @@ static NSString *cellId_2 = @"redeemCell_2";
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if(self.stores.count == 0){
+            RewardNoMortgageCell *norCell = [tableView dequeueReusableCellWithIdentifier:cellId_3];
+            if (norCell == nil) {
+                UINib *nib = [UINib nibWithNibName:NSStringFromClass([RewardNoMortgageCell class]) bundle:nil];
+                [tableView registerNib:nib forCellReuseIdentifier:cellId_3];
+                norCell = [tableView dequeueReusableCellWithIdentifier:cellId_3];
+            }
+            __block __weak typeof(self) tmpSelf = self;
+            norCell.goMortgage = ^{
+                
+            };
+            return norCell;
+        }
         
         LockModel *lock = self.stores[indexPath.row];
         

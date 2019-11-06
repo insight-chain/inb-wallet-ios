@@ -68,7 +68,7 @@
 
 +(NSArray *)countryList{
     if (LanguageIsEnglish) {
-        NSString *listPathEN = [[NSBundle mainBundle] pathForResource:@"countryNameCH" ofType:@"plist"];
+        NSString *listPathEN = [[NSBundle mainBundle] pathForResource:@"countryNameEH" ofType:@"plist"];
         return [[NSArray alloc] initWithContentsOfFile:listPathEN];
     }else{
         NSString *listPathEN = [[NSBundle mainBundle] pathForResource:@"countryNameCH" ofType:@"plist"];

@@ -9,6 +9,9 @@
 "version.update" = "更新版本";
 "version.update.immediately" = "立即更新";
 
+"tabBar.wallet" = "钱包";
+"tabBar.setting" = "设置";
+
 "nextStep" = "下一步";
 "full" = "全部";
 "resource" = "资源";
@@ -31,8 +34,6 @@
 "welcome.content3" = "锁仓抵押、节点投票、转账收款、奖励领取...\n支撑多达实际中交易类型，实时同步公链数据";
 
 "myAssets" = "我的资产";
-"cpuResources" = "CPU资源";
-"netResources" = "NET资源";
 "remaining"    = "剩余";
 "total"        = "总量";
 "mortgage"     = "抵押";
@@ -71,7 +72,8 @@
 "receive.reward.lock.success" = "锁仓抵押奖励领取成功";
 "receive.reward.lock.failed" = "锁仓抵押奖励领取失败";
 
-"reward.noMortgage" = "您未参与节点投票，暂无奖励";
+"reward.noVote" = "您未参与节点投票，暂无奖励";
+"reward.noMortgage" = "您还没有锁仓抵押资源，暂无奖励";
 
 "confirm" = "确认";
 
@@ -102,6 +104,7 @@
 "wallet.create.successed" = "钱包创建成功";
 
 "QRCode" = "二维码";
+"qrCode.showTip" = "二维码进制保存，截图，仅供用户在安全环境下方便扫描导入钱包";
 "copyAddress" = "复制地址";
 "saveQRCode" = "保存二维码";
 
@@ -123,6 +126,7 @@
 "backup.tip_2" = "请勿通过网络工具传输私钥，一旦被黑客获取将造成不可挽回的损失";
 
 "record.trading.empty" = "暂无交易历史";
+"record.receive.empty" = "暂无领取记录";
 
 "collection.tip.scan" = "扫一扫，向我支付INB";
 
@@ -184,6 +188,8 @@
 "password.replay" = "确认新密码";
 "password.setting.error.toolong" = "密码长度大于16";
 "password.setting.error.tooshort" = "密码长度小于5";
+"password.changed.success" = "密码修改成功";
+"password.changed.failed.oldError" = "原密码错误";
 
 "placeholder.originPassword" = "请输入当前密码";
 "placeholder.newPassword" = "请输入新密码";

@@ -18,6 +18,7 @@
 #import "WalletManager.h"
 
 #import "NetworkUtil.h"
+#import "MJRefresh.h"
 
 @interface SuspendTopPausePageVC ()<YNPageViewControllerDelegate, YNPageViewControllerDataSource>
 @property (nonatomic, strong) ResourceCPUView *cpuView;
@@ -60,6 +61,20 @@
     };
     [self.cpuView updataProgress]; //更新进度条图片
     
+    self.bgScrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self requestAccountInfo];
+        if(self.pageIndex == 0){
+            
+        }else{
+            redeemVC *redeem = self.controllersM[self.pageIndex];
+            [redeem request];
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)3*NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [self.bgScrollView.mj_header endRefreshing];
+        });
+    }];
+    self.bgScrollView.backgroundColor = self.cpuView.backgroundColor;
 }
 //请求账户信息
 -(void)requestAccountInfo{
@@ -305,8 +320,8 @@
 #pragma mark ---- setter && getter
 -(UIButton *)mortgageConfirmBtn{
     if (_mortgageConfirmBtn == nil) {
-        double btnHeight = iPhoneX ? 50+20 : 50;
-        _mortgageConfirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, KHEIGHT-kNavigationBarHeight-btnHeight, KWIDTH, btnHeight)];
+        double btnHeight = 50;
+        _mortgageConfirmBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, iPhoneX ? KHEIGHT-kNavigationBarHeight-btnHeight - 20: KHEIGHT-kNavigationBarHeight-btnHeight, KWIDTH, btnHeight)];
         _mortgageConfirmBtn.backgroundColor = kColorBlue;
         [_mortgageConfirmBtn setTitle:NSLocalizedString(@"confirm",@"确认") forState:UIControlStateNormal];
         [_mortgageConfirmBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

@@ -240,12 +240,12 @@
         //抵押赎回
         if(indexPath.row == 0){
             cell_1.typeName.text = NSLocalizedString(@"transfer.sendMoney", @"发款账号");
-            cell_1.value.text = self.tranferModel.from;
+            cell_1.value.text = @"--";
             cell_1.showRightBtn = YES;
             return cell_1;
         }else if (indexPath.row == 1){
             cell_1.typeName.text = NSLocalizedString(@"transfer.collectionMoney", @"收款账号");
-            cell_1.value.text = @"--";
+            cell_1.value.text = self.tranferModel.from;
             cell_1.showRightBtn = YES;
             return cell_1;
         }else if (indexPath.row == 2){
