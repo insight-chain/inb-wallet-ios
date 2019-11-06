@@ -8,6 +8,7 @@
 
 #import "BasicWebViewController.h"
 
+#import "UIViewController+BackButtonHandler.h"
 
 @interface BasicWebViewController ()<WKNavigationDelegate, WKUIDelegate>
 
@@ -48,7 +49,16 @@
     [self.webView removeObserver:self forKeyPath:@"estimatedProgress"];
 }
 
-
+//返回上一页
+-(void)popAction{
+    if ([self.webView canGoBack]) {
+        [self.webView goBack];
+        
+    }else{
+        [self.view resignFirstResponder];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 
 #pragma mark ---- 监听
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
@@ -174,6 +184,17 @@
     //不允许跳转
     //decisionHandler(WKNavigationActionPolicyCancel);
 }
+
+#pragma mark ----
+-(BOOL)navigationShouldPopOnBackButton{
+    if ([self.webView canGoBack]) {
+        [self.webView goBack];
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
 #pragma mark ---- getter
 -(WKWebView *)webView{
     if (_webView == nil) {
