@@ -11,6 +11,8 @@
 #import "PasswordChangeVC.h"
 #import "WalletBackupVC.h"
 
+#import "LXAlertView.h"
+
 #import "WalletManager.h"
 #import "PasswordInputView.h"
 
@@ -222,6 +224,18 @@
 #pragma mark ---- Button Action
 //删除账户
 -(void)deleteWalletAction:(UIButton *)sender{
+    
+    LXAlertView * alertView = [[LXAlertView alloc]initAlert:self titleContent:@"" messageContent:@"确认删除钱包？" cancelButtonTitle:@"取消" cancelFun:@"cancelAction" certainButtonTitle:@"确认" certainFun:@"deleteAction"];
+    alertView.messageLab.textColor = kColorWithHexValue(0x333333);
+    alertView.messageLab.font = [UIFont boldSystemFontOfSize:16];
+    [alertView showLXAlertViewWithFlag:0];
+}
+//取消
+-(void)cancelAction{
+    
+}
+//确认
+-(void)deleteAction{
     self.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
@@ -242,7 +256,6 @@
             });
         });
     }];
-    
 }
 -(void)addressCopy:(UIButton *)sender{
     UIPasteboard *board = [UIPasteboard generalPasteboard];

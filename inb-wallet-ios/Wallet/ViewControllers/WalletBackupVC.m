@@ -207,11 +207,11 @@
 }
 //显示私钥二维码
 -(void)privateQR:(UIButton *)sender{
-    [TransferResultView QRViewWithTitle:NSLocalizedString(@"QRCode", @"二维码") value:self.address.text];
+    [TransferResultView QRViewWithTitle:NSLocalizedString(@"QRCode", @"二维码") value:self.address.text qrTip:NSLocalizedString(@"qrCode.showTip", @"二维码进制保存，截图，仅供用户在安全环境下方便扫描导入钱包")];
 }
 //显示助记词二维码
 -(void)menmonryQR:(UIButton *)sender{
-    [TransferResultView QRViewWithTitle:NSLocalizedString(@"QRCode", @"二维码") value:self.menmonry.text];
+    [TransferResultView QRViewWithTitle:NSLocalizedString(@"QRCode", @"二维码") value:self.menmonry.text qrTip:NSLocalizedString(@"qrCode.showTip", @"二维码进制保存，截图，仅供用户在安全环境下方便扫描导入钱包")];
 }
 #pragma mark ----
 -(UILabel *)accountNameLabel{

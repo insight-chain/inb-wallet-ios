@@ -74,7 +74,7 @@
     
     [self.remaining mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.cpuResource);
-        make.top.mas_equalTo(self.cpuResource.mas_bottom).mas_offset((25));//AdaptedWidth
+        make.top.mas_equalTo(self.cpuResource.mas_bottom).mas_offset((12.5));//AdaptedWidth
     }];
     [self.remainingValue mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.remaining);
@@ -102,7 +102,7 @@
     }];
     [self.addMortgage mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.bgImg.mas_centerX);
-        make.top.mas_equalTo(self.progressBlue.mas_bottom).mas_offset(AdaptedWidth(25));
+        make.top.mas_equalTo(self.progressBlue.mas_bottom).mas_offset(AdaptedWidth(12.5));
 //        make.bottom.mas_equalTo(self.bgImg.mas_bottom).mas_offset(-AdaptedWidth(20));
         make.height.mas_equalTo(40);
         make.left.mas_equalTo(self.remainingValue.mas_left);

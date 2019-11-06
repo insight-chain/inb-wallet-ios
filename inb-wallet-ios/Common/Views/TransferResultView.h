@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(instancetype)resultSuccessVoteWithTitle:(NSString *)title voteNumber:(NSInteger)voteNumber voteNames:(NSArray *)names;
 +(instancetype)resultSuccessRedeemWithTitle:(NSString *)title value:(double)value;//赎回成功
 +(instancetype)resultSuccessRewardWithTitle:(NSString *)title value:(double)value; //（锁仓、投票）奖励领取
-+(instancetype)QRViewWithTitle:(NSString *)title value:(NSString *)value;//显示二维码
++(instancetype)QRViewWithTitle:(NSString *)title value:(NSString *)value qrTip:(NSString *)tip;//显示二维码
 @end
 
 NS_ASSUME_NONNULL_END

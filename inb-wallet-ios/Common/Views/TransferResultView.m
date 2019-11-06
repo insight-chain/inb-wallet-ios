@@ -89,10 +89,11 @@
     [App_Delegate.window addSubview:resultView];
     return resultView;
 }
-+(instancetype)QRViewWithTitle:(NSString *)title value:(NSString *)value{
++(instancetype)QRViewWithTitle:(NSString *)title value:(NSString *)value qrTip:(NSString *)tip{
 TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
    resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
    [resultView makeQRViewWithValue:value];
+    resultView.qrTipLabel.text = tip;
    [resultView layoutIfNeeded];
    resultView.contenView.layer.cornerRadius = 4;
    resultView.contenView.layer.masksToBounds = YES;
@@ -453,6 +454,7 @@ TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title
         _qrTipLabel.textColor = kColorBlue;
         _qrTipLabel.font = [UIFont systemFontOfSize:13];
         _qrTipLabel.textAlignment = NSTextAlignmentCenter;
+        _qrTipLabel.numberOfLines = 0;
     }
     return _qrTipLabel;
 }

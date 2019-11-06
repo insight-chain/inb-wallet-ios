@@ -153,7 +153,7 @@
     }];
     [self.keyPlaceHolder mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.width.mas_equalTo(self.keyTextView);
-        make.height.mas_equalTo(25);
+        make.height.mas_equalTo(AdaptedHeight(25));
     }];
     
     [self.accountNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {

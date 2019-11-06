@@ -365,7 +365,7 @@
         make.top.mas_equalTo(self.functionView.mas_bottom).mas_offset(AdaptedHeight(0));
         make.left.mas_equalTo(AdaptedWidth(16));
         make.right.mas_equalTo(-AdaptedWidth(16));
-        make.height.mas_equalTo(self.CPUView.mas_width).multipliedBy((253.5)/359);
+        make.height.mas_equalTo(self.CPUView.mas_width).multipliedBy((253.5)/410);
     }];
 }
 /** 设置状态栏的颜色，配合根控制器的 childViewControllerForStatusBarStyle 使用**/
