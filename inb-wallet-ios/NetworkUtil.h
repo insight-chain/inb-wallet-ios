@@ -21,10 +21,10 @@ static NSString *webUrl_local = @"http://explorertestapi.insightchain.io/#/";
 static NSString *explorUrl_local = @"http://192.168.1.181:8383/v1/";
 
 //正式服务器
-static NSString *hostUrl_production_default = @"http://test.insightchain.io/api-test/";
-static NSString *rpcUrl_production_default = @"http://192.168.1.185:6001";
-static NSString *webUrl_production_default = @"http://explorer.insightchain.io/#/";
-static NSString *explorUrl_production_default = @"http://explorer.insightchain.io/v1/";
+static NSString *hostUrl_production_default = @"http://apia61.insightchain.io/";
+static NSString *rpcUrl_production_default = @"http://172.31.16.108:6001/";
+static NSString *webUrl_production_default = @"http://explorer.insightchain.io/";
+static NSString *explorUrl_production_default = @"http://explorerapi.insightchain.io/v1/";
 
 //测试服务器
 static NSString *hostUrl_test_default = @"http://test.insightchain.io/api-test/";//测试服务器

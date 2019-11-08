@@ -16,6 +16,7 @@
 #import "NetworkUtil.h"
 
 @interface RedeemINBVC ()
+@property (weak, nonatomic) IBOutlet UIButton *doneBtn;
 @property (nonatomic, strong) PasswordInputView *passwordInput;
 @end
 
@@ -31,6 +32,7 @@
     }
     
     [self makeNavi];
+    [self.doneBtn setTitle:NSLocalizedString(@"done", @"完成") forState:UIControlStateNormal];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -48,7 +50,7 @@
     [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     rightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     [rightBtn addTarget:self action:@selector(doneAction) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
 }
 
 //解抵押
@@ -133,7 +135,7 @@
     self.inbTF.text = @"";
 }
 //完成
--(void)doneAction{
+-(IBAction)doneAction{
     if ([self.inbTF.text isEqualToString:@""] || !self.inbTF.text) {
         [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.redemption.value.no", @"请输入赎回数量") toView:App_Delegate.window afterDelay:1.5 animted:YES];
         return;

@@ -224,9 +224,10 @@
     cell.voteBlock = ^(Node * _Nonnull node) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if(node.isVoted){
-                if (tmpSelf.selectedNodes.count > kMaxSeleceNodesNumber) {
-                    [MBProgressHUD showMessage:@"选择的节点数目已达到最大" toView:tmpSelf.view afterDelay:1.5 animted:YES];
+                if (tmpSelf.selectedNodes.count > kMaxSeleceNodesNumber - 1) {
+                    [MBProgressHUD showMessage:NSLocalizedString(@"vote.seletedNumber.maxLimit", @"选择节点数达到上限！") toView:tmpSelf.view afterDelay:1.5 animted:YES];
                     node.isVoted = NO;
+                    [tmpSelf.tableView reloadData];
                     return ;
                 }
                 [tmpSelf.voteBarView addNode:node];
@@ -235,6 +236,7 @@
                 [tmpSelf.voteBarView deleteNode:node];
                 [tmpSelf.selectedNodes removeObject:node];
             }
+            [tmpSelf.tableView reloadData];
         });
     };
     return cell;

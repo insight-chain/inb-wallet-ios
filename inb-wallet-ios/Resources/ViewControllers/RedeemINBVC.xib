@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RedeemINBVC">
             <connections>
                 <outlet property="canUseL" destination="f6K-aj-plh" id="Rrp-bz-uiO"/>
+                <outlet property="doneBtn" destination="8an-m1-E7k" id="kBI-uj-Ku6"/>
                 <outlet property="inbTF" destination="5C8-mI-d3k" id="8hN-Iy-3cb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -50,6 +49,18 @@
                     <color key="textColor" red="0.20784313725490194" green="0.45490196078431372" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8an-m1-E7k">
+                    <rect key="frame" x="15" y="106" width="345" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="zUg-gO-ivV"/>
+                    </constraints>
+                    <state key="normal" title="完成" backgroundImage="btn_bg_blue">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="doneAction" destination="-1" eventType="touchUpInside" id="VOt-Hm-3hT"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.96233493089675903" green="0.9630243182182312" blue="0.97264796495437622" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -58,8 +69,11 @@
                 <constraint firstItem="t4K-ev-Iq8" firstAttribute="leading" secondItem="5C8-mI-d3k" secondAttribute="trailing" constant="10" id="9iD-ob-mCu"/>
                 <constraint firstItem="t4K-ev-Iq8" firstAttribute="trailing" secondItem="YjO-42-Gqb" secondAttribute="trailing" constant="-10" id="Cah-xd-0j8"/>
                 <constraint firstItem="YjO-42-Gqb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="Cpp-ul-PIj"/>
+                <constraint firstItem="8an-m1-E7k" firstAttribute="leading" secondItem="YjO-42-Gqb" secondAttribute="leading" id="DSS-lA-upY"/>
+                <constraint firstItem="8an-m1-E7k" firstAttribute="trailing" secondItem="YjO-42-Gqb" secondAttribute="trailing" id="N5e-gK-tTZ"/>
                 <constraint firstItem="5C8-mI-d3k" firstAttribute="leading" secondItem="YjO-42-Gqb" secondAttribute="leading" constant="10" id="ZL3-3d-Tk2"/>
                 <constraint firstItem="t4K-ev-Iq8" firstAttribute="centerY" secondItem="YjO-42-Gqb" secondAttribute="centerY" id="aTn-yM-mUh"/>
+                <constraint firstItem="8an-m1-E7k" firstAttribute="top" secondItem="f6K-aj-plh" secondAttribute="bottom" constant="20" id="bZG-u3-G1h"/>
                 <constraint firstItem="5C8-mI-d3k" firstAttribute="centerY" secondItem="YjO-42-Gqb" secondAttribute="centerY" id="lxF-1k-ajg"/>
                 <constraint firstAttribute="trailing" secondItem="YjO-42-Gqb" secondAttribute="trailing" constant="15" id="nrJ-lp-ujC"/>
                 <constraint firstItem="YjO-42-Gqb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="oY2-a3-2HU"/>
@@ -70,6 +84,7 @@
         </view>
     </objects>
     <resources>
+        <image name="btn_bg_blue" width="30.5" height="40"/>
         <image name="cancel" width="15" height="15"/>
         <image name="textField_bg" width="47" height="33.5"/>
     </resources>

@@ -210,7 +210,7 @@ TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title
 
 -(void)makeVoteViewWithValue:(double)value voteName:(NSArray *)voteNames{
     self.itemStr_1.text = NSLocalizedString(@"confirm.vote.canuse", @"可用票数");
-    self.itemValue_1.text = [NSString stringWithFormat:@"%@ INB", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",value]]];
+    self.itemValue_1.text = [NSString stringWithFormat:@"%d", (int)value];
     self.voteStr.text = NSLocalizedString(@"confirm.vote.node", @"投票节点");
     self.voteValue.text = [voteNames componentsJoinedByString:@"、"];
     

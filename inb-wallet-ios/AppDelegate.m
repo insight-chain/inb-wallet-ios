@@ -38,39 +38,15 @@
     
     NSLog(@"App file path: %@", NSHomeDirectory());
     
-    [self getRootUrl:rootNet_]; //服务器跟地址
-    self.isTest = YES;
+    [self getRootUrl:rootNet_production]; //服务器跟地址
+    self.isTest = NO;
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     
     NSLog(@"----Home Path: %@", NSHomeDirectory());
-    /** 创建钱包 **/
-//        WalletMeta *metadata = [[WalletMeta alloc] initWith:source_newIdentity];
-//        metadata.segWit = @"P2WPKH";
-//        metadata.name = @"test";
-//        NSDictionary *dic = [Identity createIdentityWithPassword:@"123456" metadata:metadata];
-//        Identity *identity = dic[@"identity"];
-//        NSString *mnemonic = dic[@"mnemonic"];
-//        BasicWallet *wallet = identity.wallets[0];
-    //
-
-//    
-//    
-//    for (BasicWallet *wallet in walletsArr) {
-//        /** 导出 **/
-//        NSString *prvKey = [WalletManager exportPrivateKeyForID:wallet.walletID password:@"123456"];
-//        NSString *mnemonics = [WalletManager exportMnemonicForID:wallet.walletID password:@"123456"];
-//        NSString *keystore = [WalletManager exportKeystoreForID:wallet.walletID password:@"123456"];
-//        NSLog(@"prvKey:%@\nmnemonics:%@", prvKey,mnemonics);
-//    }
-    
-    //    NSString *mnemonic = [Identity.currentIdentity exportWith:@"123456"];
-    //    NSLog(@"identify mnemonic:%@", mnemonic);
-    
     
     Identity *identi = [[StorageManager storage] tryLoadIdentity];
-    //    NSArray<BasicWallet *> *walletsArr = identi.wallets;
     
     TabBarVC *tab = [[TabBarVC alloc] init];
     
@@ -213,7 +189,10 @@
         
         
     }else{
-        
+        self.apiHost = hostUrl_production_default;
+        self.webHost = webUrl_production_default;
+        self.rpcHost = rpcUrl_production_default;
+        self.explorerHost = explorUrl_production_default;
         
     }
 }

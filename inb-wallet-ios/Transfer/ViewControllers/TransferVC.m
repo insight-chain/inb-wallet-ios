@@ -234,8 +234,7 @@
                                                                     NSLog(@"%@---%@",[responseObject  class], responseObject);
 
                                                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                                                        [self.passwordInput hidePasswordInput];
-                                                                        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.success", @"转账成功") toView:App_Delegate.window afterDelay:1 animted:NO];
+                                                                        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.success", @"转账成功") toView:self.view afterDelay:2.5 animted:YES];
                                                                         [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];
                                                                     });
                                                                 }];

@@ -67,28 +67,28 @@
                            
                            @try {
                                if(type == 0){ //普通抵押
-                                   [tmpSelf mortgageAddr:tmpSelf.address walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                                   [tmpSelf mortgageAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID inbNumber:netValue password:password];
                                }else if(type == 30){ //锁仓30天
-                                   NSInteger block = App_Delegate.isTest ? 30*kDayNumbers/1000 : 30*kDayNumbers;
+                                   NSInteger block = 30*kDayNumbers;
                                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                                   [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                                   [tmpSelf lockAddr:App_Delegate.selectAddr days:blockStr walletID:App_Delegate.selectWalletID inbNumber:netValue password:password];
                                }else if (type == 90){
-                                   NSInteger block = App_Delegate.isTest ? 90*kDayNumbers/1000 : 90*kDayNumbers;
+                                   NSInteger block = 90*kDayNumbers;
                                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                                   [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                                   [tmpSelf lockAddr:App_Delegate.selectAddr days:blockStr walletID:App_Delegate.selectWalletID inbNumber:netValue password:password];
                                }else if (type == 180){
-                                   NSInteger block = App_Delegate.isTest ? 180*kDayNumbers/1000 : 180*kDayNumbers;
+                                   NSInteger block = 180*kDayNumbers;
                                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                                   [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                                   [tmpSelf lockAddr:App_Delegate.selectAddr days:blockStr walletID:App_Delegate.selectWalletID inbNumber:netValue password:password];
                                }else if (type == 360){
-                                   NSInteger block = App_Delegate.isTest ? 360*kDayNumbers/1000 : 360*kDayNumbers;
+                                   NSInteger block =  360*kDayNumbers;
                                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                                   [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                                   [tmpSelf lockAddr:App_Delegate.selectAddr days:blockStr walletID:App_Delegate.selectAddr inbNumber:netValue password:password];
                                }else if(type == 1000){
                                    //测试
                                    NSInteger block = 1000;
                                    NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                                   [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                                   [tmpSelf lockAddr:App_Delegate.selectAddr days:blockStr walletID:App_Delegate.selectWalletID inbNumber:netValue password:password];
                                }
                                
                                
@@ -382,28 +382,28 @@
                         
                         @try {
                             if(type == 0){ //普通抵押
-                                [tmpSelf mortgageAddr:tmpSelf.address walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                                [tmpSelf mortgageAddr:App_Delegate.selectAddr walletID:App_Delegate.selectWalletID inbNumber:netValue password:password];
                             }else if(type == 30){ //锁仓30天
-                                NSInteger block = App_Delegate.isTest ? 30*kDayNumbers/1000 : 30*kDayNumbers;
+                                NSInteger block = 30*kDayNumbers;
                                 NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                                [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                                [tmpSelf lockAddr:App_Delegate.selectAddr days:blockStr walletID:App_Delegate.selectWalletID inbNumber:netValue password:password];
                             }else if (type == 90){
-                                NSInteger block = App_Delegate.isTest ? 90*kDayNumbers/1000 : 90*kDayNumbers;
+                                NSInteger block = 90*kDayNumbers;
                                 NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                                [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                                [tmpSelf lockAddr:App_Delegate.selectAddr days:blockStr walletID:App_Delegate.selectWalletID inbNumber:netValue password:password];
                             }else if (type == 180){
-                                NSInteger block = App_Delegate.isTest ? 180*kDayNumbers/1000 : 180*kDayNumbers;
+                                NSInteger block = 180*kDayNumbers;
                                 NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                                [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                                [tmpSelf lockAddr:App_Delegate.selectAddr days:blockStr walletID:App_Delegate.selectAddr inbNumber:netValue password:password];
                             }else if (type == 360){
-                                NSInteger block = App_Delegate.isTest ? 360*kDayNumbers/1000 : 360*kDayNumbers;
+                                NSInteger block = 360*kDayNumbers;
                                 NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                                [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                                [tmpSelf lockAddr:App_Delegate.selectAddr days:blockStr walletID:App_Delegate.selectWalletID inbNumber:netValue password:password];
                             }else if(type == 1000){
                                 //测试
                                 NSInteger block = 1000;
                                 NSString *blockStr = [NSString stringWithFormat:@"%ld", block];
-                                [tmpSelf lockAddr:tmpSelf.address days:blockStr walletID:tmpSelf.walletID inbNumber:netValue password:password];
+                                [tmpSelf lockAddr:App_Delegate.selectAddr days:blockStr walletID:App_Delegate.selectWalletID inbNumber:netValue password:password];
                             }
                             
                             

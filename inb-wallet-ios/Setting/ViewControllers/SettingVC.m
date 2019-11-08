@@ -161,26 +161,8 @@
         }
     }else if (indexPath.section == 1){
         if(indexPath.row == 0){
-            __block __weak typeof(self) tmpSelf = self;
-            NSString *ho = App_Delegate.apiHost;
-            [NetworkUtil getRequest:HTTP(ho, @"wallet/version") params:@{@"appType":@(3)}success:^(id  _Nonnull resonseObject) {
-                NSLog(@"检查更新---%@", resonseObject);
-                NSDictionary *dic = resonseObject[@"data"];
-                if(APP_VERSION != dic[@"versionName"] || APP_BUILD != dic[@"versionCode"]){
-                    [UpdateView showUpadate:dic[@"versionName"] intro:dic[@"releaseNote"] updateBlock:^{
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [tmpSelf showSafari:dic[@"downloadUrl"]];
-                        });
-                    }];
-                }else{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [MBProgressHUD showMessage:@"已是最新版本" toView:App_Delegate.window afterDelay:1 animted:YES];
-                    });
-                }
-                
-            } failed:^(NSError * _Nonnull error) {
-                NSLog(@"检查更新失败---%@",error);
-            }];
+//            [self checkVersionUpdataFromAppStore];
+            [self checkVersionUpdata];
         }else if (indexPath.row == 1){
             BasicWebViewController *webVC = [[BasicWebViewController alloc] init];
             webVC.urlStr = @"http://www.insightchain.io/help_center";
@@ -197,6 +179,59 @@
             [self.navigationController pushViewController:systemSettingVC animated:YES];
         }
     }
+}
+
+//从服务器获取账号信息----企业分发使用
+-(void)checkVersionUpdata{
+    __block __weak typeof(self) tmpSelf = self;
+    NSString *ho = App_Delegate.apiHost;
+    [NetworkUtil getRequest:HTTP(ho, @"wallet/version") params:@{@"appType":@(3)}success:^(id  _Nonnull resonseObject) {
+        NSLog(@"检查更新---%@", resonseObject);
+        NSDictionary *dic = resonseObject[@"data"];
+        if(APP_VERSION != dic[@"versionName"] || APP_BUILD != dic[@"versionCode"]){
+            [UpdateView showUpadate:dic[@"versionName"] intro:dic[@"releaseNote"] updateBlock:^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [tmpSelf showSafari:dic[@"downloadUrl"]];
+                });
+            }];
+        }else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [MBProgressHUD showMessage:NSLocalizedString(@"version.latest",@"当前已是最新版本") toView:App_Delegate.window afterDelay:2.5 animted:YES];
+            });
+        }
+        
+    } failed:^(NSError * _Nonnull error) {
+        NSLog(@"检查更新失败---%@",error);
+    }];
+}
+//从appstore获取版本信息 ---- 上线使用
+-(void)checkVersionUpdataFromAppStore{
+    NSString *urlStr    = @"http://itunes.apple.com/lookup?id=1329918420";//id替换即可
+    NSURL *url          = [NSURL URLWithString:urlStr];
+    [NetworkUtil getRequest:urlStr params:@{} success:^(id  _Nonnull resonseObject) {
+        NSLog(@"%@", resonseObject);
+        NSDictionary *appInfo = (NSDictionary *)resonseObject;
+        NSArray *infoContent = [appInfo objectForKey:@"results"];
+        NSDictionary *infoDic = [infoContent objectAtIndex:0];
+        NSString *version = [infoDic objectForKey:@"version"];//线上最新版本
+        //获取当前版本
+        NSString *currentVersion = APP_VERSION;
+        BOOL result = [currentVersion compare:version] == NSOrderedAscending;
+        if (result) {
+            //需要更新
+            [UpdateView showUpadate:version intro:[infoDic objectForKey:@"releaseNotes"] updateBlock:^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                     NSString *str = @"itms-apps://itunes.apple.com/cn/app/id1329918420?mt=8"; //更换id即可
+                    [self showSafari:str];
+                });
+            }];
+        }else{
+            //已是最新版本
+            [MBProgressHUD showMessage:NSLocalizedString(@"version.latest",@"当前已是最新版本") toView:App_Delegate.window afterDelay:2.5 animted:YES];
+        }
+    } failed:^(NSError * _Nonnull error) {
+        
+    }];
 }
 
 #pragma mark ---- setter && getter

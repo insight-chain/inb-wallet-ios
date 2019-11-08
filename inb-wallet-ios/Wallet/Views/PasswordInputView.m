@@ -29,6 +29,12 @@
     if (self = [super initWithFrame:frame]) {
         [self makeConstraints];
         [self.passwordTF becomeFirstResponder];
+        
+        #pragma mark -键盘弹出添加监听事件
+        // 键盘出现的通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
+        // 键盘消失的通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHiden:) name:UIKeyboardWillHideNotification object:nil];
     }
     return self;
 }
@@ -40,7 +46,7 @@
         [self.passwordTF becomeFirstResponder];
         #pragma mark -键盘弹出添加监听事件
         // 键盘出现的通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
         // 键盘消失的通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHiden:) name:UIKeyboardWillHideNotification object:nil];
     }
@@ -66,8 +72,8 @@
     [self.bgImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.mas_centerX);
         make.centerY.mas_equalTo(self.mas_centerY);
-        make.width.mas_equalTo(295);
-        make.height.mas_equalTo(self.bgImgView.mas_width).multipliedBy(67.0/59.0);
+        make.width.mas_equalTo(275);
+        make.height.mas_equalTo(self.bgImgView.mas_width).multipliedBy(67.0/69.0);
     }];
     [self.cancelBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.bgImgView.mas_top).mas_offset(5);
@@ -83,10 +89,10 @@
         make.left.mas_equalTo(self.bgImgView.mas_left).mas_offset(15);
         make.right.mas_equalTo(self.bgImgView.mas_right).mas_offset(-15);
         make.height.mas_equalTo(1);
-        make.bottom.mas_equalTo(self.confirmBtn.mas_top).mas_offset(-30);
+        make.bottom.mas_equalTo(self.confirmBtn.mas_top).mas_offset(-20);
     }];
     [self.confirmBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.bgImgView.mas_bottom).mas_offset(-30);
+        make.bottom.mas_equalTo(self.bgImgView.mas_bottom).mas_offset(-20);
         make.centerX.mas_equalTo(self.bgImgView.mas_centerX);
         make.width.mas_equalTo(AdaptedWidth(195));
         make.height.mas_equalTo(40);
@@ -153,8 +159,8 @@
     if (_bgImgView == nil) {
         _bgImgView = [[UIImageView alloc] init];
         UIImage *bgImg = [UIImage imageNamed:@"passwordInput_bg"];
-        bgImg = [bgImg resizableImageWithCapInsets:UIEdgeInsetsMake(bgImg.size.height-10, bgImg.size.width/2.0, 10, bgImg.size.width/2.0)
-                                      resizingMode:UIImageResizingModeStretch];
+//        bgImg = [bgImg resizableImageWithCapInsets:UIEdgeInsetsMake(bgImg.size.height-10, bgImg.size.width/2.0, 10, bgImg.size.width/2.0)
+//                                      resizingMode:UIImageResizingModeStretch];
         _bgImgView.image = bgImg;
     }
     return _bgImgView;

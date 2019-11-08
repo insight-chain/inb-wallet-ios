@@ -5,26 +5,27 @@
   Created by insightChain_iOS开发 on 2019/6/5.
   Copyright © 2019 insightChain_iOS开发. All rights reserved.
 */
-"version.current" = "当前版本";
+"version.current" = "Current Version";
 "version.update" = "更新版本";
 "version.update.immediately" = "立即更新";
+"version.latest" = "The latest version";
 
 "tabBar.wallet" = "Wallet";
 "tabBar.setting" = "Settings";
 
 "nextStep" = "下一步";
-"full" = "全部";
+"full" = "All";
 "resource" = "资源";
 "determine" = "确定";
 "wallet" = "钱包";
 "balance" = "余额";
 "reward.amount" = "奖励金额";
 
-"welcom" = "你好，\n欢迎来到Insight Chain";
-"welcom.hasINBWallet" = "我有INB钱包";
-"welcom.noINBWallet" = "没有INB钱包";
-"welcom.importTip" = "通过私钥、助记词导入钱包";
-"welcom.createTip" = "创建一个INB钱包";
+"welcom" = "Hello，\nWelcome to the Insight Chain";
+"welcom.hasINBWallet" = "I have an INB wallet";
+"welcom.noINBWallet" = "No INB wallet yet";
+"welcom.importTip" = "Private key or mnemonic import";
+"welcom.createTip" = "Create an INB wallet";
 
 "welcome.title1" = "INB公链官方出品";
 "welcome.title2" = "多重安全保障";
@@ -46,7 +47,7 @@
 "Resource.record" = "Stake History";
 "Resource.redemptioning" = "正在赎回";
 "Resource.mortgageList" = "抵押列表";
-"Resource.mortgage.detail" = "抵押详情";
+"Resource.mortgage.detail" = "Stakes Detail";
 "Resource.redemption.ing" = "赎回中";
 "Resource.reward.detail" = "收益详情";
 "Resource.mortgage.block" = "%@万区块高度";
@@ -60,17 +61,17 @@
 "Resource.redeem.success" = "申请赎回成功";
 "Resource.redeem.failed" = "申请赎回失败";
 "receive.redemption" = "领取赎回";
-"receive.redemption.success" = "赎回领取成功";
-"receive.redemption.failed" = "赎回领取失败";
+"receive.redemption.success" = "Receive refund success";
+"receive.redemption.failed" = "Application for refund failed";
 "receive.reward" = "领取奖励";
 "receive.reward.success" = "领取奖励成功";
 "receive.reward.failed" = "领取奖励失败";
 "receive.reward.vote" = "领取投票奖励";
-"receive.reward.vote.success" = "投票奖励领取成功";
-"receive.reward.vote.failed" = "投票奖励领取失败";
+"receive.reward.vote.success" = "Vote reward receive success";
+"receive.reward.vote.failed" = "Vote reward receive failed";
 "receive.reward.lock" = "领取锁仓抵押奖励";
-"receive.reward.lock.success" = "锁仓抵押奖励领取成功";
-"receive.reward.lock.failed" = "锁仓抵押奖励领取失败";
+"receive.reward.lock.success" = "Lockout reward receive success";
+"receive.reward.lock.failed" = "Lockout reward receive failed";
 
 "reward.noVote" = "您未参与节点投票，暂无奖励";
 "reward.noMortgage" = "您还没有锁仓抵押资源，暂无奖励";
@@ -83,13 +84,13 @@
 "walletAddress"= "Wallet Address";
 "createdTime"  = "Creation time";
 
-"wallet.create.confrimMnemonicTip" = "按照顺序点击助记词，确认您的身份";
+"wallet.create.confrimMnemonicTip" = "Click on mnemonics in order to confirm your identity";
 
 "changePassword_wallet" = "Update Password";
 "exportPrivateKey"      = "Export private key";
 
 "transfer" = "Transfer";
-"transfer.success" = "转账成功";
+"transfer.success" = "Transfer success";
 "transfer.fail" = "转账失败";
 "collection" = "Receive";
 "scanCode" = "Scan Code";
@@ -113,7 +114,7 @@
 "passwordTipMessage" = "Password prompt information";
 "importWallet" = "Import Wallet";
 "createWallet" = "Create Wallet";
-"backupWallet" = "备份钱包";
+"backupWallet" = "Backup Wallet";
 
 "addAccount" = "Add Account";
 
@@ -121,90 +122,91 @@
 "importWallet.mnemonic.placeholder" = "请输入助记词";
 "walletPassword.placeholder" = "at last 6 characters";
 "passwordTipMessage.placeholder" = "Not fill";
-"backup.tip_1" = "建议抄写或打印私钥后放置在安全地点保存";
-"backup.tip_2" = "请勿通过网络工具传输私钥，一旦被黑客获取将造成不可挽回的损失";
+"backup.tip_1" = "It is recommended that the private key should be copied or printed, and be stored in a safe place";
+"backup.tip_2" = "Do not transfer the private key through the network tool. Once it is obtained by the hacker, you may suffer irreparable loss";
 
 "record.trading.empty" = "暂无交易历史";
 "record.receive.empty" = "暂无领取记录";
 
 "collection.tip.scan" = "Scan QR code and pay me INB";
 
-"transfer.sendMoney" = "付款账号";
-"transfer.collectionMoney" = "收款账号";
-"transfer.resource" = "资源消耗";
-"transfer.blockNo." = "区块号";
-"transfer.tradeTime"= "交易时间";
-"transfer.tradeNo." = "交易号";
+"transfer.sendMoney" = "Payer Account";
+"transfer.collectionMoney" = "Payee Account";
+"transfer.resource" = "Consume Resource";
+"transfer.blockNo." = "Block Number";
+"transfer.tradeTime"= "Trading Time";
+"transfer.tradeNo." = "Trade Number";
 "transfer.vote" = "Node Vote";
-"transfer.vote.success" = "投票成功";
-"transfer.vote.failed" = "投票失败";
-"transfer.account.receive" = "收款账号";
-"transfer.number" = "数量";
-"transfer.note" = "备注信息";
-"transfer.send" = "发送";
+"transfer.vote.success" = "Vote success";
+"transfer.vote.failed" = "Vote failed";
+"transfer.account.receive" = "Payee Account";
+"transfer.number" = "Amount";
+"transfer.note" = "Remarks";
+"transfer.send" = "Send";
 "transfer.result.success" = "转账成功";
 "transfer.result.failed" = "转账失败";
 "transfer.collection.success" = "收款成功";
-"transfer.failed.noBalance" = "账户余额不足";
+"transfer.failed.noBalance" = "Insufficient Balance";
 "transfer.failed.noAddress" = "地址格式不正确";
 "transfer.typeName.mortgage" = "Resource Stake";
 "transfer.typeName.redemption.apply" = "Refund Stake";
 "transfer.typeName.redemption.receive" = "赎回领取";
-"transfer.typeName.redemption.reward" = "领取抵押收益";
+"transfer.typeName.redemption.reward" = "Receive stake award";
 "transfer.typeName.vote" = "Node Vote";
-"transfer.typeName.vote.reward" = "领取投票收益";
-"transfer.typeName.node.update" = "更新节点";
-"transfer.query" = "交易查询";
-"transfer.detail" = "交易详情";
-"transfer.note" = "备注";
-"transfer.type.res" = "资源";
-"transfer.type.other" = "其他";
+"transfer.typeName.vote.reward" = "Receive vote award";
+"transfer.typeName.node.update" = "Update node";
+"transfer.query" = "Trade Inquire";
+"transfer.detail" = "Transaction Details";
+"transfer.note" = "Remarks";
+"transfer.type.res" = "Resource";
+"transfer.type.other" = "Other";
 "transfer.reward.lock" = "锁仓收益";
 "transfer.reward.vote" = "投票收益";
 "transfer.toAddr" = "转入地址";
 
+"vote.seletedNumber.maxLimit" = "Select the number of nodes reached the limit";
 "vote.support" = "支持率";
 "vote.node.empty" = "暂无投票节点";
 "vote.selected" = "Selected";
-"vote.to" = "发起方";
+"vote.to" = "Initiator";
 "vote.detail.toStr" = "投票给";
 "vote.intro.no" = "暂无节点简介";
 "vote.node.register.submit" = "提 交";
 
-"pledgedResources" = "已抵押资源";
+"pledgedResources" = "Staked";
 "addMortgageResources" = "Add Stake";
-"voteTotal" = "投票总数";
-"submitVote" = "提交投票";
-"accountBalance" = "账户余额";
+"voteTotal" = "Total number of votes";
+"submitVote" = "Confirm Vote";
+"accountBalance" = "Account Balance";
 
-"selectedNodes" = "已选节点";
-"saveWaringTip" = "如果有人获取到您的私钥将直接获取您的财产！请抄写下私钥并存放在安全的地方。";
-"I_know" = "我知道了";
+"selectedNodes" = "Selected Node";
+"saveWaringTip" = "If your private key is stolen, your properties will be exposed! Please copy your private key and store it in a safe place";
+"I_know" = "OK";
 
-"password.change" = "修改密码";
-"password.original" = "原密码";
-"password.new" = "新密码";
-"password.replay" = "确认新密码";
+"password.change" = "Update Password";
+"password.original" = "Current Password";
+"password.new" = "New Password";
+"password.replay" = "Repeat new password";
 "password.setting.error.toolong" = "密码长度大于16";
 "password.setting.error.tooshort" = "密码长度小于5";
-"password.changed.success" = "密码修改成功";
-"password.changed.failed.oldError" = "原密码错误";
+"password.changed.success" = "Password has been updated";
+"password.changed.failed.oldError" = "The original password is wrong";
 
-"placeholder.originPassword" = "请输入当前密码";
-"placeholder.newPassword" = "请输入新密码";
-"placeholder.rePassword" = "再次输入新密码";
-"placeholder.accountName"= "设置一个身份名称";
-"placeholder.transfer.account.receive" = "请输入收款账号";
-"placeholder.transfer.number" = "请输入转账金额";
-"placeholder.transfer.note" = "请输入备注信息";
+"placeholder.originPassword" = "Current Password";
+"placeholder.newPassword" = "New Password";
+"placeholder.rePassword" = "Repeat new password";
+"placeholder.accountName"= "Set a Name";
+"placeholder.transfer.account.receive" = "Enter Payee Account";
+"placeholder.transfer.number" = "Enter Transfer Amount";
+"placeholder.transfer.note" = "Enter Remarks";
 "placeholder.inbNumber.input" = "请输入INB数量";
 
-"wallet.accountName" = "身份名称";
+"wallet.accountName" = "Name";
 "wallet.copy.address.success" = "钱包地址已复制到剪贴板";
 "wallet.copy.private.success" = "私钥已复制到剪贴板";
 "wallet.copy.memonry.success" = "助记词已复制到剪贴板";
 
-"done"  = "完成";
+"done"  = "Confirm";
 "clear" = "清空";
 
 "node.server" = "Server";
@@ -216,20 +218,20 @@
 "backup.tip_2" = "请在四周无人、确保没有摄像头的安全环境下进行备份";
 "backup.password.inputTip" = "请输入密码";
 
-"setting.system"      = "系统设置";
-"setting.invite"      = "邀请好友";
-"setting.checkUpdate" = "检查更新";
-"setting.help"        = "帮助中心";
-"setting.aboutUs"     = "关于我们";
+"setting.system"      = "Settings";
+"setting.invite"      = "Invite_friends";
+"setting.checkUpdate" = "Detection new version";
+"setting.help"        = "Help Center";
+"setting.aboutUs"     = "About Us";
 
-"setting.system.language" = "语言选择";
-"setting.system.push" = "推送设置";
-"setting.system.lockOfApp" = "应用锁";
+"setting.system.language" = "Set Language";
+"setting.system.push" = "Push Notification";
+"setting.system.lockOfApp" = "Gesture Password";
 "seeting.system.TouchID" = "Touch ID";
 
 "setting.aboutUs.protocal" = "协议与隐私条款";
-"setting.aboutUs.website" = "官方网站";
-"setting.aboutUs.weChat" = "微信公众号";
+"setting.aboutUs.website" = "Official Website";
+"setting.aboutUs.weChat" = "WeChat Subscription";
 "setting.protocal" = "隐私条款";
 
 "tip.resource.mortgage_1" = "1.在INB网络上的任何交易都会消耗资源（RES）";
@@ -244,7 +246,7 @@
 "tip.resource.reward_2" = "2.所有收益奖励产生后需要手动领取，若不领取，则当前收益保留且新的收益不再生成。";
 
 "tip.importWallet.maxNumber" = "The number of wallets has reached the limit";
-"tip.addMortgage" = "每抵押1个INB可为每个节点投一票";
+"tip.addMortgage" = "1 vote per mortgage for 1 vote per node";
 
 "tip.confir.lock_1" = "锁仓抵押最多能抵押5次，请您谨慎选择抵押金额与期限。";
 "tip.confir.lock_2" = "赎回的资源与抵押奖励收益需要您手动领取。";
@@ -258,17 +260,17 @@
 "message.tip.copy.success" = "Successful copy";
 "message.tip.saveCode.success" = "Save QR code";
 "message.tip.saveCode.failed" = "保存二维码失败";
-"message.tip.noNodes" = "未选择节点，请选择后提交";
+"message.tip.noNodes" = "Node not selected, please select and submit";
 "message.tip.scan.success" = "扫码成功";
-"message.tip.res.receive.success" = "领取资源成功";
-"message.tip.res.receive.failed" = "领取资源失败";
-"message.tip.mortgage.success" = "抵押成功";
-"message.tip.mortgage.error" = "抵押失败";
-"message.tip.mortgage.err.noNumber" = "锁仓抵押已满5次，无法继续抵押";
+"message.tip.res.receive.success" = "Receive resources success";
+"message.tip.res.receive.failed" = "Receive resources failed";
+"message.tip.mortgage.success" = "Stake success";
+"message.tip.mortgage.error" = "Stake failed";
+"message.tip.mortgage.err.noNumber" = "The locked position mortgage has been completed 5 times, so it is unable to continue to mortgage.";
 "message.tip.protocal.toAgree" = "请同意隐私条款";
 "message.tip.redemption.value.no" = "请输入赎回数量";
 "message.tip.redemption.value.overMax" = "输入INB数量超出可用值";
-"message.tip.mortgage.inputValue" = "请输入抵押数量";
+"message.tip.mortgage.inputValue" = "Enter stake amount";
 "message.tip.mortgage.choseDay" = "请选择抵押期限";
 
 "confirm.cancel" = "Cancel";

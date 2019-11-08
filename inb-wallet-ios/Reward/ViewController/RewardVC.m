@@ -621,7 +621,7 @@ static NSString *cellId_3 = @"noMortgageCell";
         self.voteRewardBtn.hidden = YES;
     }
     
-    [self calulateReward:self.lastReceiveVoteAwardHeight lockedNumber:App_Delegate.isTest?200:(7*kDayNumbers) voteNumber:_voteNumberValue];
+    [self calulateReward:self.lastReceiveVoteAwardHeight lockedNumber:(7*kDayNumbers) voteNumber:_voteNumberValue];
     self.voteNumber.text = [NSString stringWithFormat:@"已投票数量 %.0f", _voteNumberValue];
 }
 

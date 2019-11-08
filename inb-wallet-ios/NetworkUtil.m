@@ -27,7 +27,7 @@
 +(void)getRequest:(NSString *)urlStr params:(NSDictionary *)params success:(void(^)(id resonseObject))successBlock failed:(void(^)(NSError *error))failedBlock{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     //添加一种支持的类型
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json", @"text/json", nil];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html",@"application/json", @"text/json", @"text/javascript", nil];
     [manager GET:urlStr
       parameters:params?params:@{}
         progress:^(NSProgress * _Nonnull downloadProgress) {

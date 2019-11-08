@@ -13,6 +13,7 @@
 		FE05CD9523588733005801C0 /* SuspendTopPausePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CD9423588733005801C0 /* SuspendTopPausePageVC.m */; };
 		FE05CD9823588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CD9723588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m */; };
 		FE1CA86B237279B00009A658 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1CA86A237279B00009A658 /* UIViewController+BackButtonHandler.m */; };
+		FE1CA86E237440520009A658 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE1CA870237440520009A658 /* InfoPlist.strings */; };
 		FE1FCE632327899C00F89A18 /* MortgageDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1FCE612327899C00F89A18 /* MortgageDetailVC.m */; };
 		FE1FCE642327899C00F89A18 /* MortgageDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE1FCE622327899C00F89A18 /* MortgageDetailVC.xib */; };
 		FE1FCE6D2327C25300F89A18 /* RedeemINBVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE1FCE6A2327C25300F89A18 /* RedeemINBVC.xib */; };
@@ -325,6 +326,8 @@
 		FE05CD9723588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuspendTopPauseBaseTableViewVC.m; sourceTree = "<group>"; };
 		FE1CA869237279B00009A658 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
 		FE1CA86A237279B00009A658 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
+		FE1CA86F237440520009A658 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		FE1CA871237440590009A658 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FE1FCE602327899C00F89A18 /* MortgageDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MortgageDetailVC.h; sourceTree = "<group>"; };
 		FE1FCE612327899C00F89A18 /* MortgageDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MortgageDetailVC.m; sourceTree = "<group>"; };
 		FE1FCE622327899C00F89A18 /* MortgageDetailVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MortgageDetailVC.xib; sourceTree = "<group>"; };
@@ -2092,6 +2095,7 @@
 				FE92C41B22A78ED40043DA9D /* test.swift */,
 				FE92C41A22A78ED40043DA9D /* inb-wallet-ios-Bridging-Header.h */,
 				FE92C69D22A7C1660043DA9D /* Localizable.strings */,
+				FE1CA870237440520009A658 /* InfoPlist.strings */,
 			);
 			path = "inb-wallet-ios";
 			sourceTree = "<group>";
@@ -2201,6 +2205,7 @@
 				FE6D8513231CC09800023321 /* RedeemCell_1.xib in Resources */,
 				FE92C60322A792F50043DA9D /* WalletAccountsListCell.xib in Resources */,
 				FE1FCE852328F57700F89A18 /* RewardRecordCell.xib in Resources */,
+				FE1CA86E237440520009A658 /* InfoPlist.strings in Resources */,
 				FE92C5F722A792F40043DA9D /* NodeHeaderTableViewCell.xib in Resources */,
 				FE92C61422A792F50043DA9D /* TransferMessage_2Cell.xib in Resources */,
 				FE92C63C22A792F50043DA9D /* SettingCell_2.xib in Resources */,
@@ -2558,6 +2563,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		FE1CA870237440520009A658 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE1CA86F237440520009A658 /* zh-Hans */,
+				FE1CA871237440590009A658 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		FE92C69D22A7C1660043DA9D /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

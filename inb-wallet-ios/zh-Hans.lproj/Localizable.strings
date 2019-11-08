@@ -8,6 +8,7 @@
 "version.current" = "当前版本";
 "version.update" = "更新版本";
 "version.update.immediately" = "立即更新";
+"version.latest" = "当前已是最新版本";
 
 "tabBar.wallet" = "钱包";
 "tabBar.setting" = "设置";
@@ -104,7 +105,7 @@
 "wallet.create.successed" = "钱包创建成功";
 
 "QRCode" = "二维码";
-"qrCode.showTip" = "二维码进制保存，截图，仅供用户在安全环境下方便扫描导入钱包";
+"qrCode.showTip" = "二维码禁止保存，截图，仅供用户在安全环境下方便扫描导入钱包";
 "copyAddress" = "复制地址";
 "saveQRCode" = "保存二维码";
 
@@ -164,6 +165,7 @@
 "transfer.reward.vote" = "投票收益";
 "transfer.toAddr" = "转入地址";
 
+"vote.seletedNumber.maxLimit" = "选择节点数达到上限！";
 "vote.support" = "支持率";
 "vote.node.empty" = "暂无投票节点";
 "vote.selected" = "已选";

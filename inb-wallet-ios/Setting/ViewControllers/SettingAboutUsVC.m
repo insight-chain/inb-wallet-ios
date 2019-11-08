@@ -61,7 +61,7 @@
         cell.title.text = NSLocalizedString(@"setting.aboutUs.website", @"官方网站");
     }else{
         cell.title.text = NSLocalizedString(@"setting.aboutUs.weChat", @"微信公众号");
-        cell.subTitle.text = @"Insight Chain";
+        cell.subTitle.text = @"InsightChain";
         cell.hideSubTitle = NO;
         cell.hideRightImg = YES;
         cell.hideSeperator = YES;
