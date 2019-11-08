@@ -157,6 +157,7 @@
         NSArray *webUrls = dic[@"web"];
         NSArray *explorerUrls = dic[@"explorer"];
         NSArray *rpcUrls = dic[@"chain"];
+        NSArray *explorerWebUrls = dic[@"explorerWeb"];
         /* 与insight通用的api根地址 */
         if (apiUrls.count > 0) {
 //            self.hostApiUrls = apiUrls;
@@ -179,6 +180,13 @@
         }else{
             self.explorerHost = [self getDefaultUrl:3 netType:type];
         }
+        /* 区块链浏览器web */
+        if(explorerWebUrls.count > 0){
+            int expIndex = [self getRandomNumber:1 to:explorerWebUrls.count];
+            self.explorerWeb = explorerUrls[expIndex-1];
+        }else{
+            self.explorerWeb = [self getDefaultUrl:4 netType:type];
+        }
         /* rpc根地址 */
         if(rpcUrls.count > 0){
             int rpcIndex = [self getRandomNumber:1 to:rpcUrls.count];
@@ -193,6 +201,7 @@
         self.webHost = webUrl_production_default;
         self.rpcHost = rpcUrl_production_default;
         self.explorerHost = explorUrl_production_default;
+        self.explorerWeb = explorWebUrl_production_default;
         
     }
 }
@@ -213,6 +222,8 @@
             }else if (type == 3){
                 //explor
                 return explorUrl_production_default;
+            }else if(type == 4){
+                return explorWebUrl_production_default;
             }else{
                 //web
                 return webUrl_production_default;
@@ -228,6 +239,8 @@
             }else if (type == 3){
                 //explor
                 return explorUrl_test_default;
+            }else if(type == 4){
+                return explorWebUrl_test_default;
             }else{
                 //web
                 return webUrl_test_default;
@@ -243,6 +256,8 @@
             }else if (type == 3){
                 //explor
                 return explorUrl_local;
+            }else if(type == 4){
+                return explorWebUrl_local;
             }else{
                 //web
                 return webUrl_local;

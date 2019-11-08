@@ -433,7 +433,7 @@
 
 -(void)toDetail{
     BasicWebViewController *webView = [[BasicWebViewController alloc] init];
-    webView.urlStr = [NSString stringWithFormat:@"%@transactionHashMobile?transactionHash=%@",App_Delegate.webHost, [self.tranferModel.tradingHash add0xIfNeeded]];
+    webView.urlStr = [NSString stringWithFormat:@"%@transactionHashMobile?transactionHash=%@",App_Delegate.explorerWeb, [self.tranferModel.tradingHash add0xIfNeeded]];
     webView.navigationItem.title = NSLocalizedString(@"transfer.detail", @"交易详情");
     webView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webView animated:YES];

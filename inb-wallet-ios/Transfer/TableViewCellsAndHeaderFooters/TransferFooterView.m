@@ -65,7 +65,7 @@
     _info = info;
     self.textLabel.text = info;
 
-    NSString *htl = [NSString stringWithFormat:@"%@transactionHashMobile?transactionHash=%@", App_Delegate.webHost, _info];
+    NSString *htl = [NSString stringWithFormat:@"%@transactionHashMobile?transactionHash=%@", App_Delegate.explorerWeb, _info];
     self.qrImg.image = [UIImage createQRImgae:htl size:AdaptedWidth(90) centerImg:nil centerImgSize:0];
 }
 @end
