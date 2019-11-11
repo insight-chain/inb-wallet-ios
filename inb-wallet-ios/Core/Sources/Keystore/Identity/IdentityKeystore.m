@@ -86,7 +86,7 @@
         
         NSDictionary *cryptoJSON = json[@"crypto"];
         if (!cryptoJSON) {
-           @throw Exception(@"KeystoreError", @"invalid");
+            @throw [NSException exceptionWithName:@"KeystoreError" reason:@"invalid" userInfo:nil];
         }else{
             self.crypto = [[Crypto alloc] initWithJSON:cryptoJSON];
         }
@@ -98,7 +98,7 @@
         NSString *encKey = json[@"encKey"];
         NSArray *walletIds = json[@"walletIds"];
         if (!encMnemonicJSON || !identifier || !ipfsId || !encAuthKeyJSON || !encKey || !walletIds) {
-            @throw Exception(@"KeystoreError", @"invalid");
+            @throw [NSException exceptionWithName:@"KeystoreError" reason:@"invalid" userInfo:nil];
         }
         EncryptedMessage *encMnemonic = [[EncryptedMessage alloc] initWithJSON:encMnemonicJSON];
         

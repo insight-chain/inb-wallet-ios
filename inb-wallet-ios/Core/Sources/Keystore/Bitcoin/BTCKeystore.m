@@ -32,10 +32,10 @@
     if (self = [super init]) {
         NSDictionary *cryptoJson = json[@"crypto"] ? json[@"crypto"] : json[@"Crypto"];
         if (!cryptoJson) {
-            Exception(@"KeystoreError", @"invalid");
+            @throw [NSException exceptionWithName:@"KeystoreError" reason:@"invalid" userInfo:nil];
         }
         if([json[@"version"] intValue] != self.version){
-            @throw Exception(@"KeystoreError", @"invalid");
+            @throw [NSException exceptionWithName:@"KeystoreError" reason:@"invalid" userInfo:nil];
         }
         self.ID = json[@"id"] ? json[@"id"] : [BTCKeystore generateKeystoreId];
         self.address = json[@"address"] ? json[@"address"] : @"";

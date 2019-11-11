@@ -38,7 +38,7 @@
         NSDictionary *encMnemonicNode = json[@"encMnemonic"];
         NSString *mnemonicPath = json[@"mnemonicPath"];
         if (!cryptoJson || version!=self.version || !encMnemonicNode || !mnemonicPath) {
-            @throw Exception(@"KeystoreError", @"invalid");
+            @throw [NSException exceptionWithName:@"KeystoreError" reason:@"invalid" userInfo:nil];
         }
         self.ID = json[@"id"] ? json[@"id"] : [ETHMnemonicKeystore generateKeystoreId];
         self.address = json[@"address"] ? json[@"address"] : @"";//[NSString stringWithFormat:@"95%@",json[@"address"] ? json[@"address"] : @""];

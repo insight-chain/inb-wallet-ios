@@ -86,7 +86,7 @@
 
 -(NSString *)privateKey:(NSString *)password{
     if(![self.keystore verify:password]){
-        @throw Exception(@"PasswordError", @"incorrect");
+        @throw [NSException exceptionWithName:@"PasswordError" reason:@"incorrect" userInfo:nil];
         return nil;
     }
     if([self.keystore isKindOfClass:[PrivateKeyCrypto class]]){
@@ -99,7 +99,7 @@
        BTCKeystore *wifKeystore = (BTCKeystore *)self.keystore;
         return [wifKeystore decryptWIF:password];
     }else{
-        @throw Exception(@"GenericError", @"operationUnsupported");
+        @throw [NSException exceptionWithName:@"GenericError" reason:@"operationUnsupported" userInfo:nil];
         return nil;
     }
 }
@@ -108,14 +108,15 @@
         ETHMnemonicKeystore *mnemonicKeystore = (ETHMnemonicKeystore *)self.keystore;
         
         if(![self.keystore verify:password]){
-            @throw Exception(@"PasswordError", @"incorrect");
+            @throw [NSException exceptionWithName:@"PasswordError" reason:@"incorrect" userInfo:nil];
         }
         NSString *str = [mnemonicKeystore decryptMnemonic:password];
         return str;
     }else if([self.keystore isKindOfClass:[BTCMnemonicKeystore class]]){
         BTCMnemonicKeystore *mnemonicKeystore = (BTCMnemonicKeystore *)self.keystore;
         if(![self.keystore verify:password]){
-            @throw Exception(@"PasswordError", @"incorrect");
+            @throw [NSException exceptionWithName:@"PasswordError" reason:@"incorrect" userInfo:nil];
+
         }
         NSString *str = [mnemonicKeystore decryptMnemonic:password];
         NSString *menStr = [[NSString alloc] initWithData:[NSData hexStringToData:str] encoding:NSUTF8StringEncoding];

@@ -17,6 +17,7 @@
 #import "NetworkUtil.h"
 
 #define cellId @"settingCell"
+#define AppId @"1487060420"
 
 @interface SettingVC ()<UITableViewDelegate, UITableViewDataSource>
 
@@ -206,7 +207,7 @@
 }
 //从appstore获取版本信息 ---- 上线使用
 -(void)checkVersionUpdataFromAppStore{
-    NSString *urlStr    = @"http://itunes.apple.com/lookup?id=1329918420";//id替换即可
+    NSString *urlStr    = [NSString stringWithFormat:@"http://itunes.apple.com/lookup?id=%@", AppId];//id替换即可
     NSURL *url          = [NSURL URLWithString:urlStr];
     [NetworkUtil getRequest:urlStr params:@{} success:^(id  _Nonnull resonseObject) {
         NSLog(@"%@", resonseObject);
@@ -221,7 +222,7 @@
             //需要更新
             [UpdateView showUpadate:version intro:[infoDic objectForKey:@"releaseNotes"] updateBlock:^{
                 dispatch_async(dispatch_get_main_queue(), ^{
-                     NSString *str = @"itms-apps://itunes.apple.com/cn/app/id1329918420?mt=8"; //更换id即可
+                     NSString *str =[NSString stringWithFormat: @"itms-apps://itunes.apple.com/cn/app/id%@?mt=8",AppId]; //更换id即可
                     [self showSafari:str];
                 });
             }];

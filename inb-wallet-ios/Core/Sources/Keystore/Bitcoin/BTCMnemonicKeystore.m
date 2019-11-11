@@ -36,18 +36,18 @@ static NSString *defaultSalt = @"imToken";
         BTCMnemonic *btnMnemonic = [[BTCMnemonic alloc] initWithWords:[realMnemonic componentsSeparatedByString:@" "] password:@"" wordListType:BTCMnemonicWordListTypeEnglish];
         NSData *seedData = btnMnemonic.seed;
         if (!btnMnemonic || !seedData) {
-            @throw Exception(@"MnemonicError", @"wordInvalid");
+            @throw [NSException exceptionWithName:@"MnemonicError" reason:@"wordInvalid" userInfo:nil];
         }
         BTCNetwork *btcNetwork = metadata.isMainnet ? [BTCNetwork mainnet] : [BTCNetwork testnet];
         BTCKeychain *masterKeychain = [[BTCKeychain alloc] initWithSeed:seedData network:btcNetwork];
         BTCKeychain *accountKeychain = [masterKeychain derivedKeychainWithPath:self.mnemonicPath];
         if (!masterKeychain || !accountKeychain) {
-            @throw Exception(@"GenericError", @"unknownError");
+            @throw [NSException exceptionWithName:@"GenericError" reason:@"unknownError" userInfo:nil];
         }
         accountKeychain.network = btcNetwork;
         NSString *rootPrivateKey = [accountKeychain extendedPrivateKey];
         if (!rootPrivateKey) {
-            @throw Exception(@"GenericError", @"unknownError");
+            @throw [NSException exceptionWithName:@"GenericError" reason:@"unknownError" userInfo:nil];
         }
         self.crypto = [[Crypto alloc] initWith:password privateKey:[[rootPrivateKey dataUsingEncoding:NSUTF8StringEncoding] dataToHexString] cacheDerivedKey:true];
         self.encMnemonic = [EncryptedMessage createCrypto:self.crypto derivedKey:[self.crypto cachedDerivedKey:password] message:[[realMnemonic dataUsingEncoding:NSUTF8StringEncoding] dataToHexString] nonce:nil];

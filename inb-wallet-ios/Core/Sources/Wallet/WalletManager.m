@@ -40,24 +40,28 @@
 +(NSString *)exportPrivateKeyForID:(NSString *)walletID password:(NSString *)password{
     BasicWallet *wallet = [[Identity currentIdentity] findWalletByWalletID:walletID];
     if (!wallet) {
-        @throw Exception(@"GenericError", @"walletNotFound");
+        @throw [NSException exceptionWithName:@"GenericError" reason:@"walletNotFound" userInfo:nil];
+//        @throw Exception(@"GenericError", @"walletNotFound");
     }
     return [wallet privateKey:password];
 }
 +(NSString *)exportMnemonicForID:(NSString *)walletID password:(NSString *)password{
     BasicWallet *wallet = [[Identity currentIdentity] findWalletByWalletID:walletID];
     if (!wallet) {
-        @throw Exception(@"GenericError", @"walletNotFound");
+        @throw [NSException exceptionWithName:@"GenericError" reason:@"walletNotFound" userInfo:nil];
+//        @throw Exception(@"GenericError", @"walletNotFound");
     }
     return [wallet exportMnemonic:password];
 }
 +(NSString *)exportKeystoreForID:(NSString *)walletID password:(NSString *)password{
     BasicWallet *wallet = [Identity.currentIdentity findWalletByWalletID:walletID];
     if (!wallet) {
-        @throw Exception(@"GenericError", @"walletNotFound");
+        @throw [NSException exceptionWithName:@"GenericError" reason:@"walletNotFound" userInfo:nil];
+//        @throw Exception(@"GenericError", @"walletNotFound");
     }
     if(![wallet verifyPassword:password]){
-        @throw Exception(@"PasswordError", @"incorrect");
+        @throw [NSException exceptionWithName:@"PasswordError" reason:@"incorrect" userInfo:nil];
+//        @throw Exception(@"PasswordError", @"incorrect");
     }
     return [wallet exportT];
 }
@@ -84,7 +88,8 @@
     Identity *identity = [[[IdentityValidator alloc] init] validate];
     BasicWallet *wallet = [identity findWalletByAddress:address chainType:chainType];
     if (!wallet) {
-        @throw Exception(@"GenericError", @"walletNotFound");
+        @throw [NSException exceptionWithName:@"GenericError" reason:@"walletNotFound" userInfo:nil];
+//        @throw Exception(@"GenericError", @"walletNotFound");
     }
     return wallet;
 }
@@ -120,7 +125,8 @@
     
     BasicWallet *wallet = [[Identity currentIdentity] findWalletByWalletID:walletID];
     if (!wallet) {
-        @throw Exception(@"GenericError", @"walletNotFound");
+        @throw [NSException exceptionWithName:@"GenericError" reason:@"walletNotFound" userInfo:nil];
+//        @throw Exception(@"GenericError", @"walletNotFound");
     }
     @try {
         NSString *privatedKey = [wallet privateKey:password];
@@ -158,7 +164,8 @@
 +(TransactionSignedResult *)inbMortgageWithWalletID:(NSString *)walletID value:(NSString *)value password:(NSString *)password chainID:(int)chainID{
     BasicWallet *wallet = [[Identity currentIdentity] findWalletByWalletID:walletID];
     if (!wallet) {
-        @throw Exception(@"GenericError", @"walletNotFound");
+        @throw [NSException exceptionWithName:@"GenericError" reason:@"walletNotFound" userInfo:nil];
+//        @throw Exception(@"GenericError", @"walletNotFound");
     }
     @try {
         NSString *privatedKey = [wallet privateKey:password];
@@ -183,12 +190,14 @@
 +(TransactionSignedResult *)btcSignTransactionWithWalletID:(NSString *)walletID to:(NSString *)to amount:(int64_t)amount fee:(int64_t)fee password:(NSString *)password outputs:(NSArray *)outputs changeIdx:(int)changeIdx isTestnet:(BOOL)isTestnet segWit:(NSString *)segWit{
     BasicWallet *wallet = [[Identity currentIdentity] findWalletByWalletID:walletID];
     if (!wallet) {
-        @throw Exception(@"GenericError", @"walletNotFound");
+        @throw [NSException exceptionWithName:@"GenericError" reason:@"walletNotFound" userInfo:nil];
+//        @throw Exception(@"GenericError", @"walletNotFound");
     }
     
     BTCAddress *toAddress = [BTCAddress addressWithString:to];
     if (!toAddress) {
-        @throw Exception(@"AddressError", @"invalid");
+         @throw [NSException exceptionWithName:@"AddressError" reason:@"invalid" userInfo:nil];
+//        @throw Exception(@"AddressError", @"invalid");
     }
     
     NSMutableArray *unspents = [NSMutableArray array];
@@ -202,7 +211,8 @@
         }
         
         if (!utxo) {
-            @throw Exception(@"GenericError", @"paramError");
+            @throw [NSException exceptionWithName:@"GenericError" reason:@"paramError" userInfo:nil];
+//            @throw Exception(@"GenericError", @"paramError");
         }
         UTXO *unspent = utxo;
         [unspents addObject:unspent];
@@ -227,7 +237,8 @@
         BTCKeychain *keychain = [[BTCKeychain alloc] initWithExtendedKey:extendedKey];
         BTCKey *key = [keychain changeKeyAtIndex:(UInt32)changeIdx];
         if (!keychain || key)  {
-            @throw Exception(@"GenericError", @"unknownError");
+            @throw [NSException exceptionWithName:@"GenericError" reason:@"unknownError" userInfo:nil];
+//            @throw Exception(@"GenericError", @"unknownError");
         }
         changeKey = key;
         privateKeys = [NSMutableArray array];

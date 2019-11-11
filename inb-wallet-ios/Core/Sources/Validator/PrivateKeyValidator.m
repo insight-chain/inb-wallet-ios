@@ -76,29 +76,29 @@
 -(NSString *)validateBtc{
     BTCKey *key = [[BTCKey alloc] initWithWIF:self.privateKey];
     if (!key || key.privateKey ) {
-        Exception(@"PrivateKeyError", @"wifInvalid");
+        @throw [NSException exceptionWithName:@"PrivateKeyError" reason:@"wifInvalid" userInfo:nil];
         return @"";
     }
     if (self.requireCompressed && ![key isPublicKeyCompressed]) {
-        Exception(@"PrivateKeyError", @"publicKeyNotCompressed");
+        @throw [NSException exceptionWithName:@"PrivateKeyError" reason:@"publicKeyNotCompressed" userInfo:nil];
     }
     
     NSString *wif = self.network == network_main ? key.WIF : key.WIFTestnet;
     if (![wif isEqualToString:self.privateKey]) {
-        Exception(@"GenericError", @"wifWrongNetwork");
+        @throw [NSException exceptionWithName:@"GenericError" reason:@"wifWrongNetwork" userInfo:nil];
     }
     
     return self.privateKey;
 }
 -(NSString *)validateEth{
     if(![[[Secp256k1_Insight alloc] init] verify:self.privateKey]){
-        @throw Exception(@"PrivateKeyError", @"invalid");
+        @throw [NSException exceptionWithName:@"PrivateKeyError" reason:@"invalid" userInfo:nil];
     }
     NSMutableData *pubKeyData = [[BTCKey alloc] initWithPrivateKey:[NSData hexStringToData:self.privateKey]].publicKey;
     NSString *pubStr = [pubKeyData dataToHexString];
     NSString *stringToEncrypt = [pubStr substringFromIndex:2];
     if([stringToEncrypt isEqualToString:@""]){
-        @throw Exception(@"PrivateKeyError", @"invalid");
+        @throw [NSException exceptionWithName:@"PrivateKeyError" reason:@"invalid" userInfo:nil];
         return nil;
     }
     return self.privateKey;

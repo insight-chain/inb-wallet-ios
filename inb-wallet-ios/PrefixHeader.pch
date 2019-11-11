@@ -30,7 +30,7 @@ typedef enum{
 
     #define NSLog( s, ... ) NSLog( @"< %@:(%d) > %@", [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 
-    #define Exception(name, reson) [NSException exceptionWithName:name reason:reson userInfo:nil]
+//    #define Exception(name, reson) [NSException exceptionWithName:name reason:reson userInfo:nil]
 
     #else
 

@@ -14,7 +14,7 @@
 -(instancetype)initWith:(NSArray *)utxos keys:(NSArray *)keys amount:(SInt64)amount fee:(SInt64)fee toAddress:(BTCAddress *)toAddress changeAddress:(BTCAddress *)changeAddress{
     if(self = [super init]){
         if (amount < self.dustThreshould) {
-            @throw Exception(@"GenericError", @"amountLessThanMinimum");
+            @throw [NSException exceptionWithName:@"GenericError" reason:@"amountLessThanMinimum" userInfo:nil];
         }
         self.utxos = utxos;
         self.keys  = keys;
@@ -30,7 +30,7 @@
     BTCTransaction *rawTx = [[BTCTransaction alloc] init];
     SInt64 totalAmount = [rawTx calculateTotalSpend:self.utxos];
     if (totalAmount < self.amount) {
-        @throw Exception(@"GenericError", @"insufficientFunds");
+        @throw [NSException exceptionWithName:@"GenericError" reason:@"insufficientFunds" userInfo:nil];
     }
     [rawTx addInputsFrom:self.utxos];
     [rawTx addOutput:[[BTCTransactionOutput alloc] initWithValue:self.amount address:self.toAddress]];
@@ -51,7 +51,7 @@
     
     SInt64 totalAmount = [rawTx calculateTotalSpend:self.utxos];
     if (totalAmount < self.amount) {
-        @throw Exception(@"GenericError", @"insufficientFunds");
+        @throw [NSException exceptionWithName:@"GenericError" reason:@"insufficientFunds" userInfo:nil];
     }
     [rawTx addInputsFrom:self.utxos isSegWit:YES];
     

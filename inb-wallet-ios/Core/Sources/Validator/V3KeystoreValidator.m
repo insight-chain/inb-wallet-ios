@@ -30,7 +30,7 @@
 }
 -(NSDictionary *)validate{
     if (![self validate]) {
-        @throw Exception(@"KeystoreError", @"invalid");
+        @throw [NSException exceptionWithName:@"KeystoreError" reason:@"invalid" userInfo:nil];
     }
     return self.keystore;
 }

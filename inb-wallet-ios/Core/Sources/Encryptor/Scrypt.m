@@ -59,7 +59,7 @@
         NSData *da = [NSData dataWithBytes:bytes length:self.dklen];
         return [da dataToHexString];
     }else{
-        @throw Exception(@"解密", @"失败");
+        @throw [NSException exceptionWithName:@"解密" reason:@"失败" userInfo:nil];
         return nil;
     }
     

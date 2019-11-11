@@ -29,7 +29,7 @@
         NSDictionary *cryptoJson = json[@"crypto"] ? json[@"crypto"] : json[@"Crypto"];
         int version = [json[@"version"] intValue];
         if (!cryptoJson || version!=self.version) {
-            @throw Exception(@"Keystore", @"invalid");
+            @throw [NSException exceptionWithName:@"Keystore" reason:@"invalid" userInfo:nil];
         }
         NSString *ID = json[@"id"];
         self.ID = ID ? ID : [ETHKeystore generateKeystoreId];

@@ -71,19 +71,19 @@
     NSData *keyData = [self dataFromHexString:key]; 
     NSData *messageData = [self dataFromHexString:message];
     if (!(keyData && messageData)) {
-        @throw Exception(@"Secp256k1", @"failureSignResult");
+        @throw [NSException exceptionWithName:@"Secp256k1" reason:@"failureSignResult" userInfo:nil];
     }
     
     secp256k1_context *context = secp256k1_context_create((UInt32)(SECP256K1_CONTEXT_SIGN | SECP256K1_CONTEXT_VERIFY));
     
     if (secp256k1_ec_seckey_verify(context, keyData.bytes) != 1) {
         secp256k1_context_destroy(context);
-        @throw Exception(@"Secp256k1", @"failureSignResult");
+        @throw [NSException exceptionWithName:@"Secp256k1" reason:@"failureSignResult" userInfo:nil];
     }
     secp256k1_ecdsa_recoverable_signature sig;
     if(secp256k1_ecdsa_sign_recoverable(context, &sig, messageData.bytes, keyData.bytes, secp256k1_nonce_function_rfc6979, nil) == 0){
         secp256k1_context_destroy(context);
-        @throw Exception(@"Secp256k1", @"failureSignResult");
+        @throw [NSException exceptionWithName:@"Secp256k1" reason:@"failureSignResult" userInfo:nil];
     }
     NSMutableData *data = [NSMutableData dataWithLength:self.signatureLength];
     int recid;

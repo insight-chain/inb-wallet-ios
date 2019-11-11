@@ -38,10 +38,10 @@
 -(Identity *)validate{
     Identity *identity = Identity.currentIdentity;
     if (!identity) {
-        @throw Exception(@"IdentityError", @"invalidIdentity");
+        @throw [NSException exceptionWithName:@"IdentityError" reason:@"invalidIdentity" userInfo:nil];
     }
     if (self.identifier != nil && identity.identifier != self.identifier) {
-        @throw Exception(@"IdentityError", @"invalidIdentity");
+        @throw [NSException exceptionWithName:@"IdentityError" reason:@"invalidIdentity" userInfo:nil];
     }
     return identity;
 }

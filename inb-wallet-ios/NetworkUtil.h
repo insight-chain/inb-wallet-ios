@@ -39,7 +39,7 @@ static NSString *inbPriceUrl = @"coin/inb"; //INB最新价格
 
 #define HTTP(host, path) [NSString stringWithFormat:@"%@%@", host, path]
 
-static int kChainID = 891;//903;//1314520;
+static int kChainID = 95;//891;//903;//1314520;
 
 static NSString *getAccountInfo_MethodName = @"inb_getAccountInfo";
 static NSString *sendTran_MethodName   = @"inb_sendRawTransaction";  //发送交易的 method

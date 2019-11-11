@@ -114,14 +114,14 @@ static LocalFileStorage *_storage;
 
 -(NSString *)exportWith:(NSString *)password{
     if(![self.keystore verify:password]){
-        @throw Exception(@"Password", @"incorrect");
+        @throw [NSException exceptionWithName:@"Password" reason:@"incorrect" userInfo:nil];
     }
     NSString *mnemonic = [self.keystore mnemonic:password];
     return mnemonic;
 }
 -(BOOL)deleteWith:(NSString *)password{
     if(![self.keystore verify:password]){
-        @throw Exception(@"Password", @"incorrect");
+        @throw [NSException exceptionWithName:@"Password" reason:@"incorrect" userInfo:nil];
     }
     if ([_storage cleanStorage]) {
 //        [Identity setCurrentIdentity:nil];
@@ -139,14 +139,14 @@ static LocalFileStorage *_storage;
     }
     
     if([self findWalletByAddress:walletAddress chainType:keystore.meta.chainType] != nil){
-        @throw Exception(@"AddressError", @"alreadyExist");
+        @throw [NSException exceptionWithName:@"AddressError" reason:@"alreadyExist" userInfo:nil];
     }
     [self.keystore.wallets addObject:wallet];
     [self.keystore.walletIds addObject:wallet.walletID];
     if([_storage flushWallet:wallet.keystore] && [_storage flushIdentity:self.keystore]){
         return wallet;
     }
-    @throw Exception(@"GenericError", @"importFailed");
+    @throw [NSException exceptionWithName:@"GenericError" reason:@"importFailed" userInfo:nil];
     return nil;
 }
 -(BOOL)removeWallet:(BasicWallet *)wallet{
@@ -166,7 +166,7 @@ static LocalFileStorage *_storage;
 
 -(BasicWallet *)importFromMnemonic:(NSString *)mnemonic metadata:(WalletMeta *)metadata password:(NSString *)password path:(NSString *)path{
     if ([path isEqualToString:@""]) {
-        @throw Exception(@"MnemonicError", @"pathInvalid");
+        @throw [NSException exceptionWithName:@"MnemonicError" reason:@"pathInvalid" userInfo:nil];
     }
     
     Keystore *keystore = nil;
@@ -192,7 +192,8 @@ static LocalFileStorage *_storage;
     ETHKeystore *store = [[ETHKeystore alloc] initWithJSON:keystore];
     store.meta = metadata;
     if(![store verify:password]){
-        @throw Exception(@"KeystoreError", @"macUnmatch");
+        @throw [NSException exceptionWithName:@"KeystoreError" reason:@"macUnmatch" userInfo:nil];
+        
     }
     NSString *privateKey = [store decryptPrivateKey:password];
     @try {
@@ -254,7 +255,7 @@ static LocalFileStorage *_storage;
     }else{
         BTCKey *key = [[BTCKey alloc] initWithWIF:privateKey];
         if (!key) {
-            @throw Exception(@"PrivateKeyError", @"invalid");
+            @throw [NSException exceptionWithName:@"PrivateKeyError" reason:@"invalid" userInfo:nil];
         }
         NSString *address;
         if ([network isEqualToString:@"MAINNET"]) {
@@ -269,7 +270,7 @@ static LocalFileStorage *_storage;
 // BTC: generate $PATH/0/0 address from mnemonic and path
 -(BasicWallet *)findWalletByMnemonic:(NSString *)mnemonic chainType:(ChainType)chainType path:(NSString*)path network:(NSString *)netWork segWit:(NSString *)segWit{
     if ([path isEqualToString:@""] || path == nil) {
-        @throw Exception(@"MnemonicError", @"pathInvalid");
+        @throw [NSException exceptionWithName:@"MnemonicError" reason:@"pathInvalid" userInfo:nil];
     }
     if (chainType == chain_eth) {
         NSString *addr = [ETHKey mnemonicToAddress:mnemonic path:path];
@@ -278,18 +279,18 @@ static LocalFileStorage *_storage;
         BTCMnemonic *btcMnemonic = [[BTCMnemonic alloc] initWithWords:[mnemonic componentsSeparatedByString:@" "] password:@"" wordListType:BTCMnemonicWordListTypeEnglish];
         NSData *seedData = btcMnemonic.seed;
         if (!seedData) {
-            @throw Exception(@"MnemonicError", @"wordInvalid");
+            @throw [NSException exceptionWithName:@"MnemonicError" reason:@"wordInvalid" userInfo:nil];
         }
         BOOL isMainnet = [netWork isEqualToString:Network_Main] ? YES : NO;
         BTCKeychain *masterKeychain = [[BTCKeychain alloc] initWithSeed:seedData network:isMainnet ? [BTCNetwork mainnet] : [BTCNetwork testnet]];
         BTCKeychain *account = [masterKeychain derivedKeychainWithPath:path];
         BTCKey *key = [account externalKeyAtIndex:0];
         if (!key) {
-            @throw Exception(@"GenericError", @"unknownError");
+            @throw [NSException exceptionWithName:@"GenericError" reason:@"unknownError" userInfo:nil];
         }
         return [self findWalletByAddress:isMainnet?[key address]:[key addressTestnet] chainType:chainType];
     }else{
-        @throw Exception(@"GenericError", @"unsupportedChain");
+        @throw [NSException exceptionWithName:@"GenericError" reason:@"unsupportedChain" userInfo:nil];
         return nil;
     }
 }

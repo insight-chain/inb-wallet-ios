@@ -24,7 +24,7 @@
 
 -(NSString *)validate{
     if (!self.isValid) {
-        @throw Exception(@"GenericError", @"paramError");
+        @throw [NSException exceptionWithName:@"GenericError" reason:@"paramError" userInfo:nil];
     }
     return self.walletID;
 }
