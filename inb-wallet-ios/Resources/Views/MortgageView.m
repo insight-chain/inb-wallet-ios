@@ -38,16 +38,16 @@
 -(void)awakeFromNib{
     [super awakeFromNib];
     
-    self.days_blockNumber_30.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.block", @"%@万区块高度"),[NSString stringWithFormat:@"%.2f", (kDayNumbers*30)/10000.0]];
+    self.days_blockNumber_30.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.block", @"%@万区块高度"),[NSString stringWithFormat:@"%.2f", (kDayNumbers*30)*1.0/(LanguageIsEnglish ? 10000*100 : 10000)]];
     self.days_time_30.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.day", @"锁仓期 ≈ %d天"),30];
     
-    self.days_blockNumber_90.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.block", @"%@万区块高度"),[NSString stringWithFormat:@"%.2f", (kDayNumbers*90)/10000.0]];
+    self.days_blockNumber_90.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.block", @"%@万区块高度"),[NSString stringWithFormat:@"%.2f", (kDayNumbers*90)*1.0/(LanguageIsEnglish ? 10000*100 : 10000)]];
     self.days_time_90.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.day", @"锁仓期 ≈ %d天"),90];
     
-    self.days_blockNumber_180.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.block", @"%@万区块高度"),[NSString stringWithFormat:@"%.2f", (kDayNumbers*180)/10000.0]];
+    self.days_blockNumber_180.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.block", @"%@万区块高度"),[NSString stringWithFormat:@"%.2f", (kDayNumbers*180)*1.0/(LanguageIsEnglish ? 10000*100 : 10000)]];
     self.days_time_180.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.day", @"锁仓期 ≈ %d天"),180];
     
-    self.days_blockNumber_360.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.block", @"%@万区块高度"),[NSString stringWithFormat:@"%.2f", (kDayNumbers*360)/10000.0]];
+    self.days_blockNumber_360.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.block", @"%@万区块高度"),[NSString stringWithFormat:@"%.2f", (kDayNumbers*360)*1.0/(LanguageIsEnglish ? 10000*100 : 10000)]];
     self.days_time_360.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.day", @"锁仓期 ≈ %d天"),360];
     
     self.days_blockNumber_0.text = NSLocalizedString(@"Resource.mortgage.noDay", @"无抵押期限");

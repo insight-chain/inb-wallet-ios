@@ -8,9 +8,6 @@
 
 #import "CountryCodeView.h"
 
-//判断系统语言
-#define CURR_LANG ([[NSLocale preferredLanguages] objectAtIndex:0])
-#define LanguageIsEnglish ([CURR_LANG isEqualToString:@"en-US"] || [CURR_LANG isEqualToString:@"en-CA"] || [CURR_LANG isEqualToString:@"en-GB"] || [CURR_LANG isEqualToString:@"en-CN"] || [CURR_LANG isEqualToString:@"en"])
 
 #define kPickerHeight 200
 @interface CountryCodeView()<UIPickerViewDelegate, UIPickerViewDataSource>

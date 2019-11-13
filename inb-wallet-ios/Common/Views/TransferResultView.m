@@ -143,7 +143,7 @@ TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title
         self.isLock = YES;
         
         self.itemStr_2.text = NSLocalizedString(@"confirm.mortgage.day", @"抵押期限");
-        self.itemValue_2.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.block", @"%@万区块高度"), [NSString stringWithFormat:@"%.2f", lockNumber*1.0/10000]];
+        self.itemValue_2.text = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.block", @"%@万区块高度"), [NSString stringWithFormat:@"%.2f", lockNumber*1.0/(LanguageIsEnglish ? 10000*100 : 10000)]];
         self.itemStr_3.text = NSLocalizedString(@"confirm.mortgage.rate", @"年化率");
         self.itemValue_3.text = [NSString stringWithFormat:@"%.2f%%", [self getRate:lockNumber]];
         

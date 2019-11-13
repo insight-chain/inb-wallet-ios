@@ -186,7 +186,7 @@
     if (indexPath.row == 7) {
         BasicWebViewController *webView = [[BasicWebViewController alloc] init];
         webView.navigationItem.title = NSLocalizedString(@"transfer.query", @"交易查询");
-        webView.urlStr = [NSString stringWithFormat:@"%@TransactionHash?transactionHash=%@",App_Delegate.explorerWeb, [self.lockModel.hashStr add0xIfNeeded]];
+        webView.urlStr = [NSString stringWithFormat:@"%@#/TransactionHash?transactionHash=%@",App_Delegate.explorerWeb, [self.lockModel.hashStr add0xIfNeeded]];
         webView.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:webView animated:YES];
     }

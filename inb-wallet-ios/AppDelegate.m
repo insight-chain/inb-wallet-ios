@@ -183,7 +183,7 @@
         /* 区块链浏览器web */
         if(explorerWebUrls.count > 0){
             int expIndex = [self getRandomNumber:1 to:explorerWebUrls.count];
-            self.explorerWeb = explorerUrls[expIndex-1];
+            self.explorerWeb = explorerWebUrls[expIndex-1];
         }else{
             self.explorerWeb = [self getDefaultUrl:4 netType:type];
         }

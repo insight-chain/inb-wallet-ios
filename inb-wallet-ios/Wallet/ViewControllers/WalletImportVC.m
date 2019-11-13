@@ -20,6 +20,8 @@
 
 #import "SliderBar.h"
 
+#import "SWQRCode.h"
+
 #define kPadding 20
 #define kMidPadding 10
 
@@ -109,6 +111,12 @@
     /** 导航栏返回按钮文字 **/
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
+    
+    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [rightBtn setImage:[UIImage imageNamed:@"scan_white"] forState:UIControlStateNormal];
+    [rightBtn addTarget:self action:@selector(scanAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    
 }
 
 -(void)makeConstraints{
@@ -367,7 +375,24 @@
     createVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:createVC animated:YES];
 }
-
+//扫一扫
+-(void)scanAction:(UIButton *)sender{
+    SWQRCodeConfig *qrConfig = [[SWQRCodeConfig alloc] init];
+    qrConfig.scannerType = SWScannerTypeBoth;
+    
+    SWQRCodeViewController *qrVC = [[SWQRCodeViewController alloc] init];
+    qrVC.scanBlock = ^(BOOL success, NSString *value) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if(success){
+                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.scan.success", @"扫码成功") toView:self.view afterDelay:1 animted:YES];
+                self.keyTextView.text = value;
+            }
+        });
+    };
+    qrVC.codeConfig = qrConfig;
+    qrVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:qrVC animated:YES];
+}
 #pragma mark ----
 -(UILabel *)typeStrLabel{
     if (_typeStrLabel == nil) {

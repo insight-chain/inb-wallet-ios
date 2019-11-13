@@ -470,7 +470,7 @@
             [self addSubview:self.rateStr];
             [self addSubview:self.rateValue];
             
-            NSString *lockStr = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.block",@"%@万区块高度"), [NSString stringWithFormat:@"%.2f", lockNumber*1.0/10000]];
+            NSString *lockStr = [NSString stringWithFormat:NSLocalizedString(@"Resource.mortgage.block",@"%@万区块高度"), [NSString stringWithFormat:@"%.2f", lockNumber*1.0/(LanguageIsEnglish ? 10000*100 : 10000)]];
             int day = (int)(lockNumber/kDayNumbers);
             self.lockNumberValue.text = [NSString stringWithFormat:@"%@(≈%d天)",lockStr, day];
             if (day == 30) {

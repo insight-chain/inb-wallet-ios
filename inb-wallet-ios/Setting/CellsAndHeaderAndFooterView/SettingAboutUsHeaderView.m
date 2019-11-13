@@ -23,8 +23,7 @@
         [self addSubview:self.logoTitleImg];
         [self addSubview:self.versionLabel];
         
-        self.versionLabel.text = [NSString stringWithFormat:@"%@ V%@", NSLocalizedString(@"version.current", @"当前版本"), APP_VERSION];
-        
+        self.versionLabel.text = [NSString stringWithFormat:@"%@ V%@_%@", NSLocalizedString(@"version.current", @"当前版本"), APP_VERSION, APP_BUILD];
         
         [self makeConstraints];
     }
