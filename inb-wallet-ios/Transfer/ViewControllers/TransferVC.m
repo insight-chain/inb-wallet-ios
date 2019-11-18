@@ -219,22 +219,25 @@
                                                                              @"id":@(1)}
                                                                 completion:^(id  _Nullable responseObject, NSError * _Nullable error) {
                                                                     [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                                
 
                                                                     if (error) {
-//                                                                        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:App_Delegate.window afterDelay:1 animted:NO];
                                                                         [TransferResultView resultFailedWithTitle:NSLocalizedString(@"transfer.result.failed", @"转账失败") message:@"网络请求错误"];
                                                                         return ;
                                                                     }
                                                                     NSString *errorStr = responseObject[@"error"][@"message"];
                                                                     if(errorStr){
-//                                                                        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.failed", @"转账失败") toView:App_Delegate.window afterDelay:1 animted:NO];
+                                                                        [self sendLogAddr:App_Delegate.selectAddr hashStr:responseObject[@"result"] dataStr:[@{@"type":@(TxType_transfer)} toJSONString] errStr:errorStr];
                                                                         [TransferResultView resultFailedWithTitle:NSLocalizedString(@"transfer.result.failed", @"转账失败") message:errorStr];
                                                                         return ;
                                                                     }
                                                                     NSLog(@"%@---%@",[responseObject  class], responseObject);
 
                                                                     dispatch_async(dispatch_get_main_queue(), ^{
-                                                                        [MBProgressHUD showMessage:NSLocalizedString(@"transfer.result.success", @"转账成功") toView:self.view afterDelay:2.5 animted:YES];
+                                                                        
+                                                                        [self sendLogAddr:App_Delegate.selectAddr hashStr:responseObject[@"result"] dataStr:[@{@"type":@(TxType_transfer)} toJSONString] errStr:@""];
+                                                                        
+                                                                        [TransferResultView resultTransferWithTitle:NSLocalizedString(@"transfer.action.submit", @"转账已提交") value:[self.numberTF.text doubleValue] hashValue:responseObject[@"result"]];
                                                                         [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];
                                                                     });
                                                                 }];

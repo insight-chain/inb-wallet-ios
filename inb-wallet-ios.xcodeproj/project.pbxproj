@@ -50,6 +50,7 @@
 		FE3FC30A22B8D44700A41205 /* TZGifPhotoPreviewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC2FA22B8D44700A41205 /* TZGifPhotoPreviewController.m */; };
 		FE3FC30E22B90B3200A41205 /* Node.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC30D22B90B3200A41205 /* Node.m */; };
 		FE3FC31522BB279000A41205 /* FAGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = FE3FC31422BB278F00A41205 /* FAGlobal.m */; };
+		FE48CC71237ECA0800E14CC7 /* UIViewController+BaceFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = FE48CC70237ECA0800E14CC7 /* UIViewController+BaceFunction.m */; };
 		FE4FFF3D22C5F1340024CB4D /* BTCKey+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = FE4FFF3C22C5F1340024CB4D /* BTCKey+Category.m */; };
 		FE4FFF4622C61B1A0024CB4D /* BIP44.m in Sources */ = {isa = PBXBuildFile; fileRef = FE4FFF4522C61B1A0024CB4D /* BIP44.m */; };
 		FE4FFF4922C6FEA90024CB4D /* BTCTransactionSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = FE4FFF4822C6FEA90024CB4D /* BTCTransactionSigner.m */; };
@@ -393,6 +394,8 @@
 		FE3FC30D22B90B3200A41205 /* Node.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Node.m; sourceTree = "<group>"; };
 		FE3FC31322BB278F00A41205 /* FAGlobal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FAGlobal.h; sourceTree = "<group>"; };
 		FE3FC31422BB278F00A41205 /* FAGlobal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FAGlobal.m; sourceTree = "<group>"; };
+		FE48CC6F237ECA0800E14CC7 /* UIViewController+BaceFunction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BaceFunction.h"; sourceTree = "<group>"; };
+		FE48CC70237ECA0800E14CC7 /* UIViewController+BaceFunction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BaceFunction.m"; sourceTree = "<group>"; };
 		FE4FFF3B22C5F1340024CB4D /* BTCKey+Category.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTCKey+Category.h"; sourceTree = "<group>"; };
 		FE4FFF3C22C5F1340024CB4D /* BTCKey+Category.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "BTCKey+Category.m"; sourceTree = "<group>"; };
 		FE4FFF4422C61B1A0024CB4D /* BIP44.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BIP44.h; sourceTree = "<group>"; };
@@ -1292,6 +1295,8 @@
 				FE93BB13235DB29C00BA8B09 /* NSDictionary+JSON.m */,
 				FE1CA869237279B00009A658 /* UIViewController+BackButtonHandler.h */,
 				FE1CA86A237279B00009A658 /* UIViewController+BackButtonHandler.m */,
+				FE48CC6F237ECA0800E14CC7 /* UIViewController+BaceFunction.h */,
+				FE48CC70237ECA0800E14CC7 /* UIViewController+BaceFunction.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2424,6 +2429,7 @@
 				FE92C60922A792F50043DA9D /* WalletBackupVC.m in Sources */,
 				FEE947DD2302BEB90004D696 /* UICollectionView+FMListPlaceholder.m in Sources */,
 				FE92C4BB22A792580043DA9D /* BTCTransactionOutput.m in Sources */,
+				FE48CC71237ECA0800E14CC7 /* UIViewController+BaceFunction.m in Sources */,
 				FE92C4A522A792580043DA9D /* BTCScriptMachine.m in Sources */,
 				FE92C4A822A792580043DA9D /* BTCNetwork.m in Sources */,
 				FE92C62C22A792F50043DA9D /* SWQRCodeConfig.m in Sources */,

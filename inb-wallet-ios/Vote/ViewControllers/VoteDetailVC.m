@@ -176,15 +176,15 @@
                                                                     return ;
                                                                 }
                                             if(responseObject[@"error"]){
-//                                                [MBProgressHUD showMessage:@"抵押失败" toView:tmpSelf.view afterDelay:1 animted:YES];
                                                 [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"抵押失败") message:responseObject[@"error"][@"message"]];
+                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:@"" dataStr:[@{@"type":@(TxType_reResource)} toJSONString] errStr:responseObject[@"error"][@"message"]];
                                                 return;
                                             }
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                                    
+                                                                    [self sendLogAddr:App_Delegate.selectAddr hashStr:responseObject[@"result"] dataStr:[@{@"type":@(TxType_moetgage)} toJSONString] errStr:@""];
                                                                     [self.passwordInput hidePasswordInput];
-            
-//                                                                    [MBProgressHUD showMessage:@"抵押成功" toView:tmpSelf.view afterDelay:1 animted:YES];
-                                                                    [TransferResultView resultSuccessLockWithTitle:NSLocalizedString(@"Resource.mortgage.success", @"抵押成功") value:inbNumber lcokNumber:0];
+                                                                    [TransferResultView resultSuccessLockWithTitle:NSLocalizedString(@"Resource.mortgage.success", @"抵押成功") value:inbNumber lcokNumber:0 hashValue:responseObject[@"result"]];
                                                                     [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                                 });
                                                             }];
@@ -273,26 +273,25 @@
                                                                  [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                                  
                                                                  if (error || responseObject[@"error"]) {
-//                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.failed", @"投票失败") toView:tmpSelf.view afterDelay:1 animted:NO];
                                                                      [TransferResultView resultFailedWithTitle:NSLocalizedString(@"transfer.vote.failed", @"投票失败") message:error?[error description]:responseObject[@"error"][@"message"]];
                                                                      return ;
                                                                  }
                                                                  
                                                                  if(responseObject[@"error"]){
-//                                                                     [MBProgressHUD showMessage:responseObject[@"error"][@"message"] toView:tmpSelf.view afterDelay:1.5 animted:NO];
                                                                      [TransferResultView resultFailedWithTitle:NSLocalizedString(@"transfer.vote.failed", @"投票失败") message:responseObject[@"error"][@"message"]];
+                                                                     [self sendLogAddr:App_Delegate.selectAddr hashStr:@"" dataStr:[@{@"type":@(TxType_reResource)} toJSONString] errStr:responseObject[@"error"][@"message"]];
                                                                      return ;
                                                                  }
                                                                  NSLog(@"%@---%@",[responseObject  class], responseObject);
                                                                  
                                                                  dispatch_async(dispatch_get_main_queue(), ^{
+                                                                     [self sendLogAddr:App_Delegate.selectAddr hashStr:responseObject[@"result"] dataStr:[@{@"type":@(TxType_vote)} toJSONString] errStr:@""];
                                                                      [self.passwordInput hidePasswordInput];
-//                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"transfer.vote.success", @"投票成功") toView:App_Delegate.window afterDelay:1 animted:NO];
                                                                      NSMutableArray *nodeNames = @[].mutableCopy;
                                                                      for (Node *node in self.selectedNode) {
                                                                          [nodeNames addObject:node.name];
                                                                      }
-                                                                     [TransferResultView resultSuccessVoteWithTitle:NSLocalizedString(@"transfer.vote.success", @"投票成功") voteNumber:self.wallet.mortgagedINB voteNames:nodeNames];
+                                                                     [TransferResultView resultSuccessVoteWithTitle:NSLocalizedString(@"transfer.vote.success", @"投票结果已提交") voteNumber:self.wallet.mortgagedINB voteNames:nodeNames hashValue:responseObject[@"result"]];
                                                                      
                                                                      [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];
                                                                  });

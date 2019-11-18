@@ -200,7 +200,7 @@
                                                             if (error || responseObject[@"error"]) {
                                                                 dispatch_async(dispatch_get_main_queue(), ^{
                                                                     [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.error", @"抵押失败") toView:App_Delegate.window afterDelay:1 animted:YES];
-                                                                    
+                                                                    [self sendLogAddr:App_Delegate.selectAddr hashStr:@"" dataStr:[@{@"type":@(TxType_reResource)} toJSONString] errStr:error?[error description]:responseObject[@"error"][@"message"]];
                                                                     [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"资源抵押失败") message:error?[error description]:responseObject[@"error"][@"message"]];
                                                                     return ;
                                                                 });
@@ -208,8 +208,8 @@
                                                             }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                                 [tmpSelf.passwordInput hidePasswordInput];
-//                                                                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.success", @"抵押成功") toView:App_Delegate.window afterDelay:1 animted:YES];
-                                                                [TransferResultView resultSuccessLockWithTitle:NSLocalizedString(@"Resource.mortgage.success",@"资源抵押成功") value:[inbNumber doubleValue] lcokNumber:0];
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:responseObject[@"result"] dataStr:[@{@"type":@(TxType_moetgage)} toJSONString] errStr:@""];
+                                                                [TransferResultView resultSuccessLockWithTitle:NSLocalizedString(@"Resource.lock.success",@"资源抵押已提交") value:[inbNumber doubleValue] lcokNumber:0 hashValue:responseObject[@"result"]];
                                                                 
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
@@ -311,13 +311,14 @@
                                                                 
                                                                 [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.error", @"抵押失败") toView:App_Delegate.window afterDelay:1 animted:YES];
                                                                 [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.mortgage.failed", @"资源抵押失败") message:error?[error description] : responseObject[@"error"][@"message"]];
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:@"" dataStr:[@{@"type":@(TxType_reResource)} toJSONString] errStr:error?[error description]:responseObject[@"error"][@"message"]];
                                                                 return ;
                                                             }
                                         
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:responseObject[@"result"] dataStr:[@{@"type":@(TxType_lock)} toJSONString] errStr:@""];
                                                                 [tmpSelf.passwordInput hidePasswordInput];
-//                                                                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.mortgage.success", @"抵押成功") toView:App_Delegate.window afterDelay:1 animted:YES];
-                                                                [TransferResultView resultSuccessLockWithTitle:NSLocalizedString(@"Resource.mortgage.success",@"资源抵押成功") value:[inbNumber doubleValue] lcokNumber:[days integerValue]];
+                                                                [TransferResultView resultSuccessLockWithTitle:NSLocalizedString(@"Resource.mortgage.success",@"锁仓抵押已提交") value:[inbNumber doubleValue] lcokNumber:[days integerValue] hashValue:responseObject[@"result"]];
                                                                 
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });

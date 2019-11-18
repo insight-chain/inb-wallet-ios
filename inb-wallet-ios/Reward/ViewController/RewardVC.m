@@ -437,11 +437,13 @@ static NSString *cellId_3 = @"noMortgageCell";
                                                             }
                                         if(responseObject[@"error"]){
                                                                                     [TransferResultView resultFailedWithTitle:NSLocalizedString(@"receive.reward.lock.failed", @"锁仓抵押奖励领取失败") message:responseObject[@"error"][@"message"]];
+                                            [self sendLogAddr:App_Delegate.selectAddr hashStr:@"" dataStr:[@{@"type":@(TxType_reResource)} toJSONString] errStr:responseObject[@"error"][@"message"]];
                                                                                     return ;
                                                                                 }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:responseObject[@"result"] dataStr:[@{@"type":@(TxType_rewardLock)} toJSONString] errStr:@""];
                                                                 [self.passwordInput hidePasswordInput];
-                                                                [TransferResultView resultSuccessRewardWithTitle:NSLocalizedString(@"receive.reward.lock.success", @"抵押锁仓奖励领取成功") value:0];
+                                                                [TransferResultView resultSuccessRewardWithTitle:NSLocalizedString(@"receive.reward.lock.success", @"抵押锁仓奖励领取成功") value:0 hashValue:responseObject[@"result"]];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             
@@ -520,11 +522,13 @@ static NSString *cellId_3 = @"noMortgageCell";
                                                             NSLog(@"%@", responseObject);
                                                             if (error || responseObject[@"error"]) {
                                                                 [TransferResultView resultFailedWithTitle:NSLocalizedString(@"receive.reward.vote.failed", @"投票奖励领取失败") message:error?[error description]:responseObject[@"error"][@"message"]];
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:@"" dataStr:[@{@"type":@(TxType_reResource)} toJSONString] errStr:error?[error description]:responseObject[@"error"][@"message"]];
                                                                 return ;
                                                             }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:responseObject[@"result"] dataStr:[@{@"type":@(TxType_rewardVote)} toJSONString] errStr:@""];
                                                                 [self.passwordInput hidePasswordInput];
-                                                                [TransferResultView resultSuccessRewardWithTitle:NSLocalizedString(@"receive.reward.vote.success", @"投票奖励领取成功") value:0];
+                                                                [TransferResultView resultSuccessRewardWithTitle:NSLocalizedString(@"receive.reward.vote.success", @"投票奖励领取成功") value:0 hashValue:responseObject[@"result"]];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                                 
                                                                 [self.voteRewardBtn setTitle:[NSString stringWithFormat:@"领取成功"] forState:UIControlStateNormal];

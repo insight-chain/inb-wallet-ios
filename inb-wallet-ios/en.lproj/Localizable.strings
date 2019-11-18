@@ -13,6 +13,8 @@
 "tabBar.wallet" = "Wallet";
 "tabBar.setting" = "Settings";
 
+"copy" = "copy";
+
 "nextStep" = "Next";
 "full" = "All";
 "resource" = "资源";

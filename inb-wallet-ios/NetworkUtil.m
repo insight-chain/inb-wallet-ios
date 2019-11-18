@@ -66,6 +66,19 @@
              failedBlock(error);
          }];
 }
+
+//上传日志
++(void)sendLogRrequestWithPatams:(NSDictionary *)params success:(void(^)(id resonseObject))successBlock failed:(void(^)(NSError *error))failedBlock{
+    //HTTP(@"http://explorerapi.insightchain.io/v1/"
+    [self getRequest:HTTP(App_Delegate.explorerHost, @"transfer/data")
+              params:params
+             success:^(id  _Nonnull resonseObject) {
+        successBlock(resonseObject);
+    } failed:^(NSError * _Nonnull error) {
+        failedBlock(error);
+    }];
+}
+
 -(void)download:(NSString *)urlStr {
     //1.创建会话管理者
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

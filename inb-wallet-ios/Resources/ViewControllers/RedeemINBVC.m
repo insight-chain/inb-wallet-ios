@@ -99,16 +99,18 @@
                                                                     [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
                                                                     [MBProgressHUD showMessage:@"赎回失败" toView:App_Delegate.window afterDelay:1 animted:YES];
                                                                     [TransferResultView resultFailedWithTitle:NSLocalizedString(@"Resource.redeem.failed", @"申请赎回失败") message:error?[error description]:responseObject[@"error"][@"message"]];
+                                                                    [self sendLogAddr:App_Delegate.selectAddr hashStr:@"" dataStr:[@{@"type":@(TxType_reResource)} toJSONString] errStr:error?[error description]:responseObject[@"error"][@"message"]];
                                                                 });
                                                                 return ;
                                                             }
                                                             
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:responseObject[@"result"] dataStr:[@{@"type":@(TxType_unMortgage)} toJSONString] errStr:@""];
                                                                 [self.passwordInput hidePasswordInput];
                                                                 [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
 //                                                                [MBProgressHUD showMessage:@"赎回请求发送成功" toView:App_Delegate.window afterDelay:1.5 animted:YES];
                                                                 
-                                                                [TransferResultView resultSuccessRedeemWithTitle:NSLocalizedString(@"Resource.redeem.success", @"申请赎回成功") value:[inbNumber doubleValue]];
+                                                                [TransferResultView resultSuccessRedeemWithTitle:NSLocalizedString(@"Resource.redeem.success", @"赎回申请已提交") value:[inbNumber doubleValue] hashValue:responseObject[@"result"]];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
 //                                                               //延迟执行
 //                                                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

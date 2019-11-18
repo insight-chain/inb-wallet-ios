@@ -257,16 +257,18 @@ static NSString *cellId_3 = @"noMortgageCell";
                                                             if (error) {
 //                                                                [MBProgressHUD showMessage:@"领取锁仓奖励失败" toView:App_Delegate.window afterDelay:1.5 animted:YES];
                                                                 [TransferResultView resultFailedWithTitle:NSLocalizedString(@"receive.reward.lock.failed", @"锁仓抵押奖励领取失败") message:[error description]];
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:@"" dataStr:[@{@"type":@(TxType_reResource)} toJSONString] errStr:[error description]];
                                                                 return ;
                                                             }
                                         if(responseObject[@"error"]){
-//                                            [MBProgressHUD showMessage:responseObject[@"error"][@"message"] toView:App_Delegate.window afterDelay:1.5 animted:YES];
                                             [TransferResultView resultFailedWithTitle:NSLocalizedString(@"receive.reward.lock.failed", @"锁仓抵押奖励领取失败") message:responseObject[@"error"][@"message"]];
+                                            [self sendLogAddr:App_Delegate.selectAddr hashStr:@"" dataStr:[@{@"type":@(TxType_reResource)} toJSONString] errStr:responseObject[@"error"][@"message"]];
                                             return ;
                                         }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:responseObject[@"result"] dataStr:[@{@"type":@(TxType_rewardLock)} toJSONString] errStr:@""];
                                                                 [tmpSelf.passwordInput hidePasswordInput];
-                                                                [TransferResultView resultSuccessRewardWithTitle:NSLocalizedString(@"receive.reward.lock.success", @"抵押锁仓奖励领取成功") value:0];
+                                                                [TransferResultView resultSuccessRewardWithTitle:NSLocalizedString(@"receive.reward.lock.success", @"抵押锁仓奖励领取成功") value:0 hashValue:responseObject[@"result"]];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             
@@ -350,11 +352,13 @@ static NSString *cellId_3 = @"noMortgageCell";
                                         if(responseObject[@"error"]){
                                             [MBProgressHUD showMessage:responseObject[@"error"][@"message"] toView:App_Delegate.window afterDelay:1.5 animted:YES];
                                             [TransferResultView resultFailedWithTitle:NSLocalizedString(@"receive.redemption.failed", @"领取赎回失败") message:responseObject[@"error"][@"message"]];
+                                            [self sendLogAddr:App_Delegate.selectAddr hashStr:@"" dataStr:[@{@"type":@(TxType_reResource)} toJSONString] errStr:responseObject[@"error"][@"message"]];
                                             return ;
                                         }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:responseObject[@"result"] dataStr:[@{@"type":@(TxType_receive)} toJSONString] errStr:@""];
                                                                 [tmpSelf.passwordInput hidePasswordInput];
-                                                                [TransferResultView resultSuccessRewardWithTitle:NSLocalizedString(@"receive.redemption.success", @"领取赎回成功") value:value];
+                                                                [TransferResultView resultSuccessRewardWithTitle:NSLocalizedString(@"receive.redemption.success", @"领取赎回成功") value:value hashValue:responseObject[@"result"]];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];
                                                             });
                                                             

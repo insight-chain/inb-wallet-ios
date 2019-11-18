@@ -32,6 +32,11 @@
 @property (nonatomic, strong) UIImageView *qrImgView;
 @property (nonatomic, strong) UILabel *qrTipLabel;
 
+@property (nonatomic, strong) UILabel *tradingStr; //交易号
+@property (nonatomic, strong) UIImageView *tradingHashBgImg;
+@property (nonatomic, strong) UILabel *tradingHashL; //交易hash
+@property (nonatomic, strong) UIButton *hashCopy; //复制按钮
+
 @property (nonatomic, strong) UIButton *knownBtn;
 
 @property (nonatomic, assign) BOOL isLock;
@@ -49,46 +54,71 @@
     [App_Delegate.window addSubview:resultView];
     return resultView;
 }
-+(instancetype)resultSuccessLockWithTitle:(NSString *)title value:(double)value lcokNumber:(NSInteger)lockNumber{
++(instancetype)resultSuccessLockWithTitle:(NSString *)title value:(double)value lcokNumber:(NSInteger)lockNumber hashValue:(NSString*)hash{
     TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
     resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
     [resultView makeLockViewWithLockNumber:lockNumber value:value];
+    resultView.tradingHashL.text = hash;
+    
     [resultView layoutIfNeeded];
     resultView.contenView.layer.cornerRadius = 4;
     resultView.contenView.layer.masksToBounds = YES;
     [App_Delegate.window addSubview:resultView];
     return resultView;
 }
-+(instancetype)resultSuccessVoteWithTitle:(NSString *)title voteNumber:(NSInteger)voteNumber voteNames:(NSArray *)names{
++(instancetype)resultSuccessVoteWithTitle:(NSString *)title voteNumber:(NSInteger)voteNumber voteNames:(NSArray *)names hashValue:(NSString *)hash{
     TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
     resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
     [resultView makeVoteViewWithValue:voteNumber voteName:names];
+    resultView.tradingHashL.text = hash;
+    
     [resultView layoutIfNeeded];
     resultView.contenView.layer.cornerRadius = 4;
     resultView.contenView.layer.masksToBounds = YES;
     [App_Delegate.window addSubview:resultView];
     return resultView;
 }
-+(instancetype)resultSuccessRedeemWithTitle:(NSString *)title value:(double)value{
++(instancetype)resultSuccessRedeemWithTitle:(NSString *)title value:(double)value hashValue:(NSString *)hash{
     TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
     resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
     [resultView makeRedeemViewWithValue:value];
+    
+    resultView.tradingHashL.text = hash;
+    
     [resultView layoutIfNeeded];
     resultView.contenView.layer.cornerRadius = 4;
     resultView.contenView.layer.masksToBounds = YES;
     [App_Delegate.window addSubview:resultView];
     return resultView;
 }
-+(instancetype)resultSuccessRewardWithTitle:(NSString *)title value:(double)value{
++(instancetype)resultSuccessRewardWithTitle:(NSString *)title value:(double)value hashValue:(NSString *)hash{
     TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
     resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
     [resultView makeRewardViewWithValue:value];
+    
+    resultView.tradingHashL.text = hash;
+    
     [resultView layoutIfNeeded];
     resultView.contenView.layer.cornerRadius = 4;
     resultView.contenView.layer.masksToBounds = YES;
     [App_Delegate.window addSubview:resultView];
     return resultView;
 }
+
++(instancetype)resultTransferWithTitle:(NSString *)title value:(double)value hashValue:(NSString *)hash{
+    TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
+    resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
+    [resultView makeTransferViewWithValue:value];
+    
+    resultView.tradingHashL.text = hash;
+    
+    [resultView layoutIfNeeded];
+    resultView.contenView.layer.cornerRadius = 4;
+    resultView.contenView.layer.masksToBounds = YES;
+    [App_Delegate.window addSubview:resultView];
+    return resultView;
+}
+
 +(instancetype)QRViewWithTitle:(NSString *)title value:(NSString *)value qrTip:(NSString *)tip{
 TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title];
    resultView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
@@ -181,9 +211,33 @@ TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title
             make.centerY.mas_equalTo(self.itemStr_3);
             make.right.mas_equalTo(self.itemValue_2.mas_right);
         }];
+        
+        [self.tradingStr mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.itemStr_3);
+            make.top.mas_equalTo(self.itemStr_3.mas_bottom).mas_offset(20);
+        }];
+        [self.tradingHashBgImg mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.tradingStr.mas_bottom).mas_offset(10);
+            make.left.mas_equalTo(self.tradingStr);
+            make.right.mas_equalTo(self.itemValue_3.mas_right);
+            make.height.mas_equalTo(70);
+        }];
+        [self.tradingHashL mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.tradingHashBgImg);
+            make.top.mas_equalTo(self.tradingHashBgImg.mas_top).mas_offset(10);
+            make.bottom.mas_equalTo(self.tradingHashBgImg.mas_bottom).mas_offset(-10);
+            make.left.mas_equalTo(self.tradingHashBgImg.mas_left).mas_offset(10);
+            make.right.mas_equalTo(self.tradingHashBgImg.mas_right).mas_offset(-10);
+        }];
+        [self.hashCopy mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.bottom.mas_equalTo(self.tradingHashL);
+            make.width.mas_equalTo(32);
+            make.height.mas_equalTo(15);
+        }];
+        
         [self.knownBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.titleStr.mas_centerX);
-            make.top.mas_equalTo(self.itemValue_3.mas_bottom).mas_offset(30);
+            make.top.mas_equalTo(self.tradingHashBgImg.mas_bottom).mas_offset(30);
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(200);
         }];
@@ -196,9 +250,34 @@ TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title
             make.centerY.mas_equalTo(self.itemStr_1);
             make.right.mas_equalTo(self.contenView.mas_right).mas_offset(-25);
         }];
+        
+        [self.tradingStr mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.itemStr_1);
+            make.top.mas_equalTo(self.itemStr_1.mas_bottom).mas_offset(20);
+        }];
+        [self.tradingHashBgImg mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.tradingStr.mas_bottom).mas_offset(10);
+            make.left.mas_equalTo(self.tradingStr);
+            make.right.mas_equalTo(self.itemValue_1.mas_right);
+            make.height.mas_equalTo(70);
+        }];
+        [self.tradingHashL mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.tradingHashBgImg);
+            make.top.mas_equalTo(self.tradingHashBgImg.mas_top).mas_offset(10);
+            make.bottom.mas_equalTo(self.tradingHashBgImg.mas_bottom).mas_offset(-10);
+            make.left.mas_equalTo(self.tradingHashBgImg.mas_left).mas_offset(10);
+            make.right.mas_equalTo(self.tradingHashBgImg.mas_right).mas_offset(-10);
+        }];
+        [self.hashCopy mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.bottom.mas_equalTo(self.tradingHashL);
+            make.width.mas_equalTo(32);
+            make.height.mas_equalTo(15);
+        }];
+        
         [self.knownBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.titleStr.mas_centerX);
-            make.top.mas_equalTo(self.itemStr_1.mas_bottom).mas_offset(30);
+//            make.top.mas_equalTo(self.itemStr_1.mas_bottom).mas_offset(30);
+            make.top.mas_equalTo(self.tradingHashBgImg.mas_bottom).mas_offset(30);
             make.height.mas_equalTo(40);
             make.width.mas_equalTo(200);
         }];
@@ -219,6 +298,12 @@ TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title
     [self.contenView addSubview:self.voteStr];
     [self.contenView addSubview:self.voteImg];
     [self.contenView addSubview:self.voteValue];
+    
+    [self.contenView addSubview:self.tradingStr];
+    [self.contenView addSubview:self.tradingHashBgImg];
+    [self.contenView addSubview:self.tradingHashL];
+    [self.contenView addSubview:self.hashCopy];
+    
     [self makeVoteViewConstraints];
 }
 -(void)makeVoteViewConstraints{
@@ -245,10 +330,32 @@ TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title
         make.left.mas_equalTo(self.voteImg.mas_left).mas_offset(10);
         make.right.mas_equalTo(self.voteImg.mas_right).mas_offset(-10);
     }];
-    
+    [self.tradingStr mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.voteStr);
+        make.top.mas_equalTo(self.voteImg.mas_bottom).mas_offset(20);
+    }];
+    [self.tradingHashBgImg mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.tradingStr.mas_bottom).mas_offset(10);
+        make.left.mas_equalTo(self.tradingStr);
+        make.right.mas_equalTo(self.voteStr.mas_right);
+        make.height.mas_equalTo(70);
+    }];
+    [self.tradingHashL mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.tradingHashBgImg);
+        make.top.mas_equalTo(self.tradingHashBgImg.mas_top).mas_offset(10);
+        make.bottom.mas_equalTo(self.tradingHashBgImg.mas_bottom).mas_offset(-10);
+        make.left.mas_equalTo(self.tradingHashBgImg.mas_left).mas_offset(10);
+        make.right.mas_equalTo(self.tradingHashBgImg.mas_right).mas_offset(-10);
+    }];
+    [self.hashCopy mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.bottom.mas_equalTo(self.tradingHashL);
+        make.width.mas_equalTo(32);
+        make.height.mas_equalTo(15);
+    }];
     [self.knownBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.titleStr.mas_centerX);
-        make.top.mas_equalTo(self.voteImg.mas_bottom).mas_offset(30);
+//        make.top.mas_equalTo(self.voteImg.mas_bottom).mas_offset(30);
+        make.top.mas_equalTo(self.tradingHashBgImg.mas_bottom).mas_offset(30);
         make.height.mas_equalTo(40);
         make.width.mas_equalTo(200);
     }];
@@ -261,12 +368,39 @@ TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title
     [self.contenView addSubview:self.itemStr_1];
     [self.contenView addSubview:self.itemValue_1];
    
+    [self.contenView addSubview:self.tradingStr];
+    [self.contenView addSubview:self.tradingHashBgImg];
+    [self.contenView addSubview:self.tradingHashL];
+    [self.contenView addSubview:self.hashCopy];
+    
     [self makeRedeemViewConstraints];
 }
 -(void)makeRedeemViewConstraints{
+    [self.tradingStr mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.contenView.mas_left).mas_offset(25);
+        make.top.mas_equalTo(self.titleStr.mas_bottom).mas_offset(30);
+    }];
+    [self.tradingHashBgImg mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.tradingStr.mas_bottom).mas_offset(10);
+        make.left.mas_equalTo(self.tradingStr);
+        make.right.mas_equalTo(self.contenView.mas_right).mas_offset(-25);
+        make.height.mas_equalTo(70);
+    }];
+    [self.tradingHashL mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.tradingHashBgImg);
+        make.top.mas_equalTo(self.tradingHashBgImg.mas_top).mas_offset(10);
+        make.bottom.mas_equalTo(self.tradingHashBgImg.mas_bottom).mas_offset(-10);
+        make.left.mas_equalTo(self.tradingHashBgImg.mas_left).mas_offset(10);
+        make.right.mas_equalTo(self.tradingHashBgImg.mas_right).mas_offset(-10);
+    }];
+    [self.hashCopy mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.bottom.mas_equalTo(self.tradingHashL);
+        make.width.mas_equalTo(32);
+        make.height.mas_equalTo(15);
+    }];
     [self.knownBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.titleStr.mas_centerX);
-        make.top.mas_equalTo(self.titleStr.mas_bottom).mas_offset(30);
+        make.top.mas_equalTo(self.tradingHashBgImg.mas_bottom).mas_offset(30);
         make.height.mas_equalTo(40);
         make.width.mas_equalTo(200);
     }];
@@ -275,7 +409,61 @@ TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title
 -(void)makeRewardViewWithValue:(double)value{
      [self makeRedeemViewConstraints];
 }
-
+//转账view设置
+-(void)makeTransferViewWithValue:(double)value{
+    self.itemStr_1.text = NSLocalizedString(@"transfer.value", @"转账金额");
+     self.itemValue_1.text = [NSString stringWithFormat:@"%@", [NSString changeNumberFormatter:[NSString stringWithFormat:@"%f",value]]];
+     [self.contenView addSubview:self.itemStr_1];
+     [self.contenView addSubview:self.itemValue_1];
+    
+     [self.contenView addSubview:self.tradingStr];
+     [self.contenView addSubview:self.tradingHashBgImg];
+     [self.contenView addSubview:self.tradingHashL];
+     [self.contenView addSubview:self.hashCopy];
+    [self makeTransferViewConstrains];
+    
+}
+-(void)makeTransferViewConstrains{
+    [self.itemStr_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.titleStr.mas_bottom).mas_offset(30);
+        make.left.mas_equalTo(self.contenView.mas_left).mas_offset(25);
+    }];
+    [self.itemValue_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.itemStr_1);
+        make.right.mas_equalTo(self.contenView.mas_right).mas_offset(-25);
+    }];
+    
+    [self.tradingStr mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.itemStr_1.mas_left);
+        make.top.mas_equalTo(self.itemStr_1.mas_bottom).mas_offset(30);
+    }];
+    [self.tradingHashBgImg mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.tradingStr.mas_bottom).mas_offset(10);
+        make.left.mas_equalTo(self.tradingStr);
+        make.right.mas_equalTo(self.contenView.mas_right).mas_offset(-25);
+        make.height.mas_equalTo(70);
+    }];
+    [self.tradingHashL mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.tradingHashBgImg);
+        make.top.mas_equalTo(self.tradingHashBgImg.mas_top).mas_offset(10);
+        make.bottom.mas_equalTo(self.tradingHashBgImg.mas_bottom).mas_offset(-10);
+        make.left.mas_equalTo(self.tradingHashBgImg.mas_left).mas_offset(10);
+        make.right.mas_equalTo(self.tradingHashBgImg.mas_right).mas_offset(-10);
+    }];
+    [self.hashCopy mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.right.bottom.mas_equalTo(self.tradingHashL);
+        make.width.mas_equalTo(32);
+        make.height.mas_equalTo(15);
+    }];
+    [self.knownBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.titleStr.mas_centerX);
+        make.top.mas_equalTo(self.tradingHashBgImg.mas_bottom).mas_offset(30);
+        make.height.mas_equalTo(40);
+        make.width.mas_equalTo(200);
+    }];
+    
+}
+// QR View设置
 -(void)makeQRViewWithValue:(NSString *)value{
     [self.contenView addSubview:self.qrImgView];
     [self.contenView addSubview:self.qrTipLabel];
@@ -347,6 +535,12 @@ TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title
     [self removeFromSuperview];
 }
 
+//复制交易号
+-(void)hashCopyAction{
+    UIPasteboard *board = [UIPasteboard generalPasteboard];
+    board.string = self.tradingHashL.text;
+    [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.copy.success", @"复制成功") toView:App_Delegate.window afterDelay:2.0 animted:YES];
+}
 #pragma mark ---- getter && setter
 -(UIView *)maskView{
     if (_maskView == nil) {
@@ -470,4 +664,44 @@ TransferResultView *resultView = [[TransferResultView alloc] initWithTitle:title
     }
     return _knownBtn;
 }
+
+-(UILabel *)tradingStr{
+    if(_tradingStr == nil){
+        _tradingStr = [[UILabel alloc] init];
+        _tradingStr.textColor = kColorAuxiliary2;
+        _tradingStr.text = NSLocalizedString(@"transfer.tradeNo.", @"交易号");
+        _tradingStr.font = [UIFont systemFontOfSize:15];
+    }
+    return _tradingStr;
+}
+-(UIImageView *)tradingHashBgImg{
+    if (_tradingHashBgImg == nil) {
+         _tradingHashBgImg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"label_bg"]];
+    }
+    return _tradingHashBgImg;
+}
+-(UILabel *)tradingHashL{
+    if(_tradingHashL == nil){
+        _tradingHashL = [[UILabel alloc] init];
+        _tradingHashL.textColor = kColorTitle;
+        _tradingHashL.font = [UIFont systemFontOfSize:12];
+        _tradingHashL.numberOfLines = 3;
+        _tradingHashL.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hashCopyAction)];
+        [_tradingHashL addGestureRecognizer:tap];
+    }
+    return _tradingHashL;
+}
+-(UIButton *)hashCopy{
+    if(_hashCopy == nil){
+        _hashCopy = [[UIButton alloc] init];
+        [_hashCopy setBackgroundColor:kColorBlue];
+        [_hashCopy setTitle:NSLocalizedString(@"copy", @"复制") forState:UIControlStateNormal];
+        [_hashCopy setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _hashCopy.titleLabel.font = [UIFont systemFontOfSize:9];
+        [_hashCopy addTarget:self action:@selector(hashCopyAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _hashCopy;
+}
+
 @end

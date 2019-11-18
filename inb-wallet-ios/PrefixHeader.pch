@@ -162,7 +162,7 @@ typedef enum{
     #import "NSDate+DateString.h"
     #import "NSString+Category.h"
     #import "NSDictionary+JSON.h"
-
+    #import "UIViewController+BaceFunction.h"
     #import "inb_wallet_ios-Swift.h"
     #endif /* PrefixHeader_pch */
 #endif

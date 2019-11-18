@@ -12,10 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TransferResultView : UIView
 +(instancetype)resultFailedWithTitle:(NSString *)title message:(NSString *)message;
-+(instancetype)resultSuccessLockWithTitle:(NSString *)title value:(double)value lcokNumber:(NSInteger)lockNumber;
-+(instancetype)resultSuccessVoteWithTitle:(NSString *)title voteNumber:(NSInteger)voteNumber voteNames:(NSArray *)names;
-+(instancetype)resultSuccessRedeemWithTitle:(NSString *)title value:(double)value;//赎回成功
-+(instancetype)resultSuccessRewardWithTitle:(NSString *)title value:(double)value; //（锁仓、投票）奖励领取
++(instancetype)resultSuccessLockWithTitle:(NSString *)title value:(double)value lcokNumber:(NSInteger)lockNumber hashValue:(NSString*)hash;
++(instancetype)resultSuccessVoteWithTitle:(NSString *)title voteNumber:(NSInteger)voteNumber voteNames:(NSArray *)names hashValue:(NSString *)hash;
++(instancetype)resultSuccessRedeemWithTitle:(NSString *)title value:(double)value hashValue:(NSString *)hash;//赎回成功
++(instancetype)resultSuccessRewardWithTitle:(NSString *)title value:(double)value hashValue:(NSString *)hash; //（锁仓、投票）奖励领取
++(instancetype)resultTransferWithTitle:(NSString *)title value:(double)value hashValue:(NSString *)hash; //转账
 +(instancetype)QRViewWithTitle:(NSString *)title value:(NSString *)value qrTip:(NSString *)tip;//显示二维码
 @end
 

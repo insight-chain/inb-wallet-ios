@@ -205,10 +205,12 @@
                                                             });
                                                             NSLog(@"%@", responseObject);
                                                             if (error) {
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:@"" dataStr:[@{@"type":@(TxType_reResource)} toJSONString] errStr:[error description]];
                                                                 [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.res.receive.failed", @"领取资源失败") toView:App_Delegate.window afterDelay:1 animted:YES];
                                                                 return ;
                                                             }
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:responseObject[@"result"] dataStr:[@{@"type":@(TxType_reResource)} toJSONString] errStr:@""];
                                                                 [tmpSelf.passwordInput hidePasswordInput];
                                                                 [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.res.receive.success", @"领取资源成功") toView:App_Delegate.window afterDelay:1 animted:YES];
                                                                 [NotificationCenter postNotificationName:NOTI_MORTGAGE_CHANGE object:nil];

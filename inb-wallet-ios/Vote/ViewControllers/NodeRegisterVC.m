@@ -359,11 +359,13 @@
                                                             
                                                             if (error || responseObject[@"error"]) {
                                                                 [MBProgressHUD showMessage:NSLocalizedString(@"修改节点失败", @"修改节点失败") toView:App_Delegate.window afterDelay:1.5 animted:NO];
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:@"" dataStr:[@{@"type":@(TxType_reResource)} toJSONString] errStr:error?[error description]:responseObject[@"error"][@"message"]];
                                                                 return ;
                                                             }
                                                             NSLog(@"%@---%@",[responseObject  class], responseObject);
                                                             
                                                             dispatch_async(dispatch_get_main_queue(), ^{
+                                                                [self sendLogAddr:App_Delegate.selectAddr hashStr:responseObject[@"result"] dataStr:[@{@"type":@(TxType_updateNodeInfo)} toJSONString] errStr:@""];
                                                                 [self.passwordInput hidePasswordInput];
                                                                 [MBProgressHUD showMessage:NSLocalizedString(@"修改节点成功", @"修改节点成功") toView:App_Delegate.window afterDelay:1.5 animted:NO];
                                                                 [NotificationCenter postNotificationName:NOTI_BALANCE_CHANGE object:nil];

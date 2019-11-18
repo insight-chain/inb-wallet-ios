@@ -20,6 +20,7 @@
 "wallet" = "钱包";
 "balance" = "余额";
 "reward.amount" = "奖励金额";
+"copy" = "复制";
 
 "welcom" = "你好，\n欢迎来到Insight Chain";
 "welcom.hasINBWallet" = "我有INB钱包";
@@ -56,9 +57,10 @@
 "Resource.rewardType.vote" = "投票奖励";
 "Resource.rewardType.mortgage"="抵押奖励";
 
-"Resource.mortgage.success" = "资源抵押成功";
+"Resource.lock.success" = "资源抵押已提交";
+"Resource.mortgage.success" = "锁仓抵押已提交";
 "Resource.mortgage.failed" = "资源抵押失败";
-"Resource.redeem.success" = "申请赎回成功";
+"Resource.redeem.success" = "赎回申请已提交";
 "Resource.redeem.failed" = "申请赎回失败";
 "receive.redemption" = "领取赎回";
 "receive.redemption.success" = "赎回领取成功";
@@ -138,7 +140,7 @@
 "transfer.tradeTime"= "交易时间";
 "transfer.tradeNo." = "交易号";
 "transfer.vote" = "节点投票";
-"transfer.vote.success" = "投票成功";
+"transfer.vote.success" = "投票结果已提交";
 "transfer.vote.failed" = "投票失败";
 "transfer.account.receive" = "收款账号";
 "transfer.number" = "数量";
@@ -164,6 +166,8 @@
 "transfer.reward.lock" = "锁仓收益";
 "transfer.reward.vote" = "投票收益";
 "transfer.toAddr" = "转入地址";
+"transfer.value" = "转账金额";
+"transfer.action.submit" = "转账已提交";
 
 "vote.seletedNumber.maxLimit" = "选择节点数达到上限！";
 "vote.support" = "支持率";

@@ -55,7 +55,8 @@ static NSString *blockNumber_MethodName= @"inb_blockNumber"; //获取当前区�
 
 
 +(void)rpc_requetWithURL:(NSString *)url params:(NSDictionary *)params completion:(void(^)(id  _Nullable responseObject, NSError * _Nullable error))completion;
-
+//上传日志
++(void)sendLogRrequestWithPatams:(NSDictionary *)params success:(void(^)(id resonseObject))successBlock failed:(void(^)(NSError *error))failedBlock;
 
 
 @end
