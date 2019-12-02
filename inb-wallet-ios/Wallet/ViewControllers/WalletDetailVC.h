@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface WalletDetailVC : UIViewController
 @property(nonatomic, strong) BasicWallet *wallet;
+@property(nonatomic, assign) BOOL toBackUp; //跳转到备份
 @end
 
 #pragma mark ---- 点击按钮

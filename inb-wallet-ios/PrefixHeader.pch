@@ -134,6 +134,7 @@ typedef enum{
     #define unitINB [NSDecimalNumber decimalNumberWithString:@"100000"]
 
     #define kUserDefaltKey_LastSelectedWalletID @"LastSelectedWalletID"
+    #define kLastBackupTipTime @"LastBackupTipTime" //上次提示时间
 
     static NSInteger kMaxSeleceNodesNumber = 10; //最大节点投票数
 
@@ -148,6 +149,10 @@ typedef enum{
     static NSInteger kWalletsMaxNumber = 20; //导入钱包的最大数量
     static NSString *kWei = @"100000";//位
 
+    /**** 用于二维码加密存储的key和iv ****/
+    static NSString* iv = @"BDC15E1365E4430A";
+    static NSString *keyEntryQR = @"inbentrykey12345";
+
     /* ********************** */
     #import "AppDelegate.h"
     #import "Masonry.h"
@@ -159,6 +164,7 @@ typedef enum{
     #import "CCNavigationController.h"
     #import "TabBarVC.h"
 
+    #import "EncryptUtils.h"
     #import "NSDate+DateString.h"
     #import "NSString+Category.h"
     #import "NSDictionary+JSON.h"

@@ -22,6 +22,9 @@
 "wallet" = "Wallet";
 "balance" = "Balance";
 "reward.amount" = "Reward Amount";
+"address" = "Address";
+
+"photo.save.success" = "Picture saved successfully";
 
 "welcom" = "Hello，\nWelcome to the Insight Chain";
 "welcom.hasINBWallet" = "I have an INB wallet";
@@ -109,6 +112,7 @@
 "QRCode" = "二维码";
 "copyAddress" = "复制地址";
 "saveQRCode" = "保存二维码";
+"qr.unique.inb" = "INB Unique QRCode";
 
 "privateKey" = "Private key";
 "mnemonicWord"= "Mnemonic";
@@ -126,6 +130,8 @@
 "passwordTipMessage.placeholder" = "Not fill";
 "backup.tip_1" = "It is recommended that the private key should be copied or printed, and be stored in a safe place";
 "backup.tip_2" = "Do not transfer the private key through the network tool. Once it is obtained by the hacker, you may suffer irreparable loss";
+"backup.save.tip" = "本程序可能会因掉签问题而导致您的私钥丢失，建议您立即备份钱包以保障资产安全。";
+"backup.immediately" = "立即备份";
 
 "record.trading.empty" = "No transaction history";
 "record.receive.empty" = "暂无领取记录";

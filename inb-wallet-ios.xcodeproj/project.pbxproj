@@ -12,6 +12,7 @@
 		FE05CC952356C712005801C0 /* WelcomeIndexVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CC932356C712005801C0 /* WelcomeIndexVC.m */; };
 		FE05CD9523588733005801C0 /* SuspendTopPausePageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CD9423588733005801C0 /* SuspendTopPausePageVC.m */; };
 		FE05CD9823588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE05CD9723588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m */; };
+		FE18501C2390061500E24AFA /* EncryptUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FE18501B2390061500E24AFA /* EncryptUtils.m */; };
 		FE1CA86B237279B00009A658 /* UIViewController+BackButtonHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1CA86A237279B00009A658 /* UIViewController+BackButtonHandler.m */; };
 		FE1CA86E237440520009A658 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE1CA870237440520009A658 /* InfoPlist.strings */; };
 		FE1FCE632327899C00F89A18 /* MortgageDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1FCE612327899C00F89A18 /* MortgageDetailVC.m */; };
@@ -325,6 +326,8 @@
 		FE05CD9423588733005801C0 /* SuspendTopPausePageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuspendTopPausePageVC.m; sourceTree = "<group>"; };
 		FE05CD9623588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuspendTopPauseBaseTableViewVC.h; sourceTree = "<group>"; };
 		FE05CD9723588B5B005801C0 /* SuspendTopPauseBaseTableViewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuspendTopPauseBaseTableViewVC.m; sourceTree = "<group>"; };
+		FE18501A2390061500E24AFA /* EncryptUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptUtils.h; sourceTree = "<group>"; };
+		FE18501B2390061500E24AFA /* EncryptUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptUtils.m; sourceTree = "<group>"; };
 		FE1CA869237279B00009A658 /* UIViewController+BackButtonHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BackButtonHandler.h"; sourceTree = "<group>"; };
 		FE1CA86A237279B00009A658 /* UIViewController+BackButtonHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BackButtonHandler.m"; sourceTree = "<group>"; };
 		FE1CA86F237440520009A658 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -1040,6 +1043,8 @@
 		FE6D85262320EC7100023321 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FE18501A2390061500E24AFA /* EncryptUtils.h */,
+				FE18501B2390061500E24AFA /* EncryptUtils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1601,15 +1606,15 @@
 			isa = PBXGroup;
 			children = (
 				FE92C55222A792F40043DA9D /* MnemonicWordCell.h */,
-				FE92C55322A792F40043DA9D /* MnemonicWordHeaderView2.h */,
 				FE92C55422A792F40043DA9D /* MnemonicWordCell2.m */,
 				FE92C55522A792F40043DA9D /* MnemonicWordCell2.xib */,
 				FE92C55622A792F40043DA9D /* MnemonicWordHeaderView.h */,
 				FE92C55722A792F40043DA9D /* MnemonicWordCell.m */,
-				FE92C55822A792F40043DA9D /* MnemonicWordHeaderView2.m */,
 				FE92C55922A792F40043DA9D /* MnemonicWordHeaderView.xib */,
 				FE92C55A22A792F40043DA9D /* MnemonicWordCell2.h */,
 				FE92C55B22A792F40043DA9D /* MnemonicWordCell.xib */,
+				FE92C55322A792F40043DA9D /* MnemonicWordHeaderView2.h */,
+				FE92C55822A792F40043DA9D /* MnemonicWordHeaderView2.m */,
 				FE92C55C22A792F40043DA9D /* MnemonicWordHeaderView2.xib */,
 				FE92C55D22A792F40043DA9D /* MnemonicWordHeaderView.m */,
 			);
@@ -2371,6 +2376,7 @@
 				FE92C63122A792F50043DA9D /* CCSlideAnimatedTransitioning.m in Sources */,
 				FE6D850D231CBF4E00023321 /* redeemVC.m in Sources */,
 				FE92C5F022A792F40043DA9D /* NSData+Crypto.m in Sources */,
+				FE18501C2390061500E24AFA /* EncryptUtils.m in Sources */,
 				FE92C61022A792F50043DA9D /* FindVC.m in Sources */,
 				FE92C65222A792F50043DA9D /* ETHKeystore.m in Sources */,
 				FE3FC30822B8D44700A41205 /* TZImagePickerController.m in Sources */,

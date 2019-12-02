@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @interface FAGlobal : NSObject
-
++(NSString*)getDeviceName;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -52,8 +52,8 @@
     //7.3在中心划入其他图片
     CGFloat centerW = centerSize;
     CGFloat centerH = centerSize;
-    CGFloat centerX = (img.size.width-70)*0.5;
-    CGFloat centerY = (img.size.height -70)*0.5;
+    CGFloat centerX = (img.size.width-centerW)*0.5;
+    CGFloat centerY = (img.size.height -centerH)*0.5;
     [centerImg drawInRect:CGRectMake(centerX, centerY, centerW, centerH)];
     
     //7.4 获取绘制好的图片

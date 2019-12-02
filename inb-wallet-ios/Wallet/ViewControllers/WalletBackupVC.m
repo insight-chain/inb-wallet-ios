@@ -8,13 +8,21 @@
 
 #import "WalletBackupVC.h"
 #import "TransferResultView.h"
+
+#import "UIImage+QRImage.h"
+
 #define kFontSize 15
 
 #define kBigMargin 20
 #define kMidMargin 15
 #define kLittleMargin 10
 
-@interface WalletBackupVC ()
+#define kQRImgSize 130
+
+@interface WalletBackupVC ()<UIScrollViewDelegate>
+
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIView *contentView;
 
 @property(nonatomic, strong) UILabel *accountNameLabel; //"账号名"
 @property(nonatomic, strong) UILabel *accountName;
@@ -33,6 +41,12 @@
 @property(nonatomic, strong) UIImageView *menmonryBg;
 @property(nonatomic, strong) UIButton *menmonryCopy;
 @property(nonatomic, strong) UIButton *menmonryQRBtn; //私钥二维码
+
+@property(nonatomic, strong) UILabel *qrLabel; //二维码
+@property (nonatomic, strong) UIView *qrBg;
+@property (nonatomic, strong) UIImageView *qr;
+@property(nonatomic, strong) UILabel *qrAddressLabel;
+@property (nonatomic, strong) UIButton *qrDownloadBtn; //下载二维码
 
 @property(nonatomic, strong) UIImageView *tipImg_1;
 @property(nonatomic, strong) UILabel *tipLabel_1;
@@ -58,7 +72,11 @@
         self.extendedLayoutIncludesOpaqueBars = NO;
         self.modalPresentationCapturesStatusBarAppearance = NO;
     }
-    
+
+    self.scrollView.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height-kNavigationBarHeight);
+    [self.view addSubview:self.scrollView];
+    self.contentView = [[UIView alloc] init];
+    [self.scrollView addSubview:self.contentView];
     
     [self makeConstraints];
     
@@ -68,37 +86,70 @@
     if ([self.menmonry.text isEqualToString:@""]) {
         self.menmonryCopy.hidden = YES;
         self.menmonryQRBtn.hidden = YES;
+        self.menmonryLabel.hidden = YES;
+        self.menmonryBg.hidden = YES;
+        self.menmonry.hidden = YES;
+        
+        NSString *entry = [EncryptUtils encryptByAES:self.address.text key:keyEntryQR];
+        NSString *deEntry = [EncryptUtils decryptByAES:entry key:keyEntryQR];
+        NSDictionary *infoDic = @{@"type":@(1),@"content":entry};
+        NSString *jsonStr = [infoDic toJSONString];
+        self.qr.image = [UIImage createQRImgae:jsonStr size:kQRImgSize centerImg:nil centerImgSize:20];
+        
     }else{
         self.menmonryCopy.hidden = NO;
         self.menmonryQRBtn.hidden = NO;
+        
+        NSString *entry = [EncryptUtils encryptByAES:self.menmonryKey key:keyEntryQR];
+        NSString *deEntry = [EncryptUtils decryptByAES:entry key:keyEntryQR];
+        NSDictionary *infoDic = @{@"type":@(2),@"content":entry};
+        NSString *jsonStr = [infoDic toJSONString];
+        self.qr.image = [UIImage createQRImgae:jsonStr size:kQRImgSize centerImg:nil centerImgSize:20];
+        
     }
+    
+    self.qrAddressLabel.text = [NSString stringWithFormat:@"%@", [App_Delegate.selectAddr add0xIfNeeded]];
+    
+    [self.contentView layoutIfNeeded];
+    self.contentView.frame = CGRectMake(0, 0, KWIDTH, CGRectGetMaxY(self.tipLabel_2.frame)+50);
+    self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.contentView.frame));
+    
+
+    
 }
 
 -(void)makeConstraints{
-    [self.view addSubview:self.accountNameLabel];
-    [self.view addSubview:self.accountNameBg];
-    [self.view addSubview:self.accountName];
+   
+    [self.contentView addSubview:self.accountNameLabel];
+    [self.contentView addSubview:self.accountNameBg];
+    [self.contentView addSubview:self.accountName];
     
-    [self.view addSubview:self.addressLabel];
-    [self.view addSubview:self.addressBg];
-    [self.view addSubview:self.address];
-    [self.view addSubview:self.addressCopyBtn];
-    [self.view addSubview:self.privateKeyQRBtn];
+    [self.contentView addSubview:self.addressLabel];
+    [self.contentView addSubview:self.addressBg];
+    [self.contentView addSubview:self.address];
+    [self.contentView addSubview:self.addressCopyBtn];
+    [self.contentView addSubview:self.privateKeyQRBtn];
     
-    [self.view addSubview:self.menmonryLabel];
-    [self.view addSubview:self.menmonryBg];
-    [self.view addSubview:self.menmonry];
-    [self.view addSubview:self.menmonryCopy];
-    [self.view addSubview:self.menmonryQRBtn];
+    [self.contentView addSubview:self.menmonryLabel];
+    [self.contentView addSubview:self.menmonryBg];
+    [self.contentView addSubview:self.menmonry];
+    [self.contentView addSubview:self.menmonryCopy];
+    [self.contentView addSubview:self.menmonryQRBtn];
+    
+    [self.contentView addSubview:self.qrBg];
+    [self.qrBg addSubview:self.qrLabel];
+    [self.qrBg addSubview:self.qr];
+    [self.qrBg addSubview:self.qrAddressLabel];
+    [self.qrBg addSubview:self.qrDownloadBtn];
     
     UIView *sepView = [[UIView alloc] init];
     sepView.backgroundColor = kColorBackground;
-    [self.view addSubview:sepView];
+    [self.contentView addSubview:sepView];
     
-    [self.view addSubview:self.tipImg_1];
-    [self.view addSubview:self.tipLabel_1];
-    [self.view addSubview:self.tipImg_2];
-    [self.view addSubview:self.tipLabel_2];
+    [self.contentView addSubview:self.tipImg_1];
+    [self.contentView addSubview:self.tipLabel_1];
+    [self.contentView addSubview:self.tipImg_2];
+    [self.contentView addSubview:self.tipLabel_2];
     
     [self.accountNameLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(AdaptedWidth(kBigMargin));
@@ -165,15 +216,45 @@
         make.right.mas_equalTo(self.menmonryCopy.mas_left);
     }];
     
+    
+    [self.qrBg mas_remakeConstraints:^(MASConstraintMaker *make) {
+        if([self.menmonryKey isEqualToString:@""] || self.menmonryKey == nil){ make.top.mas_equalTo(self.addressBg.mas_bottom).mas_offset(AdaptedHeight(kBigMargin));
+        }else{ make.top.mas_equalTo(self.menmonryBg.mas_bottom).mas_offset(AdaptedHeight(kBigMargin));
+        }
+        make.left.mas_equalTo(AdaptedWidth(kMidMargin));
+        make.right.mas_equalTo(AdaptedWidth(-kMidMargin));
+        make.height.mas_equalTo(AdaptedHeight(250));
+    }];
+    [self.qrLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.qrBg.mas_top).mas_offset(AdaptedHeight(5));
+        make.centerX.mas_equalTo(self.qrBg.mas_centerX);
+    }];
+    [self.qr mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.qrLabel.mas_bottom).mas_offset(15);
+        make.centerX.mas_equalTo(self.qrBg);
+        make.width.height.mas_equalTo(AdaptedHeight(kQRImgSize));
+    }];
+    [self.qrAddressLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.qr);
+        make.top.mas_equalTo(self.qr.mas_bottom).mas_offset(10);
+        make.width.mas_equalTo(AdaptedHeight(170));
+    }];
+    [self.qrDownloadBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.qr);
+        make.top.mas_equalTo(self.qrAddressLabel.mas_bottom).mas_offset(10);
+        make.width.mas_equalTo(140);
+        make.height.mas_equalTo(30);
+    }];
+    
     [sepView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
-        make.top.mas_equalTo(self.menmonryBg.mas_bottom).mas_offset(AdaptedHeight(kBigMargin));
+        make.top.mas_equalTo(self.qrBg.mas_bottom).mas_offset(AdaptedHeight(kBigMargin));
         make.height.mas_equalTo(AdaptedHeight(8));
     }];
     
     [self.tipImg_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(sepView.mas_bottom).mas_offset(AdaptedHeight(kBigMargin));
-        make.left.mas_equalTo(self.view).mas_offset(AdaptedWidth(kMidMargin));
+        make.left.mas_equalTo(self.contentView).mas_offset(AdaptedWidth(kMidMargin));
         make.width.height.mas_equalTo(AdaptedWidth(15));
     }];
     [self.tipLabel_1 mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -207,13 +288,33 @@
 }
 //显示私钥二维码
 -(void)privateQR:(UIButton *)sender{
-    [TransferResultView QRViewWithTitle:NSLocalizedString(@"QRCode", @"二维码") value:self.address.text qrTip:NSLocalizedString(@"qrCode.showTip", @"二维码进制保存，截图，仅供用户在安全环境下方便扫描导入钱包")];
+    NSString *entry = [EncryptUtils encryptByAES:self.address.text key:keyEntryQR];
+    NSString *deEntry = [EncryptUtils decryptByAES:entry key:keyEntryQR];
+    NSDictionary *infoDic = @{@"type":@(1),@"content":entry};
+    NSString *jsonStr = [infoDic toJSONString];
+    [TransferResultView QRViewWithTitle:NSLocalizedString(@"QRCode", @"二维码") value:jsonStr qrTip:NSLocalizedString(@"qrCode.showTip", @"二维码进制保存，截图，仅供用户在安全环境下方便扫描导入钱包")];
 }
 //显示助记词二维码
 -(void)menmonryQR:(UIButton *)sender{
     [TransferResultView QRViewWithTitle:NSLocalizedString(@"QRCode", @"二维码") value:self.menmonry.text qrTip:NSLocalizedString(@"qrCode.showTip", @"二维码进制保存，截图，仅供用户在安全环境下方便扫描导入钱包")];
 }
+//保存inb秘钥二维码到相册
+-(void)saveINBQR{
+    self.qrDownloadBtn.hidden = YES;
+    [self saveImageFromView:self.qrBg];
+    self.qrDownloadBtn.hidden = NO;
+}
+
 #pragma mark ----
+
+-(UIScrollView *)scrollView{
+    if (_scrollView == nil) {
+        _scrollView = [[UIScrollView alloc] init];
+        _scrollView.delegate = self;
+    }
+    return _scrollView;
+}
+
 -(UILabel *)accountNameLabel{
     if(_accountNameLabel == nil){
         _accountNameLabel = [[UILabel alloc] init];
@@ -330,6 +431,51 @@
     return _menmonryQRBtn;
 }
 
+-(UILabel *)qrLabel{
+    if (_qrLabel == nil) {
+           _qrLabel = [[UILabel alloc] init];
+           _qrLabel.text = NSLocalizedString(@"qr.unique.inb", @"INB钱包专属二维码");
+           _qrLabel.font = AdaptedFontSize(kFontSize);
+           _qrLabel.textColor = kColorBlue;
+       }
+       return _qrLabel;
+}
+-(UIView *)qrBg{
+    if (_qrBg == nil) {
+        _qrBg = [[UIView alloc] init];
+//        UIImage *img = [UIImage imageNamed:@"label_bg"];
+//        img = [img resizableImageWithCapInsets:UIEdgeInsetsMake(img.size.height/2.0, img.size.width/2.0, img.size.width/2.0, img.size.height/2.0) resizingMode:UIImageResizingModeStretch];
+//        _qrBg.image = img;
+    }
+    return _qrBg;
+}
+-(UIImageView *)qr{
+    if (_qr == nil) {
+        _qr = [[UIImageView alloc] init];
+    }
+    return _qr;
+}
+-(UILabel *)qrAddressLabel{
+    if (_qrAddressLabel == nil) {
+        _qrAddressLabel = [[UILabel alloc] init];
+        _qrAddressLabel.textColor = kColorTitle;
+        _qrAddressLabel.font = [UIFont systemFontOfSize:13];
+        _qrAddressLabel.lineBreakMode = NSLineBreakByCharWrapping;
+        _qrAddressLabel.textAlignment = NSTextAlignmentCenter;
+        _qrAddressLabel.numberOfLines = 0;
+    }
+    return _qrAddressLabel;
+}
+-(UIButton *)qrDownloadBtn{
+    if (_qrDownloadBtn == nil) {
+        _qrDownloadBtn = [[UIButton alloc] init];
+        [_qrDownloadBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
+        [_qrDownloadBtn setTitle:NSLocalizedString(@"saveQRCode", @"保存二维码") forState:UIControlStateNormal];
+        [_qrDownloadBtn addTarget:self action:@selector(saveINBQR) forControlEvents:UIControlEventTouchUpInside];
+        _qrDownloadBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    }
+    return _qrDownloadBtn;
+}
 -(UIImageView *)tipImg_1{
     if (_tipImg_1 == nil) {
         _tipImg_1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"horn"]];

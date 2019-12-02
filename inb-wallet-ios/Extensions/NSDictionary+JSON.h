@@ -31,6 +31,12 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return JSON数据
  */
 - (NSData *)toJSONData;
+
+/**
+ * JSON转 Dic
+ */
++ (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString;
+
 @end
 
 NS_ASSUME_NONNULL_END

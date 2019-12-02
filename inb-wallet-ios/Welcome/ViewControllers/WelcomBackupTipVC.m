@@ -55,12 +55,14 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSString *mnemonry = [WalletManager exportMnemonicForID:tmpSelf.wallet.walletID password:self.password];
         NSString *privateKey = [WalletManager exportPrivateKeyForID:tmpSelf.wallet.walletID password:self.password];
+        NSString *address = tmpSelf.wallet.address;
         dispatch_async(dispatch_get_main_queue(), ^{
             [MBProgressHUD hideHUDForView:tmpSelf.view animated:YES];
             WelcomBackupVC *backupVC = [[WelcomBackupVC alloc] init];
             backupVC.navigationItem.title = NSLocalizedString(@"backupWallet", @"备份钱包");
             backupVC.memonry = mnemonry;
             backupVC.privateKey = privateKey;
+            backupVC.address = address;
             backupVC.needVertify = tmpSelf.needVertify;
             [tmpSelf.navigationController pushViewController:backupVC animated:YES];
         });

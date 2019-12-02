@@ -36,6 +36,7 @@
 #import "WalletInfoCPUView.h"
 #import "WalletAccountsListView.h"
 #import "PasswordInputView.h"
+#import "SavePrivatekeyWaringView.h"
 
 #import "NetworkUtil.h"
 #import "NSString+Extension.h"
@@ -299,6 +300,30 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    NSTimeInterval time = [[[NSUserDefaults standardUserDefaults] objectForKey:kLastBackupTipTime] doubleValue];
+    if (time && [NSDate getDifferenceByDate:time] <= 2) {
+
+    }else{
+        [SavePrivatekeyWaringView showBackupTipWithImg:[UIImage imageNamed:@"backupWaringBg"] title:NSLocalizedString(@"backup.save.tip", @"本程序可能会因掉签问题而导致您的私钥丢失，建议您立即备份钱包以保障资产安全。") confirmTitle:NSLocalizedString(@"backup.immediately", @"立即备份") konwBlock:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                WalletDetailVC *detailVC = [[WalletDetailVC alloc] init];
+                detailVC.wallet = self.selectedWallet;
+                detailVC.toBackUp = YES;
+                detailVC.navigationItem.title = NSLocalizedString(@"walletDetail", @"钱包详情");
+                detailVC.view.backgroundColor = [UIColor whiteColor];
+                detailVC.hidesBottomBarWhenPushed = YES;
+               
+                [self.navigationController pushViewController:detailVC animated:YES];
+                
+                [[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:kLastBackupTipTime];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            });
+        } cancelBlock:^{
+            [[NSUserDefaults standardUserDefaults] setDouble:[[NSDate date] timeIntervalSince1970] forKey:kLastBackupTipTime];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }];
+    }
 //    //设置导航栏背景图片为一个空的image，这样就透明了
 //    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
 //    //去掉透明后导航栏下边的黑边

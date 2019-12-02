@@ -69,6 +69,10 @@
     self.password.secureTextEntry = YES;
     
     self.tipPasswordCancel.hidden = YES;
+    
+    /** 导航栏返回按钮文字 **/
+   self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+   self.navigationItem.backBarButtonItem.tintColor = [UIColor whiteColor];
 }
 
 -(void)makeConstraints{
@@ -417,7 +421,8 @@
     if ([[URL scheme] isEqualToString:@"policy"]) {
         NSLog(@"同意阅读");
         BasicWebViewController *webVC = [[BasicWebViewController alloc] init];
-        webVC.urlStr = @"http://www.baidu.com";
+        webVC.navigationItem.title = NSLocalizedString(@"setting.protocal", @"隐私条款");
+        webVC.urlStr = @"http://www.insightchain.io/wallet_intro";
         [self.navigationController pushViewController:webVC animated:YES];
         return NO;
     }else if ([[URL scheme] isEqualToString:@"checkbox"]){

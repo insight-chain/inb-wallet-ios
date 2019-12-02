@@ -137,7 +137,66 @@
     self.address.text = [self.wallet.address hasPrefix:@"0x"] ? self.wallet.address : [NSString stringWithFormat:@"0x%@", self.wallet.address];
     self.createTime.text = [NSDate timestampSwitchTime:self.wallet.imTokenMeta.timestamp formatter:@"yyyy-MM-dd HH:mm:ss"];
 }
-
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    __weak __block typeof(self) tmpSelf = self;
+    if(self.toBackUp){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            tmpSelf.passwordInput = [PasswordInputView showPasswordInputWithConfirmClock:^(NSString * _Nonnull password) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
+                });
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    BOOL verifyPass = [tmpSelf.wallet verifyPassword:password];
+                    if(!verifyPass){
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                            [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:1 animted:YES];
+                        });
+                    }else{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [tmpSelf.passwordInput hidePasswordInput];
+                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                            [SavePrivatekeyWaringView showSaveWaringWith:^{
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
+                                }); dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                                    @try {
+                                        NSString *private = [tmpSelf.wallet privateKey:password];
+                                        NSString *menmonry = [tmpSelf.wallet exportMnemonic:password];
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            [self.passwordInput hidePasswordInput];
+                                            [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                            WalletBackupVC *backupVC = [[WalletBackupVC alloc] init];
+                                            backupVC.navigationItem.title = NSLocalizedString(@"backupWallet", @"备份钱包");
+                                            backupVC.privateKey = private;
+                                            backupVC.menmonryKey = menmonry;
+                                            backupVC.name = tmpSelf.wallet.name;
+                                            backupVC.hidesBottomBarWhenPushed = YES;
+                                            [tmpSelf.navigationController pushViewController:backupVC animated:YES];
+                                        });
+                                    } @catch (NSException *exception) {
+                                        if([exception.name isEqualToString:@"PasswordError"]){
+                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                [MBProgressHUD hideHUDForView:App_Delegate.window animated:YES];
+                                                [MBProgressHUD showMessage:@"密码错误" toView:App_Delegate.window afterDelay:1 animted:YES];
+                                            });
+                                        }
+                                    } @finally {
+                                        
+                                    }
+                                });
+                            }];
+                        });
+                    }
+                });
+            }];
+        });
+    };
+    
+}
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     

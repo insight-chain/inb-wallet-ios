@@ -75,27 +75,26 @@
     }
     
     self.sliderBar  = [[SliderBar alloc] initWithFrame:CGRectMake(0, 0, 0, kNavigationBarHeight)];
-    self.sliderBar.itemsTitle = @[@"私钥", @"助记词"];
+    self.sliderBar.itemsTitle = @[NSLocalizedString(@"mnemonicWord", @"助记词"), NSLocalizedString(@"privateKey", @"私钥")];
     self.sliderBar.itemTitleColor = kColorWithRGBA(1, 1, 1, 0.6);
     self.sliderBar.itemTitleFont  = AdaptedBoldFontSize(16);
     self.sliderBar.itemTitleSelectedColor = kColorWithRGBA(1, 1, 1, 1);
     self.sliderBar.itemTitleSelectedFont = AdaptedBoldFontSize(16);
     self.sliderBar.selectedIndex = 0;
-    self.selectImportType = ImportType_private; //默认私钥导入
-    
+    self.selectImportType = ImportType_mnemonic; //默认私钥导入
+    self.typeStrLabel.text = NSLocalizedString(@"mnemonicWord", @"助记词");
     __weak typeof(self) tmpSelf = self;
     self.sliderBar.itemClick = ^(NSInteger index) {
         if (index == 0) {
-            tmpSelf.selectImportType = ImportType_private;
-        }else{
             tmpSelf.selectImportType = ImportType_mnemonic;
+        }else{
+            tmpSelf.selectImportType = ImportType_private;
         }
         
     };
     
     [self initNavition];
     
-    self.typeStrLabel.text = NSLocalizedString(@"privateKey", @"私钥");
     
     [self makeConstraints];
     
@@ -385,7 +384,25 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             if(success){
                 [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.scan.success", @"扫码成功") toView:self.view afterDelay:1 animted:YES];
-                self.keyTextView.text = value;
+                NSDictionary *dic = [NSDictionary dictionaryWithJsonString:value];
+                if(!dic){
+                    self.keyTextView.text = value;
+                    self.keyPlaceHolder.hidden = YES;
+                }else{
+                    int type = [dic[@"type"] intValue]; //1-私钥，2-助记词
+                    NSString *entryStr = dic[@"content"];
+                    NSString *str = [EncryptUtils decryptByAES:entryStr key:keyEntryQR];
+                    self.keyTextView.text = str;
+                    self.keyPlaceHolder.hidden = YES;
+                    
+                    if (type == 1) {
+                        self.sliderBar.selectedIndex = 1;
+                        self.selectImportType = ImportType_private;
+                    }else if(type == 2){
+                        self.sliderBar.selectedIndex = 0;
+                        self.selectImportType = ImportType_mnemonic;
+                    }
+                }
             }
         });
     };

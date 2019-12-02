@@ -13,6 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 //发送日志
 -(void)sendLogAddr:(NSString *)addr hashStr:(NSString *)hashStr dataStr:(NSString *)dataStr errStr:(NSString *)errStr;
+//图片
+-(void)saveImageFromView:(UIView *)view; //保存图片
+-(UIImage *)imageFromView:(UIView *)view; //生成图片
+-(UIImage *)screenShotWithScrollView:(UIScrollView *)scrollView;
+- (void)saveImageToPhotos:(UIImage*)savedImage; //保存图片
 
 @end
 

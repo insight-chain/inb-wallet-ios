@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(void)showSaveWaringWith:(void(^)(void))konwBlock;
 
+//提示备份
++(void)showBackupTipWithImg:(UIImage *)tipImg title:(NSString *)tipTitle confirmTitle:(NSString *)confirmTitle konwBlock:(void(^)(void))konwBlock cancelBlock:(void(^)(void))cancelBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

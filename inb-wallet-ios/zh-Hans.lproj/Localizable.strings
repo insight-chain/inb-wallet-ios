@@ -21,6 +21,9 @@
 "balance" = "余额";
 "reward.amount" = "奖励金额";
 "copy" = "复制";
+"address" = "地址";
+
+"photo.save.success" = "图片保存成功";
 
 "welcom" = "你好，\n欢迎来到Insight Chain";
 "welcom.hasINBWallet" = "我有INB钱包";
@@ -110,6 +113,7 @@
 "qrCode.showTip" = "二维码禁止保存，截图，仅供用户在安全环境下方便扫描导入钱包";
 "copyAddress" = "复制地址";
 "saveQRCode" = "保存二维码";
+"qr.unique.inb" = "INB钱包专属二维码";
 
 "privateKey" = "私钥";
 "mnemonicWord"= "助记词";
@@ -127,6 +131,8 @@
 "passwordTipMessage.placeholder" = "可不填";
 "backup.tip_1" = "建议抄写或打印私钥后放置在安全地点保存";
 "backup.tip_2" = "请勿通过网络工具传输私钥，一旦被黑客获取将造成不可挽回的损失";
+"backup.save.tip" = "本程序可能会因掉签问题而导致您的私钥丢失，建议您立即备份钱包以保障资产安全。";
+"backup.immediately" = "立即备份";
 
 "record.trading.empty" = "暂无交易历史";
 "record.receive.empty" = "暂无领取记录";

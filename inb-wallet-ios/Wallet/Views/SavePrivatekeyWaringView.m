@@ -12,9 +12,11 @@
 @property(nonatomic, strong) UIView *maskView;
 @property(nonatomic, strong) UIImageView *bgImg;
 
+@property (nonatomic, strong) UIButton *cancelBtn; //取消
 @property(nonatomic, strong) UILabel *tipLabel;
 @property(nonatomic, strong) UIButton *knowBtn;
 @property(nonatomic, copy) void(^konwBlock)(void);
+@property(nonatomic, copy) void(^cancelBlock)(void);
 @end
 
 @implementation SavePrivatekeyWaringView
@@ -27,12 +29,25 @@
     
 }
 
++(void)showBackupTipWithImg:(UIImage *)tipImg title:(NSString *)tipTitle confirmTitle:(NSString *)confirmTitle konwBlock:(void(^)(void))konwBlock cancelBlock:(void(^)(void))cancelBlock{
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+   SavePrivatekeyWaringView *saveWaring = [[SavePrivatekeyWaringView alloc] initWithFrame:window.bounds];
+    saveWaring.bgImg.image = tipImg;
+    saveWaring.tipLabel.text = tipTitle;
+   saveWaring.konwBlock = konwBlock;
+    saveWaring.cancelBlock = cancelBlock;
+    [saveWaring.knowBtn setTitle:confirmTitle forState:UIControlStateNormal];
+   [window addSubview:saveWaring];
+}
+
+
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self addSubview:self.maskView];
         [self addSubview:self.bgImg];
         [self addSubview:self.tipLabel];
         [self addSubview:self.knowBtn];
+        [self addSubview:self.cancelBtn];
         
         [self makeConstraints];
     }
@@ -48,6 +63,10 @@
         make.centerY.mas_equalTo(self.maskView.mas_centerY);
         make.width.mas_equalTo(AdaptedWidth(295));
         make.height.mas_equalTo(self.bgImg.mas_width).multipliedBy(67.0/59.0);
+    }];
+    [self.cancelBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.mas_equalTo(self.bgImg);
+        make.width.height.mas_equalTo(30);
     }];
     [self.tipLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.bgImg.mas_left).mas_offset(25);
@@ -65,6 +84,9 @@
 -(void)hideView{
     [self removeFromSuperview];
     self.hidden = YES;
+    if(self.cancelBlock){
+        self.cancelBlock();
+    }
 }
 
 -(void)knowAction:(UIButton *)sender{
@@ -117,5 +139,13 @@
         [_knowBtn addTarget:self action:@selector(knowAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _knowBtn;
+}
+-(UIButton *)cancelBtn{
+    if (_cancelBtn == nil) {
+        _cancelBtn = [[UIButton alloc] init];
+        [_cancelBtn setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+        [_cancelBtn addTarget:self action:@selector(hideView) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _cancelBtn;
 }
 @end
