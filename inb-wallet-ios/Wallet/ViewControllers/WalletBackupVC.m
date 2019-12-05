@@ -8,7 +8,7 @@
 
 #import "WalletBackupVC.h"
 #import "TransferResultView.h"
-
+#import "NSString+Extension.h"
 #import "UIImage+QRImage.h"
 
 #define kFontSize 15
@@ -47,6 +47,7 @@
 @property (nonatomic, strong) UIImageView *qr;
 @property(nonatomic, strong) UILabel *qrAddressLabel;
 @property (nonatomic, strong) UIButton *qrDownloadBtn; //下载二维码
+@property (nonatomic, strong) UILabel *qrTipL;
 
 @property(nonatomic, strong) UIImageView *tipImg_1;
 @property(nonatomic, strong) UILabel *tipLabel_1;
@@ -56,7 +57,9 @@
 @property(nonatomic, strong) UIButton *addressCopyBtn;
 @property(nonatomic, strong) UIButton *privateKeyQRBtn; //私钥二维码
 
-
+@property (nonatomic, strong) NSString *insightQRPaw; //insight专属QR密码
+@property (nonatomic, strong) UIView *firstBackupView; //第一次
+@property (nonatomic, strong) UITextField *insightQRTF;
 @end
 
 @implementation WalletBackupVC
@@ -83,30 +86,7 @@
     self.accountName.text = self.name;
     self.address.text = self.privateKey;
     self.menmonry.text = self.menmonryKey;
-    if ([self.menmonry.text isEqualToString:@""]) {
-        self.menmonryCopy.hidden = YES;
-        self.menmonryQRBtn.hidden = YES;
-        self.menmonryLabel.hidden = YES;
-        self.menmonryBg.hidden = YES;
-        self.menmonry.hidden = YES;
-        
-        NSString *entry = [EncryptUtils encryptByAES:self.address.text key:keyEntryQR];
-        NSString *deEntry = [EncryptUtils decryptByAES:entry key:keyEntryQR];
-        NSDictionary *infoDic = @{@"type":@(1),@"content":entry};
-        NSString *jsonStr = [infoDic toJSONString];
-        self.qr.image = [UIImage createQRImgae:jsonStr size:kQRImgSize centerImg:nil centerImgSize:20];
-        
-    }else{
-        self.menmonryCopy.hidden = NO;
-        self.menmonryQRBtn.hidden = NO;
-        
-        NSString *entry = [EncryptUtils encryptByAES:self.menmonryKey key:keyEntryQR];
-        NSString *deEntry = [EncryptUtils decryptByAES:entry key:keyEntryQR];
-        NSDictionary *infoDic = @{@"type":@(2),@"content":entry};
-        NSString *jsonStr = [infoDic toJSONString];
-        self.qr.image = [UIImage createQRImgae:jsonStr size:kQRImgSize centerImg:nil centerImgSize:20];
-        
-    }
+   
     
     self.qrAddressLabel.text = [NSString stringWithFormat:@"%@", [App_Delegate.selectAddr add0xIfNeeded]];
     
@@ -114,10 +94,118 @@
     self.contentView.frame = CGRectMake(0, 0, KWIDTH, CGRectGetMaxY(self.tipLabel_2.frame)+50);
     self.scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(self.contentView.frame));
     
-
+    NSDictionary *insightQRPawDic = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaltKey_QRPassword];
+    NSString *qrPaw = insightQRPawDic[App_Delegate.selectAddr];
+    if(qrPaw && ![qrPaw isEqualToString:@""]){
+        self.insightQRPaw = qrPaw;
+        [self makrInsightQRWith:self.insightQRPaw];
+    }else{
+        self.firstBackupView.frame = CGRectMake(0, 0, KWIDTH, KHEIGHT);
+        [self.view addSubview:self.firstBackupView];
+        [self makeSubViewForFirstView];
+    }
     
 }
 
+-(void)makrInsightQRWith:(NSString *)pwd{
+    
+    NSString *pass = [NSString CharacterStringMainString:pwd AddDigit:16 AddString:@"0"];
+    if ([self.menmonry.text isEqualToString:@""]) {
+           self.menmonryCopy.hidden = YES;
+           self.menmonryQRBtn.hidden = YES;
+           self.menmonryLabel.hidden = YES;
+           self.menmonryBg.hidden = YES;
+           self.menmonry.hidden = YES;
+           
+           NSString *entry = [EncryptUtils encryptByAES:self.address.text key:keyEntryQR];
+           NSString *final = [EncryptUtils encryptByAES:entry key:pass];
+           NSDictionary *infoDic = @{@"type":@(1),@"content":final};
+           NSString *jsonStr = [infoDic toJSONString];
+           self.qr.image = [UIImage createQRImgae:jsonStr size:kQRImgSize centerImg:nil centerImgSize:20];
+           
+       }else{
+           self.menmonryCopy.hidden = NO;
+           self.menmonryQRBtn.hidden = NO;
+           
+           NSString *entry = [EncryptUtils encryptByAES:self.menmonryKey key:keyEntryQR];
+           NSString *final = [EncryptUtils encryptByAES:entry key:pass];
+           NSDictionary *infoDic = @{@"type":@(2),@"content":final};
+           NSString *jsonStr = [infoDic toJSONString];
+           self.qr.image = [UIImage createQRImgae:jsonStr size:kQRImgSize centerImg:nil centerImgSize:20];
+           
+       }
+}
+
+-(void)makeSubViewForFirstView{
+    UILabel *firtL = [[UILabel alloc] init];
+    firtL.text = NSLocalizedString(@"backup.first.qrPwd", @"首次备份请设置私钥读取密码");
+    firtL.font = AdaptedFontSize(kFontSize);
+    firtL.textColor = kColorTitle;
+    
+    UIImageView *tfBg = [[UIImageView alloc] init];
+    UIImage *img = [UIImage imageNamed:@"label_bg"];
+    img = [img resizableImageWithCapInsets:UIEdgeInsetsMake(img.size.height/2.0, img.size.width/2.0, img.size.width/2.0, img.size.height/2.0) resizingMode:UIImageResizingModeStretch];
+    tfBg.image = img;
+    
+    self.insightQRTF = [[UITextField alloc] init];
+    self.insightQRTF.font = AdaptedFontSize(kFontSize);
+    self.insightQRTF.textColor = kColorTitle;
+    self.insightQRTF.placeholder = NSLocalizedString(@"password.style", @"6-15位由大小写英文、数字或符号组成");
+    UIButton *eyeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, AdaptedHeight(45))];
+    [eyeBtn setImage:[UIImage imageNamed:@"eye_close_blue"] forState:UIControlStateNormal];
+    [eyeBtn setImage:[UIImage imageNamed:@"eye_open_blue"] forState:UIControlStateSelected];
+    [eyeBtn addTarget:self action:@selector(passwordHideAction1:)
+      forControlEvents:UIControlEventTouchUpInside];
+    self.insightQRTF.rightView = eyeBtn;
+    self.insightQRTF.rightViewMode = UITextFieldViewModeAlways;
+    self.insightQRTF.secureTextEntry = YES;
+    
+    UIButton *donBtn = [[UIButton alloc] init];
+    [donBtn setBackgroundImage:[UIImage imageNamed:@"btn_bg_blue"] forState:UIControlStateNormal];
+    [donBtn setTitle:NSLocalizedString(@"setting.done", @"设置完成") forState:UIControlStateNormal];
+    [donBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [donBtn addTarget:self action:@selector(pwdForQR) forControlEvents:UIControlEventTouchUpInside];
+    donBtn.titleLabel.font = AdaptedFontSize(kFontSize);
+    
+    UILabel *tipL = [[UILabel alloc] init];
+    tipL.font = AdaptedFontSize(12);
+    tipL.textColor = kColorBlue;
+    tipL.text = NSLocalizedString(@"backup.first.qrPwd.tip", @"私钥读取密码会在使用扫码导入私钥恢复INB钱包时使用，密码忘记无法找回，请妥善保管，切勿向他人泄露。");
+    tipL.numberOfLines = 0;
+    
+    [self.firstBackupView addSubview:firtL];
+    [self.firstBackupView addSubview:tfBg];
+    [self.firstBackupView addSubview:self.insightQRTF];
+    [self.firstBackupView addSubview:donBtn];
+    [self.firstBackupView addSubview:tipL];
+    
+    [firtL mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.mas_equalTo(AdaptedHeight(kMidMargin));
+    }];
+    [tfBg mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(firtL.mas_bottom).mas_offset(AdaptedHeight(kLittleMargin));
+        make.left.mas_equalTo(AdaptedWidth(kMidMargin));
+        make.right.mas_equalTo(AdaptedWidth(-kMidMargin));
+        make.height.mas_equalTo(AdaptedHeight(45));
+    }];
+    [self.insightQRTF mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.mas_equalTo(tfBg);
+        make.left.mas_equalTo(tfBg.mas_left).mas_offset(10);
+        make.right.mas_equalTo(tfBg.mas_right).mas_offset(-10);
+    }];
+    [donBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(tfBg);
+        make.top.mas_equalTo(tfBg.mas_bottom).mas_offset(AdaptedHeight(kLittleMargin));
+        make.height.mas_equalTo(45);
+    }];
+    [tipL mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(donBtn);
+        make.top.mas_equalTo(donBtn.mas_bottom).mas_offset(AdaptedHeight(kLittleMargin));
+    }];
+
+    
+    
+}
 -(void)makeConstraints{
    
     [self.contentView addSubview:self.accountNameLabel];
@@ -141,6 +229,7 @@
     [self.qrBg addSubview:self.qr];
     [self.qrBg addSubview:self.qrAddressLabel];
     [self.qrBg addSubview:self.qrDownloadBtn];
+    [self.qrBg addSubview:self.qrTipL];
     
     UIView *sepView = [[UIView alloc] init];
     sepView.backgroundColor = kColorBackground;
@@ -223,7 +312,7 @@
         }
         make.left.mas_equalTo(AdaptedWidth(kMidMargin));
         make.right.mas_equalTo(AdaptedWidth(-kMidMargin));
-        make.height.mas_equalTo(AdaptedHeight(250));
+        make.height.mas_equalTo(AdaptedHeight(300));
     }];
     [self.qrLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.qrBg.mas_top).mas_offset(AdaptedHeight(5));
@@ -243,9 +332,13 @@
         make.centerX.mas_equalTo(self.qr);
         make.top.mas_equalTo(self.qrAddressLabel.mas_bottom).mas_offset(10);
         make.width.mas_equalTo(140);
-        make.height.mas_equalTo(30);
+        make.height.mas_equalTo(35);
     }];
-    
+    [self.qrTipL mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.qrDownloadBtn.mas_bottom).mas_offset(10);
+        make.left.mas_equalTo(30);
+        make.right.mas_equalTo(-30);
+    }];
     [sepView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(0);
         make.top.mas_equalTo(self.qrBg.mas_bottom).mas_offset(AdaptedHeight(kBigMargin));
@@ -288,11 +381,7 @@
 }
 //显示私钥二维码
 -(void)privateQR:(UIButton *)sender{
-    NSString *entry = [EncryptUtils encryptByAES:self.address.text key:keyEntryQR];
-    NSString *deEntry = [EncryptUtils decryptByAES:entry key:keyEntryQR];
-    NSDictionary *infoDic = @{@"type":@(1),@"content":entry};
-    NSString *jsonStr = [infoDic toJSONString];
-    [TransferResultView QRViewWithTitle:NSLocalizedString(@"QRCode", @"二维码") value:jsonStr qrTip:NSLocalizedString(@"qrCode.showTip", @"二维码进制保存，截图，仅供用户在安全环境下方便扫描导入钱包")];
+    [TransferResultView QRViewWithTitle:NSLocalizedString(@"QRCode", @"二维码") value:self.address.text qrTip:NSLocalizedString(@"qrCode.showTip", @"二维码进制保存，截图，仅供用户在安全环境下方便扫描导入钱包")];
 }
 //显示助记词二维码
 -(void)menmonryQR:(UIButton *)sender{
@@ -301,10 +390,51 @@
 //保存inb秘钥二维码到相册
 -(void)saveINBQR{
     self.qrDownloadBtn.hidden = YES;
+    self.qrTipL.text = NSLocalizedString(@"tip.insightQR.userIntro", @"使用方法");
+    [self.qrTipL mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.qrAddressLabel.mas_bottom).mas_offset(10);
+        make.left.mas_equalTo(20);
+        make.right.mas_equalTo(-20);
+    }];
+    [self.qrBg layoutIfNeeded];
     [self saveImageFromView:self.qrBg];
+    self.qrTipL.text = [NSString stringWithFormat:@"1.%@\n\n2.%@",NSLocalizedString(@"tip.insightQR_1",  @"二维码仅在使用INB钱包扫码导入私钥时使用"), NSLocalizedString(@"tip.insightQR_2", @"输入正确的私钥读取密码才能成功导入INB钱包，请妥善保管密码。")];
+    [self.qrTipL mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.qrDownloadBtn.mas_bottom).mas_offset(10);
+        make.left.mas_equalTo(20);
+        make.right.mas_equalTo(-20);
+    }];
+    [self.qrBg layoutIfNeeded];
     self.qrDownloadBtn.hidden = NO;
 }
-
+//二维码密码设置完成
+-(void)pwdForQR{
+    [self.view endEditing:YES];
+    if (self.insightQRTF.text.length < 6 || self.insightQRTF.text.length > 15) {
+        [MBProgressHUD showMessage:@"密码长度设置有误" toView:App_Delegate.window afterDelay:1.0 animted:YES];
+        return;
+    }
+    self.insightQRPaw = self.insightQRTF.text;
+    [UIView animateWithDuration:0.5 animations:^{
+        CGRect rec = self.firstBackupView.frame;
+        rec.origin = CGPointMake(0, rec.size.height);
+        [self.firstBackupView removeFromSuperview];
+    }];
+    
+    NSDictionary *dic = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaltKey_QRPassword];
+    NSMutableDictionary *mut = [[NSMutableDictionary alloc] initWithDictionary:dic];
+    [mut setObject:self.insightQRPaw forKey:App_Delegate.selectAddr];
+    [[NSUserDefaults standardUserDefaults] setObject:mut forKey:kUserDefaltKey_QRPassword];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self makrInsightQRWith:self.insightQRPaw];
+    
+}
+//显示、隐藏密码
+-(void)passwordHideAction1:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    self.insightQRTF.secureTextEntry = !self.insightQRTF.secureTextEntry;
+}
 #pragma mark ----
 
 -(UIScrollView *)scrollView{
@@ -443,9 +573,6 @@
 -(UIView *)qrBg{
     if (_qrBg == nil) {
         _qrBg = [[UIView alloc] init];
-//        UIImage *img = [UIImage imageNamed:@"label_bg"];
-//        img = [img resizableImageWithCapInsets:UIEdgeInsetsMake(img.size.height/2.0, img.size.width/2.0, img.size.width/2.0, img.size.height/2.0) resizingMode:UIImageResizingModeStretch];
-//        _qrBg.image = img;
     }
     return _qrBg;
 }
@@ -475,6 +602,16 @@
         _qrDownloadBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     }
     return _qrDownloadBtn;
+}
+-(UILabel *)qrTipL{
+    if (_qrTipL == nil) {
+        _qrTipL = [[UILabel alloc] init];
+        _qrTipL.numberOfLines = 0;
+        _qrTipL.font = [UIFont systemFontOfSize:13];
+        _qrTipL.text = [NSString stringWithFormat:@"1.%@\n\n2.%@",NSLocalizedString(@"tip.insightQR_1",  @"二维码仅在使用INB钱包扫码导入私钥时使用"), NSLocalizedString(@"tip.insightQR_2", @"输入正确的私钥读取密码才能成功导入INB钱包，请妥善保管密码。")];
+        _qrTipL.textColor = kColorAuxiliary2;
+    }
+    return _qrTipL;
 }
 -(UIImageView *)tipImg_1{
     if (_tipImg_1 == nil) {
@@ -508,4 +645,13 @@
     }
     return _tipLabel_2;
 }
+
+-(UIView *)firstBackupView{
+    if (_firstBackupView == nil) {
+        _firstBackupView = [[UIView alloc] init];
+        _firstBackupView.backgroundColor = [UIColor whiteColor];
+    }
+    return _firstBackupView;
+}
+
 @end

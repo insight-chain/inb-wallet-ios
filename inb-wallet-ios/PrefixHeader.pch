@@ -135,6 +135,7 @@ typedef enum{
 
     #define kUserDefaltKey_LastSelectedWalletID @"LastSelectedWalletID"
     #define kLastBackupTipTime @"LastBackupTipTime" //上次提示时间
+    #define kUserDefaltKey_QRPassword @"InsightQRPassword" //专属QR密码
 
     static NSInteger kMaxSeleceNodesNumber = 10; //最大节点投票数
 

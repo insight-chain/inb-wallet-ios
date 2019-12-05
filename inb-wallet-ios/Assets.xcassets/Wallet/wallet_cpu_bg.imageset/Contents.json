@@ -5,11 +5,39 @@
       "scale" : "1x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "stretch",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 93,
+          "top" : 93,
+          "right" : 343,
+          "left" : 303
+        }
+      },
       "idiom" : "universal",
       "filename" : "wallet_cpu_bg@2x.png",
       "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "stretch",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 140,
+          "top" : 140,
+          "right" : 424,
+          "left" : 443
+        }
+      },
       "idiom" : "universal",
       "filename" : "wallet_cpu_bg@3x.png",
       "scale" : "3x"

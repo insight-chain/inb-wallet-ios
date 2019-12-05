@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(instancetype)add0xIfNeeded;
 
+//字符串自动补充或截取指定长度
++ (NSString*)CharacterStringMainString:(NSString*)MainString AddDigit:(int)AddDigit AddString:(NSString*)AddString;
 @end
 
 NS_ASSUME_NONNULL_END

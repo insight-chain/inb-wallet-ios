@@ -15,6 +15,8 @@
 @property(nonatomic, strong) UIView *maskView;
 @property(nonatomic, strong) UIImageView *bgImgView;
 
+@property (nonatomic, strong) UILabel *typeName;
+
 @property(nonatomic, strong) UIView *lineView;
 @property(nonatomic, strong) UITextField *passwordTF;
 
@@ -98,7 +100,53 @@
         make.height.mas_equalTo(40);
     }];
 }
-
+-(void)makeConstraintWithTitle{
+    self.bgImgView.image = [UIImage imageNamed:@"textView_bg"];
+    
+    [self addSubview:self.maskView];
+   [self addSubview:self.bgImgView];
+   [self addSubview:self.cancelBtn];
+    [self addSubview:self.typeName];
+   [self addSubview:self.passwordTF];
+   [self addSubview:self.lineView];
+   [self addSubview:self.confirmBtn];
+   
+   [self.maskView mas_remakeConstraints:^(MASConstraintMaker *make) {
+       make.top.left.right.bottom.mas_equalTo(0);
+   }];
+   [self.bgImgView mas_remakeConstraints:^(MASConstraintMaker *make) {
+       make.centerX.mas_equalTo(self.mas_centerX);
+       make.centerY.mas_equalTo(self.mas_centerY);
+       make.width.mas_equalTo(275);
+       make.height.mas_equalTo(173);
+   }];
+   [self.cancelBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+       make.top.mas_equalTo(self.bgImgView.mas_top).mas_offset(5);
+       make.right.mas_equalTo(self.bgImgView.mas_right).mas_offset(-5);
+       make.width.height.mas_equalTo(20);
+   }];
+    [self.typeName mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.bgImgView);
+        make.top.mas_equalTo(self.cancelBtn.mas_bottom);
+    }];
+   [self.passwordTF mas_remakeConstraints:^(MASConstraintMaker *make) {
+       make.left.mas_equalTo(self.bgImgView.mas_left).mas_offset(20);
+       make.right.mas_equalTo(self.bgImgView.mas_right).mas_offset(-20);
+       make.bottom.mas_equalTo(self.lineView.mas_top).mas_offset(-10);
+   }];
+   [self.lineView mas_remakeConstraints:^(MASConstraintMaker *make) {
+       make.left.mas_equalTo(self.bgImgView.mas_left).mas_offset(15);
+       make.right.mas_equalTo(self.bgImgView.mas_right).mas_offset(-15);
+       make.height.mas_equalTo(1);
+       make.bottom.mas_equalTo(self.confirmBtn.mas_top).mas_offset(-20);
+   }];
+   [self.confirmBtn mas_remakeConstraints:^(MASConstraintMaker *make) {
+       make.bottom.mas_equalTo(self.bgImgView.mas_bottom).mas_offset(-20);
+       make.centerX.mas_equalTo(self.bgImgView.mas_centerX);
+       make.width.mas_equalTo(AdaptedWidth(195));
+       make.height.mas_equalTo(40);
+   }];
+}
 +(instancetype)showPasswordInputWithConfirmClock:(void (^)(NSString * _Nonnull))confirmBlock{
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     PasswordInputView *passwordView = [[PasswordInputView alloc] initWithFrame:window.bounds];
@@ -106,7 +154,15 @@
     [window addSubview:passwordView];
     return passwordView;
 }
-
++(instancetype)showPasswordWith:(NSString *)typeTitle confirmClock:(void(^)(NSString *password))confirmBlock{
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    PasswordInputView *passwordView = [[PasswordInputView alloc] initWithFrame:window.bounds];
+    passwordView.typeName.text = typeTitle;
+    passwordView.confirmBlock = confirmBlock;
+    [passwordView makeConstraintWithTitle];
+    [window addSubview:passwordView];
+    return passwordView;
+}
 #pragma mark ---- 通知action
 -(void)keyboardWasShown:(NSNotification *)noti{
     CGRect rect = self.frame;
@@ -192,5 +248,14 @@
         _lineView.backgroundColor = kColorWithHexValue(0xe5e5e5);
     }
     return _lineView;
+}
+-(UILabel *)typeName{
+    if (_typeName == nil) {
+        _typeName = [[UILabel alloc] init];
+        _typeName.textAlignment = NSTextAlignmentCenter;
+        _typeName.textColor = kColorTitle;
+        _typeName.font = [UIFont systemFontOfSize:16];
+    }
+    return _typeName;
 }
 @end

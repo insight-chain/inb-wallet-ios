@@ -533,6 +533,9 @@ static NSString *cellId_3 = @"noMortgageCell";
     if(indexPath.section == 0){
         return;
     }
+    if (self.stores.count == 0) {
+        return;
+    }
     LockModel *model = self.stores[indexPath.row];
     
     if (model.days == 0) {

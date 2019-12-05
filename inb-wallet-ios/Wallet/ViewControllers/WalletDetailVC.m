@@ -149,6 +149,7 @@
                     [MBProgressHUD showHUDAddedTo:App_Delegate.window animated:YES];
                 });
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    self.toBackUp = NO;
                     BOOL verifyPass = [tmpSelf.wallet verifyPassword:password];
                     if(!verifyPass){
                         dispatch_async(dispatch_get_main_queue(), ^{

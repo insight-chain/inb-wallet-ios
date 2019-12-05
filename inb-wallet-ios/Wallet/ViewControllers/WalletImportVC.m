@@ -18,6 +18,9 @@
 #import "WalletManager.h"
 #import "StorageManager.h"
 
+#import "PasswordInputView.h"
+#import "NSString+Extension.h"
+
 #import "SliderBar.h"
 
 #import "SWQRCode.h"
@@ -58,6 +61,7 @@
 
 @property(nonatomic, strong) SliderBar *sliderBar;
 
+@property (nonatomic, strong) PasswordInputView *passwordInput;
 @end
 
 @implementation WalletImportVC
@@ -383,26 +387,47 @@
     qrVC.scanBlock = ^(BOOL success, NSString *value) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if(success){
-                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.scan.success", @"扫码成功") toView:self.view afterDelay:1 animted:YES];
                 NSDictionary *dic = [NSDictionary dictionaryWithJsonString:value];
                 if(!dic){
                     self.keyTextView.text = value;
                     self.keyPlaceHolder.hidden = YES;
                 }else{
                     int type = [dic[@"type"] intValue]; //1-私钥，2-助记词
-                    NSString *entryStr = dic[@"content"];
-                    NSString *str = [EncryptUtils decryptByAES:entryStr key:keyEntryQR];
-                    self.keyTextView.text = str;
-                    self.keyPlaceHolder.hidden = YES;
-                    
-                    if (type == 1) {
-                        self.sliderBar.selectedIndex = 1;
-                        self.selectImportType = ImportType_private;
-                    }else if(type == 2){
-                        self.sliderBar.selectedIndex = 0;
-                        self.selectImportType = ImportType_mnemonic;
-                    }
+                    NSString *tit = type == 1 ? @"请输入私钥读取密码" : @"请输入助记词读取密码";
+                    self.passwordInput = [PasswordInputView showPasswordWith:tit confirmClock:^(NSString * _Nonnull password) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self.passwordInput hidePasswordInput];
+                            NSDictionary *dic = [NSDictionary dictionaryWithJsonString:value];
+                              if(!dic){
+                                  self.keyTextView.text = value;
+                                  self.keyPlaceHolder.hidden = YES;
+                              }else{
+                                  int type = [dic[@"type"] intValue]; //1-私钥，2-助记词
+                                  NSString *entryStr = dic[@"content"];
+                                  NSString *str1 = [EncryptUtils decryptByAES:entryStr key:[NSString CharacterStringMainString:password AddDigit:16 AddString:@"0"]];
+                                  NSString *str = [EncryptUtils decryptByAES:str1 key:keyEntryQR];
+                                  if([str isEqualToString:@""] || str == nil){
+                                      [MBProgressHUD showMessage:@"读取密码错误" toView:App_Delegate.window afterDelay:1.0 animted:YES];
+                                      return;
+                                  }
+                                  self.keyTextView.text = str;
+                                  self.keyPlaceHolder.hidden = YES;
+                                  
+                                  if (type == 1) {
+                                      self.sliderBar.selectedIndex = 1;
+                                      self.selectImportType = ImportType_private;
+                                  }else if(type == 2){
+                                      self.sliderBar.selectedIndex = 0;
+                                      self.selectImportType = ImportType_mnemonic;
+                                  }
+                              }
+                        });
+                       
+                    }];
+                
                 }
+            }else{
+                [MBProgressHUD showMessage:NSLocalizedString(@"message.tip.scan.faild", @"扫码失败") toView:self.view afterDelay:1 animted:YES];
             }
         });
     };

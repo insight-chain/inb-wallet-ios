@@ -133,7 +133,12 @@
 "backup.tip_2" = "请勿通过网络工具传输私钥，一旦被黑客获取将造成不可挽回的损失";
 "backup.save.tip" = "本程序可能会因掉签问题而导致您的私钥丢失，建议您立即备份钱包以保障资产安全。";
 "backup.immediately" = "立即备份";
+"backup.first.qrPwd" = "首次备份请设置私钥读取密码";
+"backup.first.qrPwd.tip" = "私钥读取密码会在使用扫码导入私钥恢复INB钱包时使用，密码忘记无法找回，请妥善保管，切勿向他人泄露。";
 
+"tip.insightQR_1" = "二维码仅在使用INB钱包扫码导入私钥时使用";
+"tip.insightQR_2" = "输入正确的私钥读取密码才能成功导入INB钱包，请妥善保管密码。";
+"tip.insightQR.userIntro" = "使用方法\n1.在INB钱包中选择导入钱包，点击右上角进入扫码页面\n2.直接扫描此二维码或通过相册选择此二维码图片\n3.按照提示输入正确的读取密码即可成功导入私钥/助记词";
 "record.trading.empty" = "暂无交易历史";
 "record.receive.empty" = "暂无领取记录";
 
@@ -194,6 +199,8 @@
 "saveWaringTip" = "如果有人获取到您的私钥将直接获取您的财产！请抄写下私钥并存放在安全的地方。";
 "I_know" = "我知道了";
 
+"password.style" = "6-15位由大小写英文、数字或符号组成";
+"password.pwdQR.setTip" = "设置私钥读取密码";
 "password.change" = "修改密码";
 "password.original" = "原密码";
 "password.new" = "新密码";
@@ -244,6 +251,7 @@
 "setting.aboutUs.website" = "官方网站";
 "setting.aboutUs.weChat" = "微信公众号";
 "setting.protocal" = "隐私条款";
+"setting.done" = "设置完成";
 
 "tip.resource.mortgage_1" = "1.在INB网络上的任何交易都会消耗资源（RES）";
 "tip.resource.mortgage_2" = "2.您所消耗的资源在一定时间之后会返还。";
@@ -273,6 +281,7 @@
 "message.tip.saveCode.failed" = "保存二维码失败";
 "message.tip.noNodes" = "未选择节点，请选择后提交";
 "message.tip.scan.success" = "扫码成功";
+"message.tip.scan.faild" = "扫码失败";
 "message.tip.res.receive.success" = "领取资源成功";
 "message.tip.res.receive.failed" = "领取资源失败";
 "message.tip.mortgage.success" = "抵押成功";
